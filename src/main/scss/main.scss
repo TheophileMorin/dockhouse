@@ -32,6 +32,11 @@ body {
     color: #ccc
 }
 
+.navbar-default {
+    background-color: #333333;
+    border-color: #e7e7e7;
+}
+
 .browserupgrade {
     margin: 0.2em 0;
     background: #ccc;
@@ -67,6 +72,19 @@ body {
     height: 497px;
     background: url("../images/hipster.png") no-repeat center top;
     background-size: contain;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #333333;
+}
+
+.text-muted {
+    margin: 20px 0;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
