@@ -8621,35 +8621,33 @@ body {
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\0000377}}
 .footer {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #333333;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\0000386}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\0000384}}
 .text-muted {
   margin: 20px 0;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\0000398}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\0000396}}
   .hipster {
     background: url("../images/hipster2x.png") no-repeat center top;
     background-size: contain;
   }
 }
 /* make sure browsers use the pointer cursor for anchors, even with no href */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003105}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003103}}
 a:hover {
   cursor: pointer;
 }
 
 /* start Password strength bar style */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003111}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003109}}
 ul#strength {
   display: inline;
   list-style: none;
@@ -8659,12 +8657,12 @@ ul#strength {
   vertical-align: 2px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003120}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003118}}
 .point:last {
   margin: 0 !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003123}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003121}}
 .point {
   background: #DDD;
   border-radius: 2px;
