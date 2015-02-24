@@ -39,6 +39,18 @@ public class AuthorResource {
     }
 
     /**
+     * PUT  /authors -> update an author.
+     */
+    @RequestMapping(value = "/authors/{id}",
+        method = RequestMethod.PUT,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public void update(@RequestBody Author author, @PathVariable String id) {
+        log.debug("REST request to save Author : {}", author);
+        authorRepository.save(author);
+    }
+
+    /**
      * GET  /authors -> get all the authors.
      */
     @RequestMapping(value = "/authors",

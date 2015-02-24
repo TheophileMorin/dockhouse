@@ -49,6 +49,10 @@ module.exports = function (grunt) {
             test: {
                 files: ['src/test/javascript/spec/**/*.spec.js'],
                 tasks: ['copy:test']
+            },
+            scripts: {
+                files: ['src/main/webapp/scripts/**/*.js'],
+                tasks: ['injector']
             }
         },
 

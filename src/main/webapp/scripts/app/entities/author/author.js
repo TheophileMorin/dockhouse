@@ -13,7 +13,7 @@ angular.module('docklandApp')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/author/authors.html',
-                        controller: 'AuthorController'
+                        controller: 'AuthorController as listCtrl'
                     }
                 },
                 resolve: {
@@ -33,7 +33,7 @@ angular.module('docklandApp')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/entities/author/author-detail.html',
-                        controller: 'AuthorDetailController'
+                        controller: 'AuthorDetailController as detailCtrl'
                     }
                 },
                 resolve: {

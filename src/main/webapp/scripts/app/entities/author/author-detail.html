@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span translate="docklandApp.author.detail.title">Author</span> {{author.id}}</h2>
+    <h2><span translate="docklandApp.author.detail.title">Author</span> {{detailCtrl.author.id}}</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -15,7 +15,7 @@
                         <span translate="docklandApp.author.name">Name</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{author.name}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.author.name}}" readonly>
                     </td>
                 </tr>
                 <tr>
@@ -23,7 +23,7 @@
                         <span translate="docklandApp.author.birthDate">BirthDate</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{author.birthDate}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.author.birthDate}}" readonly>
                     </td>
                 </tr>
             </tbody>
