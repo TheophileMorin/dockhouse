@@ -1,0 +1,9 @@
+docklanddb:
+  image: mongo:3.0
+
+application:
+  image: bewilcox/dockland
+  ports:
+    - "8080:8080"
+  links:
+    - docklanddb

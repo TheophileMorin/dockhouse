@@ -1,0 +1,3 @@
+# Run the image
+- name: Deploy and run the Dockland Database
+  docker: image=mongo:3.0 name=dockland-db ports=27017:27017 state=running

@@ -6,10 +6,10 @@ spring:
         active: prod
     data:
         mongodb:
-            host: localhost
+            host: docklanddb
             port: 27017
             database: dockland
-    
+
 
     mail:
         baseUrl: http://localhost:8080
