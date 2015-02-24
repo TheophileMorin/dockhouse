@@ -4,6 +4,12 @@
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
             "home": "Dashboard",
+            "entities": {
+            "main": "Entities",
+            "author": "Author",
+            "book": "Book",
+            "additionalEntity": "JHipster will add addtional entities"
+            },
             "registries": {
                 "main": "Registries",
                 "add": "Add a new registry"

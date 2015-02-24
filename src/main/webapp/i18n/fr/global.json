@@ -4,6 +4,12 @@
         "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
         "menu": {
             "home": "Dashboard",
+            "entities": {
+            "main": "Entités",
+            "author": "Author",
+            "book": "Book",
+            "additionalEntity": "JHipster will add addtional entities"
+            },
             "registries": {
                 "main": "Registres",
                 "add": "Ajouter un nouveau registre"
