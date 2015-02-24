@@ -1,13 +1,27 @@
-'use strict';
+(function (){
+    "use strict";
 
-angular.module('docklandApp')
-    .controller('NavbarController', function ($scope, $location, $state, Auth, Principal) {
-        $scope.isAuthenticated = Principal.isAuthenticated;
-        $scope.isInRole = Principal.isInRole;
-        $scope.$state = $state;
+    angular
+        .module('docklandApp')
+        .controller('NavbarController', NavbarController);
 
-        $scope.logout = function () {
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'CONFIG'];
+
+    function NavbarController($state, Auth, Principal, CONFIG) {
+        /* jshint validthis: true */
+        var vm = this;
+
+        vm.isAuthenticated = Principal.isAuthenticated;
+        vm.isInRole = Principal.isInRole;
+        vm.config = CONFIG;
+        vm.logout = logout;
+
+        ////////////////
+        function logout() {
             Auth.logout();
             $state.go('home');
         };
-    });
+    }
+
+})();
+

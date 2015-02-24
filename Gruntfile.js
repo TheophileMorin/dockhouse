@@ -27,7 +27,8 @@ module.exports = function (grunt) {
         yeoman: {
             // configurable paths
             app: require('./bower.json').appPath || 'app',
-            dist: 'src/main/webapp/dist'
+            dist: 'src/main/webapp/dist',
+            tmp: 'src/main/webapp/.tmp'
         },
         watch: {
             bower: {
@@ -44,8 +45,41 @@ module.exports = function (grunt) {
             },
             styles: {
                 files: ['src/main/webapp/assets/styles/**/*.css']
+            },
+            test: {
+                files: ['src/test/javascript/spec/**/*.spec.js'],
+                tasks: ['copy:test']
             }
         },
+
+        injector: {
+            options: {},
+            // Inject application script files into index.html (doesn't include bower)
+            scripts: {
+                options: {
+                    transform: function (filePath){
+                        filePath = filePath.replace('/src/main/webapp/', '');
+                        filePath = filePath.replace('/src/test/javascript/spec/', '.tmp/');
+                        return '<script src="' + filePath + '"></script>';
+                    },
+                    starttag: '<!-- injector:js -->',
+                    endtag: '<!-- endinjector -->'
+                },
+                files: {
+                    'src/main/webapp/index.html': [
+                        ['{.tmp,src/main/webapp/}/scripts/**/*.js',
+                            '!{.tmp,src/main/webapp/}/scripts/app/app.js']
+                    ],
+                    'src/main/webapp/test.html': [
+                        ['{.tmp,src/main/webapp/}/scripts/**/*.js',
+                            '!{.tmp,src/main/webapp/}/scripts/app/app.js',
+                            '{.tmp,src/test/javascript/}/spec/**/*.spec.js',
+                            '{.tmp,src/test/javascript/}/spec/**/*.mock.js']
+                    ]
+                }
+            }
+        },
+
         autoprefixer: {
         // not used since Uglify task does autoprefixer,
         //    options: ['last 1 version'],
@@ -65,7 +99,7 @@ module.exports = function (grunt) {
                 ignorePath: /\.\.\/webapp\/bower_components\// // remove ../webapp/bower_components/ from paths of injected sass files
             },
             test: {
-                src: 'src/test/javascript/karma.conf.js',
+                src: ['src/test/javascript/karma.conf.js','src/main/webapp/test.html'],
                 exclude: [/angular-i18n/, /swagger-ui/, /angular-scenario/],
                 ignorePath: /\.\.\/\.\.\//, // remove ../../ from paths of injected javascripts
                 devDependencies: true,
@@ -90,7 +124,8 @@ module.exports = function (grunt) {
                         'src/main/webapp/**/*.json',
                         '{.tmp/,}src/main/webapp/assets/styles/**/*.css',
                         '{.tmp/,}src/main/webapp/scripts/**/*.js',
-                        'src/main/webapp/assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
+                        'src/main/webapp/assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
+                        'src/test/javascript/spec/**/*.spec.js'
                     ]
                 }
             },
@@ -110,7 +145,15 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
-            server: '.tmp'
+            server: {
+                files: [{
+                    dot: true,
+                    src: [
+                        '.tmp',
+                        '<%= yeoman.tmp %>'
+                    ]
+                }]
+            }
         },
         jshint: {
             options: {
@@ -296,6 +339,15 @@ module.exports = function (grunt) {
         },
         // Put files not handled in other tasks here
         copy: {
+            test: {
+                files: [{
+                    expand: true,
+                    dot: true,
+                    cwd: 'src/test/javascript/spec',
+                    dest: '<%= yeoman.tmp %>',
+                    src: ['**/*.spec.js', '**/*.mock.js']
+                }]
+            },
             dist: {
                 files: [{
                     expand: true,
@@ -398,20 +450,26 @@ module.exports = function (grunt) {
             },
             dev: {
                 options: {
-                    dest: 'src/main/webapp/scripts/app/app.constants.js',
+                    dest: 'src/main/webapp/scripts/app/app.constants.js'
                 },
                 constants: {
                     ENV: 'dev',
-                    VERSION: parseVersionFromPomXml()
+                    CONFIG: {
+                        LOG_LEVEL: 'debug',
+                        VERSION: parseVersionFromPomXml()
+                    }
                 }
             },
             prod: {
                 options: {
-                    dest: '.tmp/scripts/app/app.constants.js',
+                    dest: '.tmp/scripts/app/app.constants.js'
                 },
                 constants: {
                     ENV: 'prod',
-                    VERSION: parseVersionFromPomXml()
+                    CONFIG: {
+                        LOG_LEVEL: 'warn',
+                        VERSION: parseVersionFromPomXml()
+                    }
                 }
             }
         }
@@ -419,6 +477,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve', [
         'clean:server',
+        'copy:test',
+        'injector',
         'wiredep',
         'ngconstant:dev',
         'concurrent:server',
@@ -433,6 +493,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'clean:server',
+        'injector',
         'wiredep:test',
         'ngconstant:dev',
         'concurrent:test',
@@ -440,7 +501,9 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
+        'clean:server',
         'clean:dist',
+        'injector',
         'wiredep:app',
         'ngconstant:prod',
         'useminPrepare',

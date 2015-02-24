@@ -4,6 +4,6 @@ angular.module('docklandApp')
 
 .constant('ENV', 'dev')
 
-.constant('VERSION', '0.1.0')
+.constant('CONFIG', {LOG_LEVEL:'debug',VERSION:'0.1.0'})
 
 ;

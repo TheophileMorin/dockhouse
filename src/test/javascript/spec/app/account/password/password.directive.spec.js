@@ -14,6 +14,8 @@ describe('Directive Tests ', function () {
         elm = angular.element(html);
         $compile(elm)(scope);
 
+        console.log(elm);
+
         $httpBackend.expectGET(/api\/account\?cacheBuster=\d+/).respond({});
         $httpBackend.expectGET('i18n/en/global.json').respond({});
         $httpBackend.expectGET('i18n/en/language.json').respond({});
@@ -42,13 +44,14 @@ describe('Directive Tests ', function () {
             });
 
             var firstpointStyle = elm.find('ul').children('li')[0].getAttribute('style');
-            expect(firstpointStyle).toContain('background-color: rgb(255, 153, 0)');
+            expect(firstpointStyle).toMatch('(background|background-color):\\srgb\\(255, 153, 0\\)');
 
             var secondpointStyle = elm.find('ul').children('li')[1].getAttribute('style');
-            expect(secondpointStyle).toContain('background-color: rgb(255, 153, 0)');
+            expect(secondpointStyle).toMatch('(background|background-color):\\srgb\\(255, 153, 0\\)');
 
             var thirdpointStyle = elm.find('ul').children('li')[2].getAttribute('style');
-            expect(thirdpointStyle).toContain('background-color: rgb(221, 221, 221)');
+            expect(thirdpointStyle).toMatch('(background|background-color):\\srgb\\(221, 221, 221\\)');
+
         });
 
         it("Should change the first 4 points of the strength bar", function() {
@@ -57,20 +60,19 @@ describe('Directive Tests ', function () {
             });
 
             var firstpointStyle = elm.find('ul').children('li')[0].getAttribute('style');
-            dump(firstpointStyle);
-            expect(firstpointStyle).toContain('background-color: rgb(153, 255, 0)');
+            expect(firstpointStyle).toMatch('(background|background-color):\\srgb\\(153, 255, 0\\)');
 
             var secondpointStyle = elm.find('ul').children('li')[1].getAttribute('style');
-            expect(secondpointStyle).toContain('background-color: rgb(153, 255, 0)');
+            expect(secondpointStyle).toMatch('(background|background-color):\\srgb\\(153, 255, 0\\)');
 
             var thirdpointStyle = elm.find('ul').children('li')[2].getAttribute('style');
-            expect(thirdpointStyle).toContain('background-color: rgb(153, 255, 0)');
+            expect(thirdpointStyle).toMatch('(background|background-color):\\srgb\\(153, 255, 0\\)');
 
             var fourthpointStyle = elm.find('ul').children('li')[3].getAttribute('style');
-            expect(fourthpointStyle).toContain('background-color: rgb(153, 255, 0)');
+            expect(fourthpointStyle).toMatch('(background|background-color):\\srgb\\(153, 255, 0\\)');
 
             var fifthpointStyle = elm.find('ul').children('li')[4].getAttribute('style');
-            expect(fifthpointStyle).toContain('background-color: rgb(221, 221, 221)');
+            expect(fifthpointStyle).toMatch('(background|background-color):\\srgb\\(221, 221, 221\\)');
         });
     });
 });
