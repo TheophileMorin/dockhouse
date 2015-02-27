@@ -1,7 +1,0 @@
-- hosts: application
-  roles:
-    - { role: dockland-server }
-
-- hosts: database
-  roles:
-    - { role: dockland-db }
