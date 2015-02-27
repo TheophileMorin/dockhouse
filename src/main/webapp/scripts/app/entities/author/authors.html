@@ -90,7 +90,7 @@
                 <tr ng-repeat="author in listCtrl.authors">
                     <td><a ui-sref="authorDetail({id:author.id})">{{author.id}}</a></td>
                     <td>{{author.name}}</td>
-                    <td>{{author.birthDate}}</td>
+                    <td>{{author.birthDate | date:'longDate'}}</td>
                     <td>
                         <button type="submit"
                                 ui-sref="authorDetail({id:author.id})"

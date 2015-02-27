@@ -20,10 +20,10 @@
         .module('docklandApp')
         .controller('AuthorController', AuthorController);
 
-    AuthorController.$inject = ['Author', 'DateUtils', '$modal', 'Logger'];
+    AuthorController.$inject = ['Author', '$modal', 'Logger'];
 
     /* @ngInject */
-    function AuthorController(Author, DateUtils, $modal, Logger){
+    function AuthorController(Author, $modal, Logger){
         /* jshint validthis: true */
         var logger = Logger.getInstance('AuthorController');
         var vm = this;
@@ -107,7 +107,6 @@
 
         function openEdit(author) {
             vm.authorEdited = author;
-            //vm.authorEdited.birthDate = DateUtils.formatDateForUI(vm.authorEdited.birthDate);
             vm.editionMode = true;
 
             // Open the modal Edition window

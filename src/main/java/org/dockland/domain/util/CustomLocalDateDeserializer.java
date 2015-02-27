@@ -15,32 +15,32 @@
  */
 package org.dockland.domain.util;
 
-import java.io.IOException;
-
-import org.joda.time.DateTime;
-import org.joda.time.format.ISODateTimeFormat;
-
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.node.TextNode;
 
-/**
- * Custom Jackson deserializer for displaying Joda DateTime objects.
- */
-public class CustomDateTimeDeserializer extends JsonDeserializer<DateTime> {
+import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+
+public class CustomLocalDateDeserializer extends JsonDeserializer<LocalDate> {
 
     @Override
-    public DateTime deserialize(JsonParser jp, DeserializationContext ctxt)
-            throws IOException {
-        JsonToken t = jp.getCurrentToken();
-        if (t == JsonToken.VALUE_STRING) {
-            String str = jp.getText().trim();
-            return ISODateTimeFormat.dateTimeParser().parseDateTime(str);
-        }
-        if (t == JsonToken.VALUE_NUMBER_INT) {
-            return new DateTime(jp.getLongValue());
-        }
-        throw ctxt.mappingException(handledType());
+    public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
+        throws IOException {
+
+        ObjectCodec oc = jp.getCodec();
+        TextNode node = oc.readTree(jp);
+        String dateString = node.textValue();
+
+        Instant instant = Instant.parse(dateString);
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+        LocalDate date = LocalDate.of(dateTime.getYear(), dateTime.getMonth(), dateTime.getDayOfMonth());
+        return date;
     }
 }

@@ -20,10 +20,10 @@
         .module('docklandApp')
         .factory('Author', Author);
 
-    Author.$inject = ['Restangular', 'DateUtils'];
+    Author.$inject = ['Restangular'];
 
     /* @ngInject */
-    function Author(Restangular, DateUtils){
+    function Author(Restangular){
         var service = Restangular.service('authors');
 
         return {
@@ -44,7 +44,6 @@
             return service.one(id)
                 .get()
                 .then(function(data) {
-                    data.birthDate = DateUtils.formatDateForUI(data.birthDate);
                     return data;
                 })
                 .catch(function(error) {
@@ -120,21 +119,4 @@
 
 
 })();
-//
-//'use strict';
-//
-//angular.module('docklandApp')
-//    .factory('Author', function ($resource) {
-//        return $resource('api/authors/:id', {}, {
-//            'query': { method: 'GET', isArray: true},
-//            'get': {
-//                method: 'GET',
-//                transformResponse: function (data) {
-//                    data = angular.fromJson(data);
-//                    var birthDateFrom = data.birthDate.split("-");
-//                    data.birthDate = new Date(new Date(birthDateFrom[0], birthDateFrom[1] - 1, birthDateFrom[2]));
-//                    return data;
-//                }
-//            }
-//        });
-//    });
+

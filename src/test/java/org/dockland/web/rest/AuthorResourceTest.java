@@ -1,5 +1,8 @@
 package org.dockland.web.rest;
 
+import org.dockland.Application;
+import org.dockland.domain.Author;
+import org.dockland.repository.AuthorRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,12 +18,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import java.util.List;
-
-import org.dockland.Application;
-import org.dockland.domain.Author;
-import org.dockland.repository.AuthorRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -40,8 +39,8 @@ public class AuthorResourceTest {
     private static final String DEFAULT_NAME = "SAMPLE_TEXT";
     private static final String UPDATED_NAME = "UPDATED_TEXT";
 
-    private static final LocalDate DEFAULT_BIRTH_DATE = new LocalDate(0L);
-    private static final LocalDate UPDATED_BIRTH_DATE = new LocalDate();
+    private static final LocalDate DEFAULT_BIRTH_DATE = LocalDate.now();
+    private static final LocalDate UPDATED_BIRTH_DATE = LocalDate.of(2014, 12, 20);
 
     @Inject
     private AuthorRepository authorRepository;

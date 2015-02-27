@@ -16,8 +16,10 @@
 package org.dockland.config;
 
 
-import org.dockland.config.oauth2.OAuth2AuthenticationReadConverter;
 import com.mongodb.Mongo;
+import org.dockland.config.oauth2.OAuth2AuthenticationReadConverter;
+import org.dockland.converter.DateToLocalDateConverter;
+import org.dockland.converter.LocalDateToDateConverter;
 import org.mongeez.Mongeez;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,8 +27,8 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
@@ -35,6 +37,7 @@ import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +80,9 @@ public class DatabaseConfiguration extends AbstractMongoConfiguration  {
     @Bean
     public CustomConversions customConversions() {
         List<Converter<?, ?>> converterList = new ArrayList<>();
-        OAuth2AuthenticationReadConverter converter = new OAuth2AuthenticationReadConverter();
-        converterList.add(converter);
+        converterList.add(new OAuth2AuthenticationReadConverter());
+        converterList.add(new DateToLocalDateConverter());
+        converterList.add(new LocalDateToDateConverter());
         return new CustomConversions(converterList);
     }
 

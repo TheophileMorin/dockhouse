@@ -8,10 +8,10 @@
         .module('docklandApp')
         .controller('AuthorModalChangeController', AuthorModalChangeController);
 
-    AuthorModalChangeController.$inject = ['$modalInstance', 'authorEdited', 'Logger'];
+    AuthorModalChangeController.$inject = ['$modalInstance', '$filter', 'authorEdited', 'Logger'];
 
     /* @ngInject */
-    function AuthorModalChangeController($modalInstance, authorEdited, Logger){
+    function AuthorModalChangeController($modalInstance, $filter, authorEdited, Logger){
         /* jshint validthis: true */
         var vm = this;
         var logger = Logger.getInstance('AuthorModalChangeController');
@@ -20,13 +20,17 @@
         vm.save = save;
         vm.cancel = cancel;
 
-        console.log("ARRIVEE DANS LE CONTROLLER");
-        console.log(vm.authorEdited);
+        activate();
 
         ////////////////
 
+        function activate() {
+            vm.authorEdited.birthDate = new Date($filter('date')(vm.authorEdited.birthDate, 'yyyy-MM-dd'));
+        }
+
         function save() {
-            logger.debug('Choice --> Save')
+            logger.debug('Choice --> Save');
+            console.log(vm.authorEdited);
             $modalInstance.close(vm.authorEdited);
         };
 

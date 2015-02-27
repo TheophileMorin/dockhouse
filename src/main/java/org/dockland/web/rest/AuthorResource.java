@@ -74,7 +74,8 @@ public class AuthorResource {
     @Timed
     public List<Author> getAll() {
         log.debug("REST request to get all Authors");
-        return authorRepository.findAll();
+        List<Author> list = authorRepository.findAll();
+        return list;
     }
 
     /**
