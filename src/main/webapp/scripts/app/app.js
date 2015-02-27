@@ -25,7 +25,8 @@
         'pascalprecht.translate',
         'ngCacheBuster',
         'restangular',
-        'logger'])
+        'logger',
+        'ui.bootstrap'])
 
         .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, CONFIG) {
             $rootScope.ENV = ENV;

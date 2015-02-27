@@ -30,7 +30,8 @@
             get: get,
             getAll: getAll,
             create: create,
-            update: update
+            update: update,
+            remove: remove
         };
 
         ////////////////
@@ -93,6 +94,21 @@
          */
         function update(author) {
             return author.put()
+                .then(function(data) {
+                    return data;
+                })
+                .catch(function (error) {
+                    throw error;
+                })
+        }
+
+        /**
+         * Remove author
+         * @param author to remove
+         * @returns the author removed
+         */
+        function remove(author) {
+            return author.remove()
                 .then(function(data) {
                     return data;
                 })

@@ -29,10 +29,11 @@
 
         vm.authors = [];
         vm.authorEdited = {};
+        vm.editionMode = false;
         vm.loadAll = loadAll;
-        vm.create = create;
-        vm.edit = edit;
-        vm.delete = remove;
+        vm.applyChanges = applyChanges;
+        vm.edit = openEdit;
+        vm.delete = openRemove;
         vm.confirmRemove = confirmRemove;
         vm.clear = clear;
 
@@ -54,6 +55,14 @@
                 });
         }
 
+        function applyChanges(author) {
+            if (vm.editionMode){
+                update(author);
+            } else {
+                create(author);
+            }
+        }
+
         function create(author) {
             Author.create(author)
                 .then(function(data) {
@@ -63,22 +72,39 @@
                 });
         }
 
-        function edit(author) {
+        function update(author) {
+            Author.update(author)
+                .then(function(data) {
+                    vm.loadAll();
+                    $('#saveAuthorModal').modal('hide');
+                    vm.clear();
+                });
+        }
+
+        function openEdit(author) {
             vm.authorEdited = author;
             vm.authorEdited.birthDate = DateUtils.formatDateForUI(vm.authorEdited.birthDate);
+            vm.editionMode = true;
             $('#saveAuthorModal').modal('show');
         }
 
-        function remove(id) {
-
+        function openRemove(author) {
+            vm.authorEdited = author;
+            $('#deleteAuthorConfirmation').modal('show');
         }
 
         function confirmRemove(id) {
-
+            Author.remove(vm.authorEdited)
+                .then(function(data) {
+                    vm.loadAll();
+                    $('#deleteAuthorConfirmation').modal('hide');
+                    vm.clear();
+                });
         }
 
         function clear() {
             vm.authorEdited = {name: null, birthDate: null, id: null};
+            vm.editionMode = false;
         }
 
 
