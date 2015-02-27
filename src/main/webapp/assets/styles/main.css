@@ -8673,3 +8673,13 @@ ul#strength {
 }
 
 /* end Password strength bar style */
+/* workaround for backdrop issue with angular-ui bootstrap modal */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Work\/IdeaProjects\/dockland\/src\/main\/scss\/main\.scss}line{font-family:\00003132}}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #000;
+}

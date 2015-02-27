@@ -20,21 +20,21 @@
         .module('docklandApp')
         .controller('AuthorController', AuthorController);
 
-    AuthorController.$inject = ['Author', 'DateUtils'];
+    AuthorController.$inject = ['Author', 'DateUtils', '$modal', 'Logger'];
 
     /* @ngInject */
-    function AuthorController(Author, DateUtils){
+    function AuthorController(Author, DateUtils, $modal, Logger){
         /* jshint validthis: true */
+        var logger = Logger.getInstance('AuthorController');
         var vm = this;
 
         vm.authors = [];
         vm.authorEdited = {};
         vm.editionMode = false;
         vm.loadAll = loadAll;
-        vm.applyChanges = applyChanges;
-        vm.edit = openEdit;
-        vm.delete = openRemove;
-        vm.confirmRemove = confirmRemove;
+        vm.openCreate = openCreate;
+        vm.openEdit = openEdit;
+        vm.openRemove = openRemove;
         vm.clear = clear;
 
         activate();
@@ -67,7 +67,6 @@
             Author.create(author)
                 .then(function(data) {
                     vm.loadAll();
-                    $('#saveAuthorModal').modal('hide');
                     vm.clear();
                 });
         }
@@ -76,28 +75,91 @@
             Author.update(author)
                 .then(function(data) {
                     vm.loadAll();
-                    $('#saveAuthorModal').modal('hide');
                     vm.clear();
                 });
         }
 
+        function openCreate() {
+            vm.clear();
+
+            // Open the modal Edition window
+            logger.debug('Opening the creation window ...');
+            var modalInstance = $modal.open({
+                templateUrl: 'AuthorChangeModal',
+                controller: 'AuthorModalChangeController as modal',
+                backdrop: 'static',
+                resolve: {
+                    authorEdited: function() {
+                        return vm.authorEdited;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (authorModified) {
+                logger.debug('Trying to create the author ...');
+                applyChanges(authorModified);
+            }, function () {
+                logger.debug('Modal dismissed at: ' + new Date());
+                vm.clear();
+            });
+
+        }
+
         function openEdit(author) {
             vm.authorEdited = author;
-            vm.authorEdited.birthDate = DateUtils.formatDateForUI(vm.authorEdited.birthDate);
+            //vm.authorEdited.birthDate = DateUtils.formatDateForUI(vm.authorEdited.birthDate);
             vm.editionMode = true;
-            $('#saveAuthorModal').modal('show');
+
+            // Open the modal Edition window
+            var modalInstance = $modal.open({
+                templateUrl: 'AuthorChangeModal',
+                controller: 'AuthorModalChangeController as modal',
+                backdrop: 'static',
+                resolve: {
+                    authorEdited: function() {
+                        return vm.authorEdited;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (authorModified) {
+                applyChanges(authorModified);
+            }, function () {
+                logger.debug('Modal dismissed at: ' + new Date());
+                vm.clear();
+            });
+
         }
 
         function openRemove(author) {
+            logger.debug('Opening the delete confirmation modal window ...');
             vm.authorEdited = author;
-            $('#deleteAuthorConfirmation').modal('show');
+
+            var modalInstance = $modal.open({
+                templateUrl: 'AuthorRemoveConfirmationModal',
+                controller: 'AuthorModalRemoveController as modalDelete',
+                backdrop: 'static',
+                resolve: {
+                    authorName: function() {
+                        return vm.authorEdited.name;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (toDelete) {
+                if (toDelete){
+                    remove(vm.authorEdited);
+                }
+            }, function () {
+                logger.debug('Modal delete dismissed at: ' + new Date());
+                vm.clear();
+            });
         }
 
-        function confirmRemove(id) {
-            Author.remove(vm.authorEdited)
+        function remove(author) {
+            Author.remove(author)
                 .then(function(data) {
                     vm.loadAll();
-                    $('#deleteAuthorConfirmation').modal('hide');
                     vm.clear();
                 });
         }
