@@ -27,7 +27,7 @@
     </appender>
 -->
 
-    <logger name="org.dockland" level="DEBUG"/>
+    <logger name="org.dockhouse" level="DEBUG"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>

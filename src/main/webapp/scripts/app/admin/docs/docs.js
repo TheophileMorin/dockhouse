@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('docs', {

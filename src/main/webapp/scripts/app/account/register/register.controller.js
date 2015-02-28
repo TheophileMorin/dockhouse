@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .controller('RegisterController', function ($scope, $translate, $timeout, Auth) {
         $scope.success = null;
         $scope.error = null;

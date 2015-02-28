@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .controller('AuditsController', function ($scope, $translate, $filter, AuditsService) {
         $scope.onChangeDate = function () {
             var dateFormat = 'yyyy-MM-dd';

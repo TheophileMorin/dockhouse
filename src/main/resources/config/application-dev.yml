@@ -8,8 +8,8 @@ spring:
         mongodb:
             host: localhost
             port: 27017
-            database: dockland
-    
+            database: dockhouse
+
 
     mail:
         baseUrl: http://localhost:8080
@@ -28,6 +28,6 @@ metrics:
         enabled: false
         host: localhost
         port: 2003
-        prefix: dockland
+        prefix: dockhouse
 
 

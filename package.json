@@ -1,7 +1,7 @@
 {
-  "name": "dockland",
+  "name": "dockhouse",
   "version": "0.0.0",
-  "description": "Description for dockland",
+  "description": "Description for dockhouse",
   "private": true,
   "dependencies": {
   },

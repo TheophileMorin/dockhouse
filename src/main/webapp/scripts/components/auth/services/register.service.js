@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .factory('Register', function ($resource) {
         return $resource('api/register', {}, {
         });

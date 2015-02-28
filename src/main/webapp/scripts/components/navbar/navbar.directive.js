@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .directive('activeMenu', function($translate, $locale, tmhDynamicLocale) {
         return {
             restrict: 'A',

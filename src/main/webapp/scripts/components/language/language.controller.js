@@ -17,7 +17,7 @@
     "use strict";
 
     angular
-        .module('docklandApp')
+        .module('dockhouseApp')
         .controller('LanguageController',LanguageController);
 
     LanguageController.$inject = ['$translate', 'Language'];

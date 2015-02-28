@@ -20,7 +20,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # Deploy the application (application server embedded)
 #######################################################
-ADD target/dockland-*.war dockland/dockland.war
+ADD target/dockhouse-*.war dockhouse/dockhouse.war
 
 # Port exposition
 ##################
@@ -28,4 +28,4 @@ EXPOSE 8080
 
 # Start the application
 #########################
-CMD java -jar dockland/dockland.war --spring.profiles.active=prod
+CMD java -jar dockhouse/dockhouse.war --spring.profiles.active=prod

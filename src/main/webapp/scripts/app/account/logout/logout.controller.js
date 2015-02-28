@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .controller('LogoutController', function (Auth) {
         Auth.logout();
     });

@@ -16,7 +16,7 @@
 /* globals $ */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .directive('passwordStrengthBar', function () {
         return {
             replace: true,

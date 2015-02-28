@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .controller('BookController', function ($scope, Book) {
         $scope.books = [];
         $scope.loadAll = function() {

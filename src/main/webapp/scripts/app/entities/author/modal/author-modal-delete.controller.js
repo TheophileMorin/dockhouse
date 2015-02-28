@@ -5,7 +5,7 @@
     "use strict";
 
     angular
-        .module('docklandApp')
+        .module('dockhouseApp')
         .controller('AuthorModalRemoveController', AuthorModalRemoveController);
 
     AuthorModalRemoveController.$inject = ['$modalInstance', 'authorName', 'Logger'];

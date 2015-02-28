@@ -16,7 +16,7 @@
 /* globals $ */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .directive('showValidation', function() {
         return {
             restrict: 'A',

@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .factory('Password', function ($resource) {
         return $resource('api/account/change_password', {}, {
         });

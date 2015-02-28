@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .factory('Book', function ($resource) {
         return $resource('api/books/:id', {}, {
             'query': { method: 'GET', isArray: true},

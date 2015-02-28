@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .factory('Principal', function Principal($q, Account) {
         var _identity,
             _authenticated = false;

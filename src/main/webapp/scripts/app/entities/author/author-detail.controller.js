@@ -17,7 +17,7 @@
     "use strict";
 
     angular
-        .module('docklandApp')
+        .module('dockhouseApp')
         .controller('AuthorDetailController', AuthorDetailController);
 
     AuthorDetailController.$inject = ['Author', '$stateParams'];

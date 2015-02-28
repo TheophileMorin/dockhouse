@@ -22,21 +22,21 @@ spring:
         protocol: smtp
         tls: false
         auth: false
-        from: dockland@localhost
+        from: dockhouse@localhost
 
     messageSource:
         cacheSeconds: 1
 
 authentication:
     oauth:
-        clientid: docklandapp
+        clientid: dockhouseapp
         secret: mySecretOAuthSecret
         # Token is valid 30 minutes
         tokenValidityInSeconds: 1800
 
 swagger:
-    title: dockland API
-    description: dockland applications and beyond!
+    title: dockhouse API
+    description: dockhouse applications and beyond!
     termsOfServiceUrl: http://jhipster.github.io/
     contact:
     license: Apache 2.0

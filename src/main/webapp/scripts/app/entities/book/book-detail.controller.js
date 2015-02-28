@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .controller('BookDetailController', function ($scope, $stateParams, Book) {
         $scope.book = {};
         $scope.load = function (id) {

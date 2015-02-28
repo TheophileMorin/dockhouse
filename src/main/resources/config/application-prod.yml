@@ -6,9 +6,9 @@ spring:
         active: prod
     data:
         mongodb:
-            host: docklanddb
+            host: dockhousedb
             port: 27017
-            database: dockland
+            database: dockhouse
 
 
     mail:
@@ -28,6 +28,6 @@ metrics:
         enabled: false
         host: localhost
         port: 2003
-        prefix: dockland
+        prefix: dockhouse
 
 

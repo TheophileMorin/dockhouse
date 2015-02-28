@@ -17,7 +17,7 @@
     "use strict";
 
     angular
-        .module('docklandApp')
+        .module('dockhouseApp')
         .factory('Author', Author);
 
     Author.$inject = ['Restangular'];

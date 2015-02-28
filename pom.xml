@@ -5,16 +5,16 @@
     <parent>
         <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
-        <version>1.2.1.RELEASE</version>
+        <version>1.2.2.RELEASE</version>
         <relativePath/>
     </parent>
 
-    <groupId>org.dockland</groupId>
-    <artifactId>dockland</artifactId>
+    <groupId>org.dockhouse</groupId>
+    <artifactId>dockhouse</artifactId>
     <version>0.1.0</version>
     <packaging>war</packaging>
 
-    <name>dockland</name>
+    <name>dockhouse</name>
 
     <prerequisites>
         <maven>3.0.0</maven>

@@ -18,6 +18,6 @@ echo '##########################'
 echo '#  DOCKER IMAGE BUILD    #'
 echo '##########################'
 # Build Docker versionned image
-docker build --tag bewilcox/dockland:$APP_VERSION --rm=true .
+docker build --tag dockhouse/dockhouse:$APP_VERSION --rm=true .
 # Build Docker image for the latest version
-docker build --tag bewilcox/dockland --rm=true .
+docker build --tag dockhouse/dockhouse --rm=true .

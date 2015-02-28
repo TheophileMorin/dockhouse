@@ -2,7 +2,7 @@
 
 describe('Controllers Tests ', function () {
 
-    beforeEach(module('docklandApp'));
+    beforeEach(module('dockhouseApp'));
 
     var $scope, $httpBackend, q, Auth;
 

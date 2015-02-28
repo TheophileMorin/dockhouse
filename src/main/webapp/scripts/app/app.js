@@ -16,7 +16,7 @@
 (function (){
     'use strict';
 
-    angular.module('docklandApp', [
+    angular.module('dockhouseApp', [
         'LocalStorageModule',
         'tmh.dynamicLocale',
         'ngResource',

@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .factory('MonitoringService', function ($rootScope, $http) {
         return {
             getMetrics: function () {

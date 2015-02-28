@@ -15,7 +15,7 @@
  */
 'use strict';
 
-angular.module('docklandApp')
+angular.module('dockhouseApp')
     .config(function ($stateProvider) {
         $stateProvider
             .state('book', {
@@ -23,7 +23,7 @@ angular.module('docklandApp')
                 url: '/book',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'docklandApp.book.home.title'
+                    pageTitle: 'dockhouseApp.book.home.title'
                 },
                 views: {
                     'content@': {
@@ -43,7 +43,7 @@ angular.module('docklandApp')
                 url: '/book/:id',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'docklandApp.book.detail.title'
+                    pageTitle: 'dockhouseApp.book.detail.title'
                 },
                 views: {
                     'content@': {
