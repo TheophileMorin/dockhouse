@@ -39,6 +39,7 @@ public class AuthorResourceTest {
     private static final String DEFAULT_NAME = "SAMPLE_TEXT";
     private static final String UPDATED_NAME = "UPDATED_TEXT";
 
+
     private static final LocalDate DEFAULT_BIRTH_DATE = LocalDate.now();
     private static final LocalDate UPDATED_BIRTH_DATE = LocalDate.of(2014, 12, 20);
 
@@ -72,9 +73,9 @@ public class AuthorResourceTest {
 
         // Create the Author
         restAuthorMockMvc.perform(post("/api/authors")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(author)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertAuthorToJsonString(author)))
+            .andExpect(status().isOk());
 
         // Validate the Author in the database
         List<Author> authors = authorRepository.findAll();
@@ -127,10 +128,13 @@ public class AuthorResourceTest {
         // Update the author
         author.setName(UPDATED_NAME);
         author.setBirthDate(UPDATED_BIRTH_DATE);
-        restAuthorMockMvc.perform(post("/api/authors")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(author)))
-                .andExpect(status().isOk());
+
+
+
+        restAuthorMockMvc.perform(put("/api/authors/{id}", author.getId())
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertAuthorToJsonString(author)))
+            .andExpect(status().isOk());
 
         // Validate the Author in the database
         List<Author> authors = authorRepository.findAll();
