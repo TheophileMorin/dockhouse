@@ -12,7 +12,7 @@ echo "Version =  $APP_VERSION ..."
 echo '#############################'
 echo '#  APPLICATION PACKAGING    #'
 echo '#############################'
-mvn -Pprod package
+mvn -Pprod clean package
 
 echo '##########################'
 echo '#  DOCKER IMAGE BUILD    #'
