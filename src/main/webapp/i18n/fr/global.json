@@ -7,7 +7,6 @@
             "entities": {
             "main": "Entités",
             "author": "Author",
-            "book": "Book",
             "additionalEntity": "JHipster will add addtional entities"
             },
             "registries": {
