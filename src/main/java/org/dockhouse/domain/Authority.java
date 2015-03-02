@@ -25,7 +25,7 @@ import java.io.Serializable;
 /**
  * An authority (a security role) used by Spring Security.
  */
-@Document(collection = "T_AUTHORITY")
+@Document(collection = "authorities")
 public class Authority implements Serializable {
 
     @NotNull

@@ -22,7 +22,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import java.util.UUID;
 
-@Document(collection = "T_OAUTH_AUTHENTICATION_REFRESH_TOKEN")
+@Document(collection = "oauth-refresh-token")
 public class OAuth2AuthenticationRefreshToken {
 
     @Id

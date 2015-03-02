@@ -24,7 +24,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Document(collection = "T_OAUTH_AUTHENTICATION_ACCESS_TOKEN")
+@Document(collection = "oauth-access-token")
 public class OAuth2AuthenticationAccessToken implements Serializable {
 
     @Id

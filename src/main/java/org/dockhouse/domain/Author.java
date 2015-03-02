@@ -29,7 +29,7 @@ import java.time.LocalDate;
 /**
  * A Author.
  */
-@Document(collection = "T_AUTHOR")
+@Document(collection = "authors")
 public class Author implements Serializable {
 
     @Id

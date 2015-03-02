@@ -1,9 +1,9 @@
 <mongoChangeLog>
-    <changeSet changeId="ChangeSet-2" author="jhipster">
+    <changeSet changeId="ChangeSet-2" author="dockhouse">
         <script>
-            db.T_USER.ensureIndex({"login" : 1});
-            db.T_USER.ensureIndex({"email" : 1});
-            db.T_USER.insert(
+            db.users.ensureIndex({"login" : 1});
+            db.users.ensureIndex({"email" : 1});
+            db.users.insert(
             {
                 "_id" : "user-0",
                 "login" : "system",
@@ -17,7 +17,7 @@
                 "created_date": new Date(),
                 "authorities": [{"_id": "ROLE_ADMIN"}, {"_id": "ROLE_USER"}]
             });
-            db.T_USER.insert(
+            db.users.insert(
             {
                 "_id" : "user-1",
                 "login" : "anonymousUser",
@@ -31,7 +31,7 @@
                 "created_date": new Date(),
                 "authorities": []
             });
-            db.T_USER.insert(
+            db.users.insert(
             {
                 "_id" : "user-2",
                 "login" : "admin",
@@ -45,9 +45,9 @@
                 "created_date": new Date(),
                 "authorities": [{"_id": "ROLE_ADMIN"}, {"_id": "ROLE_USER"}]
             });
-            db.T_USER.insert(
+            db.users.insert(
             {
-                "_id" : "user-3", 
+                "_id" : "user-3",
                 "login" : "user",
                 "password" : "$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K",
                 "first_name": "",
