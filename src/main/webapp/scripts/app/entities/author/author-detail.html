@@ -40,7 +40,7 @@
                         <span translate="dockhouseApp.author.birthDate">BirthDate</span>
                     </td>
                     <td>
-                        <input type="text" class="input-sm form-control" value="{{detailCtrl.author.birthDate}}" readonly>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.author.birthDate | jsr310ToDate}}" readonly>
                     </td>
                 </tr>
             </tbody>
