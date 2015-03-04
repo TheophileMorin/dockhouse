@@ -37,9 +37,26 @@
                            ng-model="modal.registryEdited.name">
                 </div>
                 <div class="form-group">
+                    <label translate="dockhouseApp.registry.type.title">Type</label>
+                    <input type="text" class="form-control" name="name"
+                           ng-model="modal.registryEdited.type.name">
+                </div>
+                <div class="form-group">
                     <label translate="dockhouseApp.registry.host">Host</label>
                     <input type="text" class="form-control" name="host"
-                           ng-model="modal.registryEdited.host">
+                           ng-model="modal.registryEdited.host"
+                           placeholder="{{modal.registryEdited.type.defaultHost}}">
+                </div>
+                <div class="form-group">
+                    <label translate="dockhouseApp.registry.port">Port</label>
+                    <input type="text" class="form-control" name="port"
+                           ng-model="modal.registryEdited.port"
+                           placeholder="{{modal.registryEdited.type.defaultPort}}">
+                </div>
+                <div class="form-group">
+                    <label translate="dockhouseApp.registry.protocol">Protocol</label>
+                    <input type="text" class="form-control" name="protocol"
+                           ng-model="modal.registryEdited.protocol" placeholder="HTTP">
                 </div>
             </div>
             <div class="modal-footer">

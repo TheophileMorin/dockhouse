@@ -25,6 +25,31 @@
     /* @ngInject */
     function Registry(Restangular){
         var service = Restangular.service('registries');
+        var registriesMock = [{
+            name:"registry Docker One",
+            type:{
+                "name": "Docker",
+                "logo": "assets/images/logos/docker.png",
+                "defaultHost": "127.0.0.1",
+                "defaultPort": "1478",
+                "accessibility": "public"
+            },
+            host:"192.168.25.6",
+            port:"8585",
+            protocol:"HTTP"
+        },{
+            name:"test",
+            type:{
+                "name": "Docker",
+                "logo": "assets/images/logos/docker.png",
+                "defaultHost": "127.0.0.1",
+                "defaultPort": "1478",
+                "accessibility": "public"
+            },
+            host:"192.168.0.250",
+            port:"3030",
+            protocol:"HTTPS"
+        }];
 
         return {
             get: get,
@@ -40,7 +65,7 @@
          * Get a registry from an id
          * @returns the registry corresponding (promise){*}
          */
-        function get(id) {
+        function get(id) {/*
             return service.one(id)
                 .get()
                 .then(function(data) {
@@ -49,7 +74,21 @@
                 .catch(function(error) {
                     //logger.error('registries/:id',"Error lors de l'appel du service REST registries",error);
                     throw error;
+                })*/
+            //TODO MOCK
+            var promise=  new Promise(function(resolve, reject) {
+                if (true)
+                    resolve(registriesMock[0]);
+                else
+                    reject(null);
+            });
+            return promise
+                .then(function(data) {
+                    return data;
                 })
+                .catch(function(error) {
+                    throw error;
+                });
         }
 
         /**
@@ -57,7 +96,7 @@
          * @returns the complete array of registries (promise){*}
          */
         function getAll() {
-            return service
+            /*return service
                 .getList()
                 .then(function(data) {
                     return data;
@@ -65,7 +104,21 @@
                 .catch(function(error) {
                     //logger.error('registries',"Error lors de l'appel du service REST registries",error);
                     throw error;
+                })*/
+            //TODO MOCK
+            var promise=  new Promise(function(resolve, reject) {
+                if (true)
+                    resolve(registriesMock);
+                else
+                    reject(null);
+            });
+            return promise
+                .then(function(data) {
+                    return data;
                 })
+                .catch(function(error) {
+                    throw error;
+                });
         }
 
         /**
@@ -75,7 +128,7 @@
          */
         function create(registry) {
             //logger.debug('call the /registries service');
-            return service
+           /* return service
                 .post(registry)
                 .then(function(data) {
                     return data;
@@ -83,7 +136,21 @@
                 .catch(function (error){
                     //logger.error('registries',"Error lors de l'appel du service REST registries",error);
                     throw error;
+                })*/
+            //TODO MOCK
+            var promise=  new Promise(function(resolve, reject) {
+                if (true)
+                    resolve(registriesMock);
+                else
+                    reject(null);
+            });
+            return promise
+                .then(function(data) {
+                    return data;
                 })
+                .catch(function(error) {
+                    throw error;
+                });
         }
 
         /**
@@ -91,7 +158,7 @@
          * @param registry to update
          * @returns the registry updated
          */
-        function update(registry) {
+        function update(registry) {/*
             return registry.put()
                 .then(function(data) {
                     return data;
@@ -99,6 +166,21 @@
                 .catch(function (error) {
                     throw error;
                 })
+                */
+            //TODO MOCK
+            var promise=  new Promise(function(resolve, reject) {
+                if (true)
+                    resolve(registriesMock[0]);
+                else
+                    reject(null);
+            });
+            return promise
+                .then(function(data) {
+                    return data;
+                })
+                .catch(function(error) {
+                    throw error;
+                });
         }
 
         /**
@@ -106,14 +188,28 @@
          * @param registry to remove
          * @returns the registry removed
          */
-        function remove(registry) {
+        function remove(registry) {/*
             return registry.remove()
                 .then(function(data) {
                     return data;
                 })
                 .catch(function (error) {
                     throw error;
+                })*/
+            //TODO MOCK
+            var promise=  new Promise(function(resolve, reject) {
+                if (true)
+                    resolve(registriesMock[0]);
+                else
+                    reject(null);
+            });
+            return promise
+                .then(function(data) {
+                    return data;
                 })
+                .catch(function(error) {
+                    throw error;
+                });
         }
     }
 

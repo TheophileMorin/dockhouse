@@ -28,31 +28,7 @@
         /* jshint validthis: true */
         var logger = Logger.getInstance('RegistryController');
         var vm = this;
-        var registriesMock = [{
-            name:"registry Docker One",
-            type:{
-                "name": "Docker",
-                "logo": "assets/images/logos/docker.png",
-                "defaultHost": "127.0.0.1",
-                "defaultPort": "1478",
-                "accessibility": "public"
-            },
-            host:"192.168.25.6",
-            port:"8585",
-            protocol:"HTTP"
-        },{
-            name:"test",
-            type:{
-                "name": "Docker",
-                "logo": "assets/images/logos/docker.png",
-                "defaultHost": "127.0.0.1",
-                "defaultPort": "1478",
-                "accessibility": "public"
-            },
-            host:"192.168.0.255",
-            port:"3030",
-            protocol:"HTTPS"
-        }]
+
 
         vm.registries = [];
         vm.registryEdited = {};
@@ -72,41 +48,40 @@
         }
 
         function loadAll() {
-           /* Registry.getAll()
+            Registry.getAll()
                 .then(function(data){
                     vm.registries = data;
                 })
                 .catch(function(error) {
                     //logger.error('Enabled to get the list of authors.');
-                });*/
-            vm.registries = registriesMock;
+                });
         }
 
         function applyChanges(registry) {
-            /*
+
             if (vm.editionMode){
                 update(registry);
             } else {
                 create(registry);
-            }*/
+            }
         }
 
         function create(registry) {
-            /*
+
             Registry.create(registry)
                 .then(function(data) {
                     vm.loadAll();
                     vm.clear();
-                });*/
+                });
         }
 
         function update(registry) {
-            /*
+
             Registry.update(registry)
                 .then(function(data) {
                     vm.loadAll();
                     vm.clear();
-                });*/
+                });
         }
 
         function openCreate() {
@@ -126,7 +101,7 @@
             });
 
             modalInstance.result.then(function (registryModified) {
-                logger.debug('Trying to create the author ...');
+                logger.debug('Trying to create the Registry ...');
                 applyChanges(registryModified);
             }, function () {
                 logger.debug('Modal dismissed at: ' + new Date());
@@ -185,12 +160,12 @@
             });
         }
 
-        function remove(registry) {/*
+        function remove(registry) {
             Registry.remove(registry)
                 .then(function(data) {
                     vm.loadAll();
                     vm.clear();
-                });*/
+                });
         }
 
         function clear() {
