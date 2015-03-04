@@ -8682,3 +8682,9 @@ ul#strength {
   bottom: 0;
   background-color: #000;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003141}}
+.icons {
+  height: 30px;
+  width: 30px;
+}

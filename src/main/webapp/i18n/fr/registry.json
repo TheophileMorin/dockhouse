@@ -1,0 +1,29 @@
+{
+    "dockhouseApp": {
+        "registry" : {
+            "home": {
+                "title": "Registry",
+                "createLabel": "Créer un nouveau Registre",
+                "createOrEditLabel": "Créer ou éditer un Registre"
+            },
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Registre {{ id }} ?"
+            },
+            "detail": {
+                "title": "Registre"
+            },
+            "name": "Name",
+            "type": {
+                "title" : "Type",
+                "name": "Name",
+                "logo": "Logo",
+                "defaultHost": "Default Host",
+                "defaultPort": "Default Port",
+                "accessibility": "Accessibility"
+            },
+            "host": "Host",
+            "port": "Port",
+            "protocol": "Protocol"
+        }
+    }
+}

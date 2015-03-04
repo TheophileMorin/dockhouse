@@ -1,0 +1,29 @@
+{
+    "dockhouseApp": {
+        "registry" : {
+            "home": {
+                "title": "Registry",
+                "createLabel": "Create a new Registry",
+                "createOrEditLabel": "Create or edit a Registry"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Registry {{ id }}?"
+            },
+            "detail": {
+                "title": "Registry"
+            },
+            "name": "Name",
+            "type": {
+                "title" : "Type",
+                "name": "Name",
+                "logo": "Logo",
+                "defaultHost": "Default Host",
+                "defaultPort": "Default Port",
+                "accessibility": "Accessibility"
+            },
+            "host": "Host",
+            "port": "Port",
+            "protocol": "Protocol"
+        }
+    }
+}
