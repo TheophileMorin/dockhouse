@@ -30,7 +30,6 @@
 
         function save() {
             logger.debug('Choice --> Save');
-            console.log(vm.authorEdited);
             $modalInstance.close(vm.authorEdited);
         };
 

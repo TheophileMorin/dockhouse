@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.time.LocalDate;
 
 /**
  * Utility class for testing REST controllers.
@@ -63,5 +64,19 @@ public class TestUtil {
         jsonObject.put("birthDate",dateToConvert + "T00:00:00.000Z");
         String string = jsonObject.toString();
         return string;
+    }
+
+    /**
+     * Used to format a LocalDate to the format provided by the Jackson JSR310 Converter
+     * Used for jsonPath assertions
+     * @param date
+     * @return
+     */
+    public static String formatLocalDateJsr310ForJsonPath(LocalDate date ) {
+        return "[" +
+            date.getYear() + "," +
+            date.getMonthValue() + "," +
+            date.getDayOfMonth() +
+            "]";
     }
 }

@@ -3,6 +3,7 @@ package org.dockhouse.web.rest;
 import org.dockhouse.Application;
 import org.dockhouse.domain.Author;
 import org.dockhouse.repository.AuthorRepository;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,7 +75,7 @@ public class AuthorResourceTest {
         // Create the Author
         restAuthorMockMvc.perform(post("/api/authors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertAuthorToJsonString(author)))
+            .content(TestUtil.convertObjectToJsonString(author)))
             .andExpect(status().isOk());
 
         // Validate the Author in the database
@@ -96,7 +97,10 @@ public class AuthorResourceTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.[0].id").value(author.getId()))
                 .andExpect(jsonPath("$.[0].name").value(DEFAULT_NAME.toString()))
-                .andExpect(jsonPath("$.[0].birthDate").value(DEFAULT_BIRTH_DATE.toString()));
+                .andExpect(jsonPath("$.[0].birthDate").value(Matchers.contains(
+                    DEFAULT_BIRTH_DATE.getYear(),
+                    DEFAULT_BIRTH_DATE.getMonthValue(),
+                    DEFAULT_BIRTH_DATE.getDayOfMonth())));
     }
 
     @Test
@@ -110,7 +114,11 @@ public class AuthorResourceTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.id").value(author.getId()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.birthDate").value(DEFAULT_BIRTH_DATE.toString()));
+            .andExpect(jsonPath("$.birthDate").value(Matchers.contains(
+                                                                DEFAULT_BIRTH_DATE.getYear(),
+                                                                DEFAULT_BIRTH_DATE.getMonthValue(),
+                                                                DEFAULT_BIRTH_DATE.getDayOfMonth())));
+
     }
 
     @Test
@@ -129,12 +137,11 @@ public class AuthorResourceTest {
         author.setName(UPDATED_NAME);
         author.setBirthDate(UPDATED_BIRTH_DATE);
 
-
-
         restAuthorMockMvc.perform(put("/api/authors/{id}", author.getId())
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertAuthorToJsonString(author)))
+            .content(TestUtil.convertObjectToJsonString(author)))
             .andExpect(status().isOk());
+
 
         // Validate the Author in the database
         List<Author> authors = authorRepository.findAll();

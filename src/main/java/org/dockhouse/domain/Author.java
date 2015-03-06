@@ -17,8 +17,8 @@ package org.dockhouse.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import org.dockhouse.domain.util.CustomLocalDateDeserializer;
-import org.dockhouse.domain.util.CustomLocalDateSerializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -38,7 +38,7 @@ public class Author implements Serializable {
     @Field("name")
     private String name;
 
-    @JsonSerialize(using = CustomLocalDateSerializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = CustomLocalDateDeserializer.class)
     @Field("birth_date")
     private LocalDate birthDate;
