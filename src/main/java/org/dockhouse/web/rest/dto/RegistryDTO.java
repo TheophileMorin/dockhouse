@@ -13,47 +13,24 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.dockhouse.domain;
+package org.dockhouse.web.rest.dto;
 
-import java.io.Serializable;
+import org.dockhouse.domain.RegistryType;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+public class RegistryDTO {
 
-import org.dockhouse.domain.validation.CheckReference;
-import org.hibernate.validator.constraints.Range;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-
-/**
- * A registry.
- */
-@Document(collection = "registries")
-public class Registry extends AbstractAuditingEntity implements Serializable {
-
-    @Id
     private String id;
 
-    @NotNull
-    @Pattern(regexp = "^[a-z0-9]*$")
-    @Size(min = 1, max = 50)
     private String name;
 
     private String host;
 
-    @Range(min = 0, max = 65535)
     private int port;
 
-    @Size(max = 10)
     private String protocol;
 
-    @NotNull
-    @CheckReference
-    @Field("registry_type_id")
-    private String registryTypeId;
-
+    private RegistryType registryType;
+    
     public String getId() {
     	return id;
     }
@@ -94,46 +71,23 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     	this.protocol = protocol;
     }
 
-    public String getRegistryTypeId() {
-    	return registryTypeId;
+    public RegistryType getRegistryType() {
+    	return registryType;
     }
 
-    public void setRegistryTypeId(String registryTypeId) {
-    	this.registryTypeId = registryTypeId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Registry registry = (Registry) o;
-
-        if (!name.equals(registry.name)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return name.hashCode();
+    public void setRegistryType(RegistryType registryType) {
+    	this.registryType = registryType;
     }
 
     @Override
     public String toString() {
-        return "Registry{" +
+        return "RegistryDTO{" +
 	    "id='" + id + '\'' +
 	    ", name='" + name + '\'' +
 	    ", host='" + host + '\'' +
 	    ", port='" + port + '\'' +
-	    ", protocol='"       + protocol     + '\'' +
-	    ", registryTypeId='" + registryTypeId + '\'' +
+	    ", protocol='"     + protocol     + '\'' +
+	    ", registryType='" + registryType + '\'' +
 	    "}";
     }
 }

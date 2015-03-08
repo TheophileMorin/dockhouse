@@ -15,18 +15,25 @@
  */
 package org.dockhouse.web.rest;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
+import org.dockhouse.service.RegistryService;
+import org.dockhouse.web.rest.dto.RegistryDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +55,17 @@ public class RegistryResource {
     @Inject
     private RegistryRepository registryRepository;
 
+    @Inject
+    private RegistryService registryService;
+
+    @Inject
+    private Validator validator;
+    
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(validator);
+    }
+    
     /**
      * GET  /registries -> get all registries.
      */
@@ -55,9 +73,14 @@ public class RegistryResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    ResponseEntity<Iterable<Registry>> getRegistries() {
+    ResponseEntity<List<RegistryDTO>> getRegistries() {
         log.debug("REST request to get all Registries");
-        return new ResponseEntity<>(registryRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(
+        		registryRepository.findAll()
+        		                  .stream()
+        		                  .map(registryService::createRegistryDTO)
+        		                  .collect(Collectors.toList()), 
+        		HttpStatus.OK);
     }
 
     /**
@@ -67,11 +90,11 @@ public class RegistryResource {
 		    method = RequestMethod.GET,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    ResponseEntity<Registry> getRegistry(@PathVariable String id) {
+    ResponseEntity<RegistryDTO> getRegistry(@PathVariable String id) {
         log.debug("REST request to get Registry : {}", id);
         return Optional.ofNullable(registryRepository.findOne(id))
             .map(registry -> new ResponseEntity<>(
-            		registry,
+            		registryService.createRegistryDTO(registry),
 					HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -85,7 +108,6 @@ public class RegistryResource {
     @ResponseStatus(HttpStatus.CREATED)
     @Timed
     public void createRegistry(@RequestBody @Valid Registry registry) {
-        log.debug("REST request to save Registry : {}", registry);
         registryRepository.save(registry);
     }
 
@@ -98,7 +120,7 @@ public class RegistryResource {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Timed
     public void updateRegistry(@RequestBody @Valid Registry registry, @PathVariable String id) {
-        log.debug("REST request to save Registry : {}", registry);
+        log.debug("REST request to save Registry : {}", registry);        	
         registryRepository.save(registry);
     }
 
