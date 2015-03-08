@@ -13,7 +13,12 @@
     function jsr310ToDate($filter) {
         return function(item) {
             if (item){
-                var formattedDate = new Date(item[0]+"/"+item[1]+"/"+item[2]);
+                var formattedDate;
+                if (Array.isArray(item)){
+                    formattedDate = new Date(item[0]+"/"+item[1]+"/"+item[2]);
+                } else {
+                    formattedDate = item;
+                }
                 return $filter('date')(formattedDate,'longDate');
             }
         }

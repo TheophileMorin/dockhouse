@@ -79,7 +79,7 @@
          * HTTP and REST Service configuration
          */
         $httpProvider.interceptors.push('authInterceptor');
-        RestangularProvider.setBaseUrl('/api');
+        RestangularProvider.setBaseUrl('/dockhouse/api');
 
         /**
          * Logger Configuration

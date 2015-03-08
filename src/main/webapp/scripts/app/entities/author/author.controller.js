@@ -106,6 +106,7 @@
         }
 
         function openEdit(author) {
+            console.log(author);
             vm.authorEdited = author;
             vm.editionMode = true;
 
@@ -125,6 +126,7 @@
                 applyChanges(authorModified);
             }, function () {
                 logger.debug('Modal dismissed at: ' + new Date());
+                console.log(author);
                 vm.clear();
             });
 
