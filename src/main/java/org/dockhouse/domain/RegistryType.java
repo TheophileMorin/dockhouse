@@ -21,10 +21,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -39,6 +39,7 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]*$")
     @Size(min = 1, max = 50)
+    @Indexed(unique=true)
     private String name;
     
     @URL

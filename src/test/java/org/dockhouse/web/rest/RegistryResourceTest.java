@@ -79,6 +79,9 @@ public class RegistryResourceTest {
         
         this.mockMvc = MockMvcBuilders.standaloneSetup(registryMockResource).build();
 
+        registryRepository.deleteAll();
+        registryTypeRepository.deleteAll();
+        
 	    registryType = new RegistryType();
 	    registryType.setId("1");
 	    registryType.setName("name");

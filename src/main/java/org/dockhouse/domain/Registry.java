@@ -24,6 +24,7 @@ import javax.validation.constraints.Size;
 import org.dockhouse.domain.validation.CheckReference;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -39,6 +40,7 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]*$")
     @Size(min = 1, max = 50)
+    @Indexed(unique=true)
     private String name;
 
     private String host;
