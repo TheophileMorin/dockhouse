@@ -111,16 +111,15 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 
         RegistryType registryType = (RegistryType) o;
 
-        if (!name.equals(registryType.name)) {
-            return false;
-        }
+        if (id != null ? !id.equals(registryType.id) : registryType.id != null)
+        	return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override

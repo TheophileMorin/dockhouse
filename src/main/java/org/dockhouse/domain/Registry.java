@@ -113,16 +113,15 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
 
         Registry registry = (Registry) o;
 
-        if (!name.equals(registry.name)) {
-            return false;
-        }
+        if (id != null ? !id.equals(registry.id) : registry.id != null)
+        	return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
