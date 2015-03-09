@@ -17,77 +17,88 @@ package org.dockhouse.web.rest.dto;
 
 import org.dockhouse.domain.RegistryType;
 
-public class RegistryDTO {
+public class RegistryTypeDTO {
 
     private String id;
 
     private String name;
-
-    private String host;
-
-    private int port;
-
-    private String protocol;
-
-    private RegistryTypeDTO registryType;
     
+    private String logo;
+    
+    private String host;
+    
+    private int port;
+    
+    private boolean isPublic;
+
     public String getId() {
     	return id;
     }
-
+    
     public void setId(String id) {
     	this.id = id;
     }
+    
+	public String getName() {
+		return name;
+	}
 
-    public String getName() {
-    	return name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-    	this.name = name;
-    }
+	public String getLogo() {
+		return logo;
+	}
 
-    public String getHost() {
-    	return host;
-    }
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 
-    public void setHost(String host) {
-    	this.host = host;
-    }
+	public String getHost() {
+		return host;
+	}
 
-    public int getPort() {
-    	return port;
-    }
+	public void setHost(String host) {
+		this.host = host;
+	}
 
-    public void setPort(int port) {
-    	this.port = port;
-    }
+	public int getPort() {
+		return port;
+	}
 
-    public String getProtocol() {
-    	return protocol;
-    }
+	public void setPort(int port) {
+		this.port = port;
+	}
 
-    public void setProtocol(String protocol) {
-    	this.protocol = protocol;
-    }
+	public boolean isPublic() {
+		return isPublic;
+	}
 
-    public RegistryTypeDTO getRegistryType() {
-    	return registryType;
-    }
+	public void setPublic(boolean isPublic) {
+		this.isPublic = isPublic;
+	}
 
-    public void setRegistryType(RegistryTypeDTO registryType) {
-    	this.registryType = registryType;
-    }
-
+	public static RegistryTypeDTO fromRegistryType(RegistryType registryType) {
+		RegistryTypeDTO dto = new RegistryTypeDTO();
+		dto.setId(registryType.getId());
+		dto.setHost(registryType.getHost());
+		dto.setName(registryType.getName());
+		dto.setPort(registryType.getPort());
+		dto.setLogo(registryType.getLogo());
+		dto.setPublic(registryType.isPublic());
+		return dto;
+	}
+	
     @Override
     public String toString() {
-        return "RegistryDTO{" +
+        return "RegistryTypeDTO{" +
 	    "id='" + id + '\'' +
 	    ", name='" + name + '\'' +
+	    ", logo='" + logo + '\'' +
 	    ", host='" + host + '\'' +
 	    ", port='" + port + '\'' +
-	    ", protocol='"     + protocol     + '\'' +
-	    ", registryType='" + registryType + '\'' +
+	    ", isPublic='" + isPublic + '\'' +
 	    "}";
     }
 }

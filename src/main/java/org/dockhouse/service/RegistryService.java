@@ -22,6 +22,7 @@ import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.web.rest.dto.RegistryDTO;
+import org.dockhouse.web.rest.dto.RegistryTypeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class RegistryService {
     	registryDTO.setPort(registry.getPort());
     	registryDTO.setProtocol(registry.getProtocol());
     	RegistryType registryType = registryTypeRepository.findOne(registry.getRegistryTypeId());
-    	registryDTO.setRegistryType(registryType);
+    	registryDTO.setRegistryType(RegistryTypeDTO.fromRegistryType(registryType));
     	return registryDTO;
     }
 }

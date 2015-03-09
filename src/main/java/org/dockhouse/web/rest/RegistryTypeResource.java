@@ -15,13 +15,16 @@
  */
 package org.dockhouse.web.rest;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
+import org.dockhouse.web.rest.dto.RegistryTypeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -55,9 +58,14 @@ public class RegistryTypeResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    ResponseEntity<Iterable<RegistryType>> getRegistryTypes() {
+    ResponseEntity<List<RegistryTypeDTO>> getRegistryTypes() {
         log.debug("REST request to get all Registry Types");
-        return new ResponseEntity<>(registryTypeRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(
+        		registryTypeRepository.findAll()
+        							  .stream()
+        							  .map(RegistryTypeDTO::fromRegistryType)
+        							  .collect(Collectors.toList())
+        		, HttpStatus.OK);
     }
 
     /**
@@ -67,11 +75,11 @@ public class RegistryTypeResource {
 		    method = RequestMethod.GET,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    ResponseEntity<RegistryType> getRegistryType(@PathVariable String id) {
+    ResponseEntity<RegistryTypeDTO> getRegistryType(@PathVariable String id) {
         log.debug("REST request to get Registry Type : {}", id);
         return Optional.ofNullable(registryTypeRepository.findOne(id))
             .map(registryType -> new ResponseEntity<>(
-            		registryType,
+            		RegistryTypeDTO.fromRegistryType(registryType),
 					HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
