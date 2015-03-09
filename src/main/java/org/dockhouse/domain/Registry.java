@@ -37,7 +37,7 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     private String id;
 
     @NotNull
-    @Pattern(regexp = "^[a-z0-9]*$")
+    @Pattern(regexp = "^[a-zA-Z0-9]*$")
     @Size(min = 1, max = 50)
     private String name;
 
