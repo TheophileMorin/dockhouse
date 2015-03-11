@@ -15,6 +15,10 @@
  */
 package org.dockhouse.service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.inject.Inject;
 
 import org.dockhouse.domain.Registry;
@@ -41,7 +45,7 @@ public class RegistryService {
     @Inject
     private RegistryTypeRepository registryTypeRepository;
 
-    public RegistryDTO createRegistryDTO(Registry registry) {
+    private RegistryDTO createRegistryDTO(Registry registry) {
     	RegistryDTO registryDTO = new RegistryDTO();
     	registryDTO.setId(registry.getId());
     	registryDTO.setName(registry.getName());
@@ -51,5 +55,17 @@ public class RegistryService {
     	RegistryType registryType = registryTypeRepository.findOne(registry.getRegistryTypeId());
     	registryDTO.setRegistryType(RegistryTypeDTO.fromRegistryType(registryType));
     	return registryDTO;
+    }
+    
+    public List<RegistryDTO> getAll() {
+    	return registryRepository.findAll()
+    							 .stream()
+    							 .map(this::createRegistryDTO)
+    							 .collect(Collectors.toList());
+    }
+    
+    public Optional<RegistryDTO> getOne(String id) {
+    	return Optional.ofNullable(registryRepository.findOne(id))
+    			       .map(this::createRegistryDTO);
     }
 }

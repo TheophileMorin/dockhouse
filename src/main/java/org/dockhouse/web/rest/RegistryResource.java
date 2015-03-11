@@ -75,12 +75,8 @@ public class RegistryResource {
     @Timed
     ResponseEntity<List<RegistryDTO>> getRegistries() {
         log.debug("REST request to get all Registries");
-        return new ResponseEntity<>(
-        		registryRepository.findAll()
-        		                  .stream()
-        		                  .map(registryService::createRegistryDTO)
-        		                  .collect(Collectors.toList()), 
-        		HttpStatus.OK);
+        return new ResponseEntity<>(registryService.getAll(), 
+        						    HttpStatus.OK);
     }
 
     /**
@@ -92,10 +88,8 @@ public class RegistryResource {
     @Timed
     ResponseEntity<RegistryDTO> getRegistry(@PathVariable String id) {
         log.debug("REST request to get Registry : {}", id);
-        return Optional.ofNullable(registryRepository.findOne(id))
-            .map(registry -> new ResponseEntity<>(
-            		registryService.createRegistryDTO(registry),
-					HttpStatus.OK))
+        return registryService.getOne(id)
+            .map(registry -> new ResponseEntity<>(registry, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
