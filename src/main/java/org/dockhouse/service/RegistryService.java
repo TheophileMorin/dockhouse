@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import org.dockhouse.domain.Registry;
+import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.web.rest.dto.RegistryDTO;
@@ -58,5 +59,9 @@ public class RegistryService {
     public Optional<RegistryDTO> getOne(String id) {
     	return Optional.ofNullable(registryRepository.findOne(id))
     			       .map(registryDTOMapper::createDTO);
+    }
+    
+    public RegistryType getRegistryTypeOf(Registry registry) {
+    	return registryTypeRepository.findOne(registry.getRegistryTypeId());
     }
 }
