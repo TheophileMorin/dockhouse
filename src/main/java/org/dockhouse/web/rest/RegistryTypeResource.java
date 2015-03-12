@@ -24,6 +24,7 @@ import javax.validation.Valid;
 
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
+import org.dockhouse.service.RegistryTypeService;
 import org.dockhouse.web.rest.dto.RegistryTypeDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,9 @@ public class RegistryTypeResource {
 
     @Inject
     private RegistryTypeRepository registryTypeRepository;
+    
+    @Inject
+    private RegistryTypeService registryTypeService;
 
     /**
      * GET  /registry_types -> get all registry types.
@@ -60,12 +64,8 @@ public class RegistryTypeResource {
     @Timed
     ResponseEntity<List<RegistryTypeDTO>> getRegistryTypes() {
         log.debug("REST request to get all Registry Types");
-        return new ResponseEntity<>(
-        		registryTypeRepository.findAll()
-        							  .stream()
-        							  .map(RegistryTypeDTO::fromRegistryType)
-        							  .collect(Collectors.toList())
-        		, HttpStatus.OK);
+        return new ResponseEntity<>(registryTypeService.getAll(), 
+        							HttpStatus.OK);
     }
 
     /**
@@ -77,10 +77,8 @@ public class RegistryTypeResource {
     @Timed
     ResponseEntity<RegistryTypeDTO> getRegistryType(@PathVariable String id) {
         log.debug("REST request to get Registry Type : {}", id);
-        return Optional.ofNullable(registryTypeRepository.findOne(id))
-            .map(registryType -> new ResponseEntity<>(
-            		RegistryTypeDTO.fromRegistryType(registryType),
-					HttpStatus.OK))
+        return registryTypeService.getOne(id)
+            .map(registryType -> new ResponseEntity<>(registryType, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 

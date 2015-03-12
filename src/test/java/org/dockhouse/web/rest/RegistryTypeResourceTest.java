@@ -13,6 +13,7 @@ import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
+import org.dockhouse.service.RegistryTypeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,9 @@ public class RegistryTypeResourceTest {
     @Inject
     private RegistryTypeRepository registryTypeRepository;
 
+    @Inject
+    private RegistryTypeService registryTypeService;
+    
     private MockMvc mockMvc;
 
     private RegistryType registryType;
@@ -59,6 +63,7 @@ public class RegistryTypeResourceTest {
     public void setup() {
         RegistryTypeResource registryTypeMockResource = new RegistryTypeResource();
         ReflectionTestUtils.setField(registryTypeMockResource, "registryTypeRepository", registryTypeRepository);
+        ReflectionTestUtils.setField(registryTypeMockResource, "registryTypeService"   , registryTypeService);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(registryTypeMockResource).build();
 

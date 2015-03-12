@@ -21,42 +21,36 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import org.dockhouse.domain.Registry;
-import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
-import org.dockhouse.web.rest.dto.RegistryDTO;
-import org.dockhouse.web.rest.dto.mapping.RegistryDTOMapper;
-import org.modelmapper.ModelMapper;
+import org.dockhouse.web.rest.dto.RegistryTypeDTO;
+import org.dockhouse.web.rest.dto.mapping.RegistryTypeDTOMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Service class for managing registries.
+ * Service class for managing types of registries.
  */
 @Service
-public class RegistryService {
+public class RegistryTypeService {
 
-    private final Logger log = LoggerFactory.getLogger(RegistryService.class);
-
-    @Inject
-    private RegistryRepository registryRepository;
+    private final Logger log = LoggerFactory.getLogger(RegistryTypeService.class);
 
     @Inject
     private RegistryTypeRepository registryTypeRepository;
 
     @Inject
-    private RegistryDTOMapper registryDTOMapper;
+    private RegistryTypeDTOMapper registryTypeDTOMapper;
     
-    public List<RegistryDTO> getAll() {
-    	return registryRepository.findAll()
-    							 .stream()
-    							 .map(registryDTOMapper::createDTO)
-    							 .collect(Collectors.toList());
+    public List<RegistryTypeDTO> getAll() {
+    	return registryTypeRepository.findAll()
+    							 	 .stream()
+    							 	 .map(registryTypeDTOMapper::createDTO)
+    							 	 .collect(Collectors.toList());
     }
     
-    public Optional<RegistryDTO> getOne(String id) {
-    	return Optional.ofNullable(registryRepository.findOne(id))
-    			       .map(registryDTOMapper::createDTO);
+    public Optional<RegistryTypeDTO> getOne(String id) {
+    	return Optional.ofNullable(registryTypeRepository.findOne(id))
+    			       .map(registryTypeDTOMapper::createDTO);
     }
 }

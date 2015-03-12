@@ -78,17 +78,6 @@ public class RegistryTypeDTO {
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
-
-	public static RegistryTypeDTO fromRegistryType(RegistryType registryType) {
-		RegistryTypeDTO dto = new RegistryTypeDTO();
-		dto.setId(registryType.getId());
-		dto.setHost(registryType.getHost());
-		dto.setName(registryType.getName());
-		dto.setPort(registryType.getPort());
-		dto.setLogo(registryType.getLogo());
-		dto.setPublic(registryType.isPublic());
-		return dto;
-	}
 	
     @Override
     public String toString() {
