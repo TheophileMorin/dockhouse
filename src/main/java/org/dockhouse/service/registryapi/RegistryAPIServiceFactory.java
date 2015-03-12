@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.service.RegistryService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,7 +30,8 @@ import org.springframework.stereotype.Service;
 public class RegistryAPIServiceFactory {
 
 	@Inject
-	private DockerRegistryAPIService dockerRegistryAPIService;
+	@Qualifier("DockerRegistryAPIService")
+	private RegistryAPIService dockerRegistryAPIService;
 
 	@Inject
 	private RegistryService registryService;

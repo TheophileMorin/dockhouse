@@ -16,9 +16,11 @@
 package org.dockhouse.service.registryapi;
 
 import org.dockhouse.domain.Registry;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Qualifier("DockerRegistryAPIService")
 public class DockerRegistryAPIService implements RegistryAPIService {
 
 	@Override
