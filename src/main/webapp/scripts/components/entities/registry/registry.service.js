@@ -26,25 +26,29 @@
     function Registry(Restangular){
         var service = Restangular.service('registries');
         var registriesMock = [{
+            id:"aqwzsxedc",
             name:"registry Docker One",
-            type:{
+            registryType:{
+                "id": "azertyuiop",
                 "name": "Docker",
                 "logo": "assets/images/logos/docker.png",
-                "defaultHost": "127.0.0.1",
-                "defaultPort": "1478",
-                "accessibility": "public"
+                "host": "127.0.0.1",
+                "port": "1478",
+                "public": "false"
             },
             host:"192.168.25.6",
             port:"8585",
             protocol:"HTTP"
         },{
+            id:"zsxedcrfv",
             name:"test",
-            type:{
+            registryType:{
+                "id": "azertyuiop",
                 "name": "Docker",
                 "logo": "assets/images/logos/docker.png",
-                "defaultHost": "127.0.0.1",
-                "defaultPort": "1478",
-                "accessibility": "public"
+                "host": "127.0.0.1",
+                "port": "1478",
+                "public": "false"
             },
             host:"192.168.0.250",
             port:"3030",
@@ -202,6 +206,22 @@
                     resolve(registriesMock[0]);
                 else
                     reject(null);
+            });
+            return promise
+                .then(function(data) {
+                    return data;
+                })
+                .catch(function(error) {
+                    throw error;
+                });
+        }
+
+        function testRegisty(editedRegistry) { //TODO MOCK
+            var promise=  new Promise(function(resolve, reject) {
+                if (true)
+                    resolve(true);
+                else
+                    reject(false);
             });
             return promise
                 .then(function(data) {

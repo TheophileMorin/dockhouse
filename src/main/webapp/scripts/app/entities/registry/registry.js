@@ -39,5 +39,25 @@ angular.module('dockhouseApp')
                     }]
                 }
             })
+            .state('registryDetail', {
+                parent: 'entity',
+                url: '/registry/:id',
+                data: {
+                    roles: ['ROLE_USER'],
+                    pageTitle: 'dockhouseApp.registry.detail.title'
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'scripts/app/entities/registry/registry-detail.html',
+                        controller: 'RegistryDetailController as detailCtrl'
+                    }
+                },
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('registry');
+                        return $translate.refresh();
+                    }]
+                }
+            });
 
     });

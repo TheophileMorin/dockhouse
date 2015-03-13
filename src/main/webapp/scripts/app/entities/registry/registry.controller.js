@@ -39,6 +39,7 @@
         vm.openRemove = openRemove;
         vm.clear = clear;
 
+
         activate();
 
         ////////////////
@@ -53,7 +54,7 @@
                     vm.registries = data;
                 })
                 .catch(function(error) {
-                    //logger.error('Enabled to get the list of authors.');
+                    logger.error('Enabled to get the list of registries.');
                 });
         }
 
@@ -112,6 +113,7 @@
 
         function openEdit(registry) {
             vm.registryEdited = registry;
+            //TODO enlever le champ "type" et le remplacer par le champ "registryTypeId" pointant sur type.id
             vm.editionMode = true;
 
             // Open the modal Edition window
@@ -170,8 +172,9 @@
 
         function clear() {
             vm.registryEdited = {
+                id:null,
                 name:null,
-                type:null,
+                registryTypeId:null,
                 host:null,
                 port:null,
                 protocol:null };

@@ -21,9 +21,14 @@
                 "defaultPort": "Default Port",
                 "accessibility": "Accessibility"
             },
+            "status": {
+                "default" : "Status",
+                "online" : "Connecté",
+                "offline" : "Déconnecté"
+            },
             "host": "Host",
             "port": "Port",
-            "protocol": "Protocol"
+            "protocol": "HTTPS"
         }
     }
 }

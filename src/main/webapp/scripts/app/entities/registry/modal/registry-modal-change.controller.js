@@ -20,35 +20,108 @@
         .module('dockhouseApp')
         .controller('RegistryModalChangeController', RegistryModalChangeController);
 
-    RegistryModalChangeController.$inject = ['$modalInstance', '$filter', 'registryEdited', 'Logger'];
+    RegistryModalChangeController.$inject = ['$modalInstance', '$filter', 'registryEdited', 'Logger', 'Registry'];
 
     /* @ngInject */
-    function RegistryModalChangeController($modalInstance, $filter, registryEdited, Logger){
+    function RegistryModalChangeController($modalInstance, $filter, registryEdited, Logger, Registry){
         /* jshint validthis: true */
         var vm = this;
         var logger = Logger.getInstance('RegistryModalChangeController');
+        var forceSave = false;
 
         vm.registryEdited = registryEdited;
+        vm.registryTypes = [];
+        vm.httpsRegistry = false;
+        vm.alert = null;
+
+
         vm.save = save;
         vm.cancel = cancel;
-
-        activate();
+        vm.loadTypes = loadTypes;
+        vm.test = test;
 
         ////////////////
 
+        activate();
+
         function activate() {
+            vm.loadTypes();
         }
 
         function save() {
             logger.debug('Choice --> Save');
-            $modalInstance.close(vm.registryEdited);
-        };
+            adaptEdited();
+            if(!forceSave && !testRegistry()) {
+                vm.alert = "Le registre que vous souhaitez ajouter est déconnecté. Rappuyez sur le bouton de sauvegarde pour l'ajouter quand même."; //TODO translate ?
+                forceSave = true;
+            } else {
+                $modalInstance.close(vm.registryEdited);
+            }
+        }
 
         function cancel() {
             $modalInstance.dismiss('cancel');
         }
 
+        function loadTypes() {
+            /*RegistryTypes.getAll()
+             .then(function(data){
+             vm.registryTypes = data;
+             })
+             .catch(function(error) {
+             //logger.error('Enabled to get the list of authors.');
+             });*/
+            vm.registryTypes = [{//TODO remove mock
+                "id": "azertyuiop",
+                "name": "Docker",
+                "logo": "assets/images/logos/docker.png",
+                "host": "127.0.0.1",
+                "port": "1478",
+                "public": "false"
+            },{
+                "id": "qsdfghjklm",
+                "name": "Rocket",
+                "logo": "assets/images/logos/rocket.png",
+                "host": "127.0.0.1",
+                "port": "9999",
+                "public": "true"
+            }];
+            console.log("registry types loaded.");
+        }
 
+        function test() {
+            logger.debug("test registry");
+
+            var field = $('#testResultField');
+            if(testRegistry()) {
+                field.attr('class', 'btn btn-success');
+                $('#testResultTextField').attr('translate','dockhouseApp.registry.status.online');
+                field.text("online"); //TODO ajouter la translation
+            } else {
+                field.attr('class', 'btn btn-danger');
+                $('#testResultTextField').attr('translate','dockhouseApp.registry.status.offline');
+                field.text("offline"); //TODO ajouter la translation
+            }
+        }
+
+        function testRegistry() { //TODO enlever le mock.
+            /* Registry.testRegistry(vm.registryEdited).then(function(data) {
+             return true;
+             }).catch(function(error) {
+             return true;
+             });
+             */
+            adaptEdited();
+            return (vm.registryEdited.protocol === "HTTPS");
+        }
+
+        function adaptEdited() {
+            if(vm.httpsRegistry) {
+                vm.registryEdited.protocol = "HTTPS";
+            } else {
+                vm.registryEdited.protocol = "HTTP";
+            }
+        }
     }
 
 })();
