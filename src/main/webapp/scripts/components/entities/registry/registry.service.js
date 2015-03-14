@@ -54,6 +54,21 @@
             port:"3030",
             protocol:"HTTPS"
         }];
+        var registryTypesMock = [{
+            "id": "azertyuiop",
+            "name": "Docker",
+            "logo": "assets/images/logos/docker.png",
+            "host": "127.0.0.1",
+            "port": "1478",
+            "public": "false"
+        },{
+            "id": "qsdfghjklm",
+            "name": "Rocket",
+            "logo": "assets/images/logos/rocket.png",
+            "host": "127.0.0.1",
+            "port": "9999",
+            "public": "true"
+        }];
 
         return {
             get: get,

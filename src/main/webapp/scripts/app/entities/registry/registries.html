@@ -36,13 +36,15 @@
                     <div class="input-group">
                         <div class="input-group-addon">Name</div>
                         <input type="text" class="form-control" name="name"
-                               ng-model="modal.registryEdited.name">
+                               ng-model="modal.registryEdited.name" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label translate="dockhouseApp.registry.type.title">Type</label>
-                    <select name="type" ng-model="modal.registryEdited.registryTypeId">
-                        <option ng-repeat="type in modal.registryTypes" value="{{type.id}}">{{type.name}}</option>
+                    <select name="type" ng-model="modal.registryEdited.registryTypeId" required>
+                        <option ng-repeat="type in modal.registryTypes" value="{{type.id}}" >
+                            {{type.name}}
+                        </option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -51,7 +53,7 @@
                         <div class="input-group-addon">Host</div>
                         <input type="text" class="form-control" name="host"
                                ng-model="modal.registryEdited.host"
-                               placeholder="{{modal.registryEdited.registryType.host}}">
+                               placeholder="{{modal.registryEdited.registryType.host}}" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -60,7 +62,7 @@
                         <div class="input-group-addon">Port</div>
                         <input type="text" class="form-control" name="port"
                                ng-model="modal.registryEdited.port"
-                               placeholder="{{modal.registryEdited.registryType.port}}">
+                               placeholder="{{modal.registryEdited.registryType.port}}" required>
                     </div>
                 </div>
                 <div class="form-group">

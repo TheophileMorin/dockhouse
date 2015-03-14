@@ -46,11 +46,13 @@
 
         function activate() {
             vm.loadTypes();
+            convertToPostVersion();
         }
 
         function save() {
             logger.debug('Choice --> Save');
-            adaptEdited();
+            setProtocol();
+            console.log(vm.registryEdited);
             if(!forceSave && !testRegistry()) {
                 vm.alert = "Le registre que vous souhaitez ajouter est déconnecté. Rappuyez sur le bouton de sauvegarde pour l'ajouter quand même."; //TODO translate ?
                 forceSave = true;
@@ -62,6 +64,7 @@
         function cancel() {
             $modalInstance.dismiss('cancel');
         }
+
 
         function loadTypes() {
             /*RegistryTypes.getAll()
@@ -104,18 +107,28 @@
             }
         }
 
-        function testRegistry() { //TODO enlever le mock.
+        function testRegistry() {
             /* Registry.testRegistry(vm.registryEdited).then(function(data) {
              return true;
              }).catch(function(error) {
-             return true;
+             return false;
              });
              */
-            adaptEdited();
-            return (vm.registryEdited.protocol === "HTTPS");
+            setProtocol();
+            return (vm.registryEdited.protocol === "HTTPS");//TODO enlever le mock.
         }
 
-        function adaptEdited() {
+        function convertToPostVersion(){
+            //If the modal is opened in edition mode.
+            if(vm.registryEdited.registryType != null) {
+                vm.registryEdited.registryTypeId = vm.registryEdited.registryType.id;
+                delete vm.registryEdited.registryType;
+            } else { //To prevent blank choice in the select field.
+                vm.registryEdited.registryTypeId = vm.registryTypes[0].id;
+            }
+        }
+
+        function setProtocol() {
             if(vm.httpsRegistry) {
                 vm.registryEdited.protocol = "HTTPS";
             } else {
@@ -123,5 +136,4 @@
             }
         }
     }
-
 })();
