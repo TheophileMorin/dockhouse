@@ -114,7 +114,6 @@
 
         function openEdit(registry) {
             vm.registryEdited = registry;
-            //TODO enlever le champ "type" et le remplacer par le champ "registryTypeId" pointant sur type.id
             vm.editionMode = true;
 
             // Open the modal Edition window
