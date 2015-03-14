@@ -15,30 +15,29 @@
  */
 package org.dockhouse.domain;
 
-import java.io.Serializable;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.dockhouse.domain.validation.CheckReference;
-import org.hibernate.validator.constraints.Range;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import java.io.Serializable;
 
 /**
  * A registry.
  */
 @Document(collection = "registries")
-public class Registry extends AbstractAuditingEntity implements Serializable {
+public class Registry implements Serializable {
 
     @Id
     private String id;
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9]*$")
+    @Pattern(regexp = "^[\\w\\s]*$")
     @Size(min = 1, max = 50)
     @Indexed(unique=true)
     private String name;
@@ -52,9 +51,9 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     private String protocol;
 
     @NotNull
-    @CheckReference
-    @Field("registry_type_id")
-    private String registryTypeId;
+    @DBRef
+    @Field("type")
+    private RegistryType type;
 
     public String getId() {
     	return id;
@@ -96,12 +95,12 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     	this.protocol = protocol;
     }
 
-    public String getRegistryTypeId() {
-    	return registryTypeId;
+    public RegistryType getType() {
+        return type;
     }
 
-    public void setRegistryTypeId(String registryTypeId) {
-    	this.registryTypeId = registryTypeId;
+    public void setType(RegistryType type) {
+        this.type = type;
     }
 
     @Override
@@ -118,6 +117,9 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
         if (id != null ? !id.equals(registry.id) : registry.id != null)
         	return false;
 
+        if(!registry.getType().equals(type)) {
+            return false;
+        }
         return true;
     }
 
@@ -134,7 +136,7 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
 	    ", host='" + host + '\'' +
 	    ", port='" + port + '\'' +
 	    ", protocol='"       + protocol     + '\'' +
-	    ", registryTypeId='" + registryTypeId + '\'' +
+	    ", type='[" + type.toString() + "]\'" +
 	    "}";
     }
 }

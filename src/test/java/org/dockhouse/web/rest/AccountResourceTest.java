@@ -1,7 +1,6 @@
 package org.dockhouse.web.rest;
 
 import org.dockhouse.Application;
-import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.Authority;
 import org.dockhouse.domain.User;
 import org.dockhouse.repository.AuthorityRepository;
@@ -15,9 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -49,8 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-@IntegrationTest
-@Import(MongoConfiguration.class)
+//@IntegrationTest
+//@Import(MongoConfiguration.class)
 public class AccountResourceTest {
 
     @Inject

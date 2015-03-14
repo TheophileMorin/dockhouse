@@ -15,18 +15,15 @@
  */
 package org.dockhouse.service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-
+import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
-import org.dockhouse.web.rest.dto.RegistryTypeDTO;
-import org.dockhouse.web.rest.dto.mapping.RegistryTypeDTOMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import javax.inject.Inject;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service class for managing types of registries.
@@ -39,18 +36,11 @@ public class RegistryTypeService {
     @Inject
     private RegistryTypeRepository registryTypeRepository;
 
-    @Inject
-    private RegistryTypeDTOMapper registryTypeDTOMapper;
-    
-    public List<RegistryTypeDTO> getAll() {
-    	return registryTypeRepository.findAll()
-    							 	 .stream()
-    							 	 .map(registryTypeDTOMapper::createDTO)
-    							 	 .collect(Collectors.toList());
+    public List<RegistryType> getAll() {
+    	return registryTypeRepository.findAll();
     }
-    
-    public Optional<RegistryTypeDTO> getOne(String id) {
-    	return Optional.ofNullable(registryTypeRepository.findOne(id))
-    			       .map(registryTypeDTOMapper::createDTO);
+
+    public Optional<RegistryType> getOne(String id) {
+    	return Optional.ofNullable(registryTypeRepository.findOne(id));
     }
 }
