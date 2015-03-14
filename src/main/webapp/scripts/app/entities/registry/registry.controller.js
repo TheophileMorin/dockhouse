@@ -44,8 +44,9 @@
 
         ////////////////
 
-        function activate(){
+        function activate(){ //TODO Bug lors de l'affichage de la liste. Il semble que le dataBinding ne se fait pas correctement...
             vm.loadAll();
+            logger.debug("activate")
         }
 
         function loadAll() {
@@ -147,14 +148,14 @@
                 backdrop: 'static',
                 resolve: {
                     registryName: function() {
-                        return vm.registryEdited.name;
+                        return registry.name;
                     }
                 }
             });
 
             modalInstance.result.then(function (toDelete) {
                 if (toDelete){
-                    remove(vm.registryEdited);
+                    remove(registry);
                 }
             }, function () {
                 logger.debug('Modal delete dismissed at: ' + new Date());

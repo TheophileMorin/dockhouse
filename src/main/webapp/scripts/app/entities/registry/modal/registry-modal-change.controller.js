@@ -13,6 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 (function (){
     "use strict";
 
@@ -47,12 +48,12 @@
         function activate() {
             vm.loadTypes();
             convertToPostVersion();
+            console.log(vm.registryEdited);
         }
 
         function save() {
             logger.debug('Choice --> Save');
             setProtocol();
-            console.log(vm.registryEdited);
             if(!forceSave && !testRegistry()) {
                 vm.alert = "Le registre que vous souhaitez ajouter est déconnecté. Rappuyez sur le bouton de sauvegarde pour l'ajouter quand même."; //TODO translate ?
                 forceSave = true;

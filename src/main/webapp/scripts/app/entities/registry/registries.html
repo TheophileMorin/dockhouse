@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label class="sr-only" translate="dockhouseApp.registry.name">Name</label>
                     <div class="input-group">
-                        <div class="input-group-addon">Name</div>
+                        <div class="input-group-addon" translate="dockhouseApp.registry.name" >Name</div>
                         <input type="text" class="form-control" name="name"
                                ng-model="modal.registryEdited.name" required>
                     </div>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <label class="sr-only" translate="dockhouseApp.registry.host">Host</label>
                     <div class="input-group">
-                        <div class="input-group-addon">Host</div>
+                        <div class="input-group-addon" translate="dockhouseApp.registry.host">Host</div>
                         <input type="text" class="form-control" name="host"
                                ng-model="modal.registryEdited.host"
                                placeholder="{{modal.registryEdited.registryType.host}}" required>
@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="sr-only" translate="dockhouseApp.registry.port">Port</label>
                     <div class="input-group">
-                        <div class="input-group-addon">Port</div>
+                        <div class="input-group-addon" translate="dockhouseApp.registry.port">Port</div>
                         <input type="text" class="form-control" name="port"
                                ng-model="modal.registryEdited.port"
                                placeholder="{{modal.registryEdited.registryType.port}}" required>
@@ -94,7 +94,7 @@
             <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
         </div>
         <div class="modal-body">
-            <p translate="dockhouseApp.registry.delete.question" translate-values="{id: '{{modalDelete.registryName}}'}">Are you sure you want to delete this Registry?</p>
+            <p translate="dockhouseApp.registry.delete.question" translate-values="{id: '{{modalDelete.registryName}}'}">Are you sure you want to delete this Registry ?</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalDelete.cancel()">

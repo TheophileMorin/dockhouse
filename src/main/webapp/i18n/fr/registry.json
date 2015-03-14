@@ -7,26 +7,26 @@
                 "createOrEditLabel": "Créer ou éditer un Registre"
             },
             "delete": {
-                "question": "Etes-vous certain de vouloir supprimer le Registre {{ id }} ?"
+                "question": "Etes-vous certain de vouloir supprimer le Registre : {{id}} ?"
             },
             "detail": {
                 "title": "Registre"
             },
-            "name": "Name",
+            "name": "Nom",
             "type": {
                 "title" : "Type",
-                "name": "Name",
+                "name": "Nom",
                 "logo": "Logo",
-                "defaultHost": "Default Host",
-                "defaultPort": "Default Port",
-                "accessibility": "Accessibility"
+                "defaultHost": "IP par défaut",
+                "defaultPort": "Port par défaut",
+                "accessibility": "Accessibilité"
             },
             "status": {
                 "default" : "Status",
                 "online" : "Connecté",
                 "offline" : "Déconnecté"
             },
-            "host": "Host",
+            "host": "Hôte",
             "port": "Port",
             "protocol": "HTTPS"
         }

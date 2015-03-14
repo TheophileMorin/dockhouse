@@ -20,10 +20,11 @@
         .module('dockhouseApp')
         .factory('Registry', Registry);
 
-    Registry.$inject = ['Restangular'];
+    Registry.$inject = ['Restangular', 'Logger'];
 
     /* @ngInject */
-    function Registry(Restangular){
+    function Registry(Restangular, Logger){
+        var logger = Logger.getInstance('RegistryService');
         var service = Restangular.service('registries');
         var registriesMock = [{
             id:"aqwzsxedc",
@@ -146,7 +147,7 @@
          * @returns the registry inserted
          */
         function create(registry) {
-            //logger.debug('call the /registries service');
+            //logger.debug('call the /registries RESTAngular service');
            /* return service
                 .post(registry)
                 .then(function(data) {
@@ -158,10 +159,16 @@
                 })*/
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
-                if (true)
-                    resolve(registriesMock);
-                else
-                    reject(null);
+                var correspondingType = findRegistryTypeByID(registry.registryTypeId);
+                if (correspondingType == null)
+                    reject("Unknown registry type id.");
+
+                registry.registryType = correspondingType;
+                delete registry.registryTypeId;
+                registry.id = makeid();
+                registriesMock.push(registry);
+
+                resolve(registry);
             });
             return promise
                 .then(function(data) {
@@ -188,10 +195,26 @@
                 */
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
-                if (true)
-                    resolve(registriesMock[0]);
-                else
-                    reject(null);
+
+                var correspondingType = findRegistryTypeByID(registry.registryTypeId);
+                if (correspondingType == null)
+                    reject("Unknown registry type id.");
+
+                registry.registryType = correspondingType;
+                delete registry.registryTypeId;
+
+                var index = null;
+                for(var i=0; i< registriesMock.length; ++i ) {
+                    if(registriesMock[i].id === registry.id)
+                        index = i;
+                }
+                if (index == null)
+                    reject("The registry doesn't exist.");
+
+                registriesMock.splice(index,index+1);
+                registriesMock.push(registry);
+                logger.debug("Registry correctly modified.");
+                resolve(registry);
             });
             return promise
                 .then(function(data) {
@@ -217,10 +240,18 @@
                 })*/
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
-                if (true)
-                    resolve(registriesMock[0]);
-                else
-                    reject(null);
+                var index = null;
+                for(var i=0; i< registriesMock.length; ++i ) {
+                    if(registriesMock[i].id === registry.id)
+                        index = i;
+                }
+                if (index == null)
+                    reject("The registry doesn't exist.");
+
+                registriesMock.splice(index,index+1);
+                logger.debug("Registry correctly deleted.");
+
+                resolve(registry);
             });
             return promise
                 .then(function(data) {
@@ -246,6 +277,27 @@
                     throw error;
                 });
         }
+
+
+        function makeid() //TODO mock de génération d'ID
+        {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            for( var i=0; i < 9; i++ )
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        }
+
+        function findRegistryTypeByID(id) { //TODO Mock de recherche dans les types de registres
+            for(var i=0; i< registryTypesMock.length; ++i) {
+                if(registryTypesMock[i].id === id)
+                return registryTypesMock[i];
+            }
+            return null;
+        }
+
     }
 
 
