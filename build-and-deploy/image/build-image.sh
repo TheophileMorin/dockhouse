@@ -12,7 +12,7 @@ echo "Version =  $APP_VERSION ..."
 echo '#############################'
 echo '#  APPLICATION PACKAGING    #'
 echo '#############################'
-mvn -Pprod clean package
+mvn -Pprod -DskipTests=true clean package
 
 echo '##########################'
 echo '#  DOCKER IMAGE BUILD    #'
