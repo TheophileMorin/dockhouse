@@ -12,6 +12,7 @@
             "detail": {
                 "title": "Registre"
             },
+            "id":"ID",
             "name": "Nom",
             "type": {
                 "title" : "Type",

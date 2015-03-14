@@ -48,7 +48,6 @@
         function activate() {
             vm.loadTypes();
             convertToPostVersion();
-            console.log(vm.registryEdited);
         }
 
         function save() {
@@ -90,7 +89,7 @@
                 "port": "9999",
                 "public": "true"
             }];
-            console.log("registry types loaded.");
+            logger.debug("registry types loaded.");
         }
 
         function test() {

@@ -12,6 +12,7 @@
             "detail": {
                 "title": "Registry"
             },
+            "id":"ID",
             "name": "Name",
             "type": {
                 "title" : "Type",

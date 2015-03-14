@@ -46,7 +46,7 @@
 
         function activate(){ //TODO Bug lors de l'affichage de la liste. Il semble que le dataBinding ne se fait pas correctement...
             vm.loadAll();
-            logger.debug("activate")
+            logger.debug("activated")
         }
 
         function loadAll() {
