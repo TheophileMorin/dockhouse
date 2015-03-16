@@ -48,6 +48,7 @@
         function activate() {
             vm.loadTypes();
             convertToPostVersion();
+            logger.debug("activated");
         }
 
         function save() {

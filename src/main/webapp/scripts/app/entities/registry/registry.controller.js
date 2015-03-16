@@ -21,14 +21,13 @@
         .module('dockhouseApp')
         .controller('RegistryController', RegistryController);
 
-    RegistryController.$inject = ['Registry', '$modal', 'Logger'];
+    RegistryController.$inject = ['Registry', '$modal', 'Logger', '$timeout'];
 
     /* @ngInject */
-    function RegistryController(Registry, $modal, Logger){
+    function RegistryController(Registry, $modal, Logger, $timeout){
         /* jshint validthis: true */
         var logger = Logger.getInstance('RegistryController');
         var vm = this;
-
 
         vm.registries = [];
         vm.registryEdited = {};
@@ -46,7 +45,8 @@
 
         function activate(){ //TODO Bug lors de l'affichage de la liste. Il semble que le dataBinding ne se fait pas correctement...
             vm.loadAll();
-            logger.debug("activated")
+            $timeout(function(){vm.loadAll(); logger.debug("Timeout used... Resolve this bug damn bug !")},1);
+            logger.debug("activated");
         }
 
         function loadAll() {
@@ -55,7 +55,7 @@
                     vm.registries = data;
                 })
                 .catch(function(error) {
-                    logger.error('Enabled to get the list of registries.');
+                    //logger.error('Enabled to get the list of registries.');
                 });
         }
 

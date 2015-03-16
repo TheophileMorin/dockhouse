@@ -21,10 +21,10 @@
         .module('dockhouseApp')
         .controller('RegistryDetailController', RegistryDetailController);
 
-    RegistryDetailController.$inject = ['Registry', '$stateParams', 'Logger'];
+    RegistryDetailController.$inject = ['Registry', '$stateParams', 'Logger', '$timeout'];
 
     /* @ngInject */
-    function RegistryDetailController(Registry, $stateParams, Logger){
+    function RegistryDetailController(Registry, $stateParams, Logger, $timeout){
         /* jshint validthis: true */
         var logger = Logger.getInstance('RegistryDetailController');
         var vm = this;
@@ -32,13 +32,17 @@
 
         vm.registry = {};
 
+        vm.loadRegistry = loadRegistry;
+
         activate($stateParams.id);
 
         ////////////////
 
         function activate(id){
+            console.log(this); //TODO --> undefined ???...
+            vm.loadRegistry(id);
+            $timeout(function(){vm.loadRegistry(id); logger.debug("Timeout used... Resolve this bug damn bug !")},1);
             logger.debug("activated");
-            loadRegistry(id);
         }
 
         function loadRegistry(id) {
@@ -50,8 +54,6 @@
                     logger.error('Enabled to get the given registry.');
                 });
         }
-
-
     }
 
 })();

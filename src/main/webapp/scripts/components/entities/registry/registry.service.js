@@ -25,6 +25,7 @@
     /* @ngInject */
     function Registry(Restangular, Logger){
         var logger = Logger.getInstance('RegistryService');
+
         var service = Restangular.service('registries');
         var registriesMock = [{
             id:"aqwzsxedc",
@@ -127,10 +128,7 @@
                 })*/
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
-                if (true)
                     resolve(registriesMock);
-                else
-                    reject(null);
             });
             return promise
                 .then(function(data) {
