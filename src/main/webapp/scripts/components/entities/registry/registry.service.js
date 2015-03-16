@@ -77,7 +77,9 @@
             getAll: getAll,
             create: create,
             update: update,
-            remove: remove
+            remove: remove,
+            getAllTypes : getAllTypes,
+            testRegistry : testRegistry
         };
 
         ////////////////
@@ -87,15 +89,15 @@
          * @returns the registry corresponding (promise){*}
          */
         function get(id) {/*
-            return service.one(id)
-                .get()
-                .then(function(data) {
-                    return data;
-                })
-                .catch(function(error) {
-                    //logger.error('registries/:id',"Error lors de l'appel du service REST registries",error);
-                    throw error;
-                })*/
+         return service.one(id)
+         .get()
+         .then(function(data) {
+         return data;
+         })
+         .catch(function(error) {
+         //logger.error('registries/:id',"Error lors de l'appel du service REST registries",error);
+         throw error;
+         })*/
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
                 if (true)
@@ -118,17 +120,34 @@
          */
         function getAll() {
             /*return service
-                .getList()
+             .getList()
+             .then(function(data) {
+             return data;
+             })
+             .catch(function(error) {
+             //logger.error('registries',"Error lors de l'appel du service REST registries",error);
+             throw error;
+             })*/
+            //TODO MOCK
+            var promise=  new Promise(function(resolve, reject) {
+                resolve(registriesMock);
+            });
+            return promise
                 .then(function(data) {
                     return data;
                 })
                 .catch(function(error) {
-                    //logger.error('registries',"Error lors de l'appel du service REST registries",error);
                     throw error;
-                })*/
-            //TODO MOCK
+                });
+        }
+
+        /**
+         * Get the list of all the registry types
+         * @returns the complete array of registry types (promise){*}
+         */
+        function getAllTypes() { //TODO create another service ?
             var promise=  new Promise(function(resolve, reject) {
-                    resolve(registriesMock);
+                resolve(registryTypesMock);
             });
             return promise
                 .then(function(data) {
@@ -146,15 +165,15 @@
          */
         function create(registry) {
             //logger.debug('call the /registries RESTAngular service');
-           /* return service
-                .post(registry)
-                .then(function(data) {
-                    return data;
-                })
-                .catch(function (error){
-                    //logger.error('registries',"Error lors de l'appel du service REST registries",error);
-                    throw error;
-                })*/
+            /* return service
+             .post(registry)
+             .then(function(data) {
+             return data;
+             })
+             .catch(function (error){
+             //logger.error('registries',"Error lors de l'appel du service REST registries",error);
+             throw error;
+             })*/
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
                 var correspondingType = findRegistryTypeByID(registry.registryTypeId);
@@ -183,14 +202,14 @@
          * @returns the registry updated
          */
         function update(registry) {/*
-            return registry.put()
-                .then(function(data) {
-                    return data;
-                })
-                .catch(function (error) {
-                    throw error;
-                })
-                */
+         return registry.put()
+         .then(function(data) {
+         return data;
+         })
+         .catch(function (error) {
+         throw error;
+         })
+         */
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
 
@@ -229,13 +248,13 @@
          * @returns the registry removed
          */
         function remove(registry) {/*
-            return registry.remove()
-                .then(function(data) {
-                    return data;
-                })
-                .catch(function (error) {
-                    throw error;
-                })*/
+         return registry.remove()
+         .then(function(data) {
+         return data;
+         })
+         .catch(function (error) {
+         throw error;
+         })*/
             //TODO MOCK
             var promise=  new Promise(function(resolve, reject) {
                 var index = null;
@@ -260,12 +279,16 @@
                 });
         }
 
-        function testRegisty(editedRegistry) { //TODO MOCK
+        function testRegistry(editedRegistry) {
             var promise=  new Promise(function(resolve, reject) {
-                if (true)
-                    resolve(true);
-                else
-                    reject(false);
+                try {
+                    if (editedRegistry.protocol === "HTTPS")
+                        resolve(true);
+                    else
+                        resolve(false);
+                } catch(e) {
+                    reject(e);
+                }
             });
             return promise
                 .then(function(data) {
@@ -291,7 +314,7 @@
         function findRegistryTypeByID(id) { //TODO Mock de recherche dans les types de registres
             for(var i=0; i< registryTypesMock.length; ++i) {
                 if(registryTypesMock[i].id === id)
-                return registryTypesMock[i];
+                    return registryTypesMock[i];
             }
             return null;
         }

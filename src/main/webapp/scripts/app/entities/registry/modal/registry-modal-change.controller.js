@@ -35,23 +35,22 @@
         vm.httpsRegistry = false;
         vm.alert = null;
 
-
         vm.save = save;
         vm.cancel = cancel;
         vm.loadTypes = loadTypes;
-        vm.test = test;
+        vm.testRegistry = testRegistry;
 
         ////////////////
 
         activate();
 
         function activate() {
+            console.log();
             vm.loadTypes();
-            convertToPostVersion();
             logger.debug("activated");
         }
 
-        function save() {
+        function save() { //TODO adapt to asynchronism of promises in testRegistry.
             logger.debug('Choice --> Save');
             setProtocol();
             if(!forceSave && !testRegistry()) {
@@ -68,55 +67,37 @@
 
 
         function loadTypes() {
-            /*RegistryTypes.getAll()
-             .then(function(data){
-             vm.registryTypes = data;
-             })
-             .catch(function(error) {
-             //logger.error('Enabled to get the list of authors.');
-             });*/
-            vm.registryTypes = [{//TODO remove mock
-                "id": "azertyuiop",
-                "name": "Docker",
-                "logo": "assets/images/logos/docker.png",
-                "host": "127.0.0.1",
-                "port": "1478",
-                "public": "false"
-            },{
-                "id": "qsdfghjklm",
-                "name": "Rocket",
-                "logo": "assets/images/logos/rocket.png",
-                "host": "127.0.0.1",
-                "port": "9999",
-                "public": "true"
-            }];
-            logger.debug("registry types loaded.");
+            Registry.getAllTypes()
+                .then(function(data){
+                    vm.registryTypes = data;
+                    convertToPostVersion();
+                })
+                .catch(function(error) {
+                    logger.error('Enabled to get the list of registry types.');
+                });
         }
 
-        function test() {
-            logger.debug("test registry");
-
-            var field = $('#testResultField');
-            if(testRegistry()) {
-                field.attr('class', 'btn btn-success');
-                $('#testResultTextField').attr('translate','dockhouseApp.registry.status.online');
-                field.text("online"); //TODO ajouter la translation
-            } else {
-                field.attr('class', 'btn btn-danger');
-                $('#testResultTextField').attr('translate','dockhouseApp.registry.status.offline');
-                field.text("offline"); //TODO ajouter la translation
-            }
-        }
 
         function testRegistry() {
-            /* Registry.testRegistry(vm.registryEdited).then(function(data) {
-             return true;
-             }).catch(function(error) {
-             return false;
-             });
-             */
+            logger.debug("test registry");
             setProtocol();
-            return (vm.registryEdited.protocol === "HTTPS");//TODO enlever le mock.
+
+
+            Registry.testRegistry(vm.registryEdited).then(function(data) {
+                var field = $('#testResultField');
+                if(data) {
+                    field.attr('class', 'btn btn-success');
+                    $('#testResultTextField').attr('translate','dockhouseApp.registry.status.online');
+                    field.text("online"); //TODO ajouter la translation
+                } else {
+                    field.attr('class', 'btn btn-danger');
+                    $('#testResultTextField').attr('translate','dockhouseApp.registry.status.offline');
+                    field.text("offline"); //TODO ajouter la translation
+                }
+            }).catch(function(error) {
+
+            });
+            //return (vm.registryEdited.protocol === "HTTPS");//TODO enlever le mock.
         }
 
         function convertToPostVersion(){
