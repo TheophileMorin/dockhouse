@@ -52,7 +52,6 @@
             Registry.getAll()
                 .then(function(data){
                     vm.registries = data;
-                    $scope.$digest();
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the list of registries.');
@@ -69,7 +68,6 @@
         }
 
         function create(registry) {
-
             Registry.create(registry)
                 .then(function(data) {
                     vm.loadAll();

@@ -21,10 +21,10 @@
         .module('dockhouseApp')
         .controller('RegistryModalChangeController', RegistryModalChangeController);
 
-    RegistryModalChangeController.$inject = ['$modalInstance', '$filter', 'registryEdited', 'Logger', 'Registry'];
+    RegistryModalChangeController.$inject = ['$modalInstance', '$filter', 'registryEdited', 'Logger', 'Registry', 'RegistryTypes'];
 
     /* @ngInject */
-    function RegistryModalChangeController($modalInstance, $filter, registryEdited, Logger, Registry){
+    function RegistryModalChangeController($modalInstance, $filter, registryEdited, Logger, Registry, RegistryTypes){
         /* jshint validthis: true */
         var vm = this;
         var logger = Logger.getInstance('RegistryModalChangeController');
@@ -67,7 +67,7 @@
 
 
         function loadTypes() {
-            Registry.getAllTypes()
+            RegistryTypes.getAll()
                 .then(function(data){
                     vm.registryTypes = data;
                     convertToPostVersion();

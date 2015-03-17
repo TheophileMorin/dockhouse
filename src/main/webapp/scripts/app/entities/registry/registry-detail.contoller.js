@@ -46,7 +46,6 @@
             Registry.get(id)
                 .then(function(data){
                     vm.registry = data;
-                    $scope.$digest();
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the given registry.');

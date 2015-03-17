@@ -88,29 +88,16 @@
          * Get a registry from an id
          * @returns the registry corresponding (promise){*}
          */
-        function get(id) {/*
-         return service.one(id)
-         .get()
-         .then(function(data) {
-         return data;
-         })
-         .catch(function(error) {
-         //logger.error('registries/:id',"Error lors de l'appel du service REST registries",error);
-         throw error;
-         })*/
-            //TODO MOCK
-            var promise=  new Promise(function(resolve, reject) {
-                if (true)
-                    resolve(registriesMock[0]);
-                else
-                    reject(null);
-            });
-            return promise
+        function get(id) {
+            logger.debug('GET /registries/'+id);
+            return service.one(id)
+                .get()
                 .then(function(data) {
                     return data;
                 })
                 .catch(function(error) {
-                    throw error;
+                    logger.error('registries/:id',"Error lors de l'appel du service REST registries",error);
+                throw error;
                 });
         }
 
@@ -119,24 +106,14 @@
          * @returns the complete array of registries (promise){*}
          */
         function getAll() {
-            /*return service
-             .getList()
-             .then(function(data) {
-             return data;
-             })
-             .catch(function(error) {
-             //logger.error('registries',"Error lors de l'appel du service REST registries",error);
-             throw error;
-             })*/
-            //TODO MOCK
-            var promise=  new Promise(function(resolve, reject) {
-                resolve(registriesMock);
-            });
-            return promise
+            logger.debug('GET /registries');
+            return service
+                .getList()
                 .then(function(data) {
                     return data;
                 })
                 .catch(function(error) {
+                    logger.error('registries',"Error lors de l'appel du service REST registries",error);
                     throw error;
                 });
         }
@@ -164,34 +141,14 @@
          * @returns the registry inserted
          */
         function create(registry) {
-            //logger.debug('call the /registries RESTAngular service');
-            /* return service
-             .post(registry)
-             .then(function(data) {
-             return data;
-             })
-             .catch(function (error){
-             //logger.error('registries',"Error lors de l'appel du service REST registries",error);
-             throw error;
-             })*/
-            //TODO MOCK
-            var promise=  new Promise(function(resolve, reject) {
-                var correspondingType = findRegistryTypeByID(registry.registryTypeId);
-                if (correspondingType == null)
-                    reject("Unknown registry type id.");
-
-                registry.registryType = correspondingType;
-                delete registry.registryTypeId;
-                registry.id = makeid();
-                registriesMock.push(registry);
-
-                resolve(registry);
-            });
-            return promise
+            logger.debug('POST /registries');
+            return service
+                .post(registry)
                 .then(function(data) {
                     return data;
                 })
-                .catch(function(error) {
+                .catch(function (error){
+                    logger.error('registries',"Error lors de l'appel du service REST registries",error);
                     throw error;
                 });
         }
@@ -201,43 +158,15 @@
          * @param registry to update
          * @returns the registry updated
          */
-        function update(registry) {/*
-         return registry.put()
-         .then(function(data) {
-         return data;
-         })
-         .catch(function (error) {
-         throw error;
-         })
-         */
-            //TODO MOCK
-            var promise=  new Promise(function(resolve, reject) {
-
-                var correspondingType = findRegistryTypeByID(registry.registryTypeId);
-                if (correspondingType == null)
-                    reject("Unknown registry type id.");
-
-                registry.registryType = correspondingType;
-                delete registry.registryTypeId;
-
-                var index = null;
-                for(var i=0; i< registriesMock.length; ++i ) {
-                    if(registriesMock[i].id === registry.id)
-                        index = i;
-                }
-                if (index == null)
-                    reject("The registry doesn't exist.");
-
-                registriesMock.splice(index,index+1);
-                registriesMock.push(registry);
-                logger.debug("Registry correctly modified.");
-                resolve(registry);
-            });
-            return promise
+        function update(registry) {
+            logger.debug('PUT /registries');
+            return registry
+                .put()
                 .then(function(data) {
                     return data;
                 })
-                .catch(function(error) {
+                .catch(function (error) {
+                    logger.error('registries',"Error lors de l'appel du service REST registries",error);
                     throw error;
                 });
         }
@@ -247,34 +176,15 @@
          * @param registry to remove
          * @returns the registry removed
          */
-        function remove(registry) {/*
-         return registry.remove()
-         .then(function(data) {
-         return data;
-         })
-         .catch(function (error) {
-         throw error;
-         })*/
-            //TODO MOCK
-            var promise=  new Promise(function(resolve, reject) {
-                var index = null;
-                for(var i=0; i< registriesMock.length; ++i ) {
-                    if(registriesMock[i].id === registry.id)
-                        index = i;
-                }
-                if (index == null)
-                    reject("The registry doesn't exist.");
-
-                registriesMock.splice(index,index+1);
-                logger.debug("Registry correctly deleted.");
-
-                resolve(registry);
-            });
-            return promise
+        function remove(registry) {
+            logger.debug('DELETE /registries');
+            return registry
+                .remove()
                 .then(function(data) {
                     return data;
                 })
-                .catch(function(error) {
+                .catch(function (error) {
+                    logger.error('registries',"Error lors de l'appel du service REST registries",error);
                     throw error;
                 });
         }
