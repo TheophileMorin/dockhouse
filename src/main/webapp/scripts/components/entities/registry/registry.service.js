@@ -27,50 +27,7 @@
         var logger = Logger.getInstance('RegistryService');
 
         var service = Restangular.service('registries');
-        var registriesMock = [{
-            id:"aqwzsxedc",
-            name:"registry Docker One",
-            registryType:{
-                "id": "azertyuiop",
-                "name": "Docker",
-                "logo": "assets/images/logos/docker.png",
-                "host": "127.0.0.1",
-                "port": "1478",
-                "public": "false"
-            },
-            host:"192.168.25.6",
-            port:"8585",
-            protocol:"HTTP"
-        },{
-            id:"zsxedcrfv",
-            name:"test",
-            registryType:{
-                "id": "azertyuiop",
-                "name": "Docker",
-                "logo": "assets/images/logos/docker.png",
-                "host": "127.0.0.1",
-                "port": "1478",
-                "public": "false"
-            },
-            host:"192.168.0.250",
-            port:"3030",
-            protocol:"HTTPS"
-        }];
-        var registryTypesMock = [{
-            "id": "azertyuiop",
-            "name": "Docker",
-            "logo": "assets/images/logos/docker.png",
-            "host": "127.0.0.1",
-            "port": "1478",
-            "public": "false"
-        },{
-            "id": "qsdfghjklm",
-            "name": "Rocket",
-            "logo": "assets/images/logos/rocket.png",
-            "host": "127.0.0.1",
-            "port": "9999",
-            "public": "true"
-        }];
+
 
         return {
             get: get,
@@ -78,7 +35,6 @@
             create: create,
             update: update,
             remove: remove,
-            getAllTypes : getAllTypes,
             testRegistry : testRegistry
         };
 
@@ -118,22 +74,6 @@
                 });
         }
 
-        /**
-         * Get the list of all the registry types
-         * @returns the complete array of registry types (promise){*}
-         */
-        function getAllTypes() { //TODO create another service ?
-            var promise=  new Promise(function(resolve, reject) {
-                resolve(registryTypesMock);
-            });
-            return promise
-                .then(function(data) {
-                    return data;
-                })
-                .catch(function(error) {
-                    throw error;
-                });
-        }
 
         /**
          * Create a new registry
@@ -208,27 +148,6 @@
                     throw error;
                 });
         }
-
-
-        function makeid() //TODO mock de génération d'ID
-        {
-            var text = "";
-            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-            for( var i=0; i < 9; i++ )
-                text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-            return text;
-        }
-
-        function findRegistryTypeByID(id) { //TODO Mock de recherche dans les types de registres
-            for(var i=0; i< registryTypesMock.length; ++i) {
-                if(registryTypesMock[i].id === id)
-                    return registryTypesMock[i];
-            }
-            return null;
-        }
-
     }
 
 
