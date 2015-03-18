@@ -1,0 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+.idea
+
+dockhouse.iml
+/target/
+/.classpath
+/.project
+/.sass-cache/
+/.settings/
+/bin/
+/src/main/webapp/.tmp/

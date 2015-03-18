@@ -15,6 +15,7 @@ import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
+import org.dockhouse.web.rest.dto.RegistryInDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,7 +36,7 @@ public class MongoDBReferenceValidatorTest {
     @Inject
     private RegistryTypeRepository registryTypeRepository;
 
-	private Registry registry;
+	private RegistryInDTO registryInDTO;
 	
 	private RegistryType registryType;
 	
@@ -49,25 +50,25 @@ public class MongoDBReferenceValidatorTest {
         registryType.setPublic(false);
         registryTypeRepository.save(registryType);
 
-        registry = new Registry();
-        registry.setName("name");
-        registry.setHost("host");
-        registry.setPort(2222);
-        registry.setProtocol("http");
+        registryInDTO = new RegistryInDTO();
+        registryInDTO.setName("name");
+        registryInDTO.setHost("host");
+        registryInDTO.setPort(2222);
+        registryInDTO.setProtocol("http");
 	}
 	
 	@Test
-	public void testReferenceToRegistryTypeMustBeValid() {
-        registry.setRegistryTypeId(registryType.getId());
-		Set<ConstraintViolation<Registry>> errors = validator.validateProperty(registry, "registryTypeId", Default.class);
+	public void tInDTOestReferenceToRegistryTypeMustBeValid() {
+        registryInDTO.setRegistryTypeId(registryType.getId());
+		Set<ConstraintViolation<RegistryInDTO>> errors = validator.validateProperty(registryInDTO, "registryTypeId", Default.class);
 		assertTrue(errors.isEmpty());
 	
-		registry.setRegistryTypeId("");
-		errors = validator.validateProperty(registry, "registryTypeId", Default.class);
+		registryInDTO.setRegistryTypeId("");
+		errors = validator.validateProperty(registryInDTO, "registryTypeId", Default.class);
 		assertFalse(errors.isEmpty());
 		
-		registry.setRegistryTypeId(null);
-		errors = validator.validateProperty(registry, "registryTypeId", Default.class);
+		registryInDTO.setRegistryTypeId(null);
+		errors = validator.validateProperty(registryInDTO, "registryTypeId", Default.class);
 		assertFalse(errors.isEmpty());
 	}
 }

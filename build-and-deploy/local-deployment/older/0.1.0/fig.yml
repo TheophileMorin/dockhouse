@@ -1,9 +1,0 @@
-dockhousedb:
-  image: mongo:3.0
-
-application:
-  image: dockhouse/dockhouse:0.1.0
-  ports:
-    - "8080:8080"
-  links:
-    - dockhousedb
