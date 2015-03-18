@@ -86,11 +86,11 @@ public class RegistryTypeResource {
     @RequestMapping(value = "/registry_types",
 		    method = RequestMethod.POST,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     @Timed
-    public void createRegistryType(@RequestBody @Valid RegistryTypeInDTO registryTypeInDTO) {
+    public ResponseEntity<RegistryTypeOutDTO> createRegistryType(@RequestBody @Valid RegistryTypeInDTO registryTypeInDTO) {
         log.debug("REST request to save Registry Type : {}", registryTypeInDTO);
-        registryTypeService.save(registryTypeInDTO);
+        RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.save(registryTypeInDTO);
+        return new ResponseEntity<>(registryTypeOutDTO, HttpStatus.CREATED);
     }
 
     /**
@@ -99,12 +99,12 @@ public class RegistryTypeResource {
     @RequestMapping(value = "/registry_types/{id}",
 		    method = RequestMethod.PUT,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Timed
-    public void updateRegistryType(@RequestBody @Valid RegistryTypeInDTO registryTypeInDTO,
-    		                       @PathVariable String id) {
+    public ResponseEntity<RegistryTypeOutDTO> updateRegistryType(@RequestBody @Valid RegistryTypeInDTO registryTypeInDTO,
+    		                                                     @PathVariable String id) {
         log.debug("REST request to save Registry Type : {}", registryTypeInDTO);
-        registryTypeService.save(registryTypeInDTO);
+        RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.save(registryTypeInDTO);
+        return new ResponseEntity<>(registryTypeOutDTO, HttpStatus.OK);
     }
 
     /**

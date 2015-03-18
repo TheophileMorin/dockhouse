@@ -61,8 +61,9 @@ public class RegistryTypeService {
     			       .map(registryTypeOutDTOMapper::createDTO);
     }
     
-    public void save(RegistryTypeInDTO registryTypeInDTO) {
+    public RegistryTypeOutDTO save(RegistryTypeInDTO registryTypeInDTO) {
     	RegistryType registryType = registryTypeInDTOMapper.createRegistryType(registryTypeInDTO);
-    	registryTypeRepository.save(registryType);
+    	registryType = registryTypeRepository.save(registryType);
+    	return registryTypeOutDTOMapper.createDTO(registryType);
     }
 }

@@ -98,11 +98,11 @@ public class RegistryResource {
     @RequestMapping(value = "/registries",
 		    method = RequestMethod.POST,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     @Timed
-    public void createRegistry(@RequestBody @Valid RegistryInDTO registryInDTO) {
+    public ResponseEntity<RegistryOutDTO> createRegistry(@RequestBody @Valid RegistryInDTO registryInDTO) {
         log.debug("REST request to save Registry : {}", registryInDTO);        	
-        registryService.save(registryInDTO);
+        RegistryOutDTO registryOutDTO = registryService.save(registryInDTO);
+        return new ResponseEntity<RegistryOutDTO>(registryOutDTO, HttpStatus.CREATED);
     }
 
     /**
@@ -111,12 +111,12 @@ public class RegistryResource {
     @RequestMapping(value = "/registries/{id}",
 		    method = RequestMethod.PUT,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Timed
-    public void updateRegistry(@RequestBody @Valid RegistryInDTO registryInDTO,
-    						   @PathVariable String id) {
+    public ResponseEntity<RegistryOutDTO> updateRegistry(@RequestBody @Valid RegistryInDTO registryInDTO,
+    						                             @PathVariable String id) {
         log.debug("REST request to save Registry : {}", registryInDTO);        	
-        registryService.save(registryInDTO);
+        RegistryOutDTO registryOutDTO = registryService.save(registryInDTO);
+        return new ResponseEntity<RegistryOutDTO>(registryOutDTO, HttpStatus.OK);
     }
 
     /**

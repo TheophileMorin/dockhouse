@@ -64,8 +64,9 @@ public class RegistryService {
     			       .map(registryOutDTOMapper::createDTO);
     }
     
-    public void save(RegistryInDTO registryInDTO) {
+    public RegistryOutDTO save(RegistryInDTO registryInDTO) {
     	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
-    	registryRepository.save(registry);
+    	registry = registryRepository.save(registry);
+    	return registryOutDTOMapper.createDTO(registry);
     }
 }
