@@ -114,6 +114,13 @@ public class RegistryResourceTest {
     }
 
     @Test
+    public void getRegistryStatusTest200() throws Exception {
+      	this.mockMvc.perform(get("/api/registries/{id}/status", registry.getId()))
+        .andExpect(status().isOk())
+	    .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+    
+    @Test
     public void getRegistriesTest200() throws Exception {
     	this.mockMvc.perform(get("/api/registries"))
         .andExpect(status().isOk())
