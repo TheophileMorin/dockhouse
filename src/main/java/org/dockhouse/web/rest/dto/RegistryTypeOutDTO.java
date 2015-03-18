@@ -17,7 +17,7 @@ package org.dockhouse.web.rest.dto;
 
 import org.dockhouse.domain.RegistryType;
 
-public class RegistryTypeDTO {
+public class RegistryTypeOutDTO {
 
     private String id;
 
@@ -81,7 +81,7 @@ public class RegistryTypeDTO {
 	
     @Override
     public String toString() {
-        return "RegistryTypeDTO{" +
+        return "RegistryTypeOutDTO{" +
 	    "id='" + id + '\'' +
 	    ", name='" + name + '\'' +
 	    ", logo='" + logo + '\'' +
