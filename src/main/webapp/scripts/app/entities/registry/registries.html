@@ -24,88 +24,11 @@
     </button>
 
     <script type="text/ng-template" id="RegistryChangeModal">
-        <form name="editForm" role="form" novalidate
-              class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
-              ng-submit="modal.save()">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myRegistryLabel" translate="dockhouseApp.registry.home.createOrEditLabel">Create or edit a Registry</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="sr-only" translate="dockhouseApp.registry.name">Name</label>
-                    <div class="input-group">
-                        <div class="input-group-addon" translate="dockhouseApp.registry.name" >Name</div>
-                        <input type="text" class="form-control" name="name"
-                               ng-model="modal.registryEdited.name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label translate="dockhouseApp.registry.type.title">Type</label>
-                    <select name="type" ng-model="modal.registryEdited.registryTypeId" required>
-                        <option ng-repeat="type in modal.registryTypes" value="{{type.id}}" >
-                            {{type.name}}
-                        </option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" translate="dockhouseApp.registry.host">Host</label>
-                    <div class="input-group">
-                        <div class="input-group-addon" translate="dockhouseApp.registry.host">Host</div>
-                        <input type="text" class="form-control" name="host"
-                               ng-model="modal.registryEdited.host"
-                               placeholder="{{modal.registryEdited.registryType.host}}" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="sr-only" translate="dockhouseApp.registry.port">Port</label>
-                    <div class="input-group">
-                        <div class="input-group-addon" translate="dockhouseApp.registry.port">Port</div>
-                        <input type="text" class="form-control" name="port"
-                               ng-model="modal.registryEdited.port"
-                               placeholder="{{modal.registryEdited.registryType.port}}" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label translate="dockhouseApp.registry.protocol">HTTPS</label>
-                    <input type="checkbox" class="form-control" name="protocol"
-                           ng-model="modal.httpsRegistry">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <h4 ng-show="modal.alert != null" class="bg-danger">{{modal.alert}}</h4>
-                <button type="button"  class="btn btn-default" id="testResultField" disabled="disabled">
-                    <span id="testResultTextField" translate="dockhouseApp.registry.status.default">Status</span>
-                </button>
-                <button type="button"  class="btn btn-info" ng-click="modal.testRegistry()" >
-                    <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.test">Test</span>
-                </button>
-                <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
-                </button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modal.cancel()">
-                    <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-                </button>
-            </div>
-        </form>
+        <ng-include src="modal.modalHtmlURL"></ng-include>
     </script>
-
     <script type="text/ng-template" id="RegistryRemoveConfirmationModal">
-        <div class="modal-header">
-            <h4 class="modal-title" translate="entity.delete.title">Confirm delete operation</h4>
-        </div>
-        <div class="modal-body">
-            <p translate="dockhouseApp.registry.delete.question" translate-values="{id: '{{modalDelete.registryName}}'}">Are you sure you want to delete this Registry ?</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modalDelete.cancel()">
-                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
-            </button>
-            <button type="button"  class="btn btn-danger" ng-click="modalDelete.confirmRemove()">
-                <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete">Delete</span>
-            </button>
-        </div>
+        <ng-include src="modal.modalHtmlURL"></ng-include>
     </script>
-
 
     <div class="table-responsive">
         <table class="table table-striped">
@@ -121,7 +44,7 @@
             <tbody>
             <tr ng-repeat="registry in registryCtrl.registries">
                 <td><a ui-sref="registryDetail({id:registry.id})">{{registry.name}}</a></td>
-                <td><img ng-src="{{ registry.registryType.logo }}" alt="{{ registry.registryType.name }}" class="icons"> {{registry.registryType.name}}</td>
+                <td><img ng-src="{{ registry.registryType.logo }}" alt="{{ registry.registryType.logo }}" class="icons"> {{registry.registryType.name}}</td>
                 <td>{{registry.host}}</td>
                 <td>{{registry.port}}</td>
                 <td>

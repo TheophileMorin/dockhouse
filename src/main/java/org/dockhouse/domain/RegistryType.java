@@ -35,32 +35,31 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 
     @Id
     private String id;
-	
+
     @NotNull
     @Pattern(regexp = "^[a-zA-Z0-9]*$")
     @Size(min = 1, max = 50)
     @Indexed(unique=true)
     private String name;
-    
-    @URL
+
     private String logo;
-    
+
     private String host;
-    
+
     @Range(min = 0, max = 65535)
     private int port;
-    
+
     @NotNull
     private boolean isPublic;
 
     public String getId() {
     	return id;
     }
-    
+
     public void setId(String id) {
     	this.id = id;
     }
-    
+
 	public String getName() {
 		return name;
 	}
@@ -100,7 +99,7 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
-	
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

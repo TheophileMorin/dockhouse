@@ -21,10 +21,10 @@
         .module('dockhouseApp')
         .controller('RegistryController', RegistryController);
 
-    RegistryController.$inject = ['Registry', '$modal', 'Logger', '$scope'];
+    RegistryController.$inject = ['Registry', '$modal', 'Logger'];
 
     /* @ngInject */
-    function RegistryController(Registry, $modal, Logger, $scope){
+    function RegistryController(Registry, $modal, Logger){
         /* jshint validthis: true */
         var logger = Logger.getInstance('RegistryController');
         var vm = this;

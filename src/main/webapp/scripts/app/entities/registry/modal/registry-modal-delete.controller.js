@@ -29,6 +29,8 @@
         var vm = this;
         var logger = Logger.getInstance('AuthorModalRemoveController');
 
+        vm.modalHtmlURL = "scripts/app/entities/registry/modal/registry-modal-delete.html";
+
         vm.registryName = registryName;
         vm.confirmRemove = confirmRemove;
         vm.cancel = cancel;

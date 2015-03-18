@@ -24,16 +24,23 @@
     RegistryModalChangeController.$inject = ['$modalInstance', '$filter', 'registryEdited', 'Logger', 'Registry', 'RegistryTypes'];
 
     /* @ngInject */
-    function RegistryModalChangeController($modalInstance, $filter, registryEdited, Logger, Registry, RegistryTypes){
+    function RegistryModalChangeController($modalInstance, $filter, registryEdited, Logger, Registry, RegistryTypes ){
         /* jshint validthis: true */
         var vm = this;
         var logger = Logger.getInstance('RegistryModalChangeController');
         var forceSave = false;
 
+        vm.modalHtmlURL = "scripts/app/entities/registry/modal/registry-modal-change.html";
+
         vm.registryEdited = registryEdited;
         vm.registryTypes = [];
         vm.httpsRegistry = false;
-        vm.alert = null;
+        vm.testBtn = {
+            style : "btn btn-default",
+            status : "default",
+            icon : "glyphicon glyphicon-question-sign"
+        };
+        vm.alertText = null;
 
         vm.save = save;
         vm.cancel = cancel;
@@ -54,7 +61,7 @@
             logger.debug('Choice --> Save');
             setProtocol();
             if(!forceSave && !testRegistry()) {
-                vm.alert = "Le registre que vous souhaitez ajouter est déconnecté. Rappuyez sur le bouton de sauvegarde pour l'ajouter quand même."; //TODO translate ?
+                vm.alertText = "Le registre que vous souhaitez ajouter est déconnecté. Rappuyez sur le bouton de sauvegarde pour l'ajouter quand même."; //TODO translate ?
                 forceSave = true;
             } else {
                 $modalInstance.close(vm.registryEdited);
@@ -71,6 +78,7 @@
                 .then(function(data){
                     vm.registryTypes = data;
                     convertToPostVersion();
+                    console.log(vm.registryTypes);
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the list of registry types.');
@@ -82,22 +90,20 @@
             logger.debug("test registry");
             setProtocol();
 
-
             Registry.testRegistry(vm.registryEdited).then(function(data) {
-                var field = $('#testResultField');
                 if(data) {
-                    field.attr('class', 'btn btn-success');
-                    $('#testResultTextField').attr('translate','dockhouseApp.registry.status.online');
-                    field.text("online"); //TODO ajouter la translation
+                    vm.testBtn.style = "btn btn-success";
+                    vm.testBtn.status = "online";
+                    vm.testBtn.icon = "glyphicon glyphicon-ok-circle";
                 } else {
-                    field.attr('class', 'btn btn-danger');
-                    $('#testResultTextField').attr('translate','dockhouseApp.registry.status.offline');
-                    field.text("offline"); //TODO ajouter la translation
+                    //field.attr('class', 'btn btn-danger');
+                    vm.testBtn.style = "btn btn-danger";
+                    vm.testBtn.status = "offline";
+                    vm.testBtn.icon = "glyphicon glyphicon-remove-circle";
                 }
             }).catch(function(error) {
-
+                logger.error('Unable to test registry status.');
             });
-            //return (vm.registryEdited.protocol === "HTTPS");//TODO enlever le mock.
         }
 
         function convertToPostVersion(){
@@ -106,7 +112,9 @@
                 vm.registryEdited.registryTypeId = vm.registryEdited.registryType.id;
                 delete vm.registryEdited.registryType;
             } else { //To prevent blank choice in the select field.
-                vm.registryEdited.registryTypeId = vm.registryTypes[0].id;
+                if(vm.registryTypes.length) {
+                    vm.registryEdited.registryTypeId = vm.registryTypes[0].id;
+                }
             }
         }
 

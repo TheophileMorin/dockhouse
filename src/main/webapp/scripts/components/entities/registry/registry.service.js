@@ -20,10 +20,10 @@
         .module('dockhouseApp')
         .factory('Registry', Registry);
 
-    Registry.$inject = ['Restangular', 'Logger'];
+    Registry.$inject = ['Restangular', 'Logger', '$q'];
 
     /* @ngInject */
-    function Registry(Restangular, Logger){
+    function Registry(Restangular, Logger, $q){
         var logger = Logger.getInstance('RegistryService');
 
         var service = Restangular.service('registries');
@@ -66,6 +66,7 @@
             return service
                 .getList()
                 .then(function(data) {
+                    console.log(data);
                     return data;
                 })
                 .catch(function(error) {
@@ -130,7 +131,7 @@
         }
 
         function testRegistry(editedRegistry) {
-            var promise=  new Promise(function(resolve, reject) {
+            var promise=  $q(function(resolve, reject) {
                 try {
                     if (editedRegistry.protocol === "HTTPS")
                         resolve(true);
