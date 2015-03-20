@@ -6,7 +6,7 @@ import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
-import org.dockhouse.web.rest.dto.RegistryDTO;
+import org.dockhouse.web.rest.dto.RegistryOutDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,31 +17,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
- * Test class for RegistryDTOMapper.
+ * Test class for RegistryOutDTOMapper.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @Import(MongoConfiguration.class)
-public class RegistryDTOMapperTest {
+public class RegistryOutDTOMapperTest {
 	
     @Inject
-    private RegistryDTOMapper registryDTOMapper;
-   
-	private ModelMapper modelMapper;
+    private RegistryOutDTOMapper registryOutDTOMapper;
 
-    private Registry registry;
-
-    private RegistryType registryType;
-    
     @Before
     public void setup() {
-        modelMapper = new ModelMapper();
     }
 
     @Test
     public void getAllFieldsAreMapped() throws Exception {
-    	modelMapper.createTypeMap(Registry.class, RegistryDTO.class);
-    	modelMapper.validate();
+    	registryOutDTOMapper.mapper().validate();
+
     }
 }

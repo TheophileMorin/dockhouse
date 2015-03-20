@@ -16,16 +16,15 @@
 package org.dockhouse.web.rest;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.service.RegistryService;
-import org.dockhouse.web.rest.dto.RegistryDTO;
+import org.dockhouse.web.rest.dto.RegistryInDTO;
+import org.dockhouse.web.rest.dto.RegistryOutDTO;
+import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -73,7 +72,7 @@ public class RegistryResource {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    ResponseEntity<List<RegistryDTO>> getRegistries() {
+    ResponseEntity<List<RegistryOutDTO>> getRegistries() {
         log.debug("REST request to get all Registries");
         return new ResponseEntity<>(registryService.getAll(), 
         						    HttpStatus.OK);
@@ -86,7 +85,7 @@ public class RegistryResource {
 		    method = RequestMethod.GET,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    ResponseEntity<RegistryDTO> getRegistry(@PathVariable String id) {
+    ResponseEntity<RegistryOutDTO> getRegistry(@PathVariable String id) {
         log.debug("REST request to get Registry : {}", id);
         return registryService.getOne(id)
             .map(registry -> new ResponseEntity<>(registry, HttpStatus.OK))
@@ -94,15 +93,30 @@ public class RegistryResource {
     }
 
     /**
+     * GET  /registries/:id/status -> get the "id" registry status.
+     */
+    @RequestMapping(value = "/registries/{id}/status",
+		    method = RequestMethod.GET,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    ResponseEntity<RegistryStatusDTO> getRegistryStatus(@PathVariable String id) {
+        log.debug("REST request to get Registry status : {}", id);
+        RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
+        registryStatusDTO.setStatus("ok");
+        return new ResponseEntity<RegistryStatusDTO>(registryStatusDTO, HttpStatus.OK);
+    }
+        
+    /**
      * POST  /registries -> Create a new registry.
      */
     @RequestMapping(value = "/registries",
 		    method = RequestMethod.POST,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     @Timed
-    public void createRegistry(@RequestBody @Valid Registry registry) {
-        registryRepository.save(registry);
+    public ResponseEntity<RegistryOutDTO> createRegistry(@RequestBody @Valid RegistryInDTO registryInDTO) {
+        log.debug("REST request to save Registry : {}", registryInDTO);        	
+        RegistryOutDTO registryOutDTO = registryService.save(registryInDTO);
+        return new ResponseEntity<RegistryOutDTO>(registryOutDTO, HttpStatus.CREATED);
     }
 
     /**
@@ -111,11 +125,12 @@ public class RegistryResource {
     @RequestMapping(value = "/registries/{id}",
 		    method = RequestMethod.PUT,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Timed
-    public void updateRegistry(@RequestBody @Valid Registry registry, @PathVariable String id) {
-        log.debug("REST request to save Registry : {}", registry);        	
-        registryRepository.save(registry);
+    public ResponseEntity<RegistryOutDTO> updateRegistry(@RequestBody @Valid RegistryInDTO registryInDTO,
+    						                             @PathVariable String id) {
+        log.debug("REST request to save Registry : {}", registryInDTO);        	
+        RegistryOutDTO registryOutDTO = registryService.save(registryInDTO);
+        return new ResponseEntity<RegistryOutDTO>(registryOutDTO, HttpStatus.OK);
     }
 
     /**

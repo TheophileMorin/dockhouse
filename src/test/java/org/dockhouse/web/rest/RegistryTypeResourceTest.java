@@ -103,7 +103,8 @@ public class RegistryTypeResourceTest {
     	this.mockMvc.perform(post("/api/registry_types")
     			.contentType(MediaType.APPLICATION_JSON)
     			.content(validPayload))
-    	.andExpect(status().isCreated());
+    	.andExpect(status().isCreated())
+    	.andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
@@ -115,11 +116,12 @@ public class RegistryTypeResourceTest {
     }
 
     @Test
-    public void updateRegistryTypeTest204() throws Exception {
+    public void updateRegistryTypeTest200() throws Exception {
     	this.mockMvc.perform(put("/api/registry_types/{id}", registryType.getId())
     			.contentType(MediaType.APPLICATION_JSON)
     			.content(validPayload))
-    	.andExpect(status().isNoContent());
+    	.andExpect(status().isOk())
+    	.andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test

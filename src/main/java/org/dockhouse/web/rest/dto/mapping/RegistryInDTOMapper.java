@@ -16,17 +16,30 @@
 package org.dockhouse.web.rest.dto.mapping;
 
 import org.dockhouse.domain.Registry;
-import org.dockhouse.web.rest.dto.RegistryDTO;
+import org.dockhouse.web.rest.dto.RegistryInDTO;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegistryDTOMapper {
-
-	private final ModelMapper modelMapper = new ModelMapper();
+public class RegistryInDTOMapper {
 	
-	public RegistryDTO createDTO(Registry registry) {
-		return modelMapper.map(registry, RegistryDTO.class);
+	public ModelMapper mapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.addMappings(new PropertyMap<RegistryInDTO, Registry>() {
+		    protected void configure() {
+		        skip().setId(null);
+		        skip().setCreatedBy(null);
+		        skip().setCreatedDate(null);
+		        skip().setLastModifiedBy(null);
+		        skip().setLastModifiedDate(null);
+		    }	
+		});
+		return modelMapper;
+	}
+	
+	public Registry createRegistry(RegistryInDTO registryInDTO) {
+		return mapper().map(registryInDTO, Registry.class);
 	}
 	
 }

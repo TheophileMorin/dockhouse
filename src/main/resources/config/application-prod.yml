@@ -6,7 +6,7 @@ spring:
         active: prod
     data:
         mongodb:
-            host: dockhousedb
+            host: db
             port: 27017
             database: dockhouse
 

@@ -15,30 +15,34 @@
  */
 package org.dockhouse.web.rest.dto;
 
-import org.dockhouse.domain.RegistryType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-public class RegistryDTO {
+import org.dockhouse.domain.validation.CheckReference;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-    private String id;
+public class RegistryInDTO {
 
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z0-9]*$")
+    @Size(min = 1, max = 50)
     private String name;
 
     private String host;
 
+    @Range(min = 0, max = 65535)
     private int port;
 
+    @Size(max = 10)
     private String protocol;
 
-    private RegistryTypeDTO registryType;
+    @NotNull
+    @CheckReference
+    @Field("registry_type_id")
+    private String registryTypeId;
     
-    public String getId() {
-    	return id;
-    }
-
-    public void setId(String id) {
-    	this.id = id;
-    }
-
     public String getName() {
     	return name;
     }
@@ -71,23 +75,22 @@ public class RegistryDTO {
     	this.protocol = protocol;
     }
 
-    public RegistryTypeDTO getRegistryType() {
-    	return registryType;
+    public String getRegistryTypeId() {
+    	return registryTypeId;
     }
 
-    public void setRegistryType(RegistryTypeDTO registryType) {
-    	this.registryType = registryType;
+    public void setRegistryTypeId(String registryTypeId) {
+    	this.registryTypeId = registryTypeId;
     }
 
     @Override
     public String toString() {
-        return "RegistryDTO{" +
-	    "id='" + id + '\'' +
-	    ", name='" + name + '\'' +
+        return "RegistryInDTO{" +
+	    "name='" + name + '\'' +
 	    ", host='" + host + '\'' +
 	    ", port='" + port + '\'' +
 	    ", protocol='"     + protocol     + '\'' +
-	    ", registryType='" + registryType + '\'' +
+	    ", registryTypeId='" + registryTypeId + '\'' +
 	    "}";
     }
 }

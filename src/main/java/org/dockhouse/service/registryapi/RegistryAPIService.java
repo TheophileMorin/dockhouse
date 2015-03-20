@@ -13,20 +13,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.dockhouse.web.rest.dto.mapping;
+package org.dockhouse.service.registryapi;
 
-import org.dockhouse.domain.RegistryType;
-import org.dockhouse.web.rest.dto.RegistryTypeDTO;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Component;
+import org.dockhouse.domain.Registry;
 
-@Component
-public class RegistryTypeDTOMapper {
-
-	private final ModelMapper modelMapper = new ModelMapper();
+/**
+ * Class to interact with the registry APIs (e.g, Docker)
+ */
+public interface RegistryAPIService {
 	
-	public RegistryTypeDTO createDTO(RegistryType registryType) {
-		return modelMapper.map(registryType, RegistryTypeDTO.class);
-	}
-	
+	/**
+	 * Test if remote registry is available from the network.
+	 * @param registry The registry to test the availability
+	 * @return true if given registry is available
+	 */
+	public boolean isAvailable(Registry registry);
 }

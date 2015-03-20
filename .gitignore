@@ -3,3 +3,10 @@
 .idea
 
 dockhouse.iml
+/target/
+/.classpath
+/.project
+/.sass-cache/
+/.settings/
+/bin/
+/src/main/webapp/.tmp/
