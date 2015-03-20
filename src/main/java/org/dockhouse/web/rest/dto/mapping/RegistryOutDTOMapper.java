@@ -15,24 +15,32 @@
  */
 package org.dockhouse.web.rest.dto.mapping;
 
+import javax.inject.Inject;
+
 import org.dockhouse.domain.Registry;
-import org.dockhouse.web.rest.dto.RegistryInDTO;
+import org.dockhouse.domain.RegistryType;
 import org.dockhouse.web.rest.dto.RegistryOutDTO;
+import org.dockhouse.web.rest.dto.RegistryTypeOutDTO;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.PropertyMap;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RegistryOutDTOMapper {
 
+	@Inject
+	private RegistryTypeOutDTOMapper registryTypeOutDTOMapper; 
+	
 	public ModelMapper mapper() {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.createTypeMap(Registry.class, RegistryOutDTO.class);
 		return modelMapper;
 	}
 	
-	public RegistryOutDTO createDTO(Registry registry) {
-		return mapper().map(registry, RegistryOutDTO.class);
+	public RegistryOutDTO createDTO(Registry registry, RegistryType registryType) {
+		RegistryOutDTO registryOutDTO = mapper().map(registry, RegistryOutDTO.class);
+		RegistryTypeOutDTO registryTypeOutDTO = registryTypeOutDTOMapper.createDTO(registryType);
+		registryOutDTO.setRegistryType(registryTypeOutDTO);
+		return registryOutDTO;
 	}
 	
 }
