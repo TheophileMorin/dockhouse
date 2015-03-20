@@ -1,5 +1,7 @@
 package org.dockhouse.web.rest.dto.mapping;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -27,21 +29,31 @@ public class RegistryInDTOMapperTest {
 	
     @Inject
     private RegistryInDTOMapper registryInDTOMapper;
-   
-	private ModelMapper modelMapper;
 
-    private Registry registry;
-
-    private RegistryType registryType;
-    
     @Before
     public void setup() {
-        modelMapper = registryInDTOMapper.mapper();
     }
 
     @Test
     public void getAllFieldsAreMapped() throws Exception {
-//    	modelMapper.createTypeMap(RegistryInDTO.class, Registry.class);
-    	modelMapper.validate();
+    	registryInDTOMapper.mapper().validate();
+    }
+    
+    @Test
+    public void createRegistryTest() {
+    	RegistryInDTO registryInDTO = new RegistryInDTO();
+    	registryInDTO.setName("name");
+    	registryInDTO.setHost("host");
+    	registryInDTO.setPort(1);
+    	registryInDTO.setProtocol("protocol");
+    	registryInDTO.setRegistryTypeId("registryId");
+    	
+    	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
+    
+    	assertEquals(registryInDTO.getName(), registry.getName());
+    	assertEquals(registryInDTO.getHost(), registry.getHost());
+    	assertEquals(registryInDTO.getPort(), registry.getPort());
+    	assertEquals(registryInDTO.getProtocol(), registry.getProtocol());
+    	assertEquals(registryInDTO.getRegistryTypeId(), registry.getRegistryTypeId());
     }
 }

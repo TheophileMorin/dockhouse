@@ -1,5 +1,7 @@
 package org.dockhouse.web.rest.dto.mapping;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -7,6 +9,7 @@ import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.web.rest.dto.RegistryInDTO;
+import org.dockhouse.web.rest.dto.RegistryTypeInDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,5 +41,23 @@ public class RegistryTypeInDTOMapperTest {
     @Test
     public void getAllFieldsAreMapped() throws Exception {
     	modelMapper.validate();
+    }
+    
+    @Test
+    public void createRegistryTypeTest() {
+    	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
+    	registryTypeInDTO.setName("name");
+    	registryTypeInDTO.setHost("host");
+    	registryTypeInDTO.setPort(1);
+    	registryTypeInDTO.setLogo("logo");
+    	registryTypeInDTO.setPublic(true);
+    	
+    	RegistryType registryType = registryTypeInDTOMapper.createRegistryType(registryTypeInDTO);
+    
+    	assertEquals(registryTypeInDTO.getName(), registryType.getName());
+    	assertEquals(registryTypeInDTO.getHost(), registryType.getHost());
+    	assertEquals(registryTypeInDTO.getPort(), registryType.getPort());
+    	assertEquals(registryTypeInDTO.getLogo(), registryType.getLogo());
+    	assertEquals(registryTypeInDTO.isPublic(), registryType.isPublic());
     }
 }
