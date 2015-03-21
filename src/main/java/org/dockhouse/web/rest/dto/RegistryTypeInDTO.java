@@ -35,7 +35,6 @@ public class RegistryTypeInDTO {
     @Range(min = 0, max = 65535)
     private int port;
     
-    @NotNull
     private boolean isPublic;
 
 	public String getName() {
