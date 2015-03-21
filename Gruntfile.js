@@ -293,9 +293,9 @@ module.exports = function (grunt) {
             //         ]
             //     }
             // }
-            options: {
-                root: 'src/main/webapp' // Replace relative paths for static resources with absolute path
-            }
+            //options: {
+            //    root: 'src/main/webapp' // Replace relative paths for static resources with absolute path
+            //}
         },
         ngtemplates:    {
             dist: {
