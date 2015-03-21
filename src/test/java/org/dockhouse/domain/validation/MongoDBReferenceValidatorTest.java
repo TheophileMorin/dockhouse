@@ -58,7 +58,7 @@ public class MongoDBReferenceValidatorTest {
 	}
 	
 	@Test
-	public void tInDTOestReferenceToRegistryTypeMustBeValid() {
+	public void testReferenceToRegistryTypeMustBeValid() {
         registryInDTO.setRegistryTypeId(registryType.getId());
 		Set<ConstraintViolation<RegistryInDTO>> errors = validator.validateProperty(registryInDTO, "registryTypeId", Default.class);
 		assertTrue(errors.isEmpty());

@@ -1,5 +1,7 @@
 package org.dockhouse.web.rest.dto.mapping;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -9,7 +11,6 @@ import org.dockhouse.web.rest.dto.RegistryTypeOutDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,16 +27,33 @@ public class RegistryTypeOutDTOMapperTest {
 	
     @Inject
     private RegistryTypeOutDTOMapper registryTypeOutDTOMapper;
-   
-	private ModelMapper modelMapper;
-
+ 
     @Before
     public void setup() {
-        modelMapper = registryTypeOutDTOMapper.mapper();
     }
 
     @Test
     public void getAllFieldsAreMapped() throws Exception {
-    	modelMapper.validate();
+    	registryTypeOutDTOMapper.mapper().validate();
+    }
+    
+    @Test
+    public void createDTOTest() {
+    	RegistryType registryType = new RegistryType();
+    	registryType.setId("1");
+    	registryType.setName("name");
+    	registryType.setHost("host");
+    	registryType.setPort(1);
+    	registryType.setLogo("logo");
+    	registryType.setPublic(true);
+    	
+    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeOutDTOMapper.createDTO(registryType);
+    
+    	assertEquals(registryType.getId(), registryTypeOutDTO.getId());
+    	assertEquals(registryType.getName(), registryTypeOutDTO.getName());
+    	assertEquals(registryType.getHost(), registryTypeOutDTO.getHost());
+    	assertEquals(registryType.getPort(), registryTypeOutDTO.getPort());
+    	assertEquals(registryType.getLogo(), registryTypeOutDTO.getLogo());
+    	assertEquals(registryType.isPublic(), registryTypeOutDTO.isPublic());
     }
 }
