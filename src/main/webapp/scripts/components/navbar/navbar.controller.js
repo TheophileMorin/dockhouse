@@ -34,7 +34,7 @@
         ////////////////
         function logout() {
             Auth.logout();
-            $state.go('home');
+            $state.go('login');
         };
     }
 
