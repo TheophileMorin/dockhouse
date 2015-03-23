@@ -30,6 +30,9 @@ module.exports = function (config) {
             'main/webapp/bower_components/lodash/dist/lodash.compat.js',
             'main/webapp/bower_components/restangular/dist/restangular.js',
             'main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'main/webapp/bower_components/Bootflat/bootflat/js/icheck.min.js',
+            'main/webapp/bower_components/Bootflat/bootflat/js/jquery.fs.selecter.min.js',
+            'main/webapp/bower_components/Bootflat/bootflat/js/jquery.fs.stepper.min.js',
             'main/webapp/bower_components/angular-mocks/angular-mocks.js',
             // endbower
             'main/webapp/scripts/app/app.js',

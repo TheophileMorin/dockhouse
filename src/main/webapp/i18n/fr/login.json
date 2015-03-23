@@ -2,12 +2,31 @@
     "login": {
         "title": "Authentification",
         "form": {
+            "username": "Nom d'utilisateur",
+            "username.placeholder": "Votre nom d'utilisateur ou email",
+            "newpassword": "Nouveau mot de passe",
+            "newpassword.placeholder": "Nouveau mot de passe",
+            "confirmpassword": "Confirmation du nouveau mot de passe",
+            "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",
+            "email": "Email",
+            "email.placeholder": "Votre email",
             "password": "Mot de passe",
             "password.placeholder": "Votre mot de passe",
             "rememberme": "Garder la session ouverte",
-            "button": "Connexion"
+            "button": "Se connecter",
+            "or": "OU",
+            "create.account": "Créer un nouveau compte",
+            "oauth": {
+                "github": "Se connecter avec Github",
+                "google": "Se connecter avec Google +",
+                "twitter": "Se connecter avec Twitter"
+            }
         },
         "messages": {
+            "info": {
+                "authenticated": "Si vous voulez vous <a href=\"#/login\">connecter</a>, vous pouvez utiliser les comptes par défaut : <br/> - Administrateur (nom d'utilisateur=\"admin\" et mot de passe =\"admin\") <br/> - Utilisateur (nom d'utilisateur=\"user\" et mot de passe =\"user\").",
+                "register": "Vous n'avez pas encore de compte ?"
+            },
             "error": {
                 "authentication": "<strong>Erreur d'authentification!</strong> Veuillez vérifier vos identifiants de connexion."
             }

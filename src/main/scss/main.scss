@@ -2,6 +2,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 
 // bower:scss
 @import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "Bootflat/bootflat/scss/bootflat.scss";
 // endbower
 
 body {
@@ -35,6 +36,24 @@ body {
 .navbar-default {
     background-color: #333333;
     border-color: #e7e7e7;
+}
+
+.navbar-brand {
+    padding-bottom: 13px;
+    padding-top: 1px;
+
+}
+
+.navbar-title {
+    font-size: 25px;
+    color: #ffffff
+}
+
+.navbar-logo {
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 12px;
+    border-top-width: 0px;
 }
 
 .browserupgrade {
@@ -75,10 +94,10 @@ body {
 }
 
 .footer {
-    width: 100%;
-    /* Set the fixed height of the footer here */
+    //    width: 100%;
+    //    /* Set the fixed height of the footer here */
     height: 60px;
-    background-color: #333333;
+    background-color: #cbcbcb;
 }
 
 .text-muted {
@@ -86,13 +105,12 @@ body {
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
-@media
-only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (   min--moz-device-pixel-ratio: 2),
-only screen and (     -o-min-device-pixel-ratio: 2/1),
-only screen and (        min-device-pixel-ratio: 2),
-only screen and (                min-resolution: 192dpi),
-only screen and (                min-resolution: 2dppx) {
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min--moz-device-pixel-ratio: 2),
+only screen and (-o-min-device-pixel-ratio: 2/1),
+only screen and (min-device-pixel-ratio: 2),
+only screen and (min-resolution: 192dpi),
+only screen and (min-resolution: 2dppx) {
     .hipster {
         background: url("../images/hipster2x.png") no-repeat center top;
         background-size: contain;
@@ -101,35 +119,36 @@ only screen and (                min-resolution: 2dppx) {
 
 /* make sure browsers use the pointer cursor for anchors, even with no href */
 a:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
-
 
 /* start Password strength bar style */
 ul#strength {
-    display:inline;
-    list-style:none;
-    margin:0;
-    margin-left:15px;
-    padding:0;
-    vertical-align:2px;
+    display: inline;
+    list-style: none;
+    margin: 0;
+    margin-left: 15px;
+    padding: 0;
+    vertical-align: 2px;
 }
 
 .point:last {
-    margin:0 !important;
+    margin: 0 !important;
 }
+
 .point {
-    background:#DDD;
-    border-radius:2px;
-    display:inline-block;
-    height:5px;
-    margin-right:1px;
-    width:20px;
+    background: #DDD;
+    border-radius: 2px;
+    display: inline-block;
+    height: 5px;
+    margin-right: 1px;
+    width: 20px;
 }
+
 /* end Password strength bar style */
 
 /* workaround for backdrop issue with angular-ui bootstrap modal */
-.modal-backdrop{
+.modal-backdrop {
     position: fixed;
     top: 0;
     right: 0;
