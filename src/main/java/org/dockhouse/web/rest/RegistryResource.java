@@ -20,11 +20,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.service.RegistryService;
 import org.dockhouse.web.rest.dto.RegistryInDTO;
 import org.dockhouse.web.rest.dto.RegistryOutDTO;
+import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -92,6 +92,20 @@ public class RegistryResource {
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    /**
+     * GET  /registries/:id/status -> get the "id" registry status.
+     */
+    @RequestMapping(value = "/registries/{id}/status",
+		    method = RequestMethod.GET,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    ResponseEntity<RegistryStatusDTO> getRegistryStatus(@PathVariable String id) {
+        log.debug("REST request to get Registry status : {}", id);
+        RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
+        registryStatusDTO.setStatus("ok");
+        return new ResponseEntity<RegistryStatusDTO>(registryStatusDTO, HttpStatus.OK);
+    }
+        
     /**
      * POST  /registries -> Create a new registry.
      */

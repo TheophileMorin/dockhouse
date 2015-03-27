@@ -1,0 +1,70 @@
+<form name="editForm" role="form" novalidate
+      class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+      ng-submit="modal.save()">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myRegistryLabel" translate="dockhouseApp.registry.home.createOrEditLabel">Create or edit a Registry</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.name.$invalid && !editForm.name.$pristine) }" >
+            <label translate="dockhouseApp.registry.name">Name</label>
+            <input type="text" class="form-control" name="name"
+                   ng-model="modal.registryEdited.name" ng-minlength="1" ng-maxlength="50" required>
+            <p ng-show="editForm.name.$invalid && !editForm.name.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.name" translate-values="{min: '1', max: '50'}">
+                The name must be between min and MAX characters
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.type.$invalid && !editForm.type.$pristine) }">
+            <label translate="dockhouseApp.registry.type.title">Type</label>
+            <select name="type" class="form-control" ng-model="modal.registryEdited.registryTypeId" required>
+                <option ng-repeat="type in modal.registryTypes" value="{{type.id}}" >
+                    {{type.name}}
+                </option>
+            </select>
+            <p ng-show="editForm.type.$invalid && !editForm.type.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.type">
+                You must select a type
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.host.$invalid && !editForm.host.$pristine) }">
+            <label translate="dockhouseApp.registry.host">Host</label>
+            <input type="text" class="form-control" name="host"
+                   ng-model="modal.registryEdited.host"
+                   placeholder="{{modal.registryEdited.registryType.host}}" required>
+            <p ng-show="editForm.host.$invalid && !editForm.host.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.host">
+                You must set a host address
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.port.$invalid && !editForm.port.$pristine) }">
+            <label translate="dockhouseApp.registry.port">Port</label>
+            <input type="number" class="form-control" name="port"
+                   ng-model="modal.registryEdited.port"
+                   placeholder="{{modal.registryEdited.registryType.port}}"  min="0" max="65535"  required>
+            <p ng-show="editForm.port.$invalid && !editForm.port.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.port" translate-values="{min: '0', max: '65535'}">
+                You must set a port value between MIN and MAX
+            </p>
+        </div>
+        <div class="form-group">
+            <input type="checkbox"
+                   name="protocol" ng-model="modal.vHttpsRegistry"/>&nbsp;
+            <label translate="dockhouseApp.registry.protocol">HTTPS</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <h4 ng-show="modal.vAlertDisconnectedRegistry" class="modalAlertText" translate="dockhouseApp.registry.validation.disconnected" >Disconnected</h4>
+        <button type="button" class="{{modal.vTestBtn.style}}" id="testResultField" disabled="disabled">
+            <span class="{{modal.vTestBtn.icon}}"></span>&nbsp;<span id="testResultTextField" translate="dockhouseApp.registry.status.{{modal.vTestBtn.status}}">Status</span>
+        </button>
+        <button type="button"  class="btn btn-info" ng-click="modal.testRegistry()" >
+            <span class="glyphicon glyphicon-transfer"></span>&nbsp;<span translate="entity.action.test">Test</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="modal.cancel()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span translate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

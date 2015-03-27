@@ -2076,13 +2076,13 @@ a.bg-warning:hover {
   background-color: #f7ecb5;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/webapp\/bower_components\/bootstrap-sass\/assets\/stylesheets\/bootstrap\/mixins\/_background-variant\.scss}line{font-family:\000035}}
-.bg-danger {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/webapp\/bower_components\/bootstrap-sass\/assets\/stylesheets\/bootstrap\/mixins\/_background-variant\.scss}line{font-family:\000035}}
+.bg-danger, .modalAlertText {
   background-color: #f2dede;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/webapp\/bower_components\/bootstrap-sass\/assets\/stylesheets\/bootstrap\/mixins\/_background-variant\.scss}line{font-family:\000038}}
-a.bg-danger:hover {
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/webapp\/bower_components\/bootstrap-sass\/assets\/stylesheets\/bootstrap\/mixins\/_background-variant\.scss}line{font-family:\000038}}
+a.bg-danger:hover, a.modalAlertText:hover {
   background-color: #e4b9b9;
 }
 
@@ -11656,10 +11656,12 @@ body {
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003102}}
 .footer {
   height: 60px;
-  background-color: #cbcbcb;
+  background-color: #333333;
+  position: fixed;
+  bottom: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003109}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\0000386}}
 .text-muted {
   color: #090909;
   margin: 20px 0;
@@ -11667,20 +11669,20 @@ body {
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003121}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\0000398}}
   .hipster {
     background: url("../images/hipster2x.png") no-repeat center top;
     background-size: contain;
   }
 }
 /* make sure browsers use the pointer cursor for anchors, even with no href */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003128}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003105}}
 a:hover {
   cursor: pointer;
 }
 
 /* start Password strength bar style */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003133}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003111}}
 ul#strength {
   display: inline;
   list-style: none;
@@ -11690,12 +11692,12 @@ ul#strength {
   vertical-align: 2px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003142}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003120}}
 .point:last {
   margin: 0 !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003146}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003123}}
 .point {
   background: #DDD;
   border-radius: 2px;
@@ -11707,7 +11709,7 @@ ul#strength {
 
 /* end Password strength bar style */
 /* workaround for backdrop issue with angular-ui bootstrap modal */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003158}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003134}}
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -11717,638 +11719,17 @@ ul#strength {
   background-color: #000;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003167}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003143}}
 .icons {
   height: 30px;
   width: 30px;
 }
 
-/*
- * Component: Small Box
- * --------------------
- */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003176}}
-.small-box {
-  border-radius: 2px;
-  position: relative;
-  display: block;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  color: #fff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003185}}
-.small-box > .inner {
-  padding: 10px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003188}}
-.small-box > .small-box-footer {
-  position: relative;
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003148}}
+.modalAlertText {
+  border: 2px solid #9D9D9D;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: -5px;
   text-align: center;
-  padding: 3px 0;
-  color: #fff;
-  display: block;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.1);
-  text-decoration: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003199}}
-.small-box > .small-box-footer:hover {
-  color: #fff;
-  background: rgba(0, 0, 0, 0.15);
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003203}}
-.small-box h3 {
-  font-size: 38px;
-  font-weight: bold;
-  margin: 0 0 10px 0;
-  white-space: nowrap;
-  padding: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003210}}
-.small-box p {
-  font-size: 15px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003213}}
-.small-box p > small {
-  display: block;
-  color: #f9f9f9;
-  font-size: 13px;
-  margin-top: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003219}}
-.small-box h3,
-.small-box p {
-  z-index: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003223}}
-.small-box .icon {
-  position: absolute;
-  top: -10px;
-  right: 10px;
-  z-index: 0;
-  font-size: 90px;
-  color: #fff;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003235}}
-.small-box:hover {
-  text-decoration: none;
-  color: #f9f9f9;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003239}}
-.small-box:hover .icon {
-  font-size: 95px;
-}
-
-@media (max-width: 767px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003243}}
-  .small-box {
-    text-align: center;
-  }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003246}}
-  .small-box .icon {
-    display: none;
-  }
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003249}}
-  .small-box p {
-    font-size: 12px;
-  }
-}
-/*
- * Component: Application short List
- * ------------------------
- */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003258}}
-.short-app-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003263}}
-.short-app-list > .item {
-  border-radius: 3px;
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  padding: 10px 0;
-  background: #fff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003270}}
-.short-app-list > .item:before,
-.short-app-list > .item:after {
-  content: " ";
-  display: table;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003275}}
-.short-app-list > .item:after {
-  clear: both;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003278}}
-.short-app-list .short-app-list-img {
-  float: left;
-  padding-left: 12px;
-  padding-top: 6px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003283}}
-.short-app-list .short-app-list-img img {
-  width: 50px;
-  height: 50px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003287}}
-.short-app-list .short-app-list-info {
-  margin-left: 60px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003290}}
-.short-app-list .short-app-list-title {
-  font-weight: 600;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003293}}
-.short-app-list .short-app-list-description {
-  display: block;
-  color: #999;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003300}}
-.short-app-list-in-box > .item {
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
-  border-bottom: 1px solid #f4f4f4;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003306}}
-.short-app-list-in-box > .item:last-of-type {
-  border-bottom-width: 0;
-}
-
-/*
-*
-* Component: Box
-* --------------
-*/
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003315}}
-.box {
-  position: relative;
-  border-radius: 3px;
-  background: #ffffff;
-  border-top: 3px solid #d2d6de;
-  margin-bottom: 20px;
-  width: 100%;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003324}}
-.box.box-primary {
-  border-top-color: #3c8dbc;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003327}}
-.box.box-info {
-  border-top-color: #00c0ef;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003330}}
-.box.box-danger {
-  border-top-color: #dd4b39;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003333}}
-.box.box-warning {
-  border-top-color: #f39c12;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003336}}
-.box.box-success {
-  border-top-color: #00a65a;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003339}}
-.box.box-default {
-  border-top-color: #d2d6de;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003342}}
-.box.collapsed-box .box-body,
-.box.collapsed-box .box-footer {
-  display: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003346}}
-.box .nav-stacked > li {
-  border-bottom: 1px solid #f4f4f4;
-  margin: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003350}}
-.box .nav-stacked > li:last-of-type {
-  border-bottom: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003353}}
-.box.height-control .box-body {
-  max-height: 300px;
-  overflow: auto;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003357}}
-.box .border-right {
-  border-right: 1px solid #f4f4f4;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003360}}
-.box .border-left {
-  border-left: 1px solid #f4f4f4;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003363}}
-.box.box-solid {
-  border-top: 0px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003366}}
-.box.box-solid > .box-header .btn.btn-default {
-  background: transparent;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003369}}
-.box.box-solid > .box-header .btn:hover,
-.box.box-solid > .box-header a:hover {
-  background: rgba(0, 0, 0, 0.1) !important;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003373}}
-.box.box-solid.box-default {
-  border: 1px solid #d2d6de;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003376}}
-.box.box-solid.box-default > .box-header {
-  color: #444444;
-  background: #d2d6de;
-  background-color: #d2d6de;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003381}}
-.box.box-solid.box-default > .box-header a,
-.box.box-solid.box-default > .box-header .btn {
-  color: #444444;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003385}}
-.box.box-solid.box-primary {
-  border: 1px solid #3c8dbc;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003388}}
-.box.box-solid.box-primary > .box-header {
-  color: #ffffff;
-  background: #3c8dbc;
-  background-color: #3c8dbc;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003393}}
-.box.box-solid.box-primary > .box-header a,
-.box.box-solid.box-primary > .box-header .btn {
-  color: #ffffff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003397}}
-.box.box-solid.box-info {
-  border: 1px solid #00c0ef;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003400}}
-.box.box-solid.box-info > .box-header {
-  color: #ffffff;
-  background: #00c0ef;
-  background-color: #00c0ef;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003405}}
-.box.box-solid.box-info > .box-header a,
-.box.box-solid.box-info > .box-header .btn {
-  color: #ffffff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003409}}
-.box.box-solid.box-danger {
-  border: 1px solid #dd4b39;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003412}}
-.box.box-solid.box-danger > .box-header {
-  color: #ffffff;
-  background: #dd4b39;
-  background-color: #dd4b39;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003417}}
-.box.box-solid.box-danger > .box-header a,
-.box.box-solid.box-danger > .box-header .btn {
-  color: #ffffff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003421}}
-.box.box-solid.box-warning {
-  border: 1px solid #f39c12;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003424}}
-.box.box-solid.box-warning > .box-header {
-  color: #ffffff;
-  background: #f39c12;
-  background-color: #f39c12;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003429}}
-.box.box-solid.box-warning > .box-header a,
-.box.box-solid.box-warning > .box-header .btn {
-  color: #ffffff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003433}}
-.box.box-solid.box-success {
-  border: 1px solid #00a65a;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003436}}
-.box.box-solid.box-success > .box-header {
-  color: #ffffff;
-  background: #00a65a;
-  background-color: #00a65a;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003441}}
-.box.box-solid.box-success > .box-header a,
-.box.box-solid.box-success > .box-header .btn {
-  color: #ffffff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003445}}
-.box.box-solid > .box-header > .box-tools .btn {
-  border: 0;
-  box-shadow: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003449}}
-.box.box-solid[class*='bg'] > .box-header {
-  color: #fff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003452}}
-.box .box-group > .box {
-  margin-bottom: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003455}}
-.box .knob-label {
-  text-align: center;
-  color: #333;
-  font-weight: 100;
-  font-size: 12px;
-  margin-bottom: 0.3em;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003462}}
-.box > .overlay,
-.box > .loading-img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003470}}
-.box .overlay {
-  z-index: 1010;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 3px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003475}}
-.box .overlay > .fa {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -15px;
-  margin-top: -15px;
-  color: #000;
-  font-size: 30px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003484}}
-.box .overlay.dark {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003487}}
-.box-header {
-  color: #444;
-  display: block;
-  padding: 10px;
-  position: relative;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003493}}
-.box-header:before,
-.box-header:after {
-  content: " ";
-  display: table;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003498}}
-.box-header:after {
-  clear: both;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003501}}
-.box-header.with-border {
-  border-bottom: 1px solid #f4f4f4;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003504}}
-.collapsed-box .box-header.with-border {
-  border-bottom: none;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003507}}
-.box-header > .fa,
-.box-header > .glyphicon,
-.box-header > .ion,
-.box-header .box-title {
-  display: inline-block;
-  font-size: 18px;
-  margin: 0;
-  line-height: 1;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003516}}
-.box-header > .fa,
-.box-header > .glyphicon,
-.box-header > .ion {
-  margin-right: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003521}}
-.box-header > .box-tools {
-  position: absolute;
-  right: 10px;
-  top: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003526}}
-.box-header > .box-tools [data-toggle="tooltip"] {
-  position: relative;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003529}}
-.box-header > .box-tools.pull-right .dropdown-menu {
-  right: 0;
-  left: auto;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003533}}
-.btn-box-tool {
-  padding: 5px;
-  font-size: 12px;
-  background: transparent;
-  box-shadow: none !important;
-  color: #97a0b3;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003540}}
-.open .btn-box-tool,
-.btn-box-tool:hover {
-  color: #606c84;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003544}}
-.btn-box-tool:active {
-  outline: none !important;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003547}}
-.box-body {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  padding: 10px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003554}}
-.no-header .box-body {
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003558}}
-.box-body > .table {
-  margin-bottom: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003561}}
-.box-body > .chart {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003566}}
-.box-body > .chart svg,
-.box-body > .chart canvas {
-  width: 100% !important;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003570}}
-.box-body .fc {
-  margin-top: 5px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003573}}
-.box-body .full-width-chart {
-  margin: -19px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003576}}
-.box-body.no-padding .full-width-chart {
-  margin: -9px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003579}}
-.box-body .box-pane {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 3px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003585}}
-.box-body .box-pane-right {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 0;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003591}}
-.box-footer {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border-top: 1px solid #f4f4f4;
-  padding: 10px;
-  background-color: #ffffff;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003600}}
-.chart-legend {
-  margin: 10px 0;
-}
-
-@media (max-width: 991px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003604}}
-  .chart-legend > li {
-    float: left;
-    margin-right: 10px;
-  }
-}
-/* Background colors */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003611}}
-.bg-harbor {
-  background-color: #757D75 !important;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003614}}
-.bg-silver-sand {
-  background-color: #BDC3C7 !important;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/BWI\/Documents\/Developpements\/dockhouse\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003617}}
-.bg-lynch {
-  background-color: #6C7A89 !important;
 }

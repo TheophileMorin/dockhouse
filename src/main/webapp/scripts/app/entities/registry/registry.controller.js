@@ -29,7 +29,6 @@
         var logger = Logger.getInstance('RegistryController');
         var vm = this;
 
-
         vm.registries = [];
         vm.registryEdited = {};
         vm.editionMode = false;
@@ -44,9 +43,9 @@
 
         ////////////////
 
-        function activate(){ //TODO Bug lors de l'affichage de la liste. Il semble que le dataBinding ne se fait pas correctement...
+        function activate(){
             vm.loadAll();
-            logger.debug("activate")
+            logger.debug("activated");
         }
 
         function loadAll() {
@@ -69,7 +68,6 @@
         }
 
         function create(registry) {
-
             Registry.create(registry)
                 .then(function(data) {
                     vm.loadAll();
@@ -78,7 +76,6 @@
         }
 
         function update(registry) {
-
             Registry.update(registry)
                 .then(function(data) {
                     vm.loadAll();
@@ -139,7 +136,7 @@
 
         function openRemove(registry) {
             logger.debug('Opening the delete confirmation modal window ...');
-            vm.authorEdited = registry;
+            vm.registryEdited = registry;
 
             var modalInstance = $modal.open({
                 templateUrl: 'RegistryRemoveConfirmationModal',
@@ -180,7 +177,6 @@
                 protocol:null };
             vm.editionMode = false;
         }
-
 
     }
 
