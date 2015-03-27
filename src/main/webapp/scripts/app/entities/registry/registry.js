@@ -45,6 +45,7 @@ angular.module('dockhouseApp')
                 data: {
                     roles: ['ROLE_USER'],
                     pageTitle: 'dockhouseApp.registry.detail.title'
+
                 },
                 views: {
                     'content@': {

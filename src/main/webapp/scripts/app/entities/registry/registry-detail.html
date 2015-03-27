@@ -18,67 +18,68 @@
 
 <div>
     <h2><span translate="dockhouseApp.registry.detail.title">Registry</span> : {{detailCtrl.registry.name}}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th translate="entity.detail.field">Field</th>
-                <th translate="entity.detail.value">Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>
-                    <span translate="dockhouseApp.registry.id">ID</span>
-                </td>
-                <td>
-                    <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.id}}" readonly>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="dockhouseApp.registry.name">Name</span>
-                </td>
-                <td>
-                    <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.name}}" readonly>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="dockhouseApp.registry.host">Host</span>
-                </td>
-                <td>
-                    <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.host}}" readonly>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="dockhouseApp.registry.port">Port</span>
-                </td>
-                <td>
-                    <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.port}}" readonly>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="dockhouseApp.registry.protocol">Protocol</span>
-                </td>
-                <td>
-                    <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.protocol}}" readonly>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <span translate="dockhouseApp.registry.type.title">Type</span>
-                </td>
-                <td>
-                    <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.registryType.name}}" readonly>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="well testTEST">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th translate="entity.detail.field">Field</th>
+                    <th translate="entity.detail.value">Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <span translate="dockhouseApp.registry.id">ID</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.id}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dockhouseApp.registry.name">Name</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.name}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dockhouseApp.registry.host">Host</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.host}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dockhouseApp.registry.port">Port</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.port}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dockhouseApp.registry.protocol">Protocol</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.protocol}}" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span translate="dockhouseApp.registry.type.title">Type</span>
+                    </td>
+                    <td>
+                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.registryType.name}}" readonly>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
     <button type="submit"
             ui-sref="registry"
             class="btn btn-info">
