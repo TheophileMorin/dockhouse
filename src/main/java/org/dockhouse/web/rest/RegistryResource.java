@@ -59,12 +59,12 @@ public class RegistryResource {
 
     @Inject
     private Validator validator;
-    
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(validator);
     }
-    
+
     /**
      * GET  /registries -> get all registries.
      */
@@ -74,7 +74,7 @@ public class RegistryResource {
     @Timed
     ResponseEntity<List<RegistryOutDTO>> getRegistries() {
         log.debug("REST request to get all Registries");
-        return new ResponseEntity<>(registryService.getAll(), 
+        return new ResponseEntity<>(registryService.getAll(),
         						    HttpStatus.OK);
     }
 
@@ -105,7 +105,7 @@ public class RegistryResource {
         registryStatusDTO.setStatus("ok");
         return new ResponseEntity<RegistryStatusDTO>(registryStatusDTO, HttpStatus.OK);
     }
-        
+
     /**
      * POST  /registries -> Create a new registry.
      */
@@ -114,7 +114,7 @@ public class RegistryResource {
 		    produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<RegistryOutDTO> createRegistry(@RequestBody @Valid RegistryInDTO registryInDTO) {
-        log.debug("REST request to save Registry : {}", registryInDTO);        	
+        log.debug("REST request to save Registry : {}", registryInDTO);
         RegistryOutDTO registryOutDTO = registryService.save(registryInDTO);
         return new ResponseEntity<RegistryOutDTO>(registryOutDTO, HttpStatus.CREATED);
     }
@@ -128,8 +128,8 @@ public class RegistryResource {
     @Timed
     public ResponseEntity<RegistryOutDTO> updateRegistry(@RequestBody @Valid RegistryInDTO registryInDTO,
     						                             @PathVariable String id) {
-        log.debug("REST request to save Registry : {}", registryInDTO);        	
-        RegistryOutDTO registryOutDTO = registryService.save(registryInDTO);
+        log.debug("REST request to save Registry : {}", registryInDTO);
+        RegistryOutDTO registryOutDTO = registryService.saveOrUpdate(id, registryInDTO);
         return new ResponseEntity<RegistryOutDTO>(registryOutDTO, HttpStatus.OK);
     }
 
