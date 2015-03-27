@@ -35,16 +35,6 @@
             },
             "language": "Language"
         },
-        "form": {
-            "username": "Login",
-            "username.placeholder": "Your login",
-            "newpassword": "New password",
-            "newpassword.placeholder": "New password",
-            "confirmpassword": "New password confirmation",
-            "confirmpassword.placeholder": "Confirm the new password",
-            "email": "E-mail",
-            "email.placeholder": "Your e-mail"
-        },
         "messages": {
             "error": {
                 "dontmatch" : "The password and its confirmation do not match!"

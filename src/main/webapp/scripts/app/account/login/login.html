@@ -18,14 +18,13 @@
 <div>
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
-            <!--<h1 translate="login.title">Authentication</h1>-->
-            <i class="fa fa-key fa-4x"></i>
-            <p></p>
+            <form class="form well well-lg" role="form">
+                <i class="fa fa-key fa-4x"></i>
+                <p></p>
 
-            <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
-                <strong>Authentication failed!</strong> Please check your credentials and try again.
-            </div>
-            <form class="form" role="form">
+                <div class="alert alert-danger" ng-show="authenticationError" translate="login.messages.error.authentication">
+                    <strong>Authentication failed!</strong> Please check your credentials and try again.
+                </div>
                 <div class="form-group">
                     <div class="form-group has-feedback">
                         <input type="text" class="form-control" id="username" placeholder="{{'login.form.username.placeholder' | translate}}" ng-model="username">
@@ -58,6 +57,7 @@
                     <a class="btn btn-default btn-lg btn-block" href="#/register" translate="login.form.create.account">Create an account</a>
                 </div>
             </form>
+            <p class="text-muted text-center" translate="footer">
         </div>
     </div>
 </div>

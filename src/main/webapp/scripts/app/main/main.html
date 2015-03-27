@@ -16,44 +16,125 @@
 
 -->
 <div ng-cloak>
-    <div class="row">
+    <div class="container well main-container">
         <div class="col-md-4">
-            <span class="hipster img-responsive img-rounded"></span>
+            <span class="dockhouse img-responsive img-rounded"></span>
         </div>
         <div class="col-md-8">
-            <h1 translate="main.title">Welcome, Java Hipster!</h1>
-            <p class="lead" translate="main.subtitle">This is your homepage</p>
+            <h2 translate="main.title">Dashboard</h2>
+            <h6><em>Version {{mainCtrl.config.VERSION}}</em></h6>
 
-            <div ng-switch="isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true"
-                     translate="main.logged.message" translate-values="{username: '{{account.login}}'}">
-                    You are logged in as user "Admin".
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.authenticated">
-                    If you want to <a href="#/login">authenticate</a>, you can try the default login="admin" and
-                    password="admin".
-                </div>
-
-                <div class="alert alert-warning" ng-switch-when="false" translate="global.messages.info.register">
-                    Don't have an account? <a href=\"#/register\">Register</a>
+            <div ng-switch="mainCtrl.isAuthenticated()">
+                <div class="alert alert-success alert-dismissable text-center" ng-switch-when="true"
+                     translate="main.logged.message" translate-values="{username: '{{mainCtrl.account.login}}'}">
                 </div>
             </div>
 
-            <p translate="main.question">
-                If you have any question on JHipster:
-            </p>
+            <!--Tiles for elements counter-->
+            <div class="row">
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-harbor">
+                        <div class="inner">
+                            <h3>3</h3>
+                            <p>Registries</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-server"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">See all <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-lynch">
+                        <div class="inner">
+                            <h3>44</h3>
+                            <p>Images</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-cube"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">See all <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+                <div class="col-lg-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-silver-sand">
+                        <div class="inner">
+                            <h3>12</h3>
+                            <p>Applications</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-sitemap"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">See all <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div><!-- ./col -->
+            </div>
 
-            <ul>
-                <li><a href="http://jhipster.github.io/" target="_blank" translate="main.link.homepage">JHipster homepage</a></li>
-                <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" translate="main.link.stackoverflow">JHipster on Stack Overflow</a></li>
-                <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" translate="main.link.bugtracker">JHipster bug tracker</a></li>
-                <li><a href="https://twitter.com/java_hipster" target="_blank"  translate="main.link.contact">contact @java_hipster on Twitter</a></li>
-            </ul>
+            <!--Applications list-->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">My applications</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <ul class="short-app-list short-app-list-in-box">
+                        <!-- /.item -->
+                        <li class="item">
+                            <div class="short-app-list-img">
+                                <i class="fa fa-sitemap fa-2x"></i>
+                            </div>
+                            <div class="short-app-list-info">
+                                <a href="" class="short-app-list-title">
+                                    Application 1 name
+                                    <span class="label label-warning pull-right">4 service(s)</span>
+                                </a>
+                                <span class="short-app-list-description">
+                                  Short description for the application 1
+                                </span>
+                            </div>
+                        </li>
+                        <!-- /.item -->
+                        <li class="item">
+                            <div class="short-app-list-img">
+                                <i class="fa fa-sitemap fa-2x"></i>
+                            </div>
+                            <div class="short-app-list-info">
+                                <a href="" class="short-app-list-title">
+                                    Another Application
+                                    <span class="label label-warning pull-right">1 service(s)</span>
+                                </a>
+                                <span class="short-app-list-description">
+                                  Another short description for the application 2
+                                </span>
+                            </div>
+                        </li>
+                        <!-- /.item -->
+                        <li class="item">
+                            <div class="short-app-list-img">
+                                <i class="fa fa-sitemap fa-2x"></i>
+                            </div>
+                            <div class="short-app-list-info">
+                                <a href="" class="short-app-list-title">
+                                    The last app
+                                    <span class="label label-warning pull-right">12 service(s)</span>
+                                </a>
+                                <span class="short-app-list-description">
+                                  The last app project
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                    <a href="" class="uppercase">View All Applications</a>
+                </div>
+                <!-- /.box-footer -->
+            </div>
 
-            <p>
-             <span translate="main.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" translate="main.github">Github</a>!
-            </p>
         </div>
     </div>
 </div>

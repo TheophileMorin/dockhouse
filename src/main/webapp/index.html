@@ -29,9 +29,8 @@
         <![endif]-->
         <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
-        <div class="container">
-            <div class="well" ui-view="content"></div>
-            <p class="text-muted text-center" translate="footer">
+        <div class="container-fluid">
+            <div ui-view="content"></div>
         </div>
 
         <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.

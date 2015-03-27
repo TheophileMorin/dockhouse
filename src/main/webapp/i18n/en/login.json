@@ -4,7 +4,8 @@
         "form": {
             "username": "Login",
             "username.placeholder": "Your login or email",
-            "newpassword": "New password",
+            "login.placeholder": "Your username",
+            "newpassword": "Password",
             "newpassword.placeholder": "New password",
             "confirmpassword": "New password confirmation",
             "confirmpassword.placeholder": "Confirm the new password",

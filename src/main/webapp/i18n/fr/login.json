@@ -4,7 +4,8 @@
         "form": {
             "username": "Nom d'utilisateur",
             "username.placeholder": "Votre nom d'utilisateur ou email",
-            "newpassword": "Nouveau mot de passe",
+            "login.placeholder": "Votre nom d'utilisateur",
+            "newpassword": "Mot de passe",
             "newpassword.placeholder": "Nouveau mot de passe",
             "confirmpassword": "Confirmation du nouveau mot de passe",
             "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",

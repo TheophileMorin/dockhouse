@@ -23,7 +23,7 @@ angular.module('dockhouseApp')
             restrict: 'E',
             template: '<div id="strength">' +
                 '<small translate="global.messages.validate.newpassword.strength">Password strength:</small>' +
-                '<ul id="strengthBar">' +
+                '<ul id="strengthBar" style="padding-left: 0px;">' +
                 '<li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li>' +
                 '</ul>' +
                 '</div>',

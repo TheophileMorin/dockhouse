@@ -26,50 +26,6 @@
     function Registry(Restangular, Logger){
         var logger = Logger.getInstance('RegistryService');
         var service = Restangular.service('registries');
-        var registriesMock = [{
-            id:"aqwzsxedc",
-            name:"registry Docker One",
-            registryType:{
-                "id": "azertyuiop",
-                "name": "Docker",
-                "logo": "assets/images/logos/docker.png",
-                "host": "127.0.0.1",
-                "port": "1478",
-                "public": "false"
-            },
-            host:"192.168.25.6",
-            port:"8585",
-            protocol:"HTTP"
-        },{
-            id:"zsxedcrfv",
-            name:"test",
-            registryType:{
-                "id": "azertyuiop",
-                "name": "Docker",
-                "logo": "assets/images/logos/docker.png",
-                "host": "127.0.0.1",
-                "port": "1478",
-                "public": "false"
-            },
-            host:"192.168.0.250",
-            port:"3030",
-            protocol:"HTTPS"
-        }];
-        var registryTypesMock = [{
-            "id": "azertyuiop",
-            "name": "Docker",
-            "logo": "assets/images/logos/docker.png",
-            "host": "127.0.0.1",
-            "port": "1478",
-            "public": "false"
-        },{
-            "id": "qsdfghjklm",
-            "name": "Rocket",
-            "logo": "assets/images/logos/rocket.png",
-            "host": "127.0.0.1",
-            "port": "9999",
-            "public": "true"
-        }];
 
         return {
             get: get,
