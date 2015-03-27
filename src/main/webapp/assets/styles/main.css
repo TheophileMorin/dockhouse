@@ -2076,12 +2076,12 @@ a.bg-warning:hover {
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/webapp\/bower_components\/bootstrap-sass\/assets\/stylesheets\/bootstrap\/mixins\/_background-variant\.scss}line{font-family:\000035}}
-.bg-danger {
+.bg-danger, .modalAlertText {
   background-color: #f2dede;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/webapp\/bower_components\/bootstrap-sass\/assets\/stylesheets\/bootstrap\/mixins\/_background-variant\.scss}line{font-family:\000038}}
-a.bg-danger:hover {
+a.bg-danger:hover, a.modalAlertText:hover {
   background-color: #e4b9b9;
 }
 
@@ -8624,29 +8624,31 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #333333;
+  position: fixed;
+  bottom: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\0000384}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\0000386}}
 .text-muted {
   margin: 20px 0;
 }
 
 /* wait autoprefixer update to allow simple generation of high pixel density media query */
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\0000396}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\0000398}}
   .hipster {
     background: url("../images/hipster2x.png") no-repeat center top;
     background-size: contain;
   }
 }
 /* make sure browsers use the pointer cursor for anchors, even with no href */
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003105}}
 a:hover {
   cursor: pointer;
 }
 
 /* start Password strength bar style */
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003109}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003111}}
 ul#strength {
   display: inline;
   list-style: none;
@@ -8656,12 +8658,12 @@ ul#strength {
   vertical-align: 2px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003118}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003120}}
 .point:last {
   margin: 0 !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003121}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003123}}
 .point {
   background: #DDD;
   border-radius: 2px;
@@ -8673,7 +8675,7 @@ ul#strength {
 
 /* end Password strength bar style */
 /* workaround for backdrop issue with angular-ui bootstrap modal */
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003132}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003134}}
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -8683,8 +8685,17 @@ ul#strength {
   background-color: #000;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003141}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003143}}
 .icons {
   height: 30px;
   width: 30px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003148}}
+.modalAlertText {
+  border: 2px solid #9D9D9D;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: -5px;
+  text-align: center;
 }

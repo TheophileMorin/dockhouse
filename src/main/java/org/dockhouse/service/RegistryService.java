@@ -75,4 +75,8 @@ public class RegistryService {
     	registry = registryRepository.save(registry);
     	return createRegistryOutDTO(registry);
     }
+    
+    public RegistryType getRegistryTypeOf(Registry registry) {
+    	return registryTypeRepository.findOne(registry.getRegistryTypeId());
+    }
 }
