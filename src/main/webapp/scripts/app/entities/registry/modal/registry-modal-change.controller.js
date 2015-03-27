@@ -28,19 +28,19 @@
         /* jshint validthis: true */
         var vm = this;
         var logger = Logger.getInstance('RegistryModalChangeController');
-        var forceSave = false;
 
         vm.modalHtmlURL = "scripts/app/entities/registry/modal/registry-modal-change.html";
 
-        vm.registryEdited = registryEdited;
+        vm.registryEdited = {};
         vm.registryTypes = [];
-        vm.httpsRegistry = false;
-        vm.testBtn = {
+
+        vm.vHttpsRegistry = false;
+        vm.vTestBtn = {
             style : "btn btn-default",
             status : "default",
             icon : "glyphicon glyphicon-question-sign"
         };
-        vm.alertText = null;
+        vm.vAlertDisconnectedRegistry = false;
 
         vm.save = save;
         vm.cancel = cancel;
@@ -52,17 +52,18 @@
         activate();
 
         function activate() {
-            console.log();
+            /* We clone the registryEdited to isolate reference from the registryController (in case of a dismissed modal). */
+            cloneInitialReference();
+            setProtocolStateInView();
             vm.loadTypes();
             logger.debug("activated");
         }
 
-        function save() { //TODO adapt to asynchronism of promises in testRegistry.
+        function save() {
             logger.debug('Choice --> Save');
             setProtocol();
-            if(!forceSave && !testRegistry()) {
-                vm.alertText = "Le registre que vous souhaitez ajouter est déconnecté. Rappuyez sur le bouton de sauvegarde pour l'ajouter quand même."; //TODO translate ?
-                forceSave = true;
+            if(!vm.vAlertDisconnectedRegistry) {
+                vm.vAlertDisconnectedRegistry = true;
             } else {
                 $modalInstance.close(vm.registryEdited);
             }
@@ -78,7 +79,6 @@
                 .then(function(data){
                     vm.registryTypes = data;
                     convertToPostVersion();
-                    console.log(vm.registryTypes);
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the list of registry types.');
@@ -92,14 +92,13 @@
 
             Registry.testRegistry(vm.registryEdited).then(function(data) {
                 if(data) {
-                    vm.testBtn.style = "btn btn-success";
-                    vm.testBtn.status = "online";
-                    vm.testBtn.icon = "glyphicon glyphicon-ok-circle";
+                    vm.vTestBtn.style = "btn btn-success";
+                    vm.vTestBtn.status = "online";
+                    vm.vTestBtn.icon = "glyphicon glyphicon-ok-circle";
                 } else {
-                    //field.attr('class', 'btn btn-danger');
-                    vm.testBtn.style = "btn btn-danger";
-                    vm.testBtn.status = "offline";
-                    vm.testBtn.icon = "glyphicon glyphicon-remove-circle";
+                    vm.vTestBtn.style = "btn btn-danger";
+                    vm.vTestBtn.status = "offline";
+                    vm.vTestBtn.icon = "glyphicon glyphicon-remove-circle";
                 }
             }).catch(function(error) {
                 logger.error('Unable to test registry status.');
@@ -119,10 +118,32 @@
         }
 
         function setProtocol() {
-            if(vm.httpsRegistry) {
+            if(vm.vHttpsRegistry) {
                 vm.registryEdited.protocol = "HTTPS";
             } else {
                 vm.registryEdited.protocol = "HTTP";
+            }
+        }
+
+        function setProtocolStateInView() {
+            if(vm.registryEdited.protocol == null) {
+                vm.vHttpsRegistry = false;
+                return;
+            }
+            if(vm.registryEdited.protocol ===   "HTTPS") {
+                vm.vHttpsRegistry = true;
+                return;
+            }
+            vm.vHttpsRegistry = false;
+        }
+
+        function cloneInitialReference() {
+            try {
+                //If the modal is opened in edition mode, the parameter is a RestAngular object.
+                vm.registryEdited = registryEdited.clone();
+            } catch (e) {
+                //Otherwise it's a common JS object
+                vm.registryEdited = registryEdited;
             }
         }
     }

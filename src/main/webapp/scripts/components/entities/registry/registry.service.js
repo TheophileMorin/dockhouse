@@ -66,7 +66,6 @@
             return service
                 .getList()
                 .then(function(data) {
-                    console.log(data);
                     return data;
                 })
                 .catch(function(error) {

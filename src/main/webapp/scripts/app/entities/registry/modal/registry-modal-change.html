@@ -5,56 +5,57 @@
         <h4 class="modal-title" id="myRegistryLabel" translate="dockhouseApp.registry.home.createOrEditLabel">Create or edit a Registry</h4>
     </div>
     <div class="modal-body">
-        <div class="form-group">
-            <label class="sr-only" translate="dockhouseApp.registry.name">Name</label>
-            <div class="input-group">
-                <div class="input-group-addon" translate="dockhouseApp.registry.name" >Name</div>
-                <input type="text" class="form-control" name="name"
-                       ng-model="modal.registryEdited.name" required>
-            </div>
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.name.$invalid && !editForm.name.$pristine) }" >
+            <label translate="dockhouseApp.registry.name">Name</label>
+            <input type="text" class="form-control" name="name"
+                   ng-model="modal.registryEdited.name" ng-minlength="1" ng-maxlength="50" required>
+            <p ng-show="editForm.name.$invalid && !editForm.name.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.name" translate-values="{min: '1', max: '50'}">
+                The name must be between min and MAX characters
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.type.$invalid && !editForm.type.$pristine) }">
+            <label translate="dockhouseApp.registry.type.title">Type</label>
+            <select name="type" class="form-control" ng-model="modal.registryEdited.registryTypeId" required>
+                <option ng-repeat="type in modal.registryTypes" value="{{type.id}}" >
+                    {{type.name}}
+                </option>
+            </select>
+            <p ng-show="editForm.type.$invalid && !editForm.type.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.type">
+                You must select a type
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.host.$invalid && !editForm.host.$pristine) }">
+            <label translate="dockhouseApp.registry.host">Host</label>
+            <input type="text" class="form-control" name="host"
+                   ng-model="modal.registryEdited.host"
+                   placeholder="{{modal.registryEdited.registryType.host}}" required>
+            <p ng-show="editForm.host.$invalid && !editForm.host.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.host">
+                You must set a host address
+            </p>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.port.$invalid && !editForm.port.$pristine) }">
+            <label translate="dockhouseApp.registry.port">Port</label>
+            <input type="number" class="form-control" name="port"
+                   ng-model="modal.registryEdited.port"
+                   placeholder="{{modal.registryEdited.registryType.port}}"  min="0" max="65535"  required>
+            <p ng-show="editForm.port.$invalid && !editForm.port.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.port" translate-values="{min: '0', max: '65535'}">
+                You must set a port value between MIN and MAX
+            </p>
         </div>
         <div class="form-group">
-            <label class="sr-only" translate="dockhouseApp.registry.type.title">Type</label>
-            <div class="input-group">
-                <div class="input-group-addon" translate="dockhouseApp.registry.type.title">Type</div>
-                <select name="type" class="form-control" ng-model="modal.registryEdited.registryTypeId" required >
-                    <option ng-repeat="type in modal.registryTypes" value="{{type.id}}" >
-                        {{type.name}}
-                    </option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="sr-only" translate="dockhouseApp.registry.host">Host</label>
-            <div class="input-group">
-                <div class="input-group-addon" translate="dockhouseApp.registry.host">Host</div>
-                <input type="text" class="form-control" name="host"
-                       ng-model="modal.registryEdited.host"
-                       placeholder="{{modal.registryEdited.registryType.host}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="sr-only" translate="dockhouseApp.registry.port">Port</label>
-            <div class="input-group">
-                <div class="input-group-addon" translate="dockhouseApp.registry.port">Port</div>
-                <input type="text" class="form-control" name="port"
-                       ng-model="modal.registryEdited.port"
-                       placeholder="{{modal.registryEdited.registryType.port}}" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="sr-only" translate="dockhouseApp.registry.protocol"> HTTPS </label>
-            <div class="input-group">
-                <div translate="dockhouseApp.registry.protocol"> HTTPS </div>
-                <input type="checkbox" class="form-control"
-                       name="protocol" ng-model="modal.httpsRegistry">
-            </div>
+            <input type="checkbox"
+                   name="protocol" ng-model="modal.vHttpsRegistry"/>&nbsp;
+            <label translate="dockhouseApp.registry.protocol">HTTPS</label>
         </div>
     </div>
     <div class="modal-footer">
-        <h4 ng-show="modal.alert != null" class="bg-danger">{{modal.alertText}}</h4>
-        <button type="button" class="{{modal.testBtn.style}}" id="testResultField" disabled="disabled">
-            <span class="{{modal.testBtn.icon}}"></span>&nbsp;<span id="testResultTextField" translate="dockhouseApp.registry.status.{{modal.testBtn.status}}">Status</span>
+        <h4 ng-show="modal.vAlertDisconnectedRegistry" class="modalAlertText" translate="dockhouseApp.registry.validation.disconnected" >Disconnected</h4>
+        <button type="button" class="{{modal.vTestBtn.style}}" id="testResultField" disabled="disabled">
+            <span class="{{modal.vTestBtn.icon}}"></span>&nbsp;<span id="testResultTextField" translate="dockhouseApp.registry.status.{{modal.vTestBtn.status}}">Status</span>
         </button>
         <button type="button"  class="btn btn-info" ng-click="modal.testRegistry()" >
             <span class="glyphicon glyphicon-transfer"></span>&nbsp;<span translate="entity.action.test">Test</span>

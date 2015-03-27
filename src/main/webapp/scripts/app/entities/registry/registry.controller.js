@@ -76,7 +76,6 @@
         }
 
         function update(registry) {
-
             Registry.update(registry)
                 .then(function(data) {
                     vm.loadAll();
@@ -137,7 +136,7 @@
 
         function openRemove(registry) {
             logger.debug('Opening the delete confirmation modal window ...');
-            vm.authorEdited = registry;
+            vm.registryEdited = registry;
 
             var modalInstance = $modal.open({
                 templateUrl: 'RegistryRemoveConfirmationModal',
@@ -178,7 +177,6 @@
                 protocol:null };
             vm.editionMode = false;
         }
-
 
     }
 

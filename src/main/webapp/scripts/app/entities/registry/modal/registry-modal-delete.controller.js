@@ -36,6 +36,11 @@
         vm.cancel = cancel;
 
         ////////////////
+        activate();
+
+        function activate() {
+            logger.debug("acivated");
+        }
 
         function confirmRemove() {
             logger.debug('Choice -> confirm delete');
