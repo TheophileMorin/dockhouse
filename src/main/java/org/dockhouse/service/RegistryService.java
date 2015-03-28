@@ -70,8 +70,15 @@ public class RegistryService {
     	return registryOutDTOMapper.createDTO(registry, registryType);
     }
     
-    public RegistryOutDTO save(RegistryInDTO registryInDTO) {
+    public RegistryOutDTO insert(RegistryInDTO registryInDTO) {
     	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
+    	registry = registryRepository.save(registry);
+    	return createRegistryOutDTO(registry);
+    }
+    
+    public RegistryOutDTO upsert(RegistryInDTO registryInDTO, String id) {
+    	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
+    	registry.setId(id);
     	registry = registryRepository.save(registry);
     	return createRegistryOutDTO(registry);
     }

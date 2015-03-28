@@ -61,8 +61,15 @@ public class RegistryTypeService {
     			       .map(registryTypeOutDTOMapper::createDTO);
     }
     
-    public RegistryTypeOutDTO save(RegistryTypeInDTO registryTypeInDTO) {
+    public RegistryTypeOutDTO insert(RegistryTypeInDTO registryTypeInDTO) {
     	RegistryType registryType = registryTypeInDTOMapper.createRegistryType(registryTypeInDTO);
+    	registryType = registryTypeRepository.save(registryType);
+    	return registryTypeOutDTOMapper.createDTO(registryType);
+    }
+    
+    public RegistryTypeOutDTO upsert(RegistryTypeInDTO registryTypeInDTO, String id) {
+    	RegistryType registryType = registryTypeInDTOMapper.createRegistryType(registryTypeInDTO);
+    	registryType.setId(id);
     	registryType = registryTypeRepository.save(registryType);
     	return registryTypeOutDTOMapper.createDTO(registryType);
     }
