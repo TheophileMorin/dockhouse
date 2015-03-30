@@ -2,3 +2,37 @@
 .testTEST {
   background: red;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/registry-detail\.scss}line{font-family:\000035}}
+.regDetMainContainer {
+  background: #EFEFFF;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/registry-detail\.scss}line{font-family:\000037}}
+.regDetMainContainer .row {
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/registry-detail\.scss}line{font-family:\0000312}}
+.regDetMainContainer .row .regDetContainers {
+  margin-bottom: -10px;
+  padding: 4px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/registry-detail\.scss}line{font-family:\0000320}}
+.list-group a {
+  background: #E6E9ED;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/registry-detail\.scss}line{font-family:\0000325}}
+.regDetInfos {
+  max-height: 130px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/registry-detail\.scss}line{font-family:\0000331}}
+.bigIcons {
+  height: 80px;
+  width: 80px;
+}

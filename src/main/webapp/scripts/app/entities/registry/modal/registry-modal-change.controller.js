@@ -28,6 +28,8 @@
         /* jshint validthis: true */
         var vm = this;
         var logger = Logger.getInstance('RegistryModalChangeController');
+        var testedAndOnlineRegistry = false;
+
 
         vm.modalHtmlURL = "scripts/app/entities/registry/modal/registry-modal-change.html";
 
@@ -62,7 +64,7 @@
         function save() {
             logger.debug('Choice --> Save');
             setProtocol();
-            if(!vm.vAlertDisconnectedRegistry) {
+            if(!vm.vAlertDisconnectedRegistry && !testedAndOnlineRegistry) {
                 vm.vAlertDisconnectedRegistry = true;
             } else {
                 $modalInstance.close(vm.registryEdited);
@@ -95,6 +97,7 @@
                     vm.vTestBtn.style = "btn btn-success";
                     vm.vTestBtn.status = "online";
                     vm.vTestBtn.icon = "glyphicon glyphicon-ok-circle";
+                    testedAndOnlineRegistry = true;
                 } else {
                     vm.vTestBtn.style = "btn btn-danger";
                     vm.vTestBtn.status = "offline";

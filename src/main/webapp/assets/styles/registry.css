@@ -18,3 +18,9 @@
 .modalAlertText {
   border: solid 1px darkgray;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/registry\.scss}line{font-family:\0000317}}
+.icons {
+  height: 30px;
+  width: 30px;
+}

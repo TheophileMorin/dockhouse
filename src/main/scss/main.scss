@@ -12,10 +12,6 @@ body {
     color: #333;
 }
 
-.mainAppContainer {
-    margin-bottom: 50px;
-}
-
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
@@ -165,13 +161,8 @@ ul#strength {
     background-color: #000;
 }
 
-.icons {
-    height: 30px;
-    width: 30px;
-}
-
 .modalAlertText {
-    @extend .bg-danger;
+    @extend .alert-warning;
     border: 2px solid #9D9D9D;
     border-radius: 5px;
     padding: 8px;

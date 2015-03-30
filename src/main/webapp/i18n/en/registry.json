@@ -20,7 +20,7 @@
                 "logo": "Logo",
                 "defaultHost": "Default Host",
                 "defaultPort": "Default Port",
-                "accessibility": "Accessibility"
+                "accessibility": "Public registry"
             },
             "status": {
                 "default" : "Status",
@@ -30,13 +30,16 @@
             "host": "Host",
             "port": "Port",
             "protocol": "HTTPS",
+            "protocolLabel": "Protocol",
+            "detailsLabel": "Details",
             "validation": {
                 "name" : "The regstry name must be between {{min}} and {{max}} characters.",
                 "type" : "You must select a type.",
                 "host" : "You must set a host address.",
                 "port" : "The port value must be between {{min}} and {{max}}.",
                 "disconnected" : "The registry is currently disconnected. Clic Save button if you want to save it anyway."
-            }
+            },
+            "imagesLabel" : "Registry images"
         }
     }
 }

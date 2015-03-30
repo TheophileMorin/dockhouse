@@ -16,74 +16,142 @@
 
 -->
 
-<div>
-    <h2><span translate="dockhouseApp.registry.detail.title">Registry</span> : {{detailCtrl.registry.name}}</h2>
-    <div class="well testTEST">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th translate="entity.detail.field">Field</th>
-                    <th translate="entity.detail.value">Value</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <span translate="dockhouseApp.registry.id">ID</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.id}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="dockhouseApp.registry.name">Name</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.name}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="dockhouseApp.registry.host">Host</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.host}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="dockhouseApp.registry.port">Port</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.port}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="dockhouseApp.registry.protocol">Protocol</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.protocol}}" readonly>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <span translate="dockhouseApp.registry.type.title">Type</span>
-                    </td>
-                    <td>
-                        <input type="text" class="input-sm form-control" value="{{detailCtrl.registry.registryType.name}}" readonly>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+<div class="container well regDetMainContainer">
+    <h2>
+        <span translate="dockhouseApp.registry.detail.title">Registry</span> : {{detailCtrl.registry.name}} &nbsp;&nbsp;
+        <span ng-class="{'glyphicon glyphicon-minus': detailCtrl.onlineRegistry=='pending',
+                        'glyphicon glyphicon-ok': detailCtrl.onlineRegistry=='online',
+                        'glyphicon glyphicon-remove': detailCtrl.onlineRegistry=='offline'}" aria-hidden="true"></span>
+    </h2>
+
+    <div class="row">
+        <div class="col-md-4 regDetContainers">
+            <div class="well">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img ng-src="{{ detailCtrl.registry.registryType.logo }}" alt="{{ detailCtrl.registry.registryType.logo }}" class="bigIcons">
+                        </div>
+                        <div class="col-md-7">
+                            <!--<span translate="dockhouseApp.registry.type.title">Type</span> -->
+                            <h4>{{ detailCtrl.registry.registryType.name }}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label translate="dockhouseApp.registry.type.defaultHost">Default host:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <p>{{ detailCtrl.registry.registryType.host }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label translate="dockhouseApp.registry.type.defaultPort">Default port:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <p>{{ detailCtrl.registry.registryType.port }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label translate="dockhouseApp.registry.type.accessibility">Public registry:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <p>{{ detailCtrl.registry.registryType.public }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 regDetContainers">
+            <div class="well">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h4><span translate="dockhouseApp.registry.id">ID</span></h4>
+                        </div>
+                        <div class="col-md-10">
+                            <h4><a ui-sref="registryDetail({id:detailCtrl.registry.id})">{{detailCtrl.registry.id}}</a></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label translate="dockhouseApp.registry.host">Host</label>
+                        </div>
+                        <div class="col-md-10">
+                            <p>{{detailCtrl.registry.host}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label translate="dockhouseApp.registry.port">Port</label>
+                        </div>
+                        <div class="col-md-10">
+                            <p>{{detailCtrl.registry.port}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label translate="dockhouseApp.registry.protocolLabel">Protocol</label>
+                        </div>
+                        <div class="col-md-10">
+                            <p>{{detailCtrl.registry.protocol}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="list-group">
+                                <a ng-click="showRegistryDetails = !showRegistryDetails" class="list-group-item " ng-class="{active: showRegistryDetails}">
+                                    <span ng-class="{'glyphicon glyphicon-menu-right': !showRegistryDetails, 'glyphicon glyphicon-menu-down': showRegistryDetails}" aria-hidden="true"></span>
+                                    &nbsp;
+                                    <span translate="dockhouseApp.registry.detailsLabel">Details</span>
+                                </a>
+                                <div class="list-group-item regDetInfos" ng-show="showRegistryDetails">
+                                    <div class="row" ng-repeat="detail in detailCtrl.registryDetail">
+                                        <label class="col-md-2"> {{ detail.key }} </label>
+                                        <p class="col-md-10">  {{ detail.value }} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <button type="submit"
-            ui-sref="registry"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
-    </button>
-
+    <div class="row">
+        <div class="col-md-12 regDetContainers">
+            <div class="well">
+                <h4 translate="dockhouseApp.registry.imagesLabel">Registry images</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Version</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="image in detailCtrl.registryImages">
+                            <td>
+                                <p>{{image.name}}</p>
+                            </td>
+                            <td>
+                                <p>{{image.version}}</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit"
+                ui-sref="registry"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span translate="entity.action.back"> Back</span>
+        </button>
+    </div>
 </div>

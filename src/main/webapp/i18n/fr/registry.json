@@ -18,9 +18,9 @@
                 "title" : "Type",
                 "name": "Nom",
                 "logo": "Logo",
-                "defaultHost": "IP par défaut",
+                "defaultHost": "Hôte par défaut",
                 "defaultPort": "Port par défaut",
-                "accessibility": "Accessibilité"
+                "accessibility": "Registre public"
             },
             "status": {
                 "default" : "Status",
@@ -30,13 +30,16 @@
             "host": "Hôte",
             "port": "Port",
             "protocol": "HTTPS",
+            "protocolLabel": "Protocole",
+            "detailsLabel": "Détails",
             "validation": {
                 "name" : "Le nom du registre doit faire entre {{min}} et {{max}} caractères.",
                 "type" : "Vous devez selectionner un type.",
                 "host" : "Vous devez renseigner une adresse hôte.",
                 "port" : "La valeur du port doit être entre {{min}} et {{max}}.",
                 "disconnected" : "Le registry est actuellement innaccessible, Rappuyez pour sauvegarder quand-même."
-            }
+            },
+            "imagesLabel" : "Images du registre"
         }
     }
 }

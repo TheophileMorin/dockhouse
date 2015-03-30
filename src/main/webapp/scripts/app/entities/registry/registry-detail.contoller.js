@@ -21,15 +21,19 @@
         .module('dockhouseApp')
         .controller('RegistryDetailController', RegistryDetailController);
 
-    RegistryDetailController.$inject = ['Registry', '$stateParams', 'Logger', '$scope'];
+    RegistryDetailController.$inject = ['Registry', '$stateParams', 'Logger'];
 
     /* @ngInject */
-    function RegistryDetailController(Registry, $stateParams, Logger, $scope){
+    function RegistryDetailController(Registry, $stateParams, Logger){
         /* jshint validthis: true */
         var logger = Logger.getInstance('RegistryDetailController');
         var vm = this;
 
         vm.registry = {};
+        vm.showRegistryDetails = false;
+        vm.onlineRegistry = "pending";
+        vm.registryDetail = [];
+        vm.registryImages = [];
 
         vm.loadRegistry = loadRegistry;
 
@@ -46,10 +50,62 @@
             Registry.get(id)
                 .then(function(data){
                     vm.registry = data;
+                    testRegistry();
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the given registry.');
                 });
+        }
+
+        function testRegistry() {
+            Registry.testRegistry(vm.registry)
+                .then(function(data){
+                    if(data) {
+                        vm.onlineRegistry = "online";
+                        // the return of the ping.
+                        mockRegistryDetail();
+                        mockRegistryImages();
+                    } else {
+                        vm.onlineRegistry = "offline";
+                    }
+                })
+                .catch(function(error) {
+                    logger.error('Enabled to test the given registry.');
+                });
+        }
+
+        function mockRegistryDetail() {
+            vm.registryDetail = [
+                {
+                    "key" : "State",
+                    "value" : "online"
+                },
+                {
+                    "key" : "Timestamp",
+                    "value" : "131065412310"
+                },
+                {
+                    "key" : "NbImages",
+                    "value" : "2"
+                },
+                {
+                    "key" : "Value",
+                    "value" : "150"
+                }
+            ];
+        }
+
+        function mockRegistryImages() {
+            vm.registryImages = [
+                {
+                    "name" : "Image 1",
+                    "version" : "v1.0.6"
+                },
+                {
+                    "name" : "Image 2",
+                    "version" : "v2.3.7"
+                }
+            ];
         }
     }
 
