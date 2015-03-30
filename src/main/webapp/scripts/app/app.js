@@ -28,7 +28,7 @@
         'logger',
         'ui.bootstrap'])
 
-        .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, CONFIG) {
+        .run(function ($rootScope, $location, $window, $http, $state, $translate, Auth, Principal, Language, ENV, CONFIG, $q) {
             $rootScope.ENV = ENV;
             $rootScope.VERSION = CONFIG.VERSION;
             $rootScope.$on('$stateChangeStart', function (event, toState, toStateParams) {
@@ -69,6 +69,7 @@
                     $state.go($rootScope.previousStateName, $rootScope.previousStateParams);
                 }
             };
+
         })
 
         .factory('authInterceptor', function ($rootScope, $q, $location, localStorageService) {
@@ -83,6 +84,13 @@
                     }
 
                     return config;
+                },
+                // Forward to the login page if 401 response
+                responseError: function(responseRejection) {
+                    if(responseRejection.status === 401) {
+                        $location.path('/login');
+                    }
+                    return $q.reject(responseRejection);
                 }
             };
         });

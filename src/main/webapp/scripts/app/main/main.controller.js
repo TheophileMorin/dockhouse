@@ -13,12 +13,46 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-'use strict';
+(function (){
+    "use strict";
 
-angular.module('dockhouseApp')
-    .controller('MainController', function ($scope, Principal) {
-        Principal.identity().then(function(account) {
-            $scope.account = account;
-            $scope.isAuthenticated = Principal.isAuthenticated;
-        });
-    });
+    angular
+        .module('dockhouseApp')
+        .controller('MainController', MainController);
+
+    MainController.$inject = ['Principal','CONFIG'];
+
+    /* @ngInject */
+    function MainController(Principal,CONFIG){
+        /* jshint validthis: true */
+        var vm = this;
+
+        vm.config=CONFIG;
+        vm.account={};
+        vm.isAuthenticated={};
+
+
+        activate();
+
+        ////////////////
+
+        function activate(){
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+            });
+        }
+
+
+    }
+
+})();
+//'use strict';
+//
+//angular.module('dockhouseApp')
+//    .controller('MainController', function ($scope, Principal) {
+//        Principal.identity().then(function(account) {
+//            $scope.account = account;
+//            $scope.isAuthenticated = Principal.isAuthenticated;
+//        });
+//    });

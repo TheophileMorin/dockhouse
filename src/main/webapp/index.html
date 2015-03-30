@@ -12,10 +12,15 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css assets/styles/vendor.css -->
         <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/Bootflat/bootflat/css/bootflat.css" />
+        <link rel="stylesheet" href="bower_components/Bootflat/bootflat/css/bootflat.min.css" />
+        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:css assets/styles/main.css -->
         <link rel="stylesheet" href="assets/styles/main.css">
+        <link rel="stylesheet" href="assets/styles/login.css">
+        <link rel="stylesheet" href="assets/styles/bootstrap-social.css">
         <!-- endbuild -->
     </head>
     <body ng-app="dockhouseApp">
@@ -24,15 +29,9 @@
         <![endif]-->
         <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
-        <div class="container mainAppContainer">
-            <div class="well" ui-view="content"></div>
-
+        <div class="container-fluid">
+            <div ui-view="content"></div>
         </div>
-        <footer class="footer">
-            <div class="container">
-                <p class="text-muted" translate="footer">Copyright (C) 2015  Dockhouse project. ( http://dockhouse.github.io/ ). This project is under LGPLv3 license</p>
-            </div>
-        </footer>
 
         <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
         <script>
@@ -64,6 +63,9 @@
         <script src="bower_components/lodash/dist/lodash.compat.js"></script>
         <script src="bower_components/restangular/dist/restangular.js"></script>
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/Bootflat/bootflat/js/icheck.min.js"></script>
+        <script src="bower_components/Bootflat/bootflat/js/jquery.fs.selecter.min.js"></script>
+        <script src="bower_components/Bootflat/bootflat/js/jquery.fs.stepper.min.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 

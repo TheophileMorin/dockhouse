@@ -80,12 +80,33 @@ public class RegistryTypeServiceTest {
     }
     
     @Test
-    public void saveTest() {
+    public void insertTest() {
     	long collectionSize = registryTypeRepository.count();
     	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
     	registryTypeInDTO.setName("new");
-    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.save(registryTypeInDTO);
+    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.insert(registryTypeInDTO);
     	assertEquals(registryTypeInDTO.getName(), registryTypeOutDTO.getName());
     	assertEquals(collectionSize+1, registryTypeRepository.count());
+    }
+    
+    @Test
+    public void upsertInsertTest() {
+    	long collectionSize = registryTypeRepository.count();
+    	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
+    	registryTypeInDTO.setName("new");
+    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.upsert(registryTypeInDTO, "id");
+    	assertEquals(registryTypeInDTO.getName(), registryTypeOutDTO.getName());
+    	assertEquals("id", registryTypeOutDTO.getId());
+    	assertEquals(collectionSize+1, registryTypeRepository.count());
+    }
+    
+    @Test
+    public void upsertUpdateTest() {
+    	long collectionSize = registryTypeRepository.count();
+    	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
+    	registryTypeInDTO.setName("update");
+    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.upsert(registryTypeInDTO, registryType1.getId());
+    	assertEquals(registryTypeInDTO.getName(), registryTypeOutDTO.getName());
+    	assertEquals(collectionSize, registryTypeRepository.count());
     }
 }

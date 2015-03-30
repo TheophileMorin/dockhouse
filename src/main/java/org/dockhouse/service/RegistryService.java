@@ -52,49 +52,37 @@ public class RegistryService {
 
     @Inject
     private RegistryInDTOMapper registryInDTOMapper;
-
+    
     public List<RegistryOutDTO> getAll() {
     	return registryRepository.findAll()
     							 .stream()
     							 .map(this::createRegistryOutDTO)
     							 .collect(Collectors.toList());
     }
-
+    
     public Optional<RegistryOutDTO> getOne(String id) {
     	return Optional.ofNullable(registryRepository.findOne(id))
     			       .map(this::createRegistryOutDTO);
     }
-
+    
     public RegistryOutDTO createRegistryOutDTO(Registry registry) {
     	RegistryType registryType = registryTypeRepository.findOne(registry.getRegistryTypeId());
     	return registryOutDTOMapper.createDTO(registry, registryType);
     }
-
-    public RegistryOutDTO save(RegistryInDTO registryInDTO) {
+    
+    public RegistryOutDTO insert(RegistryInDTO registryInDTO) {
     	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
     	registry = registryRepository.save(registry);
     	return createRegistryOutDTO(registry);
     }
-
-    public RegistryOutDTO saveOrUpdate(String id, RegistryInDTO registryInDTO) {
-        Registry oldRegistry = registryRepository.findOne(id);
-        if(oldRegistry == null) {
-            //TODO save to a pricise ID !!
-            return save(registryInDTO);
-        } else {
-            Registry registryUpdated = registryInDTOMapper.createRegistry(registryInDTO);
-            /* For all attributes */
-            oldRegistry.setName(registryUpdated.getName());
-            oldRegistry.setHost(registryUpdated.getHost());
-            oldRegistry.setPort(registryUpdated.getPort());
-            oldRegistry.setProtocol(registryUpdated.getProtocol());
-            oldRegistry.setRegistryTypeId(registryUpdated.getRegistryTypeId());
-
-            oldRegistry = registryRepository.save(oldRegistry);
-            return createRegistryOutDTO(oldRegistry);
-        }
+    
+    public RegistryOutDTO upsert(RegistryInDTO registryInDTO, String id) {
+    	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
+    	registry.setId(id);
+    	registry = registryRepository.save(registry);
+    	return createRegistryOutDTO(registry);
     }
-
+    
     public RegistryType getRegistryTypeOf(Registry registry) {
     	return registryTypeRepository.findOne(registry.getRegistryTypeId());
     }

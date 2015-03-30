@@ -29,11 +29,7 @@ angular.module('dockhouseApp')
                 rememberMe: $scope.rememberMe
             }).then(function () {
                 $scope.authenticationError = false;
-                if ($rootScope.previousStateName === 'register') {
-                    $state.go('home');
-                } else {
-                    $rootScope.back();
-                }
+                $state.go('home');
             }).catch(function () {
                 $scope.authenticationError = true;
             });

@@ -27,7 +27,7 @@ angular.module('dockhouseApp')
                 views: {
                     'content@': {
                         templateUrl: 'scripts/app/main/main.html',
-                        controller: 'MainController'
+                        controller: 'MainController as mainCtrl'
                     }
                 },
                 resolve: {

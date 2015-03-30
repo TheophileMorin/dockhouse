@@ -89,7 +89,7 @@ public class RegistryTypeResource {
     @Timed
     public ResponseEntity<RegistryTypeOutDTO> createRegistryType(@RequestBody @Valid RegistryTypeInDTO registryTypeInDTO) {
         log.debug("REST request to save Registry Type : {}", registryTypeInDTO);
-        RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.save(registryTypeInDTO);
+        RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.insert(registryTypeInDTO);
         return new ResponseEntity<>(registryTypeOutDTO, HttpStatus.CREATED);
     }
 
@@ -103,7 +103,7 @@ public class RegistryTypeResource {
     public ResponseEntity<RegistryTypeOutDTO> updateRegistryType(@RequestBody @Valid RegistryTypeInDTO registryTypeInDTO,
     		                                                     @PathVariable String id) {
         log.debug("REST request to save Registry Type : {}", registryTypeInDTO);
-        RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.save(registryTypeInDTO);
+        RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.upsert(registryTypeInDTO, id);
         return new ResponseEntity<>(registryTypeOutDTO, HttpStatus.OK);
     }
 

@@ -2,12 +2,32 @@
     "login": {
         "title": "Authentication",
         "form": {
+            "username": "Login",
+            "username.placeholder": "Your login or email",
+            "login.placeholder": "Your username",
+            "newpassword": "Password",
+            "newpassword.placeholder": "New password",
+            "confirmpassword": "New password confirmation",
+            "confirmpassword.placeholder": "Confirm the new password",
+            "email": "E-mail",
+            "email.placeholder": "Your e-mail",
             "password": "Password",
             "password.placeholder": "Your password",
             "rememberme": "Automatic Login",
-            "button": "Authenticate"
+            "button": "Sign in",
+            "or": "OR",
+            "create.account": "Create an account",
+            "oauth": {
+                "github": "Sign up with Github",
+                "google": "Sign up with Google +",
+                "twitter": "Sign up with Twitter"
+            }
         },
         "messages": {
+            "info": {
+                "authenticated": "If you want to <a href=\"#/login\">authenticate</a>, you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\").",
+                "register": "You don't have an account yet?"
+            },
             "error": {
                 "authentication": "<strong>Authentication failed!</strong> Please check your credentials and try again."
             }

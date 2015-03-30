@@ -35,21 +35,7 @@
             },
             "language": "Langue"
         },
-        "form": {
-            "username": "Nom d'utilisateur",
-            "username.placeholder": "Votre nom d'utilisateur",
-            "newpassword": "Nouveau mot de passe",
-            "newpassword.placeholder": "Nouveau mot de passe",
-            "confirmpassword": "Confirmation du nouveau mot de passe",
-            "confirmpassword.placeholder": "Confirmation du nouveau mot de passe",
-            "email": "Email",
-            "email.placeholder": "Votre email"
-        },
         "messages": {
-            "info": {
-                "authenticated": "Si vous voulez vous <a href=\"#/login\">connecter</a>, vous pouvez utiliser les comptes par défaut : <br/> - Administrateur (nom d'utilisateur=\"admin\" et mot de passe =\"admin\") <br/> - Utilisateur (nom d'utilisateur=\"user\" et mot de passe =\"user\").",
-                "register": "Vous n'avez pas encore de compte ? <a href=\"#/register\">Créer un compte</a>"
-            },
             "error": {
                 "dontmatch": "Le nouveau mot de passe et sa confirmation ne sont pas égaux!"
             },
@@ -92,5 +78,5 @@
             "title": "Confirmation de suppression"
         }
     },
-    "footer": "Copyright (C) 2015  Dockhouse project. ( http://dockhouse.github.io/ ). Ce projet est sous la licence LGPLv3"
+    "footer": "Copyright © 2015  Dockhouse project. Ce projet est sous la licence LGPLv3 (voir <a href=\"http://dockhouse.github.io/ \">http://dockhouse.github.io/</a>)"
 }
