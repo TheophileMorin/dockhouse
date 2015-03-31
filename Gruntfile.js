@@ -97,11 +97,11 @@ module.exports = function (grunt) {
         //    }
         },
         wiredep: {
-            app: {
-                src: ['src/main/webapp/index.html', 'src/main/scss/main.scss'],
-                exclude: [/angular-i18n/, /swagger-ui/],
-                ignorePath: /\.\.\/webapp\/bower_components\// // remove ../webapp/bower_components/ from paths of injected sass files
-            },
+            //app: {
+            //    src: ['src/main/webapp/index.html', 'src/main/scss/main.scss'],
+            //    exclude: [/angular-i18n/, /swagger-ui/],
+            //    ignorePath: /\.\.\/webapp\/bower_components\// // remove ../webapp/bower_components/ from paths of injected sass files
+            //},
             test: {
                 src: ['src/test/javascript/karma.conf.js','src/main/webapp/test.html'],
                 exclude: [/angular-i18n/, /swagger-ui/, /angular-scenario/],
@@ -373,6 +373,14 @@ module.exports = function (grunt) {
                     ]
                 }]
             },
+            // customisation to add font files from CSS libraries:
+            fonts: {
+                expand: true,
+                flatten: true,
+                cwd: '<%= yeoman.app %>',
+                dest: '<%= yeoman.dist %>/assets/fonts',
+                src: ['bower_components/fontawesome/fonts/*']
+            },
             generateHerokuDirectory: {
                     expand: true,
                     dest: 'deploy/heroku',
@@ -508,12 +516,13 @@ module.exports = function (grunt) {
         'clean:server',
         'clean:dist',
         'injector',
-        'wiredep:app',
+        //'wiredep:app',
         'ngconstant:prod',
         'useminPrepare',
         'ngtemplates',
         'concurrent:dist',
         'concat',
+        'copy:fonts',
         'copy:dist',
         'ngAnnotate',
         'cssmin',
