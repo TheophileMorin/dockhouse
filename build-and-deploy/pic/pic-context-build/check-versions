@@ -1,0 +1,48 @@
+#!/bin/bash
+
+echo "-------------------"
+echo "- Check versions --"
+echo "-------------------"
+echo
+echo "-  Java version   -"
+echo "-------------------"
+echo `java -version`
+echo
+echo "-  Maven version   -"
+echo "-------------------"
+echo `mvn --version`
+echo
+echo "-  Node version   -"
+echo "-------------------"
+echo `node --version`
+echo
+echo "-  npm version   -"
+echo "-------------------"
+echo `npm --version`
+echo
+echo "-  yeoman version   -"
+echo "-------------------"
+echo `yo --version`
+echo
+echo "-  bower version   -"
+echo "-------------------"
+echo `bower --version`
+echo
+echo "-  grunt version   -"
+echo "-------------------"
+echo `grunt --version`
+echo
+echo "-  ruby version   -"
+echo "-------------------"
+echo `ruby -v`
+echo
+echo "-  Sass version   -"
+echo "-------------------"
+echo `sass --version`
+echo
+echo "-  Compass version   -"
+echo "-------------------"
+echo `compass version`
+
+
+
