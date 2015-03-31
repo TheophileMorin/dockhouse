@@ -24,7 +24,6 @@ import org.hibernate.validator.constraints.Range;
 public class RegistryTypeInDTO {
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9]*$")
     @Size(min = 1, max = 50)
     private String name;
     

@@ -26,7 +26,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class RegistryInDTO {
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9]*$")
     @Size(min = 1, max = 50)
     private String name;
 

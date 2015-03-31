@@ -67,24 +67,6 @@ public class RegistryTypeInDTOTest extends DTOValidationTest<RegistryTypeInDTO> 
 	}
 	
 	@Test
-	public void testNameRegexp() {
-		registryTypeInDTO.setName("na_me");
-		assertFieldIsInvalid(registryTypeInDTO, "name");
-		
-		registryTypeInDTO.setName("a name");
-		assertFieldIsInvalid(registryTypeInDTO, "name");
-		
-		registryTypeInDTO.setName("name");
-		assertFieldIsValid(registryTypeInDTO, "name");
-		
-		registryTypeInDTO.setName("1name");
-		assertFieldIsValid(registryTypeInDTO, "name");
-		
-		registryTypeInDTO.setName("Name");
-		assertFieldIsValid(registryTypeInDTO, "name");
-	}
-	
-	@Test
 	public void testPortIsBetween0And65535() {
 		registryTypeInDTO.setPort(-1);   
 		assertFieldIsInvalid(registryTypeInDTO, "port");
