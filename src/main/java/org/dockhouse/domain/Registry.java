@@ -18,10 +18,8 @@ package org.dockhouse.domain;
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.dockhouse.domain.validation.CheckReference;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -38,15 +36,21 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     private String id;
 
     @Indexed(unique=true)
+    @NotNull
+    @Size(min = 1, max = 50)
     private String name;
 
     private String host;
 
+    @Range(min = 0, max = 65535)
     private int port;
 
+    @Size(max = 10)
     private String protocol;
 
-    private String registryTypeId;
+    @NotNull
+    @Field("registry_type")
+    private RegistryType registryType;
 
     public String getId() {
     	return id;
@@ -88,12 +92,12 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     	this.protocol = protocol;
     }
 
-    public String getRegistryTypeId() {
-    	return registryTypeId;
+    public RegistryType getRegistryType() {
+    	return registryType;
     }
 
-    public void setRegistryTypeId(String registryTypeId) {
-    	this.registryTypeId = registryTypeId;
+    public void setRegistryType(RegistryType registryType) {
+    	this.registryType = registryType;
     }
 
     @Override
@@ -125,8 +129,8 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
 	    ", name='" + name + '\'' +
 	    ", host='" + host + '\'' +
 	    ", port='" + port + '\'' +
-	    ", protocol='"       + protocol     + '\'' +
-	    ", registryTypeId='" + registryTypeId + '\'' +
+	    ", protocol='"     + protocol     + '\'' +
+	    ", registryType='" + registryType + '\'' +
 	    "}";
     }
 }

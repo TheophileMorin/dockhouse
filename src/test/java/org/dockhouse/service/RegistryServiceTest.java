@@ -15,10 +15,6 @@ import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
-import org.dockhouse.web.rest.dto.RegistryInDTO;
-import org.dockhouse.web.rest.dto.RegistryOutDTO;
-import org.dockhouse.web.rest.dto.RegistryTypeInDTO;
-import org.dockhouse.web.rest.dto.RegistryTypeOutDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -69,7 +65,7 @@ public class RegistryServiceTest {
         registry1.setProtocol("http");
         registry1.setHost("host");
         registry1.setPort(2222);
-        registry1.setRegistryTypeId(registryType.getId());
+        registry1.setRegistryType(registryType);
         registryRepository.save(registry1);
         
         registry2 = new Registry();
@@ -77,65 +73,35 @@ public class RegistryServiceTest {
         registry2.setProtocol("http");
         registry2.setHost("host");
         registry2.setPort(2222);
-        registry2.setRegistryTypeId(registryType.getId());
+        registry2.setRegistryType(registryType);
         registryRepository.save(registry2);
     }
 
     @Test
     public void getAllTest() {
-    	List<RegistryOutDTO> registryOutDTOs = registryService.getAll();
-    	assertEquals(2, registryOutDTOs.size());
+    	List<Registry> registries = registryService.getAll();
+    	assertEquals(2, registries.size());
     }
     
     @Test
     public void getOneTest() {
-    	Optional<RegistryOutDTO> registryOutDTO = registryService.getOne(registry1.getId());
-    	assertTrue(registryOutDTO.isPresent());
-    	assertEquals(registry1.getId(), registryOutDTO.get().getId());
+    	Optional<Registry> registry = registryService.getOne(registry1.getId());
+    	assertTrue(registry.isPresent());
+    	assertEquals(registry1.getId(), registry.get().getId());
     
-    	registryOutDTO = registryService.getOne("0");
-    	assertFalse(registryOutDTO.isPresent());
+    	registry = registryService.getOne("0");
+    	assertFalse(registry.isPresent());
     }
-    
-    @Test
-    public void createRegistryOutDTOTest() {
-    	RegistryOutDTO registryOutDTO = registryService.createRegistryOutDTO(registry1);
-    	assertEquals(registry1.getId(), registryOutDTO.getId());
-    	assertEquals(registryType.getId(), registryOutDTO.getRegistryType().getId());
-    }
-    
+
     @Test
     public void insertTest() {
     	long collectionSize = registryRepository.count();
-    	RegistryInDTO registryInDTO = new RegistryInDTO();
-    	registryInDTO.setName("new");
-    	registryInDTO.setRegistryTypeId(registryType.getId());
-    	RegistryOutDTO registryOutDTO = registryService.insert(registryInDTO);
-    	assertEquals(registryInDTO.getName(), registryOutDTO.getName());
+    	Registry registry = new Registry();
+    	final String name = "name";
+    	registry.setName(name);
+    	registry.setRegistryType(registryType);
+    	registry = registryService.insert(registry);
+    	assertEquals(name, registry.getName());
     	assertEquals(collectionSize+1, registryRepository.count());
-    }
-    
-    
-    @Test
-    public void upsertInsertTest() {
-    	long collectionSize = registryRepository.count();
-    	RegistryInDTO registryInDTO = new RegistryInDTO();
-    	registryInDTO.setRegistryTypeId(registryType.getId());
-    	registryInDTO.setName("new");
-    	RegistryOutDTO registryOutDTO = registryService.upsert(registryInDTO, "id");
-    	assertEquals(registryInDTO.getName(), registryOutDTO.getName());
-    	assertEquals("id", registryOutDTO.getId());
-    	assertEquals(collectionSize+1, registryRepository.count());
-    }
-    
-    @Test
-    public void upsertUpdateTest() {
-    	long collectionSize = registryRepository.count();
-    	RegistryInDTO registryInDTO = new RegistryInDTO();
-    	registryInDTO.setRegistryTypeId(registryType.getId());
-    	registryInDTO.setName("update");
-    	RegistryOutDTO registryOutDTO = registryService.upsert(registryInDTO, registry1.getId());
-    	assertEquals(registryInDTO.getName(), registryOutDTO.getName());
-    	assertEquals(collectionSize, registryRepository.count());
     }
 }

@@ -56,19 +56,26 @@ public class RegistryResourceTest {
 
     private RegistryType registryType;
     
+    private static String registryTypePayload =
+    		"{ \"name\"        : \"registrytype\", " +
+			  "\"defaultHost\" : \"host\"        , " +
+			  "\"logo\"        : \"http://example.com/logo.png\" , " +
+			  "\"defaultPort\" : 22222, " +
+			  "\"isPublic\"    : false }";
+    
     private static String validPayload =
     		"{ \"name\"    : \"registry\", " +
 			  "\"host\"    : \"host\"    , " +
 			  "\"protocol\": \"https\"   , " +
 			  "\"port\"    : 22222       , " + 
-			  "\"registryTypeId\": \"1\" "+ "}";
+			  "\"registryType\": "+ registryTypePayload + "}";
 
     private static String invalidPayload =
     		"{ \"name\"    : \"\", " +
       		  "\"host\"    : \"\", " +
     	 	  "\"protocol\": \"\", " +
    		  	  "\"port\"    : -1  , " + 
-   		  	  "\"registryTypeId\": \"2\" " + "}";
+   		  	  "\"registryType\": null " + "}";
 
     @Before
     public void setup() {
@@ -96,7 +103,7 @@ public class RegistryResourceTest {
         registry.setHost("host");
         registry.setPort(2222);
         registry.setProtocol("http");
-        registry.setRegistryTypeId(registryType.getId());
+        registry.setRegistryType(registryType);
         registryRepository.save(registry);
     }
 

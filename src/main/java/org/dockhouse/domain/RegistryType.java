@@ -26,6 +26,7 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * A type of registry.
@@ -36,13 +37,18 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
     @Id
     private String id;
 	
-    @Indexed(unique=true)
+    @NotNull
+    @Size(min = 1, max = 50)
     private String name;
     
     private String logo;
     
+    @NotNull
+    @Field("default_host")
     private String defaultHost;
     
+    @Range(min = 0, max = 65535)
+    @Field("default_port")
     private int defaultPort;
     
     private boolean isPublic;

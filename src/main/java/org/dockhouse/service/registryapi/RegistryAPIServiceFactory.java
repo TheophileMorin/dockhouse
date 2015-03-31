@@ -33,9 +33,6 @@ public class RegistryAPIServiceFactory {
 	@Qualifier("DockerRegistryAPIService")
 	private RegistryAPIService dockerRegistryAPIService;
 
-	@Inject
-	private RegistryService registryService;
-	
 	/**
 	 * Return RegistryAPIService corresponding to given registry type.
 	 * 
@@ -57,8 +54,7 @@ public class RegistryAPIServiceFactory {
 	 * @return RegistryAPIService of given registry 
 	 */
 	public RegistryAPIService get(Registry registry) {
-		RegistryType registryType = registryService.getRegistryTypeOf(registry);
-		return get(registryType.getName());
+		return get(registry.getRegistryType().getName());
 	}
 	
 }

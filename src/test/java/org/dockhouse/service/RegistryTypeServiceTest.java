@@ -13,8 +13,6 @@ import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
-import org.dockhouse.web.rest.dto.RegistryTypeInDTO;
-import org.dockhouse.web.rest.dto.RegistryTypeOutDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -65,48 +63,30 @@ public class RegistryTypeServiceTest {
 
     @Test
     public void getAllTest() {
-    	List<RegistryTypeOutDTO> registryTypeOutDTOs = registryTypeService.getAll();
-    	assertEquals(2, registryTypeOutDTOs.size());
+    	List<RegistryType> registryTypes = registryTypeService.getAll();
+    	assertEquals(2, registryTypes.size());
     }
     
     @Test
     public void getOneTest() {
-    	Optional<RegistryTypeOutDTO> registryTypeOutDTO = registryTypeService.getOne(registryType1.getId());
-    	assertTrue(registryTypeOutDTO.isPresent());
-    	assertEquals(registryType1.getId(), registryTypeOutDTO.get().getId());
+    	Optional<RegistryType> registryType = registryTypeService.getOne(registryType1.getId());
+    	assertTrue(registryType.isPresent());
+    	assertEquals(registryType1.getId(), registryType.get().getId());
     
-    	registryTypeOutDTO = registryTypeService.getOne("0");
-    	assertFalse(registryTypeOutDTO.isPresent());
+    	registryType = registryTypeService.getOne("0");
+    	assertFalse(registryType.isPresent());
     }
     
     @Test
     public void insertTest() {
     	long collectionSize = registryTypeRepository.count();
-    	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
-    	registryTypeInDTO.setName("new");
-    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.insert(registryTypeInDTO);
-    	assertEquals(registryTypeInDTO.getName(), registryTypeOutDTO.getName());
+    	RegistryType registryType = new RegistryType();
+    	String name = "name";
+    	registryType.setName(name);
+    	registryType.setDefaultHost("host");
+    	registryType.setDefaultPort(4);
+    	registryType = registryTypeService.insert(registryType);
+    	assertEquals(name, registryType.getName());
     	assertEquals(collectionSize+1, registryTypeRepository.count());
-    }
-    
-    @Test
-    public void upsertInsertTest() {
-    	long collectionSize = registryTypeRepository.count();
-    	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
-    	registryTypeInDTO.setName("new");
-    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.upsert(registryTypeInDTO, "id");
-    	assertEquals(registryTypeInDTO.getName(), registryTypeOutDTO.getName());
-    	assertEquals("id", registryTypeOutDTO.getId());
-    	assertEquals(collectionSize+1, registryTypeRepository.count());
-    }
-    
-    @Test
-    public void upsertUpdateTest() {
-    	long collectionSize = registryTypeRepository.count();
-    	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
-    	registryTypeInDTO.setName("update");
-    	RegistryTypeOutDTO registryTypeOutDTO = registryTypeService.upsert(registryTypeInDTO, registryType1.getId());
-    	assertEquals(registryTypeInDTO.getName(), registryTypeOutDTO.getName());
-    	assertEquals(collectionSize, registryTypeRepository.count());
     }
 }
