@@ -49,16 +49,16 @@ public class RegistryTypeServiceTest {
         registryType1 = new RegistryType();
         registryType1.setName("name1");
         registryType1.setLogo("http://example.com/logo.png");
-        registryType1.setHost("host");
-        registryType1.setPort(2222);
+        registryType1.setDefaultHost("host");
+        registryType1.setDefaultPort(2222);
         registryType1.setPublic(false);
         registryTypeRepository.save(registryType1);
         
         registryType2 = new RegistryType();
         registryType2.setName("name2");
         registryType2.setLogo("http://example.com/logo.png");
-        registryType2.setHost("host");
-        registryType2.setPort(2222);
+        registryType2.setDefaultHost("host");
+        registryType2.setDefaultPort(2222);
         registryType2.setPublic(false);
         registryTypeRepository.save(registryType2);
     }

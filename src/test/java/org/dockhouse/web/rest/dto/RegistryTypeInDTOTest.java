@@ -25,8 +25,8 @@ public class RegistryTypeInDTOTest extends DTOValidationTest<RegistryTypeInDTO> 
     public void setup() {
 		registryTypeInDTO = new RegistryTypeInDTO();
     	registryTypeInDTO.setName("name");
-    	registryTypeInDTO.setHost("host");
-    	registryTypeInDTO.setPort(1);
+    	registryTypeInDTO.setDefaultHost("host");
+    	registryTypeInDTO.setDefaultPort(1);
     	registryTypeInDTO.setLogo("logo");
     	registryTypeInDTO.setPublic(true);
     }
@@ -67,20 +67,26 @@ public class RegistryTypeInDTOTest extends DTOValidationTest<RegistryTypeInDTO> 
 	}
 	
 	@Test
-	public void testPortIsBetween0And65535() {
-		registryTypeInDTO.setPort(-1);   
-		assertFieldIsInvalid(registryTypeInDTO, "port");
+	public void testDefaultHostCannotBeNull() {
+		registryTypeInDTO.setDefaultHost(null);
+		assertFieldIsInvalid(registryTypeInDTO, "defaultHost");
+	}
+	
+	@Test
+	public void testDefaultPortIsBetween0And65535() {
+		registryTypeInDTO.setDefaultPort(-1);   
+		assertFieldIsInvalid(registryTypeInDTO, "defaultPort");
 		
-		registryTypeInDTO.setPort(65536);
-		assertFieldIsInvalid(registryTypeInDTO, "port");
+		registryTypeInDTO.setDefaultPort(65536);
+		assertFieldIsInvalid(registryTypeInDTO, "defaultPort");
 		
-		registryTypeInDTO.setPort(0);
-		assertFieldIsValid(registryTypeInDTO, "port");
+		registryTypeInDTO.setDefaultPort(0);
+		assertFieldIsValid(registryTypeInDTO, "defaultPort");
 		
-		registryTypeInDTO.setPort(22222);
-		assertFieldIsValid(registryTypeInDTO, "port");
+		registryTypeInDTO.setDefaultPort(22222);
+		assertFieldIsValid(registryTypeInDTO, "defaultPort");
 		
-		registryTypeInDTO.setPort(65535);
-		assertFieldIsValid(registryTypeInDTO, "port");
+		registryTypeInDTO.setDefaultPort(65535);
+		assertFieldIsValid(registryTypeInDTO, "defaultPort");
 	}
 }

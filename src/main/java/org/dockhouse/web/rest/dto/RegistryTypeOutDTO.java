@@ -25,9 +25,9 @@ public class RegistryTypeOutDTO {
     
     private String logo;
     
-    private String host;
+    private String defaultHost;
     
-    private int port;
+    private int defaultPort;
     
     private boolean isPublic;
 
@@ -55,20 +55,20 @@ public class RegistryTypeOutDTO {
 		this.logo = logo;
 	}
 
-	public String getHost() {
-		return host;
+	public String getDefaultHost() {
+		return defaultHost;
 	}
 
-	public void setHost(String host) {
-		this.host = host;
+	public void setDefaultHost(String host) {
+		this.defaultHost = host;
 	}
 
-	public int getPort() {
-		return port;
+	public int getDefaultPort() {
+		return defaultPort;
 	}
 
-	public void setPort(int port) {
-		this.port = port;
+	public void setDefaultPort(int port) {
+		this.defaultPort = port;
 	}
 
 	public boolean isPublic() {
@@ -85,8 +85,8 @@ public class RegistryTypeOutDTO {
 	    "id='" + id + '\'' +
 	    ", name='" + name + '\'' +
 	    ", logo='" + logo + '\'' +
-	    ", host='" + host + '\'' +
-	    ", port='" + port + '\'' +
+	    ", host='" + defaultHost + '\'' +
+	    ", port='" + defaultPort + '\'' +
 	    ", isPublic='" + isPublic + '\'' +
 	    "}";
     }

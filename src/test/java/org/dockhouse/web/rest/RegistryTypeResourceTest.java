@@ -46,18 +46,18 @@ public class RegistryTypeResourceTest {
     private RegistryType registryType;
 
     private static String validPayload =
-    		"{ \"name\"    : \"registrytype\", " +
-			  "\"host\"    : \"host\"        , " +
-			  "\"logo\"    : \"http://example.com/logo.png\" , " +
-			  "\"port\"    : 22222, " +
-			  "\"isPublic\": false }";
+    		"{ \"name\"        : \"registrytype\", " +
+			  "\"defaultHost\" : \"host\"        , " +
+			  "\"logo\"        : \"http://example.com/logo.png\" , " +
+			  "\"defaultPort\" : 22222, " +
+			  "\"isPublic\"    : false }";
 
     private static String invalidPayload =
-    		"{ \"name\"    : \"\", " +
-    		  "\"host\"    : \"\", " +
-    		  "\"logo\"    : \"\", " +
-    		  "\"port\"    : -1  , " +
-    		  "\"isPublic\": false }";
+    		"{ \"name\"        : \"\", " +
+    		  "\"defaultHost\" : \"\", " +
+    		  "\"logo\"        : \"\", " +
+    		  "\"defaultPort\" : -1  , " +
+    		  "\"isPublic\"    : false }";
 
     @Before
     public void setup() {
@@ -72,8 +72,8 @@ public class RegistryTypeResourceTest {
         registryType = new RegistryType();
         registryType.setName("name");
         registryType.setLogo("http://example.com/logo.png");
-        registryType.setHost("host");
-        registryType.setPort(2222);
+        registryType.setDefaultHost("host");
+        registryType.setDefaultPort(2222);
         registryType.setPublic(false);
         registryTypeRepository.save(registryType);
     }

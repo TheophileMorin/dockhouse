@@ -51,8 +51,8 @@ public class RegistryOutDTOMapperTest {
     	RegistryType registryType = new RegistryType();
     	registryType.setId("1");
     	registryType.setName("name");
-    	registryType.setHost("host");
-    	registryType.setPort(1);
+    	registryType.setDefaultHost("host");
+    	registryType.setDefaultPort(1);
     	registryType.setLogo("logo");
     	registryType.setPublic(true);
 
@@ -67,8 +67,8 @@ public class RegistryOutDTOMapperTest {
     	
     	assertEquals(registryType.getId(), registryTypeOutDTO.getId());
     	assertEquals(registryType.getName(), registryTypeOutDTO.getName());
-    	assertEquals(registryType.getHost(), registryTypeOutDTO.getHost());
-    	assertEquals(registryType.getPort(), registryTypeOutDTO.getPort());
+    	assertEquals(registryType.getDefaultHost(), registryTypeOutDTO.getDefaultHost());
+    	assertEquals(registryType.getDefaultPort(), registryTypeOutDTO.getDefaultPort());
     	assertEquals(registryType.getLogo(), registryTypeOutDTO.getLogo());
     	assertEquals(registryType.isPublic(), registryTypeOutDTO.isPublic());
     }

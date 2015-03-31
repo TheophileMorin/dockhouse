@@ -85,8 +85,8 @@ public class RegistryResourceTest {
 	    registryType = new RegistryType();
 	    registryType.setId("1");
 	    registryType.setName("name");
-	    registryType.setHost("host");
-	    registryType.setPort(1111);
+	    registryType.setDefaultHost("host");
+	    registryType.setDefaultPort(1111);
 	    registryType.setLogo("http://example.com/logo.png");
 	    registryType.setPublic(true);
 	    registryType = registryTypeRepository.save(registryType);

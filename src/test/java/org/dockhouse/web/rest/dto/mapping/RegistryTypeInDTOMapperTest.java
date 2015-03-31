@@ -47,16 +47,16 @@ public class RegistryTypeInDTOMapperTest {
     public void createRegistryTypeTest() {
     	RegistryTypeInDTO registryTypeInDTO = new RegistryTypeInDTO();
     	registryTypeInDTO.setName("name");
-    	registryTypeInDTO.setHost("host");
-    	registryTypeInDTO.setPort(1);
+    	registryTypeInDTO.setDefaultHost("host");
+    	registryTypeInDTO.setDefaultPort(1);
     	registryTypeInDTO.setLogo("logo");
     	registryTypeInDTO.setPublic(true);
     	
     	RegistryType registryType = registryTypeInDTOMapper.createRegistryType(registryTypeInDTO);
     
     	assertEquals(registryTypeInDTO.getName(), registryType.getName());
-    	assertEquals(registryTypeInDTO.getHost(), registryType.getHost());
-    	assertEquals(registryTypeInDTO.getPort(), registryType.getPort());
+    	assertEquals(registryTypeInDTO.getDefaultHost(), registryType.getDefaultHost());
+    	assertEquals(registryTypeInDTO.getDefaultPort(), registryType.getDefaultPort());
     	assertEquals(registryTypeInDTO.getLogo(), registryType.getLogo());
     	assertEquals(registryTypeInDTO.isPublic(), registryType.isPublic());
     }

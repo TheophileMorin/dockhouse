@@ -45,8 +45,8 @@ public class MongoDBReferenceValidatorTest {
         registryType = new RegistryType();
         registryType.setName("name");
         registryType.setLogo("http://example.com/logo.png");
-        registryType.setHost("host");
-        registryType.setPort(2222);
+        registryType.setDefaultHost("host");
+        registryType.setDefaultPort(2222);
         registryType.setPublic(false);
         registryTypeRepository.save(registryType);
 

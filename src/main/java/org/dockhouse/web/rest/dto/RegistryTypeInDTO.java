@@ -20,6 +20,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 public class RegistryTypeInDTO {
 
@@ -29,10 +30,13 @@ public class RegistryTypeInDTO {
     
     private String logo;
     
-    private String host;
+    @NotNull
+    @Field("default_host")
+    private String defaultHost;
     
     @Range(min = 0, max = 65535)
-    private int port;
+    @Field("default_port")
+    private int defaultPort;
     
     private boolean isPublic;
 
@@ -52,20 +56,20 @@ public class RegistryTypeInDTO {
 		this.logo = logo;
 	}
 
-	public String getHost() {
-		return host;
+	public String getDefaultHost() {
+		return defaultHost;
 	}
 
-	public void setHost(String host) {
-		this.host = host;
+	public void setDefaultHost(String defaultHost) {
+		this.defaultHost = defaultHost;
 	}
 
-	public int getPort() {
-		return port;
+	public int getDefaultPort() {
+		return defaultPort;
 	}
 
-	public void setPort(int port) {
-		this.port = port;
+	public void setDefaultPort(int defaultPort) {
+		this.defaultPort = defaultPort;
 	}
 
 	public boolean isPublic() {
@@ -81,8 +85,8 @@ public class RegistryTypeInDTO {
         return "RegistryTypeInDTO{" +
 	    ", name='" + name + '\'' +
 	    ", logo='" + logo + '\'' +
-	    ", host='" + host + '\'' +
-	    ", port='" + port + '\'' +
+	    ", host='" + defaultHost + '\'' +
+	    ", port='" + defaultPort + '\'' +
 	    ", isPublic='" + isPublic + '\'' +
 	    "}";
     }
