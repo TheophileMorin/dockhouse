@@ -66,8 +66,6 @@ RUN gem install compass
 ADD check-versions check-versions
 RUN chmod +x ./check-versions
 
-VOLUME ["/dockhouse"]
-
 EXPOSE 22
 
 CMD /usr/sbin/sshd -D
