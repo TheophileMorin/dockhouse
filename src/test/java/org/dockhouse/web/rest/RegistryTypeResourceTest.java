@@ -45,7 +45,6 @@ public class RegistryTypeResourceTest {
     @Before
     public void setup() {
         RegistryTypeResource registryTypeMockResource = new RegistryTypeResource();
-        ReflectionTestUtils.setField(registryTypeMockResource, "registryTypeRepository", registryTypeRepository);
         ReflectionTestUtils.setField(registryTypeMockResource, "registryTypeService"   , registryTypeService);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(registryTypeMockResource).build();
