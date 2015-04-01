@@ -25,8 +25,11 @@ import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
+import org.dockhouse.service.registryapi.DockerRegistryAPIServiceV1;
+import org.dockhouse.service.registryapi.RegistryAPIService;
 import org.dockhouse.web.rest.dto.RegistryInDTO;
 import org.dockhouse.web.rest.dto.RegistryOutDTO;
+import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.dockhouse.web.rest.dto.mapping.RegistryInDTOMapper;
 import org.dockhouse.web.rest.dto.mapping.RegistryOutDTOMapper;
 import org.slf4j.Logger;
@@ -52,6 +55,7 @@ public class RegistryService {
 
     @Inject
     private RegistryInDTOMapper registryInDTOMapper;
+
     
     public List<RegistryOutDTO> getAll() {
     	return registryRepository.findAll()
@@ -85,5 +89,28 @@ public class RegistryService {
     
     public RegistryType getRegistryTypeOf(Registry registry) {
     	return registryTypeRepository.findOne(registry.getRegistryTypeId());
+    }
+    
+    public RegistryStatusDTO getStatus(String id){
+    	RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
+    	registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
+    	
+    	//MOCK TODO remove
+        Registry registry = new Registry();
+        registry.setHost("ns507652.ip-192-99-10.net");
+        registry.setPort(5000);
+        registry.setProtocol("http");  
+        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1(); 
+        //ENDMOCK
+        
+        //Registry registry = registryRepository.findOne(id);
+        if(registry != null){
+        	//RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            //RegistryAPIService registreAPI = factory.get(registry);
+            if(registreAPI.isAvailable(registry)){
+            	registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
+            }
+        }
+        return registryStatusDTO;  
     }
 }
