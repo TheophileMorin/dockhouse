@@ -36,6 +36,7 @@
         vm.registryImages = [];
 
         vm.loadRegistry = loadRegistry;
+        vm.editRegistry = editRegistry;
 
         activate($stateParams.id);
 
@@ -60,7 +61,7 @@
         function testRegistry() {
             Registry.testRegistry(vm.registry.id)
                 .then(function(data){
-                    if(data) {
+                    if(data.status == "ok") { //TODO mock, change to "online" or "offline"
                         vm.onlineRegistry = "online";
                         vm.registryDetail = JSON.stringify(data, null, 10); //TODO mock
                         mockRegistryImages();
@@ -84,6 +85,20 @@
                     "version" : "v2.3.7"
                 }
             ];
+        }
+
+        function editRegistry() {
+            logger.log("MOCK"); //TODO mock
+            if(vm.onlineRegistry == "pending") {
+                vm.onlineRegistry = "online";
+            }
+            else if(vm.onlineRegistry == "online") {
+                vm.onlineRegistry = "offline";
+            }
+            else if(vm.onlineRegistry == "offline") {
+                vm.onlineRegistry = "pending";
+            }
+            logger.log(vm.onlineRegistry);
         }
     }
 

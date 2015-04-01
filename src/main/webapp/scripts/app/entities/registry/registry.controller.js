@@ -37,6 +37,7 @@
         vm.openEdit = openEdit;
         vm.openRemove = openRemove;
         vm.clear = clear;
+        vm.testAll = testAll;
 
 
         activate();
@@ -52,6 +53,7 @@
             Registry.getAll()
                 .then(function(data){
                     vm.registries = data;
+                    vm.testAll();
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the list of registries.');
@@ -171,13 +173,37 @@
             vm.registryEdited = {
                 id:null,
                 name:null,
-                registryTypeId:null,
+                apiVersion:null,
+                registryType:null,
                 host:null,
                 port:null,
                 protocol:null };
             vm.editionMode = false;
         }
 
+        function testAll() {
+            var max = vm.registries.length;
+            for (var i= 0; i < max; ++i) {
+                vm.registries[i].status = "pending";
+            }
+            for (var i= 0; i < max; ++i) {
+                (function(index){
+                    Registry.testRegistry(vm.registries[i].id)
+                    .then(function(data){
+                        console.log(index);
+                        if(data.status == "online") {
+                            vm.registries[index].status = "online";
+                        } else {
+                            vm.registries[index].status = "offline";
+                        }
+                    })
+                    .catch(function(error) {
+                        logger.error('Enabled to test the given registry.' + error);
+                    });
+                }(i));
+
+            }
+        }
     }
 
 })();

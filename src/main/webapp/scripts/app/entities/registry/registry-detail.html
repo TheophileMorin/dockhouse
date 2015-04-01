@@ -17,21 +17,22 @@
 -->
 
 <div class="container well regDetMainContainer">
+
     <h2>
         <span translate="dockhouseApp.registry.detail.title">Registry</span> : {{detailCtrl.registry.name}} &nbsp;
             <span class="btnStatus" ng-class="{'fa fa-spinner text-warning fa-spin': detailCtrl.onlineRegistry=='pending',
                             'fa fa-circle-o-notch text-success': detailCtrl.onlineRegistry=='online',
-                            'fa fa-circle-o text-danger': detailCtrl.onlineRegistry=='offline'}" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left"></span>
+                            'fa fa-circle-o text-danger': detailCtrl.onlineRegistry=='offline'}"></span>
     </h2>
+
     <div class="row">
         <div class="col-md-12 regDetContainers">
             <div class="box box-primary">
-
                 <div class="row">
                     <div class="col-md-8">
                         <h3 >
                             <span translate="dockhouseApp.registry.detailLabel">Informations</span>
-                            <span class="clickable btnStatus fa fa-cog" ng-click="detailCtrl.onlineRegistry='pending'"></span>
+                            <span class="clickable btnStatus fa fa-cog" ng-click="detailCtrl.editRegistry()"></span>
                         </h3>
                     </div>
                     <div class="col-md-4">
@@ -88,46 +89,44 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 regDetContainers">
-            <div class="box box-default">
-                <tabset>
-                    <tab select="alertMe()">
-                        <tab-heading>
-                            <h5 translate="dockhouseApp.registry.imagesLabel">Registry images</h5>
-                        </tab-heading>
-                        <div>
-                            <div class="table-responsive">
-                                <table class="table no-margin">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="image in detailCtrl.registryImages">
-                                        <td>
-                                            <h5><i class="fa fa-cube"></i> <a href="">{{image.name}}</a></h5>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </tab>
 
-                    <tab select="console.log('ok')">
-                        <tab-heading>
-                            <h5 translate="dockhouseApp.registry.infoLabel">Registry Detail</h5>
-                        </tab-heading>
-                        <div>
-                            <pre> <code>{{ detailCtrl.registryDetail }}</code> </pre>
-                        </div>
-                    </tab>
-                </tabset>
-            </div>
-        </div>
+    <div class="box box-default regDetContainers">
+        <tabset>
+            <tab select="alertMe()">
+                <tab-heading>
+                    <h5 translate="dockhouseApp.registry.imagesLabel">Registry images</h5>
+                </tab-heading>
+                <div>
+                    <div class="table-responsive">
+                        <table class="table no-margin">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="image in detailCtrl.registryImages">
+                                <td>
+                                    <h5><i class="fa fa-cube"></i> <a href="">{{image.name}}</a></h5>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </tab>
+
+            <tab select="console.log('ok')">
+                <tab-heading>
+                    <h5 translate="dockhouseApp.registry.infoLabel">Registry Detail</h5>
+                </tab-heading>
+                <div>
+                    <pre> <code>{{ detailCtrl.registryDetail }}</code> </pre>
+                </div>
+            </tab>
+        </tabset>
     </div>
+
     <div class="row">
         <button type="submit"
                 ui-sref="registry"
