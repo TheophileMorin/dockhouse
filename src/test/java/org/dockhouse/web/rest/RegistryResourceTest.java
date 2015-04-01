@@ -150,7 +150,7 @@ public class RegistryResourceTest {
     			.content(invalidPayload))
     	.andExpect(status().isBadRequest());
     }
-
+    
     @Test
     public void updateRegistryTest200() throws Exception {
     	this.mockMvc.perform(put("/api/registries/{id}", registry.getId())

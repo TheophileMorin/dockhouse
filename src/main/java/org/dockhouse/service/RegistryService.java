@@ -49,6 +49,12 @@ public class RegistryService {
     }
     
     public Registry insert(Registry registry) {
+    	registry.setId(null);
+    	return registryRepository.save(registry);
+    }
+    
+    public Registry upsert(Registry registry, String id) {
+    	registry.setId(id);
     	return registryRepository.save(registry);
     }
 }

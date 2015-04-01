@@ -98,10 +98,35 @@ public class RegistryServiceTest {
     	long collectionSize = registryRepository.count();
     	Registry registry = new Registry();
     	final String name = "name";
+    	final String id = "id";
     	registry.setName(name);
+    	registry.setId(id);
     	registry.setRegistryType(registryType);
     	registry = registryService.insert(registry);
     	assertEquals(name, registry.getName());
+    	assertFalse(id.equals(registry.getId()));
+    	assertEquals(collectionSize+1, registryRepository.count());
+    }
+    
+    @Test
+    public void upsertTest() {
+    	long collectionSize = registryRepository.count();
+    	Registry registry = new Registry();
+    	String name = "name";
+    	String id = "id";
+    	registry.setName(name);
+    	registry.setRegistryType(registryType);
+    	registry = registryService.upsert(registry, id);
+    	assertEquals(name, registry.getName());
+    	assertEquals(id, registry.getId());
+    	assertEquals(collectionSize+1, registryRepository.count());
+    	
+    	name = "new name";
+    	registry.setId(null);
+    	registry.setName(name);
+    	registry = registryService.upsert(registry, id);
+    	assertEquals(name, registry.getName());
+    	assertEquals(id, registry.getId());
     	assertEquals(collectionSize+1, registryRepository.count());
     }
 }

@@ -128,7 +128,7 @@ public class RegistryResource {
     public ResponseEntity<Registry> updateRegistry(@RequestBody @Valid Registry registry,
     						                       @PathVariable String id) {
         log.debug("REST request to save Registry : {}", registry);        	
-        registry = registryService.insert(registry);
+        registry = registryService.upsert(registry, id);
         return new ResponseEntity<Registry>(registry, HttpStatus.OK);
     }
 
