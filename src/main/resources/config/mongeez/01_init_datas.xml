@@ -1,0 +1,57 @@
+<mongoChangeLog>
+    <changeSet changeId="InitDatas01" author="dockhouse">
+        <script>
+            // Roles Initialisation
+            //***************************
+            db.authorities.insert({"_id" : "ROLE_ADMIN"});
+            db.authorities.insert({"_id" : "ROLE_USER"});
+
+            //**************************************************************************************************
+
+            // Users Initialisation
+            //***************************
+            db.users.ensureIndex({"login" : 1});
+            db.users.ensureIndex({"email" : 1});
+            db.users.insert(
+            {
+                "_id" : "user-1",
+                "login" : "admin",
+                "password" : "$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC",
+                "first_name": "",
+                "last_name": "Administrator",
+                "email": "",
+                "activated": "true",
+                "lang_key": "en",
+                "created_by": "system",
+                "created_date": new Date(),
+                "authorities": [{"_id": "ROLE_ADMIN"}, {"_id": "ROLE_USER"}]
+            });
+
+            //**************************************************************************************************
+
+            // Types of registries Initialisation
+            //************************************
+            db.registry_types.insert(
+            {
+                "_id" : "registry_type-0",
+                "name" : "Docker Private Registry",
+                "logo" : "/assets/images/logos/docker.png",
+                "default_host": "localhost",
+                "default_port": "5000",
+                "public": false,
+                "api_versions": ["v1", "v2"]
+            });
+
+            db.registry_types.insert(
+            {
+                "_id" : "registry_type-1",
+                "name" : "Rocket",
+                "logo" : "/assets/images/logos/rocket.png",
+                "default_host": "",
+                "default_port": "",
+                "public": true,
+                "api_versions": ["v1"]
+            });
+        </script>
+    </changeSet>
+</mongoChangeLog>

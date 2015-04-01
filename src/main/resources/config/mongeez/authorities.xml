@@ -1,8 +1,0 @@
-<mongoChangeLog>
-    <changeSet changeId="ChangeSet-1" author="dockhouse">
-        <script>
-            db.authorities.insert({"_id" : "ROLE_ADMIN"});
-            db.authorities.insert({"_id" : "ROLE_USER"});
-        </script>
-    </changeSet>
-</mongoChangeLog>

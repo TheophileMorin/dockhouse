@@ -1,0 +1,11 @@
+mongo:
+    image : mongo:3.0
+    ports:
+        - "27017:27017"
+
+registry:
+    image: registry
+    environment:
+        - SEARCH_BACKEND=sqlalchemy
+    ports:
+        - "5000:5000"
