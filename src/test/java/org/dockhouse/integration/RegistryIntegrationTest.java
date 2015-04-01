@@ -98,7 +98,7 @@ public class RegistryIntegrationTest {
     }
     
     @Test
-    public void showRegistryTest200() throws Exception {
+    public void getRegistryTest200() throws Exception {
         registryRepository.save(registry1);
     	
     	this.mockMvc.perform(get("/api/registries/" + registry1.getId()))
@@ -120,7 +120,7 @@ public class RegistryIntegrationTest {
     }
     
     @Test
-    public void showRegistryTest404() throws Exception {
+    public void getRegistryTest404() throws Exception {
     	this.mockMvc.perform(get("/api/registries/does_not_exists"))
         .andExpect(status().isNotFound());      
     }

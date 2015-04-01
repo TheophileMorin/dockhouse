@@ -75,7 +75,7 @@ public class RegistryTypeIntegrationTest {
     }
     
     @Test
-    public void showRegistryTypeTest200() throws Exception {
+    public void getRegistryTypeTest200() throws Exception {
     	
     	this.mockMvc.perform(get("/api/registry_types/" + registryType1.getId()))
         .andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class RegistryTypeIntegrationTest {
     }
     
     @Test
-    public void showRegistryTypeTest404() throws Exception {
+    public void getRegistryTypeTest404() throws Exception {
     	this.mockMvc.perform(get("/api/registry_types/does_not_exists"))
         .andExpect(status().isNotFound());      
     }
