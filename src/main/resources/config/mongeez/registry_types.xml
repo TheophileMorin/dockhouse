@@ -9,7 +9,7 @@
             "default_host": "localhost",
             "default_port": "5000",
             "public": true,
-            "api_versions": [{"1.0"}, {"2.0"}]
+            "api_versions": [{"v1"}, {"v2"}]
             });
 
             db.registry_types.insert(
@@ -20,7 +20,7 @@
             "default_host": "",
             "default_port": "",
             "public": true,
-            "api_versions": [{"1.0"}]
+            "api_versions": [{"v1"}]
             });
         </script>
     </changeSet>
