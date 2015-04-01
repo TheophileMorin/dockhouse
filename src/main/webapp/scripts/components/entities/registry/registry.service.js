@@ -53,7 +53,7 @@
                 })
                 .catch(function(error) {
                     logger.error('registries/:id',"Error lors de l'appel du service REST registries",error);
-                throw error;
+                    throw error;
                 });
         }
 
@@ -129,27 +129,18 @@
                 });
         }
 
-        function testRegistry(editedRegistry) {
-            var promise=  $q(function(resolve, reject) {
-                try {
-                    if (editedRegistry.protocol === "HTTPS")
-                        resolve(true);
-                    else
-                        resolve(false);
-                } catch(e) {
-                    reject(e);
-                }
-            });
-            return promise
+        function testRegistry(id) {
+            return service.one(id).customGET("status")
                 .then(function(data) {
                     return data;
+
                 })
                 .catch(function(error) {
+                    logger.error('registries/:id/status',"Error lors de l'appel du service REST registries status",error);
                     throw error;
                 });
         }
     }
-
 
 })();
 

@@ -92,7 +92,7 @@
             logger.debug("test registry");
             setProtocol();
 
-            Registry.testRegistry(vm.registryEdited).then(function(data) {
+            Registry.testRegistry(vm.registryEdited.id).then(function(data) {
                 if(data) {
                     vm.vTestBtn.style = "btn btn-success";
                     vm.vTestBtn.status = "online";
@@ -147,6 +147,7 @@
             } catch (e) {
                 //Otherwise it's a common JS object
                 vm.registryEdited = registryEdited;
+                testedAndOnlineRegistry = true;
             }
         }
     }

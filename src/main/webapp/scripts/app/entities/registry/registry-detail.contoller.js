@@ -32,7 +32,7 @@
         vm.registry = {};
         vm.showRegistryDetails = false;
         vm.onlineRegistry = "pending";
-        vm.registryDetail = [];
+        vm.registryDetail = "";
         vm.registryImages = [];
 
         vm.loadRegistry = loadRegistry;
@@ -53,56 +53,34 @@
                     testRegistry();
                 })
                 .catch(function(error) {
-                    logger.error('Enabled to get the given registry.');
+                    logger.error('Enabled to get the given registry.' + error);
                 });
         }
 
         function testRegistry() {
-            Registry.testRegistry(vm.registry)
+            Registry.testRegistry(vm.registry.id)
                 .then(function(data){
                     if(data) {
                         vm.onlineRegistry = "online";
-                        // the return of the ping.
-                        mockRegistryDetail();
+                        vm.registryDetail = JSON.stringify(data, null, 10); //TODO mock
                         mockRegistryImages();
                     } else {
                         vm.onlineRegistry = "offline";
                     }
                 })
                 .catch(function(error) {
-                    logger.error('Enabled to test the given registry.');
+                    logger.error('Enabled to test the given registry.' + error);
                 });
-        }
-
-        function mockRegistryDetail() {
-            vm.registryDetail = [
-                {
-                    "key" : "State",
-                    "value" : "online"
-                },
-                {
-                    "key" : "Timestamp",
-                    "value" : "131065412310"
-                },
-                {
-                    "key" : "NbImages",
-                    "value" : "2"
-                },
-                {
-                    "key" : "Value",
-                    "value" : "150"
-                }
-            ];
         }
 
         function mockRegistryImages() {
             vm.registryImages = [
                 {
-                    "name" : "Image 1",
+                    "name" : "Dockhouse/Dockhouse",
                     "version" : "v1.0.6"
                 },
                 {
-                    "name" : "Image 2",
+                    "name" : "Dockhouse/Dockhouse-pic-tool",
                     "version" : "v2.3.7"
                 }
             ];
