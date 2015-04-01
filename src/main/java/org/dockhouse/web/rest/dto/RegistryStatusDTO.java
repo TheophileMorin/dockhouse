@@ -19,6 +19,10 @@ package org.dockhouse.web.rest.dto;
  * Status of a registry.
  */
 public class RegistryStatusDTO {
+	
+	public final static String STATUT_ONLINE = "Online";
+	public final static String STATUT_OFFLINE = "Offline";
+	
 	private String status;
 	
     public String getStatus() {

@@ -17,15 +17,36 @@ package org.dockhouse.service.registryapi;
 
 import org.dockhouse.domain.Registry;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 @Service
-@Qualifier("DockerRegistryAPIService")
-public class DockerRegistryAPIService implements RegistryAPIService {
+@Qualifier("DockerRegistryAPIServiceV1")
+public class DockerRegistryAPIServiceV1 implements RegistryAPIService {
 
 	@Override
 	public boolean isAvailable(Registry registry) {
-		return false;
-	}
 
+		RestTemplate restTemplate = new RestTemplate();
+		String url = registry.getProtocol()
+				+ "://"
+				+ registry.getHost()
+				+ ":"
+				+ registry.getPort()
+				+ "/"
+				+ "v1"
+				+ "/_ping";
+		//TODO handle format got from data
+
+		try{
+			ResponseEntity<String> result = restTemplate.getForEntity(url, String.class);
+			return result.getStatusCode() == HttpStatus.OK;
+		}
+		catch(RestClientException e){
+			return false;
+		}
+	}
 }

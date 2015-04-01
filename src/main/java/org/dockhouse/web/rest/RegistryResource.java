@@ -20,8 +20,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 
+import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.service.RegistryService;
+import org.dockhouse.service.registryapi.DockerRegistryAPIServiceV1;
+import org.dockhouse.service.registryapi.RegistryAPIService;
+import org.dockhouse.service.registryapi.RegistryAPIServiceFactory;
 import org.dockhouse.web.rest.dto.RegistryInDTO;
 import org.dockhouse.web.rest.dto.RegistryOutDTO;
 import org.dockhouse.web.rest.dto.RegistryStatusDTO;
@@ -101,8 +105,27 @@ public class RegistryResource {
     @Timed
     ResponseEntity<RegistryStatusDTO> getRegistryStatus(@PathVariable String id) {
         log.debug("REST request to get Registry status : {}", id);
+        
+        //MOCK TODO remove
+        Registry registry = new Registry();
+        registry.setHost("ns507652.ip-192-99-10.net");
+        registry.setPort(5000);
+        registry.setProtocol("http");  
+        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1(); 
+        
+        //ENDMOCK
+        //Registry registry = registryRepository.findOne(id);
+        //RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+        //RegistryAPIService registreAPI = factory.get(registry);
+        
         RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
-        registryStatusDTO.setStatus("ok");
+        if(registreAPI.isAvailable(registry)){
+        	registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
+        }
+        else{
+        	registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
+        }   
+        
         return new ResponseEntity<RegistryStatusDTO>(registryStatusDTO, HttpStatus.OK);
     }
         

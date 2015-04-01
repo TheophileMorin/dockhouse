@@ -30,8 +30,8 @@ import org.springframework.stereotype.Service;
 public class RegistryAPIServiceFactory {
 
 	@Inject
-	@Qualifier("DockerRegistryAPIService")
-	private RegistryAPIService dockerRegistryAPIService;
+	@Qualifier("DockerRegistryAPIServiceV1")
+	private RegistryAPIService dockerRegistryAPIServiceV1;
 
 	@Inject
 	private RegistryService registryService;
@@ -44,7 +44,9 @@ public class RegistryAPIServiceFactory {
 	 */
 	public RegistryAPIService get(String registryTypeName) {
 		switch (registryTypeName) {
-			case "Docker": return dockerRegistryAPIService;
+			case "Docker": 
+				return dockerRegistryAPIServiceV1;
+				//TODO ajouter la gestion de la version
 			default: 
 				throw new IllegalArgumentException("RegistryAPIService for given id does not exist.");
 		}
@@ -59,6 +61,7 @@ public class RegistryAPIServiceFactory {
 	public RegistryAPIService get(Registry registry) {
 		RegistryType registryType = registryService.getRegistryTypeOf(registry);
 		return get(registryType.getName());
+		//TODO handle registry Version
 	}
 	
 }
