@@ -18,10 +18,8 @@ package org.dockhouse.web.rest;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
 
 import org.dockhouse.domain.RegistryType;
-import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.service.RegistryTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +27,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
@@ -46,9 +42,6 @@ public class RegistryTypeResource {
 
     private final Logger log = LoggerFactory.getLogger(RegistryTypeResource.class);
 
-    @Inject
-    private RegistryTypeRepository registryTypeRepository;
-    
     @Inject
     private RegistryTypeService registryTypeService;
 
@@ -77,45 +70,5 @@ public class RegistryTypeResource {
         return registryTypeService.getOne(id)
             .map(registryType -> new ResponseEntity<>(registryType, HttpStatus.OK))
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
-
-    /**
-     * POST  /registry_types -> Create a new registry type.
-     */
-    @RequestMapping(value = "/registry_types",
-		    method = RequestMethod.POST,
-		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<RegistryType> createRegistryType(@RequestBody @Valid RegistryType registryTypeInDTO) {
-        log.debug("REST request to save Registry Type : {}", registryTypeInDTO);
-        RegistryType registryTypeOutDTO = registryTypeService.insert(registryTypeInDTO);
-        return new ResponseEntity<>(registryTypeOutDTO, HttpStatus.CREATED);
-    }
-
-    /**
-     * PUT  /registry_types/:id -> update an registry type.
-     */
-    @RequestMapping(value = "/registry_types/{id}",
-		    method = RequestMethod.PUT,
-		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
-    public ResponseEntity<RegistryType> updateRegistryType(@RequestBody @Valid RegistryType registryType,
-    		                                                     @PathVariable String id) {
-        log.debug("REST request to save Registry Type : {}", registryType);
-        registryType = registryTypeService.insert(registryType);
-        return new ResponseEntity<>(registryType, HttpStatus.OK);
-    }
-
-    /**
-     * DELETE  /registry_types/:id -> delete the "id" registry type.
-     */
-    @RequestMapping(value = "/registry_types/{id}",
-		    method = RequestMethod.DELETE,
-		    produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Timed
-    public void deleteRegistryType(@PathVariable String id) {
-        log.debug("REST request to delete Registry Type: {}", id);
-        registryTypeRepository.delete(id);
     }
 }
