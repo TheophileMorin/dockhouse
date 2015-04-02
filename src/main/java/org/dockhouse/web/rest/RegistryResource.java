@@ -104,6 +104,19 @@ public class RegistryResource {
         RegistryStatusDTO status = registryService.getStatus(id);
         return new ResponseEntity<RegistryStatusDTO>(status, HttpStatus.OK);
     }
+    
+    /**
+     * GET  /registries/:id/details -> get the "id" registry details.
+     */
+    @RequestMapping(value = "/registries/{id}/details",
+		    method = RequestMethod.GET,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    ResponseEntity<String> getRegistryDetails(@PathVariable String id) {
+        log.debug("REST request to get Registry details : {}", id);
+        String details = registryService.getDetails(id);
+        return new ResponseEntity<String>(details, HttpStatus.OK);
+    }
         
     /**
      * POST  /registries -> Create a new registry.

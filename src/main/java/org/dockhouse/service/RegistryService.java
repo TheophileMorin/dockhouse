@@ -113,4 +113,24 @@ public class RegistryService {
         }
         return registryStatusDTO;  
     }
+    
+    public String getDetails(String id){
+    	String details = "";
+    	
+    	//MOCK TODO remove
+        Registry registry = new Registry();
+        registry.setHost("ns507652.ip-192-99-10.net");
+        registry.setPort(5000);
+        registry.setProtocol("http");  
+        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1(); 
+        //ENDMOCK
+        
+        //Registry registry = registryRepository.findOne(id);
+        if(registry != null){
+        	//RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            //RegistryAPIService registreAPI = factory.get(registry);
+        	details = registreAPI.getDetails(registry);
+        }
+        return details;
+    }
 }

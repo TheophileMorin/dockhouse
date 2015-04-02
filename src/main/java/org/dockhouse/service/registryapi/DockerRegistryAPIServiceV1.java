@@ -26,20 +26,14 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @Qualifier("DockerRegistryAPIServiceV1")
 public class DockerRegistryAPIServiceV1 implements RegistryAPIService {
+	private final String apiVersion = "v1"; 
+	private final String pingCall = "_ping";
 
 	@Override
 	public boolean isAvailable(Registry registry) {
 
 		RestTemplate restTemplate = new RestTemplate();
-		String url = registry.getProtocol()
-				+ "://"
-				+ registry.getHost()
-				+ ":"
-				+ registry.getPort()
-				+ "/"
-				+ "v1"
-				+ "/_ping";
-		//TODO handle format got from data
+		String url = getURL(registry, pingCall);
 
 		try{
 			ResponseEntity<String> result = restTemplate.getForEntity(url, String.class);
@@ -48,5 +42,38 @@ public class DockerRegistryAPIServiceV1 implements RegistryAPIService {
 		catch(RestClientException e){
 			return false;
 		}
+	}
+
+	@Override
+	public String getDetails(Registry registry) {
+		RestTemplate restTemplate = new RestTemplate();
+		String url = getURL(registry, pingCall);
+
+		try{
+			ResponseEntity<String> result = restTemplate.getForEntity(url, String.class);
+			return result.getBody();
+		}
+		catch(RestClientException e){
+			return new String();
+		}
+	}
+
+	/**
+	 * Returns the formatted URL in order to call the webservice
+	 * @param registry Registry to pull the information from
+	 * @param call String the specific call
+	 * @return String the formatted URL for the request
+	 */
+	private String getURL(Registry registry, String call){
+		return registry.getProtocol()
+				+ "://"
+				+ registry.getHost()
+				+ ":"
+				+ registry.getPort()
+				+ "/"
+				+ apiVersion
+				+ "/"
+				+ call;
+		//TODO handle format got from data
 	}
 }
