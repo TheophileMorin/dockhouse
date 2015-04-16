@@ -69,6 +69,7 @@ public class RegistryServiceTest {
         registry1.setProtocol("http");
         registry1.setHost("host");
         registry1.setPort(2222);
+		registry1.setApiVersion("V1");
         registry1.setRegistryType(registryType);
         registryRepository.save(registry1);
         
@@ -77,6 +78,7 @@ public class RegistryServiceTest {
         registry2.setProtocol("http");
         registry2.setHost("host");
         registry2.setPort(2222);
+		registry2.setApiVersion("V2");
         registry2.setRegistryType(registryType);
         registryRepository.save(registry2);
     }
@@ -105,6 +107,7 @@ public class RegistryServiceTest {
     	final String id = "id";
     	registry.setName(name);
     	registry.setId(id);
+		registry.setApiVersion("V1");
     	registry.setRegistryType(registryType);
     	registry = registryService.insert(registry);
     	assertEquals(name, registry.getName());
@@ -119,6 +122,7 @@ public class RegistryServiceTest {
     	String name = "name";
     	String id = "id";
     	registry.setName(name);
+		registry.setApiVersion("V1");
     	registry.setRegistryType(registryType);
     	registry = registryService.upsert(registry, id);
     	assertEquals(name, registry.getName());

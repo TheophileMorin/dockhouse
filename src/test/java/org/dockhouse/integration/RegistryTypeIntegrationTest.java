@@ -1,10 +1,7 @@
 package org.dockhouse.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,11 +12,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
-import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.web.rest.RegistryTypeResource;
-import org.dockhouse.web.rest.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -91,6 +86,7 @@ public class RegistryTypeIntegrationTest {
         .andExpect(jsonPath("$.logo")       .value(registryType1.getLogo()))
         .andExpect(jsonPath("$.defaultHost").value(registryType1.getDefaultHost()))
         .andExpect(jsonPath("$.defaultPort").value(registryType1.getDefaultPort()))
+        .andExpect(jsonPath("$.apiVersions[0]").value(registryType1.getApiVersions().get(0)))
         .andExpect(jsonPath("$.public")     .value(registryType1.isPublic()))        
         ;
     }
@@ -114,6 +110,7 @@ public class RegistryTypeIntegrationTest {
         .andExpect(jsonPath("$[0].logo")       .value(registryType1.getLogo()))
         .andExpect(jsonPath("$[0].defaultHost").value(registryType1.getDefaultHost()))
         .andExpect(jsonPath("$[0].defaultPort").value(registryType1.getDefaultPort()))
+        .andExpect(jsonPath("$[0].apiVersions[0]").value(registryType1.getApiVersions().get(0)))
         .andExpect(jsonPath("$[0].public")     .value(registryType1.isPublic()))  
       
         .andExpect(jsonPath("$[1].id")         .value(registryType2.getId()))
@@ -121,6 +118,7 @@ public class RegistryTypeIntegrationTest {
         .andExpect(jsonPath("$[1].logo")       .value(registryType2.getLogo()))
         .andExpect(jsonPath("$[1].defaultHost").value(registryType2.getDefaultHost()))
         .andExpect(jsonPath("$[1].defaultPort").value(registryType2.getDefaultPort()))
+        .andExpect(jsonPath("$[1].apiVersions[0]").value(registryType2.getApiVersions().get(0)))
         .andExpect(jsonPath("$[1].public")     .value(registryType2.isPublic()))  
         ;
     }

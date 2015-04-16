@@ -84,6 +84,7 @@ public class RegistryIntegrationTest {
         registry1.setHost("host");
         registry1.setPort(1111);
         registry1.setProtocol("http");
+		registry1.setApiVersion("V1");
         registry1.setRegistryType(registryType);
      
         registry2 = new Registry();
@@ -91,6 +92,7 @@ public class RegistryIntegrationTest {
         registry2.setHost("host2");
         registry2.setPort(2222);
         registry2.setProtocol("https");
+		registry2.setApiVersion("V2");
         registry2.setRegistryType(registryType);
         
         invalidRegistry = new Registry();
@@ -98,6 +100,7 @@ public class RegistryIntegrationTest {
         invalidRegistry.setHost(null);
         invalidRegistry.setPort(-1);
         invalidRegistry.setProtocol(null);
+		invalidRegistry.setApiVersion(null);
         invalidRegistry.setRegistryType(registryType);
     }
     
@@ -114,11 +117,13 @@ public class RegistryIntegrationTest {
         .andExpect(jsonPath("$.host")    .value(registry1.getHost()))
         .andExpect(jsonPath("$.port")    .value(registry1.getPort()))
         .andExpect(jsonPath("$.protocol").value(registry1.getProtocol()))
+        .andExpect(jsonPath("$.apiVersion").value(registry1.getApiVersion()))
         .andExpect(jsonPath("$.registryType.id")         .value(registryType.getId()))
         .andExpect(jsonPath("$.registryType.name")       .value(registryType.getName()))
         .andExpect(jsonPath("$.registryType.logo")       .value(registryType.getLogo()))
         .andExpect(jsonPath("$.registryType.defaultHost").value(registryType.getDefaultHost()))
         .andExpect(jsonPath("$.registryType.defaultPort").value(registryType.getDefaultPort()))
+        .andExpect(jsonPath("$.registryType.apiVersions[0]").value(registryType.getApiVersions().get(0)))
         .andExpect(jsonPath("$.registryType.public")     .value(registryType.isPublic()))        
         ;
     }
@@ -144,11 +149,13 @@ public class RegistryIntegrationTest {
         .andExpect(jsonPath("$[0].host")    .value(registry1.getHost()))
         .andExpect(jsonPath("$[0].port")    .value(registry1.getPort()))
         .andExpect(jsonPath("$[0].protocol").value(registry1.getProtocol()))
+        .andExpect(jsonPath("$[0].apiVersion").value(registry1.getApiVersion()))
         .andExpect(jsonPath("$[0].registryType.id")         .value(registryType.getId()))
         .andExpect(jsonPath("$[0].registryType.name")       .value(registryType.getName()))
         .andExpect(jsonPath("$[0].registryType.logo")       .value(registryType.getLogo()))
         .andExpect(jsonPath("$[0].registryType.defaultHost").value(registryType.getDefaultHost()))
         .andExpect(jsonPath("$[0].registryType.defaultPort").value(registryType.getDefaultPort()))
+        .andExpect(jsonPath("$[0].registryType.apiVersions[0]").value(registryType.getApiVersions().get(0)))
         .andExpect(jsonPath("$[0].registryType.public")     .value(registryType.isPublic())) 
       
         .andExpect(jsonPath("$[1].id")      .value(registry2.getId()))
@@ -156,11 +163,13 @@ public class RegistryIntegrationTest {
         .andExpect(jsonPath("$[1].host")    .value(registry2.getHost()))
         .andExpect(jsonPath("$[1].port")    .value(registry2.getPort()))
         .andExpect(jsonPath("$[1].protocol").value(registry2.getProtocol()))
+        .andExpect(jsonPath("$[1].apiVersion").value(registry2.getApiVersion()))
         .andExpect(jsonPath("$[1].registryType.id")         .value(registryType.getId()))
         .andExpect(jsonPath("$[1].registryType.name")       .value(registryType.getName()))
         .andExpect(jsonPath("$[1].registryType.logo")       .value(registryType.getLogo()))
         .andExpect(jsonPath("$[1].registryType.defaultHost").value(registryType.getDefaultHost()))
         .andExpect(jsonPath("$[1].registryType.defaultPort").value(registryType.getDefaultPort()))
+        .andExpect(jsonPath("$[1].registryType.apiVersions[0]").value(registryType.getApiVersions().get(0)))
         .andExpect(jsonPath("$[1].registryType.public")     .value(registryType.isPublic())) 
         ;
     }
@@ -181,11 +190,13 @@ public class RegistryIntegrationTest {
         .andExpect(jsonPath("$.host")    .value(registry1.getHost()))
         .andExpect(jsonPath("$.port")    .value(registry1.getPort()))
         .andExpect(jsonPath("$.protocol").value(registry1.getProtocol()))
+        .andExpect(jsonPath("$.apiVersion").value(registry1.getApiVersion()))
         .andExpect(jsonPath("$.registryType.id")         .value(registryType.getId()))
         .andExpect(jsonPath("$.registryType.name")       .value(registryType.getName()))
         .andExpect(jsonPath("$.registryType.logo")       .value(registryType.getLogo()))
         .andExpect(jsonPath("$.registryType.defaultHost").value(registryType.getDefaultHost()))
         .andExpect(jsonPath("$.registryType.defaultPort").value(registryType.getDefaultPort()))
+        .andExpect(jsonPath("$.registryType.apiVersions[0]").value(registryType.getApiVersions().get(0)))
         .andExpect(jsonPath("$.registryType.public")     .value(registryType.isPublic())) 
         ;
     	
@@ -225,11 +236,13 @@ public class RegistryIntegrationTest {
         .andExpect(jsonPath("$.host")    .value(registry1.getHost()))
         .andExpect(jsonPath("$.port")    .value(registry1.getPort()))
         .andExpect(jsonPath("$.protocol").value(registry1.getProtocol()))
+        .andExpect(jsonPath("$.apiVersion").value(registry1.getApiVersion()))
         .andExpect(jsonPath("$.registryType.id")         .value(registryType.getId()))
         .andExpect(jsonPath("$.registryType.name")       .value(registryType.getName()))
         .andExpect(jsonPath("$.registryType.logo")       .value(registryType.getLogo()))
         .andExpect(jsonPath("$.registryType.defaultHost").value(registryType.getDefaultHost()))
         .andExpect(jsonPath("$.registryType.defaultPort").value(registryType.getDefaultPort()))
+        .andExpect(jsonPath("$.registryType.apiVersions[0]").value(registryType.getApiVersions().get(0)))
         .andExpect(jsonPath("$.registryType.public")     .value(registryType.isPublic())) 
         ;
     	
@@ -264,6 +277,7 @@ public class RegistryIntegrationTest {
         updatedRegistry.setHost("new host");
         updatedRegistry.setPort(1111);
         updatedRegistry.setProtocol("http");
+        updatedRegistry.setApiVersion("V1");
         updatedRegistry.setRegistryType(registryType);
         
     	this.mockMvc.perform(put("/api/registries/" + id)
@@ -278,11 +292,13 @@ public class RegistryIntegrationTest {
         .andExpect(jsonPath("$.host")    .value(updatedRegistry.getHost()))
         .andExpect(jsonPath("$.port")    .value(updatedRegistry.getPort()))
         .andExpect(jsonPath("$.protocol").value(updatedRegistry.getProtocol()))
+        .andExpect(jsonPath("$.apiVersion").value(registry1.getApiVersion()))
         .andExpect(jsonPath("$.registryType.id")         .value(registryType.getId()))
         .andExpect(jsonPath("$.registryType.name")       .value(registryType.getName()))
         .andExpect(jsonPath("$.registryType.logo")       .value(registryType.getLogo()))
         .andExpect(jsonPath("$.registryType.defaultHost").value(registryType.getDefaultHost()))
         .andExpect(jsonPath("$.registryType.defaultPort").value(registryType.getDefaultPort()))
+        .andExpect(jsonPath("$.registryType.apiVersions[0]").value(registryType.getApiVersions().get(0)))
         .andExpect(jsonPath("$.registryType.public")     .value(registryType.isPublic())) 
         ;
     	

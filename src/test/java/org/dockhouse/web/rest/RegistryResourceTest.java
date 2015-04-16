@@ -73,6 +73,7 @@ public class RegistryResourceTest {
 			  "\"host\"    : \"host\"    , " +
 			  "\"protocol\": \"https\"   , " +
 			  "\"port\"    : 22222       , " + 
+   		  	  "\"apiVersion\"  : \"V1\"  , " + 
 			  "\"registryType\": "+ registryTypePayload + "}";
 
     private static String invalidPayload =
@@ -80,6 +81,7 @@ public class RegistryResourceTest {
       		  "\"host\"    : \"\", " +
     	 	  "\"protocol\": \"\", " +
    		  	  "\"port\"    : -1  , " + 
+   		  	  "\"apiVersion\"  : \"\" , " + 
    		  	  "\"registryType\": null " + "}";
 
     @Before
@@ -111,6 +113,7 @@ public class RegistryResourceTest {
         registry.setHost("host");
         registry.setPort(2222);
         registry.setProtocol("http");
+		registry.setApiVersion("V1");
         registry.setRegistryType(registryType);
         registryRepository.save(registry);
     }

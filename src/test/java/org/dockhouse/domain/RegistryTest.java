@@ -53,6 +53,7 @@ public class RegistryTest extends ValidationTest<Registry> {
     	registry.setHost("host");
     	registry.setPort(1);
     	registry.setProtocol("protocol");
+    	registry.setApiVersion("V1");
     	registry.setRegistryType(registryType);
     }
 
@@ -125,6 +126,15 @@ public class RegistryTest extends ValidationTest<Registry> {
 		
 		registry.setProtocol(stringOfLength(10));
 		assertFieldIsValid(registry, "protocol");
+	}
+	
+	@Test
+	public void testApiVersionCannotBeNull() {
+		registry.setApiVersion(null);
+		assertFieldIsInvalid(registry, "apiVersion");
+		
+		registry.setApiVersion("V1");
+		assertFieldIsValid(registry, "apiVersion");
 	}
 	
 	@Test

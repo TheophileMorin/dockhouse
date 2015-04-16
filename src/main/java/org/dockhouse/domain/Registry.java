@@ -16,10 +16,12 @@
 package org.dockhouse.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -48,6 +50,10 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     @Size(max = 10)
     private String protocol;
 
+    @NotNull
+    @Field("api_version")
+    private String apiVersion;
+    
     @NotNull
     @Field("registry_type")
     private RegistryType registryType;
@@ -92,7 +98,15 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
     	this.protocol = protocol;
     }
 
-    public RegistryType getRegistryType() {
+    public String getApiVersion() {
+		return apiVersion;
+	}
+
+	public void setApiVersion(String apiVersion) {
+		this.apiVersion = apiVersion;
+	}
+
+	public RegistryType getRegistryType() {
     	return registryType;
     }
 
@@ -130,6 +144,7 @@ public class Registry extends AbstractAuditingEntity implements Serializable {
 	    ", host='" + host + '\'' +
 	    ", port='" + port + '\'' +
 	    ", protocol='"     + protocol     + '\'' +
+	    ", apiVersion='"   + apiVersion   + '\'' +
 	    ", registryType='" + registryType + '\'' +
 	    "}";
     }
