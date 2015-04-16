@@ -16,15 +16,14 @@
 package org.dockhouse.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -53,6 +52,11 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
     
     private boolean isPublic;
 
+    @NotNull
+    @NotEmpty
+    @Field("api_versions")
+    private List<String> apiVersions;
+    
     public String getId() {
     	return id;
     }
@@ -100,6 +104,14 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
+
+	public List<String> getApiVersions() {
+		return apiVersions;
+	}
+
+	public void setApiVersions(List<String> apiVersions) {
+		this.apiVersions = apiVersions;
+	}
 	
     @Override
     public boolean equals(Object o) {
@@ -132,6 +144,7 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 	    ", host='" + defaultHost + '\'' +
 	    ", port='" + defaultPort + '\'' +
 	    ", isPublic='" + isPublic + '\'' +
+	    ", apiVersions='" + apiVersions + '\'' +
 	    "}";
     }
 }

@@ -7,6 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -61,7 +64,9 @@ public class RegistryResourceTest {
 			  "\"defaultHost\" : \"host\"        , " +
 			  "\"logo\"        : \"http://example.com/logo.png\" , " +
 			  "\"defaultPort\" : 22222, " +
-			  "\"isPublic\"    : false }";
+			  "\"public\"      : false, " +  
+			  "\"apiVersions\"    : [\"V1\"]" +  
+			  " }";
     
     private static String validPayload =
     		"{ \"name\"    : \"registry\", " +
@@ -96,6 +101,9 @@ public class RegistryResourceTest {
 	    registryType.setDefaultPort(1111);
 	    registryType.setLogo("http://example.com/logo.png");
 	    registryType.setPublic(true);
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType.setApiVersions(versions);
 	    registryType = registryTypeRepository.save(registryType);
     	 
         registry = new Registry();

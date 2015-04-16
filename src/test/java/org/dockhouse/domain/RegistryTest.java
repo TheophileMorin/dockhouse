@@ -1,5 +1,8 @@
 package org.dockhouse.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -40,6 +43,9 @@ public class RegistryTest extends ValidationTest<Registry> {
         registryType.setDefaultHost("host");
         registryType.setDefaultPort(2222);
         registryType.setPublic(false);
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType.setApiVersions(versions);
         registryType = registryTypeRepository.save(registryType);
 		
 		registry = new Registry();

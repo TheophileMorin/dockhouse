@@ -1,8 +1,10 @@
 package org.dockhouse.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
-import org.dockhouse.domain.RegistryType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+
 
 /**
  * Test class for RegistryType.
@@ -30,10 +33,14 @@ public class RegistryTypeTest extends ValidationTest<RegistryType> {
     	registryType.setDefaultPort(1);
     	registryType.setLogo("logo");
     	registryType.setPublic(true);
+    	
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType.setApiVersions(versions);
     }
 
 	@Test
-	public void testRegistryTypeInDTOIsValid() {
+	public void testRegistryTypeIsValid() {
 		assertIsValid(registryType);
 	}
 	
@@ -89,5 +96,20 @@ public class RegistryTypeTest extends ValidationTest<RegistryType> {
 		
 		registryType.setDefaultPort(65535);
 		assertFieldIsValid(registryType, "defaultPort");
+	}
+	
+	@Test
+	public void testApiVersionsCannotBeEmpty() {
+		registryType.setApiVersions(null);
+		assertFieldIsInvalid(registryType, "apiVersions");
+
+		List<String> versions = new ArrayList<String>();
+		
+		registryType.setApiVersions(versions);
+		assertFieldIsInvalid(registryType, "apiVersions");
+		
+		versions.add("V1");
+		registryType.setApiVersions(versions);
+		assertFieldIsValid(registryType, "apiVersions");
 	}
 }

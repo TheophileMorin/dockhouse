@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,9 @@ public class RegistryTypeServiceTest {
         registryType1.setDefaultHost("host");
         registryType1.setDefaultPort(2222);
         registryType1.setPublic(false);
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType1.setApiVersions(versions);
         registryTypeRepository.save(registryType1);
         
         registryType2 = new RegistryType();
@@ -58,6 +62,7 @@ public class RegistryTypeServiceTest {
         registryType2.setDefaultHost("host");
         registryType2.setDefaultPort(2222);
         registryType2.setPublic(false);
+		registryType2.setApiVersions(versions);
         registryTypeRepository.save(registryType2);
     }
 
@@ -85,6 +90,9 @@ public class RegistryTypeServiceTest {
     	registryType.setName(name);
     	registryType.setDefaultHost("host");
     	registryType.setDefaultPort(4);
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType.setApiVersions(versions);
     	registryType = registryTypeService.insert(registryType);
     	assertEquals(name, registryType.getName());
     	assertEquals(collectionSize+1, registryTypeRepository.count());

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -63,6 +64,9 @@ public class RegistryTypeIntegrationTest {
 	    registryType1.setDefaultPort(1111);
 	    registryType1.setLogo("http://example.com/logo1.png");
 	    registryType1.setPublic(true);
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType1.setApiVersions(versions);
 	    registryType1 = registryTypeRepository.save(registryType1);
     	 
 	    registryType2 = new RegistryType();
@@ -71,6 +75,7 @@ public class RegistryTypeIntegrationTest {
 	    registryType2.setDefaultPort(2222);
 	    registryType2.setLogo("http://example.com/logo2.png");
 	    registryType2.setPublic(false);
+		registryType2.setApiVersions(versions);
 	    registryType2 = registryTypeRepository.save(registryType2);
     }
     

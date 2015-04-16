@@ -4,6 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -57,6 +60,9 @@ public class RegistryTypeResourceTest {
         registryType.setDefaultHost("host");
         registryType.setDefaultPort(2222);
         registryType.setPublic(false);
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType.setApiVersions(versions);
         registryTypeRepository.save(registryType);
     }
 
