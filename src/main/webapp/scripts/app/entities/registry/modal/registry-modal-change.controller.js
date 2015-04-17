@@ -64,28 +64,14 @@
         function loadTypes() {
             RegistryTypes.getAll()
                 .then(function(data){
-                    data[0].apiVersions = ["v1","v2"]; //TODO mock
-                    data[1].apiVersions = ["v3","v4"]; //TODO mock
                     vm.registryTypes = data;
-                    //convertToPostVersion();
+                    console.log(data);
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the list of registry types.');
                 });
         }
-        /*
-        function convertToPostVersion(){
-            //If the modal is opened in edition mode.
-            if(vm.registryEdited.registryType != null) {
-                vm.registryEdited.registryTypeId = vm.registryEdited.registryType.id;
-                delete vm.registryEdited.registryType;
-            } else { //To prevent blank choice in the select field.
-                if(vm.registryTypes.length) {
-                    vm.registryEdited.registryTypeId = vm.registryTypes[0].id;
-                }
-            }
-        }
-*/
+
         function setProtocol() {
             if(vm.vHttpsRegistry) {
                 vm.registryEdited.protocol = "HTTPS";

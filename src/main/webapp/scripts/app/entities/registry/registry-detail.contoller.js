@@ -61,10 +61,10 @@
         function testRegistry() {
             Registry.testRegistry(vm.registry.id)
                 .then(function(data){
-                    if(data.status == "ok") { //TODO mock, change to "online" or "offline"
+                    if(data.status == "online") {
                         vm.onlineRegistry = "online";
-                        vm.registryDetail = JSON.stringify(data, null, 10); //TODO mock
-                        mockRegistryImages();
+                        vm.registryDetail = JSON.stringify(data, null, 10); //TODO mock faire appel a Regitry.getDetail(id).
+                        mockRegistryImages();//TODO mock faire appel a Registry.get Images
                     } else {
                         vm.onlineRegistry = "offline";
                     }

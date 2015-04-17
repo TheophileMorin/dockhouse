@@ -20,10 +20,10 @@
         .module('dockhouseApp')
         .factory('Registry', Registry);
 
-    Registry.$inject = ['Restangular', 'Logger', '$q'];
+    Registry.$inject = ['Restangular', 'Logger'];
 
     /* @ngInject */
-    function Registry(Restangular, Logger, $q){
+    function Registry(Restangular, Logger){
         var logger = Logger.getInstance('RegistryService');
 
         var service = Restangular.service('registries');
@@ -133,7 +133,6 @@
             return service.one(id).customGET("status")
                 .then(function(data) {
                     return data;
-
                 })
                 .catch(function(error) {
                     logger.error('registries/:id/status',"Error lors de l'appel du service REST registries status",error);
