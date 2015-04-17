@@ -37,7 +37,7 @@
                 "name" : "Docker Private Registry",
                 "logo" : "assets/images/logos/docker.png",
                 "default_host": "localhost",
-                "default_port": "5000",
+                "default_port": 5000,
                 "public": false,
                 "api_versions": ["v1", "v2"]
             });
@@ -47,8 +47,8 @@
                 "_id" : "registry_type-1",
                 "name" : "Rocket",
                 "logo" : "assets/images/logos/rocket.png",
-                "default_host": "",
-                "default_port": "",
+                "default_host": "localhost",
+                "default_port": 5555,
                 "public": true,
                 "api_versions": ["v1"]
             });
