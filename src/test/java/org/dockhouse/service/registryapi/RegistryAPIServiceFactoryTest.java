@@ -26,7 +26,7 @@ public class RegistryAPIServiceFactoryTest {
 	private RegistryAPIServiceFactory registryAPIServiceFactory;
 
 	@Inject
-	private DockerRegistryAPIService dockerAPIService;
+	private DockerRegistryAPIServiceV1 dockerAPIService;
 
 	private Registry registry;
 

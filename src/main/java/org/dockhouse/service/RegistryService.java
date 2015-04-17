@@ -22,16 +22,10 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import org.dockhouse.domain.Registry;
-import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryRepository;
-import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.service.registryapi.DockerRegistryAPIServiceV1;
 import org.dockhouse.service.registryapi.RegistryAPIService;
-import org.dockhouse.web.rest.dto.RegistryInDTO;
-import org.dockhouse.web.rest.dto.RegistryOutDTO;
 import org.dockhouse.web.rest.dto.RegistryStatusDTO;
-import org.dockhouse.web.rest.dto.mapping.RegistryInDTOMapper;
-import org.dockhouse.web.rest.dto.mapping.RegistryOutDTOMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -46,16 +40,6 @@ public class RegistryService {
 
     @Inject
     private RegistryRepository registryRepository;
-
-    @Inject
-    private RegistryTypeRepository registryTypeRepository;
-
-    @Inject
-    private RegistryOutDTOMapper registryOutDTOMapper;
-
-    @Inject
-    private RegistryInDTOMapper registryInDTOMapper;
-
 
     public List<Registry> getAll() {
     	return registryRepository.findAll()
@@ -75,10 +59,6 @@ public class RegistryService {
     public Registry upsert(Registry registry, String id) {
     	registry.setId(id);
     	return registryRepository.save(registry);
-    }
-
-    public RegistryType getRegistryTypeOf(Registry registry) {
-        return registryTypeRepository.findOne(registry.getRegistryTypeId());
     }
 
     public RegistryStatusDTO getStatus(String id){
