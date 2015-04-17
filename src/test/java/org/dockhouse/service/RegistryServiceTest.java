@@ -137,4 +137,14 @@ public class RegistryServiceTest {
     	assertEquals(id, registry.getId());
     	assertEquals(collectionSize+1, registryRepository.count());
     }
+    
+    @Test
+    public void getStatusTest(){
+    	
+    }
+    
+    @Test
+    public void getDetailsTest(){
+    	
+    }
 }

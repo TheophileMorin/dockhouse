@@ -23,6 +23,7 @@ import javax.validation.Valid;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.service.RegistryService;
+import org.dockhouse.web.rest.dto.RegistryDetailsDTO;
 import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,10 +112,10 @@ public class RegistryResource {
 		    method = RequestMethod.GET,
 		    produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    ResponseEntity<String> getRegistryDetails(@PathVariable String id) {
+    ResponseEntity<RegistryDetailsDTO> getRegistryDetails(@PathVariable String id) {
         log.debug("REST request to get Registry details : {}", id);
-        String details = registryService.getDetails(id);
-        return new ResponseEntity<String>(details, HttpStatus.OK);
+        RegistryDetailsDTO details = registryService.getDetails(id);
+        return new ResponseEntity<RegistryDetailsDTO>(details, HttpStatus.OK);
     }
         
     /**
