@@ -190,7 +190,7 @@
                 (function(index){
                     Registry.testRegistry(vm.registries[i].id)
                     .then(function(data){
-                        console.log(index);
+                        //console.log(index);
                         if(data.status == "online") {
                             vm.registries[index].status = "online";
                         } else {
@@ -201,7 +201,6 @@
                         logger.error('Enabled to test the given registry.' + error);
                     });
                 }(i));
-
             }
         }
     }
