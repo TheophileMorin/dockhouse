@@ -23,6 +23,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Base abstract class for entities which will hold definitions for created, last modified by and created,
  * last modified by date.
@@ -31,18 +33,22 @@ public abstract class AbstractAuditingEntity {
 
     @CreatedBy
     @Field("created_by")
+    @JsonIgnore
     private String createdBy;
 
     @CreatedDate
     @Field("created_date")
+    @JsonIgnore
     private DateTime createdDate = DateTime.now();
 
     @LastModifiedBy
     @Field("last_modified_by")
+    @JsonIgnore
     private String lastModifiedBy;
 
     @LastModifiedDate
     @Field("last_modified_date  ")
+    @JsonIgnore
     private DateTime lastModifiedDate = DateTime.now();
 
     public String getCreatedBy() {

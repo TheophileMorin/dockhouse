@@ -7,6 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -56,19 +59,30 @@ public class RegistryResourceTest {
 
     private RegistryType registryType;
     
+    private static String registryTypePayload =
+    		"{ \"name\"        : \"registrytype\", " +
+			  "\"defaultHost\" : \"host\"        , " +
+			  "\"logo\"        : \"http://example.com/logo.png\" , " +
+			  "\"defaultPort\" : 22222, " +
+			  "\"public\"      : false, " +  
+			  "\"apiVersions\"    : [\"V1\"]" +  
+			  " }";
+    
     private static String validPayload =
     		"{ \"name\"    : \"registry\", " +
 			  "\"host\"    : \"host\"    , " +
 			  "\"protocol\": \"https\"   , " +
 			  "\"port\"    : 22222       , " + 
-			  "\"registryTypeId\": \"1\" "+ "}";
+   		  	  "\"apiVersion\"  : \"V1\"  , " + 
+			  "\"registryType\": "+ registryTypePayload + "}";
 
     private static String invalidPayload =
     		"{ \"name\"    : \"\", " +
       		  "\"host\"    : \"\", " +
     	 	  "\"protocol\": \"\", " +
    		  	  "\"port\"    : -1  , " + 
-   		  	  "\"registryTypeId\": \"2\" " + "}";
+   		  	  "\"apiVersion\"  : \"\" , " + 
+   		  	  "\"registryType\": null " + "}";
 
     @Before
     public void setup() {
@@ -85,10 +99,13 @@ public class RegistryResourceTest {
 	    registryType = new RegistryType();
 	    registryType.setId("1");
 	    registryType.setName("name");
-	    registryType.setHost("host");
-	    registryType.setPort(1111);
+	    registryType.setDefaultHost("host");
+	    registryType.setDefaultPort(1111);
 	    registryType.setLogo("http://example.com/logo.png");
 	    registryType.setPublic(true);
+    	List<String> versions = new ArrayList<String>();
+		versions.add("V1");
+		registryType.setApiVersions(versions);
 	    registryType = registryTypeRepository.save(registryType);
     	 
         registry = new Registry();
@@ -96,7 +113,8 @@ public class RegistryResourceTest {
         registry.setHost("host");
         registry.setPort(2222);
         registry.setProtocol("http");
-        registry.setRegistryTypeId(registryType.getId());
+		registry.setApiVersion("V1");
+        registry.setRegistryType(registryType);
         registryRepository.save(registry);
     }
 
@@ -143,7 +161,7 @@ public class RegistryResourceTest {
     			.content(invalidPayload))
     	.andExpect(status().isBadRequest());
     }
-
+    
     @Test
     public void updateRegistryTest200() throws Exception {
     	this.mockMvc.perform(put("/api/registries/{id}", registry.getId())

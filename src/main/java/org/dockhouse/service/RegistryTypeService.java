@@ -21,13 +21,8 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryTypeRepository;
-import org.dockhouse.web.rest.dto.RegistryTypeInDTO;
-import org.dockhouse.web.rest.dto.RegistryTypeOutDTO;
-import org.dockhouse.web.rest.dto.mapping.RegistryTypeInDTOMapper;
-import org.dockhouse.web.rest.dto.mapping.RegistryTypeOutDTOMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -43,34 +38,17 @@ public class RegistryTypeService {
     @Inject
     private RegistryTypeRepository registryTypeRepository;
 
-    @Inject
-    private RegistryTypeOutDTOMapper registryTypeOutDTOMapper;
-
-    @Inject
-    private RegistryTypeInDTOMapper registryTypeInDTOMapper;
-    
-    public List<RegistryTypeOutDTO> getAll() {
+    public List<RegistryType> getAll() {
     	return registryTypeRepository.findAll()
     							 	 .stream()
-    							 	 .map(registryTypeOutDTOMapper::createDTO)
     							 	 .collect(Collectors.toList());
     }
     
-    public Optional<RegistryTypeOutDTO> getOne(String id) {
-    	return Optional.ofNullable(registryTypeRepository.findOne(id))
-    			       .map(registryTypeOutDTOMapper::createDTO);
+    public Optional<RegistryType> getOne(String id) {
+    	return Optional.ofNullable(registryTypeRepository.findOne(id));
     }
     
-    public RegistryTypeOutDTO insert(RegistryTypeInDTO registryTypeInDTO) {
-    	RegistryType registryType = registryTypeInDTOMapper.createRegistryType(registryTypeInDTO);
-    	registryType = registryTypeRepository.save(registryType);
-    	return registryTypeOutDTOMapper.createDTO(registryType);
-    }
-    
-    public RegistryTypeOutDTO upsert(RegistryTypeInDTO registryTypeInDTO, String id) {
-    	RegistryType registryType = registryTypeInDTOMapper.createRegistryType(registryTypeInDTO);
-    	registryType.setId(id);
-    	registryType = registryTypeRepository.save(registryType);
-    	return registryTypeOutDTOMapper.createDTO(registryType);
+    public RegistryType insert(RegistryType registryType) {
+    	return registryTypeRepository.save(registryType);
     }
 }

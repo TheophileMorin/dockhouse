@@ -1,4 +1,4 @@
-package org.dockhouse.web.rest.dto;
+package org.dockhouse.domain;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,23 +10,23 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
-public class DTOValidationTest<DTO> {
+public class ValidationTest<Entity> {
 	
 	@Inject
 	private Validator validator;
 	
-	public void assertIsValid(DTO dto) {
-		Set<ConstraintViolation<DTO>> errors = validator.validate(dto, Default.class);
+	public void assertIsValid(Entity dto) {
+		Set<ConstraintViolation<Entity>> errors = validator.validate(dto, Default.class);
 		assertTrue(errors.isEmpty());
 	}
 	
-	public void assertFieldIsValid(DTO dto, String field) {
-		Set<ConstraintViolation<DTO>> errors = validator.validateProperty(dto, field, Default.class);
+	public void assertFieldIsValid(Entity dto, String field) {
+		Set<ConstraintViolation<Entity>> errors = validator.validateProperty(dto, field, Default.class);
 		assertTrue(errors.isEmpty());
 	}
 	
-	public void assertFieldIsInvalid(DTO dto, String field) {
-		Set<ConstraintViolation<DTO>> errors = validator.validateProperty(dto, field, Default.class);
+	public void assertFieldIsInvalid(Entity dto, String field) {
+		Set<ConstraintViolation<Entity>> errors = validator.validateProperty(dto, field, Default.class);
 		assertFalse(errors.isEmpty());
 	}
 	

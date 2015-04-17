@@ -56,81 +56,72 @@ public class RegistryService {
     @Inject
     private RegistryInDTOMapper registryInDTOMapper;
 
-    
-    public List<RegistryOutDTO> getAll() {
+
+    public List<Registry> getAll() {
     	return registryRepository.findAll()
     							 .stream()
-    							 .map(this::createRegistryOutDTO)
     							 .collect(Collectors.toList());
     }
-    
-    public Optional<RegistryOutDTO> getOne(String id) {
-    	return Optional.ofNullable(registryRepository.findOne(id))
-    			       .map(this::createRegistryOutDTO);
+
+    public Optional<Registry> getOne(String id) {
+    	return Optional.ofNullable(registryRepository.findOne(id));
     }
-    
-    public RegistryOutDTO createRegistryOutDTO(Registry registry) {
-    	RegistryType registryType = registryTypeRepository.findOne(registry.getRegistryTypeId());
-    	return registryOutDTOMapper.createDTO(registry, registryType);
+
+    public Registry insert(Registry registry) {
+    	registry.setId(null);
+    	return registryRepository.save(registry);
     }
-    
-    public RegistryOutDTO insert(RegistryInDTO registryInDTO) {
-    	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
-    	registry = registryRepository.save(registry);
-    	return createRegistryOutDTO(registry);
-    }
-    
-    public RegistryOutDTO upsert(RegistryInDTO registryInDTO, String id) {
-    	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
+
+    public Registry upsert(Registry registry, String id) {
     	registry.setId(id);
-    	registry = registryRepository.save(registry);
-    	return createRegistryOutDTO(registry);
+    	return registryRepository.save(registry);
     }
-    
+
     public RegistryType getRegistryTypeOf(Registry registry) {
-    	return registryTypeRepository.findOne(registry.getRegistryTypeId());
+        return registryTypeRepository.findOne(registry.getRegistryTypeId());
     }
-    
+
     public RegistryStatusDTO getStatus(String id){
-    	RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
-    	registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
-    	
-    	//MOCK TODO remove
+        RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
+        registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
+
+        //MOCK TODO remove
         Registry registry = new Registry();
         registry.setHost("ns507652.ip-192-99-10.net");
         registry.setPort(5000);
-        registry.setProtocol("http");  
-        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1(); 
+        registry.setProtocol("http");
+        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1();
         //ENDMOCK
-        
+
         //Registry registry = registryRepository.findOne(id);
         if(registry != null){
-        	//RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            //RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
             //RegistryAPIService registreAPI = factory.get(registry);
             if(registreAPI.isAvailable(registry)){
-            	registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
+                registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
             }
-        }
-        return registryStatusDTO;  
+         }
+         return registryStatusDTO;
     }
-    
+
     public String getDetails(String id){
-    	String details = "";
-    	
-    	//MOCK TODO remove
+        String details = "";
+
+        //MOCK TODO remove
         Registry registry = new Registry();
         registry.setHost("ns507652.ip-192-99-10.net");
         registry.setPort(5000);
-        registry.setProtocol("http");  
-        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1(); 
+        registry.setProtocol("http");
+        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1();
         //ENDMOCK
-        
+
         //Registry registry = registryRepository.findOne(id);
         if(registry != null){
-        	//RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            //RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
             //RegistryAPIService registreAPI = factory.get(registry);
-        	details = registreAPI.getDetails(registry);
+            details = registreAPI.getDetails(registry);
         }
         return details;
     }
+
 }

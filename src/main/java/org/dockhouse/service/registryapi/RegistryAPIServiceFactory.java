@@ -35,33 +35,31 @@ public class RegistryAPIServiceFactory {
 
 	@Inject
 	private RegistryService registryService;
-	
+
 	/**
 	 * Return RegistryAPIService corresponding to given registry type.
-	 * 
+	 *
 	 * @param registryTypeName Name of the registry type
 	 * @return RegistryAPIService of given registry type
 	 */
 	public RegistryAPIService get(String registryTypeName) {
 		switch (registryTypeName) {
-			case "Docker": 
+			case "Docker":
 				return dockerRegistryAPIServiceV1;
 				//TODO ajouter la gestion de la version
-			default: 
+			default:
 				throw new IllegalArgumentException("RegistryAPIService for given id does not exist.");
 		}
 	}
-	
+
 	/**
 	 * Return RegistryAPIService corresponding to given registry.
-	 * 
+	 *
 	 * @param registry Registry to find the RegistryAPIService for
-	 * @return RegistryAPIService of given registry 
+	 * @return RegistryAPIService of given registry
 	 */
 	public RegistryAPIService get(Registry registry) {
-		RegistryType registryType = registryService.getRegistryTypeOf(registry);
-		return get(registryType.getName());
-		//TODO handle registry Version
+		return get(registry.getRegistryType().getName());
 	}
-	
+
 }
