@@ -35,36 +35,37 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 
     @Id
     private String id;
-	
+
     @NotNull
     @Size(min = 1, max = 50)
     private String name;
-    
+
     private String logo;
-    
+
     @NotNull
     @Field("default_host")
     private String defaultHost;
-    
+
     @Range(min = 0, max = 65535)
     @Field("default_port")
     private int defaultPort;
-    
+
+    @Field("public")
     private boolean isPublic;
 
     @NotNull
     @NotEmpty
     @Field("api_versions")
     private List<String> apiVersions;
-    
+
     public String getId() {
     	return id;
     }
-    
+
     public void setId(String id) {
     	this.id = id;
     }
-    
+
 	public String getName() {
 		return name;
 	}
@@ -112,7 +113,7 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 	public void setApiVersions(List<String> apiVersions) {
 		this.apiVersions = apiVersions;
 	}
-	
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
