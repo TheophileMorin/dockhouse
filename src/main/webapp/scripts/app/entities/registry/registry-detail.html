@@ -97,6 +97,10 @@
                     <h5 translate="dockhouseApp.registry.imagesLabel">Registry images</h5>
                 </tab-heading>
                 <div>
+                    <div class="right-inner-addon">
+                        <i class="glyphicon glyphicon-search"></i>
+                        <input type="search" class="form-control" ng-model="filter" translate="global.search" placeholder="TODO.translate.Search" />
+                    </div>
                     <div class="table-responsive">
                         <table class="table no-margin">
                             <thead>
@@ -105,9 +109,14 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="image in detailCtrl.registryImages">
+                            <tr ng-repeat="image in detailCtrl.registryImages | filter:filter | orderBy:predicate:reverse">
                                 <td>
                                     <h5><i class="fa fa-cube"></i> <a href="">{{image.name}}</a></h5>
+                                </td>
+                            </tr>
+                            <tr ng-show="!detailCtrl.registryImages.length">
+                                <td>
+                                    <h5><i class="fa fa-cube"></i>TODO.translate."You need to add images to the registry."</h5>
                                 </td>
                             </tr>
                             </tbody>

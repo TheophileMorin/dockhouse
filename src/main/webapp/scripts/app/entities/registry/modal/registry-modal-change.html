@@ -63,7 +63,7 @@
             <label translate="dockhouseApp.registry.host">Host</label>
             <input type="text" class="form-control" name="host"
                    ng-model="modal.registryEdited.host"
-                   placeholder="{{modal.registryEdited.registryType.host}}" required>
+                   placeholder="{{modal.registryEdited.registryType.defaultHost}}" required>
             <p ng-show="editForm.host.$invalid && !editForm.host.$pristine"
                class="help-block" translate="dockhouseApp.registry.validation.host">
                 You must set a host address
@@ -73,7 +73,7 @@
             <label translate="dockhouseApp.registry.port">Port</label>
             <input type="number" class="form-control" name="port"
                    ng-model="modal.registryEdited.port"
-                   placeholder="{{modal.registryEdited.registryType.port}}"  min="0" max="65535"  required>
+                   placeholder="{{modal.registryEdited.registryType.defaultPort}}"  min="0" max="65535"  required>
             <p ng-show="editForm.port.$invalid && !editForm.port.$pristine"
                class="help-block" translate="dockhouseApp.registry.validation.port" translate-values="{min: '0', max: '65535'}">
                 You must set a port value between MIN and MAX

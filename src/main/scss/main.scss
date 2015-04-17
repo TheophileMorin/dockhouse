@@ -684,3 +684,33 @@ ul#strength {
 .clickable {
     cursor: default;
 }
+
+
+.left-inner-addon {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    input {
+        padding-left: 30px;
+    }
+    i {
+        position: absolute;
+        padding: 10px 12px;
+        pointer-events: none;
+    }
+}
+
+.right-inner-addon {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    input {
+        padding-right: 30px;
+    }
+    i {
+        position: absolute;
+        right: 0px;
+        padding: 10px 12px;
+        pointer-events: none;
+    }
+}

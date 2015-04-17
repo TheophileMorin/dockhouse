@@ -58,7 +58,8 @@
                     "invalid": "Votre email n'est pas valide."
                 }
             }
-        }
+        },
+        "search" : "Rechercher"
     },
     "entity": {
         "action": {
