@@ -29,7 +29,7 @@
     <script type="text/ng-template" id="RegistryRemoveConfirmationModal">
         <ng-include src="modalDelete.modalHtmlURL"></ng-include>
     </script>
-
+    <br /><br />
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -43,8 +43,13 @@
             </thead>
             <tbody>
             <tr ng-repeat="registry in registryCtrl.registries">
-                <td><a ui-sref="registryDetail({id:registry.id})">{{registry.name}}</a></td>
-                <td><img ng-src="{{ registry.registryType.logo }}" alt="{{ registry.registryType.logo }}" class="icons"> {{registry.registryType.name}}</td>
+                <td>
+                    <i ng-class="{'fa fa-spinner text-warning fa-spin': registry.status=='pending',
+                            'fa fa-circle-o-notch text-success': registry.status=='online',
+                            'fa fa-circle-o text-danger': registry.status=='offline'}"></i> &nbsp;
+                    <a ui-sref="registryDetail({id:registry.id})">{{registry.name}}</a>
+                </td>
+                <td><img ng-src="{{ registry.registryType.logo }}" alt="{{ registry.registryType.logo }}" class="icons">  &nbsp; {{registry.registryType.name}}</td>
                 <td>{{registry.host}}</td>
                 <td>{{registry.port}}</td>
                 <td>
