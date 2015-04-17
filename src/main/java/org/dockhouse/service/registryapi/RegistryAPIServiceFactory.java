@@ -18,8 +18,6 @@ package org.dockhouse.service.registryapi;
 import javax.inject.Inject;
 
 import org.dockhouse.domain.Registry;
-import org.dockhouse.domain.RegistryType;
-import org.dockhouse.service.RegistryService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -33,20 +31,22 @@ public class RegistryAPIServiceFactory {
 	@Qualifier("DockerRegistryAPIServiceV1")
 	private RegistryAPIService dockerRegistryAPIServiceV1;
 
-	@Inject
-	private RegistryService registryService;
-
 	/**
 	 * Return RegistryAPIService corresponding to given registry type.
 	 *
 	 * @param registryTypeName Name of the registry type
+	 * @param registryApiVersion Version of the registry
 	 * @return RegistryAPIService of given registry type
 	 */
-	public RegistryAPIService get(String registryTypeName) {
+	public RegistryAPIService get(String registryTypeName, String registryApiVersion) {
 		switch (registryTypeName) {
 			case "Docker":
-				return dockerRegistryAPIServiceV1;
-				//TODO ajouter la gestion de la version
+				try{
+					return getDockerRegistryByApiVersion(registryApiVersion);
+				}
+				catch (IllegalArgumentException e) {
+					throw e;
+				}
 			default:
 				throw new IllegalArgumentException("RegistryAPIService for given id does not exist.");
 		}
@@ -59,7 +59,21 @@ public class RegistryAPIServiceFactory {
 	 * @return RegistryAPIService of given registry
 	 */
 	public RegistryAPIService get(Registry registry) {
-		return get(registry.getRegistryType().getName());
+		return get(registry.getRegistryType().getName(), registry.getApiVersion());
 	}
-
+	
+	/**
+	 * Return DockerRegistryAPIService corresponding to given api version.
+	 *
+	 * @param registryApiVersion Version of the registry
+	 * @return RegistryAPIService of given registry type and api version
+	 */
+	public RegistryAPIService getDockerRegistryByApiVersion(String registryApiVersion) {
+		switch (registryApiVersion) {
+		case "v1":
+			return dockerRegistryAPIServiceV1;
+		default:
+			throw new IllegalArgumentException("RegistryAPIService for given id and api does not exist.");
+		}
+	}
 }

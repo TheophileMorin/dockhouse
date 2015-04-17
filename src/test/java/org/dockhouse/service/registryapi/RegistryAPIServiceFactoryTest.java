@@ -37,17 +37,23 @@ public class RegistryAPIServiceFactoryTest {
     	registry = new Registry();
     	docker = new RegistryType();
     	docker.setName("Docker");
+    	registry.setApiVersion("v1");
     	registry.setRegistryType(docker);
     }
 
     @Test
     public void getDockerAPIService() {
-    	assertSame(dockerAPIService, registryAPIServiceFactory.get("Docker"));
+    	assertSame(dockerAPIService, registryAPIServiceFactory.get("Docker", "v1"));
     	assertSame(dockerAPIService, registryAPIServiceFactory.get(registry));
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void getNonExistingAPIService() {
-    	registryAPIServiceFactory.get("does not exist");
+    	registryAPIServiceFactory.get("does not exist", "");
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void getNonExistingAPIServiceForDocker() {
+    	registryAPIServiceFactory.get("Docker", "not an api version");
     }
 }
