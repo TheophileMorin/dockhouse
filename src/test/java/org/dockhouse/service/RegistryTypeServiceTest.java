@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,32 +39,16 @@ public class RegistryTypeServiceTest {
     private RegistryTypeService registryTypeService;
     
     private RegistryType registryType1;
-
-    private RegistryType registryType2;
+    
+    @Inject
+	private RegistryTypePopulator registryTypePopulator;
     
     @Before
     public void setup() {
         registryTypeRepository.deleteAll();
+        registryTypePopulator.populate();
         
-        registryType1 = new RegistryType();
-        registryType1.setName("name1");
-        registryType1.setLogo("http://example.com/logo.png");
-        registryType1.setDefaultHost("host");
-        registryType1.setDefaultPort(2222);
-        registryType1.setPublic(false);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType1.setApiVersions(versions);
-        registryTypeRepository.save(registryType1);
-        
-        registryType2 = new RegistryType();
-        registryType2.setName("name2");
-        registryType2.setLogo("http://example.com/logo.png");
-        registryType2.setDefaultHost("host");
-        registryType2.setDefaultPort(2222);
-        registryType2.setPublic(false);
-		registryType2.setApiVersions(versions);
-        registryTypeRepository.save(registryType2);
+        registryType1 = registryTypeRepository.findAll().get(0);
     }
 
     @Test

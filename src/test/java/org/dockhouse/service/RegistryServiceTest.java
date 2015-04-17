@@ -14,6 +14,8 @@ import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryPopulator;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.junit.Before;
@@ -45,42 +47,22 @@ public class RegistryServiceTest {
     private RegistryType registryType;
 
     private Registry registry1;
+        
+    @Inject
+	private RegistryTypePopulator registryTypePopulator;
     
-    private Registry registry2;
+    @Inject
+	private RegistryPopulator registryPopulator;
     
     @Before
     public void setup() {
         registryRepository.deleteAll();
         registryTypeRepository.deleteAll();
+        registryTypePopulator.populate();
+        registryPopulator.populate();
         
-        registryType = new RegistryType();
-        registryType.setName("name1");
-        registryType.setLogo("http://example.com/logo.png");
-        registryType.setDefaultHost("host");
-        registryType.setDefaultPort(2222);
-        registryType.setPublic(false);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType.setApiVersions(versions);
-        registryTypeRepository.save(registryType);
-        
-        registry1 = new Registry();
-        registry1.setName("name2");
-        registry1.setProtocol("http");
-        registry1.setHost("host");
-        registry1.setPort(2222);
-		registry1.setApiVersion("V1");
-        registry1.setRegistryType(registryType);
-        registryRepository.save(registry1);
-        
-        registry2 = new Registry();
-        registry2.setName("name3");
-        registry2.setProtocol("http");
-        registry2.setHost("host");
-        registry2.setPort(2222);
-		registry2.setApiVersion("V2");
-        registry2.setRegistryType(registryType);
-        registryRepository.save(registry2);
+	    registryType = registryTypeRepository.findAll().get(0);	     
+        registry1 = registryRepository.findAll().get(0);
     }
 
     @Test

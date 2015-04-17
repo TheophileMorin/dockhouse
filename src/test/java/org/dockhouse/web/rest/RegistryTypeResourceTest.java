@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.service.RegistryTypeService;
 import org.junit.Before;
@@ -44,7 +45,10 @@ public class RegistryTypeResourceTest {
     private MockMvc mockMvc;
 
     private RegistryType registryType;
-
+    
+    @Inject
+	private RegistryTypePopulator registryTypePopulator;
+    
     @Before
     public void setup() {
         RegistryTypeResource registryTypeMockResource = new RegistryTypeResource();
@@ -53,17 +57,9 @@ public class RegistryTypeResourceTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(registryTypeMockResource).build();
 
         registryTypeRepository.deleteAll();
+        registryTypePopulator.populate();
         
-        registryType = new RegistryType();
-        registryType.setName("name");
-        registryType.setLogo("http://example.com/logo.png");
-        registryType.setDefaultHost("host");
-        registryType.setDefaultPort(2222);
-        registryType.setPublic(false);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType.setApiVersions(versions);
-        registryTypeRepository.save(registryType);
+        registryType = registryTypeRepository.findAll().get(0);
     }
 
     @Test

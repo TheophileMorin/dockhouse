@@ -16,6 +16,8 @@ import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryPopulator;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.service.RegistryService;
@@ -59,6 +61,12 @@ public class RegistryResourceTest {
 
     private RegistryType registryType;
     
+    @Inject
+	private RegistryTypePopulator registryTypePopulator;
+    
+    @Inject
+	private RegistryPopulator registryPopulator;
+    
     private static String registryTypePayload =
     		"{ \"name\"        : \"registrytype\", " +
 			  "\"defaultHost\" : \"host\"        , " +
@@ -95,27 +103,11 @@ public class RegistryResourceTest {
 
         registryRepository.deleteAll();
         registryTypeRepository.deleteAll();
+        registryTypePopulator.populate();
+        registryPopulator.populate();
         
-	    registryType = new RegistryType();
-	    registryType.setId("1");
-	    registryType.setName("name");
-	    registryType.setDefaultHost("host");
-	    registryType.setDefaultPort(1111);
-	    registryType.setLogo("http://example.com/logo.png");
-	    registryType.setPublic(true);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType.setApiVersions(versions);
-	    registryType = registryTypeRepository.save(registryType);
-    	 
-        registry = new Registry();
-        registry.setName("name");
-        registry.setHost("host");
-        registry.setPort(2222);
-        registry.setProtocol("http");
-		registry.setApiVersion("V1");
-        registry.setRegistryType(registryType);
-        registryRepository.save(registry);
+	    registryType = registryTypeRepository.findAll().get(0);
+        registry = registryRepository.findAll().get(0);
     }
 
     @Test
