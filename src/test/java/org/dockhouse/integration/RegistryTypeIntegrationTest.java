@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 import org.dockhouse.Application;
 import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.web.rest.RegistryTypeResource;
 import org.junit.Before;
@@ -46,32 +47,20 @@ public class RegistryTypeIntegrationTest {
     private RegistryType registryType1;
 
     private RegistryType registryType2;
+
+    @Inject
+	private RegistryTypePopulator registryTypePopulator;
     
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.standaloneSetup(registryTypeRessource).build();
         
         registryTypeRepository.deleteAll();
-    	
-	    registryType1 = new RegistryType();
-	    registryType1.setName("name1");
-	    registryType1.setDefaultHost("host1");
-	    registryType1.setDefaultPort(1111);
-	    registryType1.setLogo("http://example.com/logo1.png");
-	    registryType1.setPublic(true);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType1.setApiVersions(versions);
-	    registryType1 = registryTypeRepository.save(registryType1);
-    	 
-	    registryType2 = new RegistryType();
-	    registryType2.setName("name2");
-	    registryType2.setDefaultHost("host2");
-	    registryType2.setDefaultPort(2222);
-	    registryType2.setLogo("http://example.com/logo2.png");
-	    registryType2.setPublic(false);
-		registryType2.setApiVersions(versions);
-	    registryType2 = registryTypeRepository.save(registryType2);
+        registryTypePopulator.populate();
+        
+        List<RegistryType> registryTypes = registryTypeRepository.findAll();
+        registryType1 = registryTypes.get(0);
+        registryType2 = registryTypes.get(1);
     }
     
     @Test

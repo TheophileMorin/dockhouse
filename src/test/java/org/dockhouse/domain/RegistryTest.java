@@ -1,14 +1,10 @@
 package org.dockhouse.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
-import org.dockhouse.domain.Registry;
-import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,23 +27,19 @@ public class RegistryTest extends ValidationTest<Registry> {
 	
 	private RegistryType registryType;
 
+	@Inject
+	private RegistryTypePopulator registryTypePopulator;
+	
     @Inject
     private RegistryTypeRepository registryTypeRepository;
 	
 	@Before
     public void setup() {
-    	registryTypeRepository.deleteAll();
-        registryType = new RegistryType();
-        registryType.setName("name");
-        registryType.setLogo("http://example.com/logo.png");
-        registryType.setDefaultHost("host");
-        registryType.setDefaultPort(2222);
-        registryType.setPublic(false);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType.setApiVersions(versions);
-        registryType = registryTypeRepository.save(registryType);
 		
+    	registryTypeRepository.deleteAll();
+    	registryTypePopulator.populate();
+    	registryType = registryTypeRepository.findAll().get(0);
+        
 		registry = new Registry();
     	registry.setName("name");
     	registry.setHost("host");

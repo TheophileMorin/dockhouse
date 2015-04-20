@@ -1,9 +1,9 @@
 package org.dockhouse.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -17,6 +17,8 @@ import javax.inject.Inject;
 import org.dockhouse.Application;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryPopulator;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.web.rest.RegistryResource;
@@ -60,40 +62,26 @@ public class RegistryIntegrationTest {
 
     private RegistryType registryType;
     
+    @Inject
+	private RegistryTypePopulator registryTypePopulator;
+    
+    @Inject
+	private RegistryPopulator registryPopulator;
+    
     @Before
     public void setup() {
         this.mockMvc = MockMvcBuilders.standaloneSetup(registryRessource).build();
         
     	registryRepository.deleteAll();
     	registryTypeRepository.deleteAll();
-    	
-	    registryType = new RegistryType();
-	    registryType.setId("1");
-	    registryType.setName("name");
-	    registryType.setDefaultHost("host");
-	    registryType.setDefaultPort(1111);
-	    registryType.setLogo("http://example.com/logo.png");
-	    registryType.setPublic(true);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType.setApiVersions(versions);
-	    registryType = registryTypeRepository.save(registryType);
-    	 
-        registry1 = new Registry();
-        registry1.setName("name1");
-        registry1.setHost("host");
-        registry1.setPort(1111);
-        registry1.setProtocol("http");
-		registry1.setApiVersion("V1");
-        registry1.setRegistryType(registryType);
-     
-        registry2 = new Registry();
-        registry2.setName("name2");
-        registry2.setHost("host2");
-        registry2.setPort(2222);
-        registry2.setProtocol("https");
-		registry2.setApiVersion("V2");
-        registry2.setRegistryType(registryType);
+        registryTypePopulator.populate();
+        registryPopulator.populate();
+        
+	    registryType = registryTypeRepository.findAll().get(0);
+	     
+        List<Registry> registries = registryRepository.findAll();
+        registry1 = registries.get(0);
+        registry2 = registries.get(1);
         
         invalidRegistry = new Registry();
         invalidRegistry.setName(null);
@@ -105,9 +93,7 @@ public class RegistryIntegrationTest {
     }
     
     @Test
-    public void getRegistryTest200() throws Exception {
-        registryRepository.save(registry1);
-    	
+    public void getRegistryTest200() throws Exception {    	
     	this.mockMvc.perform(get("/api/registries/" + registry1.getId()))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -136,8 +122,6 @@ public class RegistryIntegrationTest {
     
     @Test
     public void getRegistriesTest200() throws Exception {
-        registryRepository.save(registry1);
-        registryRepository.save(registry2);
         assertThat(registryRepository.findAll()).hasSize(2);
     	
     	this.mockMvc.perform(get("/api/registries"))
@@ -176,7 +160,7 @@ public class RegistryIntegrationTest {
     
     @Test
     public void createRegistryTestPOST201() throws Exception {
-        assertThat(registryRepository.findAll()).hasSize(0);
+    	registryRepository.deleteAll();
 
     	this.mockMvc.perform(post("/api/registries")
     			.contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -208,7 +192,7 @@ public class RegistryIntegrationTest {
     
     @Test
     public void createRegistryTestPOST400() throws Exception {
-        assertThat(registryRepository.findAll()).hasSize(0);
+    	registryRepository.deleteAll();
     	
     	this.mockMvc.perform(post("/api/registries")
     			.contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -222,7 +206,7 @@ public class RegistryIntegrationTest {
     @Test
     public void createRegistryTestPUT200() throws Exception {
     	final String id = "551c1748c8306c8fa74e3cd6";
-        assertThat(registryRepository.findAll()).hasSize(0);
+    	registryRepository.deleteAll();
 
     	this.mockMvc.perform(put("/api/registries/" + id)
     			.contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -255,7 +239,7 @@ public class RegistryIntegrationTest {
     @Test
     public void createRegistryTestPUT400() throws Exception {
     	final String id = "551c1748c8306c8fa74e3cd6";
-        assertThat(registryRepository.findAll()).hasSize(0);
+    	registryRepository.deleteAll();
     	
     	this.mockMvc.perform(put("/api/registries/" + id)
     			.contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -268,9 +252,8 @@ public class RegistryIntegrationTest {
     
     @Test
     public void updateRegistryTest200() throws Exception {
-    	registryRepository.save(registry1);
     	final String id = registry1.getId();
-        assertThat(registryRepository.findAll()).hasSize(1);
+        assertThat(registryRepository.findAll()).hasSize(2);
 
         Registry updatedRegistry = new Registry();
         updatedRegistry.setName("new name");
@@ -303,15 +286,14 @@ public class RegistryIntegrationTest {
         ;
     	
     	List<Registry> registries = registryRepository.findAll();
-        assertThat(registries).hasSize(1);
+        assertThat(registries).hasSize(2);
         Registry createdRegistry = registries.iterator().next();
         assertThat(createdRegistry.getName()).isEqualTo(updatedRegistry.getName());
     }
     
     @Test
     public void updateRegistryTest400() throws Exception {
-    	registryRepository.save(registry1);
-    	assertThat(registryRepository.findAll()).hasSize(1);
+    	assertThat(registryRepository.findAll()).hasSize(2);
     	
     	this.mockMvc.perform(put("/api/registries/" + registry1.getId())
     			.contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -319,18 +301,17 @@ public class RegistryIntegrationTest {
 
         .andExpect(status().isBadRequest());
     	
-        assertThat(registryRepository.findAll()).hasSize(1);
+        assertThat(registryRepository.findAll()).hasSize(2);
     }
     
     @Test
     public void deleteRegistryTest204() throws Exception {
-    	registryRepository.save(registry1);
-    	assertThat(registryRepository.findAll()).hasSize(1);
+    	assertThat(registryRepository.findAll()).hasSize(2);
     	
     	this.mockMvc.perform(delete("/api/registries/" + registry1.getId()))
         .andExpect(status().isNoContent());
     	
-        assertThat(registryRepository.findAll()).hasSize(0);
+        assertThat(registryRepository.findAll()).hasSize(1);
         
     	this.mockMvc.perform(delete("/api/registries/" + registry1.getId()))
         .andExpect(status().isNoContent());
