@@ -23,8 +23,9 @@ import javax.inject.Inject;
 
 import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
-import org.dockhouse.service.registryapi.DockerRegistryAPIServiceV1;
 import org.dockhouse.service.registryapi.RegistryAPIService;
+import org.dockhouse.service.registryapi.RegistryAPIServiceFactory;
+import org.dockhouse.web.rest.dto.RegistryDetailsDTO;
 import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,18 +66,10 @@ public class RegistryService {
         RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
         registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
 
-        //MOCK TODO remove
-        Registry registry = new Registry();
-        registry.setHost("ns507652.ip-192-99-10.net");
-        registry.setPort(5000);
-        registry.setProtocol("http");
-        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1();
-        //ENDMOCK
-
-        //Registry registry = registryRepository.findOne(id);
+        Registry registry = registryRepository.findOne(id);
         if(registry != null){
-            //RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
-            //RegistryAPIService registreAPI = factory.get(registry);
+            RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            RegistryAPIService registreAPI = factory.get(registry);
             if(registreAPI.isAvailable(registry)){
                 registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
             }
@@ -84,24 +77,17 @@ public class RegistryService {
          return registryStatusDTO;
     }
 
-    public String getDetails(String id){
-        String details = "";
+    public RegistryDetailsDTO getDetails(String id){
+        RegistryDetailsDTO registryDetailsDTO = new RegistryDetailsDTO();
+        registryDetailsDTO.setDetails(new String());
 
-        //MOCK TODO remove
-        Registry registry = new Registry();
-        registry.setHost("ns507652.ip-192-99-10.net");
-        registry.setPort(5000);
-        registry.setProtocol("http");
-        RegistryAPIService registreAPI = new DockerRegistryAPIServiceV1();
-        //ENDMOCK
-
-        //Registry registry = registryRepository.findOne(id);
+        Registry registry = registryRepository.findOne(id);
         if(registry != null){
-            //RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
-            //RegistryAPIService registreAPI = factory.get(registry);
-            details = registreAPI.getDetails(registry);
+            RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            RegistryAPIService registreAPI = factory.get(registry);
+            registryDetailsDTO.setDetails(registreAPI.getDetails(registry));
         }
-        return details;
+        return registryDetailsDTO;
     }
 
 }

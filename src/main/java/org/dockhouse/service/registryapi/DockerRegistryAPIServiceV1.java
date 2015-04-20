@@ -74,6 +74,5 @@ public class DockerRegistryAPIServiceV1 implements RegistryAPIService {
 				+ apiVersion
 				+ "/"
 				+ call;
-		//TODO handle format got from data
 	}
 }
