@@ -140,11 +140,11 @@ public class RegistryServiceTest {
     
     @Test
     public void getStatusTest(){
-    	
+    	//TODO
     }
     
     @Test
     public void getDetailsTest(){
-    	
+    	//TODO
     }
 }
