@@ -18,13 +18,13 @@ public class RegistryTypePopulator {
 	public void populate() {
 		
 	    RegistryType registryType1 = new RegistryType();
-	    registryType1.setName("name1");
+	    registryType1.setName("Docker");
 	    registryType1.setDefaultHost("host1");
 	    registryType1.setDefaultPort(1111);
 	    registryType1.setLogo("http://example.com/logo1.png");
 	    registryType1.setPublic(true);
     	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
+		versions.add("v1");
 		registryType1.setApiVersions(versions);
     	 
 	    RegistryType registryType2 = new RegistryType();

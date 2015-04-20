@@ -260,7 +260,7 @@ public class RegistryIntegrationTest {
         updatedRegistry.setHost("new host");
         updatedRegistry.setPort(1111);
         updatedRegistry.setProtocol("http");
-        updatedRegistry.setApiVersion("V1");
+        updatedRegistry.setApiVersion("v1");
         updatedRegistry.setRegistryType(registryType);
         
     	this.mockMvc.perform(put("/api/registries/" + id)

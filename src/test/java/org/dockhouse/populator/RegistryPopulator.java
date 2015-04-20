@@ -25,7 +25,7 @@ public class RegistryPopulator {
         registry1.setHost("host");
         registry1.setPort(1111);
         registry1.setProtocol("http");
-		registry1.setApiVersion("V1");
+		registry1.setApiVersion("v1");
         registry1.setRegistryType(registryType);
      
         Registry registry2 = new Registry();
@@ -33,7 +33,7 @@ public class RegistryPopulator {
         registry2.setHost("host2");
         registry2.setPort(2222);
         registry2.setProtocol("https");
-		registry2.setApiVersion("V2");
+		registry2.setApiVersion("v2");
         registry2.setRegistryType(registryType);
         
 	    registryRepository.save(registry1);
