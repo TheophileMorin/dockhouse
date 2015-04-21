@@ -20,10 +20,10 @@
         .module('dockhouseApp')
         .factory('Registry', Registry);
 
-    Registry.$inject = ['Restangular', 'Logger'];
+    Registry.$inject = ['Restangular', 'Logger', '$q'];
 
     /* @ngInject */
-    function Registry(Restangular, Logger){
+    function Registry(Restangular, Logger, $q){
         var logger = Logger.getInstance('RegistryService');
 
         var service = Restangular.service('registries');
@@ -35,7 +35,9 @@
             create: create,
             update: update,
             remove: remove,
-            testRegistry : testRegistry
+            testRegistry : testRegistry,
+            getDetail : getDetail,
+            getAllImages : getAllImages
         };
 
         ////////////////
@@ -129,6 +131,11 @@
                 });
         }
 
+        /**
+         * Test the registry
+         * @param id - the ID of the given registry
+         * @returns online/offline depending on the registry status.
+         */
         function testRegistry(id) {
             return service.one(id).customGET("status")
                 .then(function(data) {
@@ -138,6 +145,60 @@
                     logger.error('registries/:id/status',"Error lors de l'appel du service REST registries status",error);
                     throw error;
                 });
+        }
+
+        /**
+         * Get details of a registry from its ID.
+         * @param registryId - the registry ID.
+         * @returns a JSON object representing the registry details.
+         */
+        function getDetail(registryId) { //TODO mock.
+            return $q(function(resolve) {
+                resolve({
+                    "status" : "Still mocked in the Front services.",
+                    "id" : registryId
+                });
+            });
+            /*return service.one(id).customGET("info")
+                .then(function(data) {
+                    return data;
+                })
+                .catch(function(error) {
+                    logger.error('registries/:id/info',"Error lors de l'appel du service REST registries info",error);
+                    throw error;
+                });*/
+        }
+
+        /**
+         * Get all the images contained in a registry.
+         * @param registryId - The registry ID.
+         * @returns a JSON array with the image list.
+         */
+        function getAllImages(registryId) { //TODO mock.
+            return $q(function(resolve) {
+                resolve([
+                    {
+                        "name" : "Dockhouse/Dockhouse",
+                        "version" : "v1.0.6"
+                    },
+                    {
+                        "name" : "Dockhouse/Dockhouse-pic-tool",
+                        "version" : "v2.3.7"
+                    },
+                    {
+                        "name" : "Ubuntu",
+                        "version" : "14.04"
+                    }
+                ]);
+            });
+            /*return service.one(id).customGET("images")
+             .then(function(data) {
+             return data;
+             })
+             .catch(function(error) {
+             logger.error('registries/:id/images',"Error lors de l'appel du service REST registries images",error);
+             throw error;
+             });*/
         }
     }
 

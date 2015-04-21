@@ -40,7 +40,10 @@
                 "port" : "The port value must be between {{min}} and {{max}}.",
                 "disconnected" : "The registry is currently disconnected. Clic Save button if you want to save it anyway."
             },
-            "imagesLabel" : "Registry images",
+            "images" : {
+                "imagesLabel" : "Registry images",
+                "noImagesWarning" : "This registry does not contains any images."
+            },
             "detailLabel": "Registry Details",
             "infoLabel": "Informations",
             "protocolLabel": "Protocol"

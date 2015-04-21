@@ -198,7 +198,7 @@
                         }
                     })
                     .catch(function(error) {
-                        logger.error('Enabled to test the given registry.' + error);
+                            vm.registries[index].status = "offline";
                     });
                 }(i));
             }

@@ -40,7 +40,10 @@
                 "port" : "La valeur du port doit être entre {{min}} et {{max}}.",
                 "disconnected" : "Le registry est actuellement innaccessible, Rappuyez pour sauvegarder quand-même."
             },
-            "imagesLabel" : "Images du registre",
+            "images" : {
+                "imagesLabel" : "Images du registre",
+                "noImagesWarning" : "Ce registre ne contient aucune images."
+            },
             "detailLabel": "Détails du registre",
             "infoLabel": "Informations",
             "protocolLabel": "Protocole"
