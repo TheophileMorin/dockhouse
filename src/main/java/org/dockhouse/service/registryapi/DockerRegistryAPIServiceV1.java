@@ -28,15 +28,19 @@ import org.springframework.web.client.RestTemplate;
 public class DockerRegistryAPIServiceV1 implements RegistryAPIService {
 	private final String apiVersion = "v1"; 
 	private final String pingCall = "_ping";
+	
+	private RestTemplate restTemplate;
+	
+	public DockerRegistryAPIServiceV1() {
+		this.restTemplate = new RestTemplate();
+	}
 
 	@Override
 	public boolean isAvailable(Registry registry) {
-
-		RestTemplate restTemplate = new RestTemplate();
 		String url = getURL(registry, pingCall);
 
 		try{
-			ResponseEntity<String> result = restTemplate.getForEntity(url, String.class);
+			ResponseEntity<String> result = this.restTemplate.getForEntity(url, String.class);
 			return result.getStatusCode() == HttpStatus.OK;
 		}
 		catch(RestClientException e){
@@ -46,11 +50,10 @@ public class DockerRegistryAPIServiceV1 implements RegistryAPIService {
 
 	@Override
 	public String getDetails(Registry registry) {
-		RestTemplate restTemplate = new RestTemplate();
 		String url = getURL(registry, pingCall);
 
 		try{
-			ResponseEntity<String> result = restTemplate.getForEntity(url, String.class);
+			ResponseEntity<String> result = this.restTemplate.getForEntity(url, String.class);
 			return result.getBody();
 		}
 		catch(RestClientException e){
@@ -74,5 +77,9 @@ public class DockerRegistryAPIServiceV1 implements RegistryAPIService {
 				+ apiVersion
 				+ "/"
 				+ call;
+	}
+	
+	public void setRestTemplate(RestTemplate restTemp){
+		this.restTemplate = restTemp;
 	}
 }
