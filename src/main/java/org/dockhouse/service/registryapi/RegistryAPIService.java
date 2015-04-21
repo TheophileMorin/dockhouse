@@ -28,4 +28,11 @@ public interface RegistryAPIService {
 	 * @return true if given registry is available
 	 */
 	public boolean isAvailable(Registry registry);
+	
+	/**
+	 * Returns general information about the registry
+	 * @param registry The registry to get the information
+	 * @return String The message containing the information (JSON)
+	 */
+	public String getDetails(Registry registry);
 }

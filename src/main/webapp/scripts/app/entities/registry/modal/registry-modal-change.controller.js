@@ -28,8 +28,6 @@
         /* jshint validthis: true */
         var vm = this;
         var logger = Logger.getInstance('RegistryModalChangeController');
-        var testedAndOnlineRegistry = false;
-
 
         vm.modalHtmlURL = "scripts/app/entities/registry/modal/registry-modal-change.html";
 
@@ -37,19 +35,10 @@
         vm.registryTypes = [];
 
         vm.vHttpsRegistry = false;
-        vm.vTestBtn = {
-            style : "btn btn-default",
-            status : "default",
-            icon : "glyphicon glyphicon-question-sign"
-        };
-        vm.vAlertDisconnectedRegistry = false;
 
         vm.save = save;
         vm.cancel = cancel;
         vm.loadTypes = loadTypes;
-        vm.testRegistry = testRegistry;
-
-        ////////////////
 
         activate();
 
@@ -64,11 +53,7 @@
         function save() {
             logger.debug('Choice --> Save');
             setProtocol();
-            if(!vm.vAlertDisconnectedRegistry && !testedAndOnlineRegistry) {
-                vm.vAlertDisconnectedRegistry = true;
-            } else {
                 $modalInstance.close(vm.registryEdited);
-            }
         }
 
         function cancel() {
@@ -80,44 +65,11 @@
             RegistryTypes.getAll()
                 .then(function(data){
                     vm.registryTypes = data;
-                    convertToPostVersion();
+                    console.log(data);
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the list of registry types.');
                 });
-        }
-
-
-        function testRegistry() {
-            logger.debug("test registry");
-            setProtocol();
-
-            Registry.testRegistry(vm.registryEdited).then(function(data) {
-                if(data) {
-                    vm.vTestBtn.style = "btn btn-success";
-                    vm.vTestBtn.status = "online";
-                    vm.vTestBtn.icon = "glyphicon glyphicon-ok-circle";
-                    testedAndOnlineRegistry = true;
-                } else {
-                    vm.vTestBtn.style = "btn btn-danger";
-                    vm.vTestBtn.status = "offline";
-                    vm.vTestBtn.icon = "glyphicon glyphicon-remove-circle";
-                }
-            }).catch(function(error) {
-                logger.error('Unable to test registry status.');
-            });
-        }
-
-        function convertToPostVersion(){
-            //If the modal is opened in edition mode.
-            if(vm.registryEdited.registryType != null) {
-                vm.registryEdited.registryTypeId = vm.registryEdited.registryType.id;
-                delete vm.registryEdited.registryType;
-            } else { //To prevent blank choice in the select field.
-                if(vm.registryTypes.length) {
-                    vm.registryEdited.registryTypeId = vm.registryTypes[0].id;
-                }
-            }
         }
 
         function setProtocol() {

@@ -20,7 +20,9 @@
                 "logo": "Logo",
                 "defaultHost": "Default Host",
                 "defaultPort": "Default Port",
-                "accessibility": "Public registry"
+                "accessibility": "Public registry",
+                "id" : "Type ID",
+                "apiVersions" : "API versions"
             },
             "status": {
                 "default" : "Status",
@@ -30,8 +32,7 @@
             "host": "Host",
             "port": "Port",
             "protocol": "HTTPS",
-            "protocolLabel": "Protocol",
-            "detailsLabel": "Details",
+            "apiVersion" : "API version",
             "validation": {
                 "name" : "The regstry name must be between {{min}} and {{max}} characters.",
                 "type" : "You must select a type.",
@@ -39,7 +40,14 @@
                 "port" : "The port value must be between {{min}} and {{max}}.",
                 "disconnected" : "The registry is currently disconnected. Clic Save button if you want to save it anyway."
             },
-            "imagesLabel" : "Registry images"
+            "images" : {
+                "imagesLabel" : "Registry images",
+                "noImagesWarning" : "This registry does not contains any images."
+            },
+            "detailLabel": "Registry Details",
+            "infoLabel": "Informations",
+            "protocolLabel": "Protocol"
+
         }
     }
 }

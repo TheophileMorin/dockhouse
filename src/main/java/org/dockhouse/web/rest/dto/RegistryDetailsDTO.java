@@ -13,19 +13,20 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.dockhouse.service.registryapi;
+package org.dockhouse.web.rest.dto;
 
-import org.dockhouse.domain.Registry;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
+/**
+ * Status of a registry.
+ */
+public class RegistryDetailsDTO {
 
-@Service
-@Qualifier("DockerRegistryAPIService")
-public class DockerRegistryAPIService implements RegistryAPIService {
+	private String details;
 
-	@Override
-	public boolean isAvailable(Registry registry) {
-		return false;
+	public String getDetails() {
+		return details;
 	}
 
+	public void setDetails(String details) {
+		this.details = details;
+	}
 }

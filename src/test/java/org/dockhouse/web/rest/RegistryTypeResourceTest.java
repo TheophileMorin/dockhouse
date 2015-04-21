@@ -1,17 +1,18 @@
 package org.dockhouse.web.rest;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
 import org.dockhouse.domain.RegistryType;
+import org.dockhouse.populator.RegistryTypePopulator;
 import org.dockhouse.repository.RegistryTypeRepository;
 import org.dockhouse.service.RegistryTypeService;
 import org.junit.Before;
@@ -44,38 +45,21 @@ public class RegistryTypeResourceTest {
     private MockMvc mockMvc;
 
     private RegistryType registryType;
-
-    private static String validPayload =
-    		"{ \"name\"    : \"registrytype\", " +
-			  "\"host\"    : \"host\"        , " +
-			  "\"logo\"    : \"http://example.com/logo.png\" , " +
-			  "\"port\"    : 22222, " +
-			  "\"isPublic\": false }";
-
-    private static String invalidPayload =
-    		"{ \"name\"    : \"\", " +
-    		  "\"host\"    : \"\", " +
-    		  "\"logo\"    : \"\", " +
-    		  "\"port\"    : -1  , " +
-    		  "\"isPublic\": false }";
-
+    
+    @Inject
+	private RegistryTypePopulator registryTypePopulator;
+    
     @Before
     public void setup() {
         RegistryTypeResource registryTypeMockResource = new RegistryTypeResource();
-        ReflectionTestUtils.setField(registryTypeMockResource, "registryTypeRepository", registryTypeRepository);
         ReflectionTestUtils.setField(registryTypeMockResource, "registryTypeService"   , registryTypeService);
 
         this.mockMvc = MockMvcBuilders.standaloneSetup(registryTypeMockResource).build();
 
         registryTypeRepository.deleteAll();
+        registryTypePopulator.populate();
         
-        registryType = new RegistryType();
-        registryType.setName("name");
-        registryType.setLogo("http://example.com/logo.png");
-        registryType.setHost("host");
-        registryType.setPort(2222);
-        registryType.setPublic(false);
-        registryTypeRepository.save(registryType);
+        registryType = registryTypeRepository.findAll().get(0);
     }
 
     @Test
@@ -96,45 +80,5 @@ public class RegistryTypeResourceTest {
     	this.mockMvc.perform(get("/api/registry_types"))
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    }
-
-    @Test
-    public void createRegistryTypeTest201() throws Exception {
-    	this.mockMvc.perform(post("/api/registry_types")
-    			.contentType(MediaType.APPLICATION_JSON)
-    			.content(validPayload))
-    	.andExpect(status().isCreated())
-    	.andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    }
-
-    @Test
-    public void createRegistryTypeTest400() throws Exception {
-    	this.mockMvc.perform(post("/api/registry_types")
-    			.contentType(MediaType.APPLICATION_JSON)
-    			.content(invalidPayload))
-    	.andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void updateRegistryTypeTest200() throws Exception {
-    	this.mockMvc.perform(put("/api/registry_types/{id}", registryType.getId())
-    			.contentType(MediaType.APPLICATION_JSON)
-    			.content(validPayload))
-    	.andExpect(status().isOk())
-    	.andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    }
-
-    @Test
-    public void updateRegistryTypeTest400() throws Exception {
-    	this.mockMvc.perform(put("/api/registry_types/{id}", registryType.getId())
-    			.contentType(MediaType.APPLICATION_JSON)
-    			.content(invalidPayload))
-    	.andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void deleteRegistryTypeTest204() throws Exception {
-    	this.mockMvc.perform(delete("/api/registry_types/{id}", registryType.getId()))
-    	.andExpect(status().isNoContent());
     }
 }

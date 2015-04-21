@@ -16,16 +16,16 @@
 package org.dockhouse.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
-import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * A type of registry.
@@ -35,26 +35,37 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 
     @Id
     private String id;
-	
-    @Indexed(unique=true)
+
+    @NotNull
+    @Size(min = 1, max = 50)
     private String name;
-    
+
     private String logo;
-    
-    private String host;
-    
-    private int port;
-    
+
+    @NotNull
+    @Field("default_host")
+    private String defaultHost;
+
+    @Range(min = 0, max = 65535)
+    @Field("default_port")
+    private int defaultPort;
+
+    @Field("public")
     private boolean isPublic;
+
+    @NotNull
+    @NotEmpty
+    @Field("api_versions")
+    private List<String> apiVersions;
 
     public String getId() {
     	return id;
     }
-    
+
     public void setId(String id) {
     	this.id = id;
     }
-    
+
 	public String getName() {
 		return name;
 	}
@@ -71,20 +82,20 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 		this.logo = logo;
 	}
 
-	public String getHost() {
-		return host;
+	public String getDefaultHost() {
+		return defaultHost;
 	}
 
-	public void setHost(String host) {
-		this.host = host;
+	public void setDefaultHost(String host) {
+		this.defaultHost = host;
 	}
 
-	public int getPort() {
-		return port;
+	public int getDefaultPort() {
+		return defaultPort;
 	}
 
-	public void setPort(int port) {
-		this.port = port;
+	public void setDefaultPort(int port) {
+		this.defaultPort = port;
 	}
 
 	public boolean isPublic() {
@@ -94,7 +105,15 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 	public void setPublic(boolean isPublic) {
 		this.isPublic = isPublic;
 	}
-	
+
+	public List<String> getApiVersions() {
+		return apiVersions;
+	}
+
+	public void setApiVersions(List<String> apiVersions) {
+		this.apiVersions = apiVersions;
+	}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -123,9 +142,10 @@ public class RegistryType extends AbstractAuditingEntity implements Serializable
 	    "id='" + id + '\'' +
 	    ", name='" + name + '\'' +
 	    ", logo='" + logo + '\'' +
-	    ", host='" + host + '\'' +
-	    ", port='" + port + '\'' +
+	    ", host='" + defaultHost + '\'' +
+	    ", port='" + defaultPort + '\'' +
 	    ", isPublic='" + isPublic + '\'' +
+	    ", apiVersions='" + apiVersions + '\'' +
 	    "}";
     }
 }

@@ -22,13 +22,11 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import org.dockhouse.domain.Registry;
-import org.dockhouse.domain.RegistryType;
 import org.dockhouse.repository.RegistryRepository;
-import org.dockhouse.repository.RegistryTypeRepository;
-import org.dockhouse.web.rest.dto.RegistryInDTO;
-import org.dockhouse.web.rest.dto.RegistryOutDTO;
-import org.dockhouse.web.rest.dto.mapping.RegistryInDTOMapper;
-import org.dockhouse.web.rest.dto.mapping.RegistryOutDTOMapper;
+import org.dockhouse.service.registryapi.RegistryAPIService;
+import org.dockhouse.service.registryapi.RegistryAPIServiceFactory;
+import org.dockhouse.web.rest.dto.RegistryDetailsDTO;
+import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -44,46 +42,52 @@ public class RegistryService {
     @Inject
     private RegistryRepository registryRepository;
 
-    @Inject
-    private RegistryTypeRepository registryTypeRepository;
-
-    @Inject
-    private RegistryOutDTOMapper registryOutDTOMapper;
-
-    @Inject
-    private RegistryInDTOMapper registryInDTOMapper;
-    
-    public List<RegistryOutDTO> getAll() {
+    public List<Registry> getAll() {
     	return registryRepository.findAll()
     							 .stream()
-    							 .map(this::createRegistryOutDTO)
     							 .collect(Collectors.toList());
     }
-    
-    public Optional<RegistryOutDTO> getOne(String id) {
-    	return Optional.ofNullable(registryRepository.findOne(id))
-    			       .map(this::createRegistryOutDTO);
+
+    public Optional<Registry> getOne(String id) {
+    	return Optional.ofNullable(registryRepository.findOne(id));
     }
-    
-    public RegistryOutDTO createRegistryOutDTO(Registry registry) {
-    	RegistryType registryType = registryTypeRepository.findOne(registry.getRegistryTypeId());
-    	return registryOutDTOMapper.createDTO(registry, registryType);
+
+    public Registry insert(Registry registry) {
+    	registry.setId(null);
+    	return registryRepository.save(registry);
     }
-    
-    public RegistryOutDTO insert(RegistryInDTO registryInDTO) {
-    	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
-    	registry = registryRepository.save(registry);
-    	return createRegistryOutDTO(registry);
-    }
-    
-    public RegistryOutDTO upsert(RegistryInDTO registryInDTO, String id) {
-    	Registry registry = registryInDTOMapper.createRegistry(registryInDTO);
+
+    public Registry upsert(Registry registry, String id) {
     	registry.setId(id);
-    	registry = registryRepository.save(registry);
-    	return createRegistryOutDTO(registry);
+    	return registryRepository.save(registry);
     }
-    
-    public RegistryType getRegistryTypeOf(Registry registry) {
-    	return registryTypeRepository.findOne(registry.getRegistryTypeId());
+
+    public RegistryStatusDTO getStatus(String id){
+        RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
+        registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
+
+        Registry registry = registryRepository.findOne(id);
+        if(registry != null){
+            RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            RegistryAPIService registreAPI = factory.get(registry);
+            if(registreAPI.isAvailable(registry)){
+                registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
+            }
+         }
+         return registryStatusDTO;
     }
+
+    public RegistryDetailsDTO getDetails(String id){
+        RegistryDetailsDTO registryDetailsDTO = new RegistryDetailsDTO();
+        registryDetailsDTO.setDetails(new String());
+
+        Registry registry = registryRepository.findOne(id);
+        if(registry != null){
+            RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
+            RegistryAPIService registreAPI = factory.get(registry);
+            registryDetailsDTO.setDetails(registreAPI.getDetails(registry));
+        }
+        return registryDetailsDTO;
+    }
+
 }

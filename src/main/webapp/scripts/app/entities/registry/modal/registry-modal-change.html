@@ -21,6 +21,7 @@
     <div class="modal-header">
         <h4 class="modal-title" id="myRegistryLabel" translate="dockhouseApp.registry.home.createOrEditLabel">Create or edit a Registry</h4>
     </div>
+
     <div class="modal-body">
         <div class="form-group" ng-class="{ 'has-error' : (editForm.name.$invalid && !editForm.name.$pristine) }" >
             <label translate="dockhouseApp.registry.name">Name</label>
@@ -31,10 +32,11 @@
                 The name must be between min and MAX characters
             </p>
         </div>
+
         <div class="form-group" ng-class="{ 'has-error' : (editForm.type.$invalid && !editForm.type.$pristine) }">
             <label translate="dockhouseApp.registry.type.title">Type</label>
-            <select name="type" class="form-control" ng-model="modal.registryEdited.registryTypeId" required>
-                <option ng-repeat="type in modal.registryTypes" value="{{type.id}}" >
+            <select json-parsing name="type" class="form-control" ng-model="modal.registryEdited.registryType" required >
+                <option ng-repeat="type in modal.registryTypes" value={{type}}  >
                     {{type.name}}
                 </option>
             </select>
@@ -43,11 +45,25 @@
                 You must select a type
             </p>
         </div>
+
+        <div class="form-group" ng-class="{ 'has-error' : (editForm.apiVersion.$invalid && !editForm.apiVersion.$pristine) }">
+            <label translate="dockhouseApp.registry.type.apiVersions">API versions</label>
+            <select name="apiVersion" class="form-control" ng-model="modal.registryEdited.apiVersion" required>
+                <option ng-repeat="version in modal.registryEdited.registryType.apiVersions" value="{{version}}" >
+                    {{version}}
+                </option>
+            </select>
+            <p ng-show="editForm.apiVersion.$invalid && !editForm.apiVersion.$pristine"
+               class="help-block" translate="dockhouseApp.registry.validation.apiVersion">
+                You must select an API version
+            </p>
+        </div>
+
         <div class="form-group" ng-class="{ 'has-error' : (editForm.host.$invalid && !editForm.host.$pristine) }">
             <label translate="dockhouseApp.registry.host">Host</label>
             <input type="text" class="form-control" name="host"
                    ng-model="modal.registryEdited.host"
-                   placeholder="{{modal.registryEdited.registryType.host}}" required>
+                   placeholder="{{modal.registryEdited.registryType.defaultHost}}" required>
             <p ng-show="editForm.host.$invalid && !editForm.host.$pristine"
                class="help-block" translate="dockhouseApp.registry.validation.host">
                 You must set a host address
@@ -57,7 +73,7 @@
             <label translate="dockhouseApp.registry.port">Port</label>
             <input type="number" class="form-control" name="port"
                    ng-model="modal.registryEdited.port"
-                   placeholder="{{modal.registryEdited.registryType.port}}"  min="0" max="65535"  required>
+                   placeholder="{{modal.registryEdited.registryType.defaultPort}}"  min="0" max="65535"  required>
             <p ng-show="editForm.port.$invalid && !editForm.port.$pristine"
                class="help-block" translate="dockhouseApp.registry.validation.port" translate-values="{min: '0', max: '65535'}">
                 You must set a port value between MIN and MAX
@@ -69,14 +85,8 @@
             <label translate="dockhouseApp.registry.protocol">HTTPS</label>
         </div>
     </div>
+
     <div class="modal-footer">
-        <h4 ng-show="modal.vAlertDisconnectedRegistry" class="modalAlertText" translate="dockhouseApp.registry.validation.disconnected" >Disconnected</h4>
-        <button type="button" class="{{modal.vTestBtn.style}}" id="testResultField" disabled="disabled">
-            <span class="{{modal.vTestBtn.icon}}"></span>&nbsp;<span id="testResultTextField" translate="dockhouseApp.registry.status.{{modal.vTestBtn.status}}">Status</span>
-        </button>
-        <button type="button"  class="btn btn-info" ng-click="modal.testRegistry()" >
-            <span class="glyphicon glyphicon-transfer"></span>&nbsp;<span translate="entity.action.test">Test</span>
-        </button>
         <button type="submit" ng-disabled="editForm.$invalid" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span translate="entity.action.save">Save</span>
         </button>

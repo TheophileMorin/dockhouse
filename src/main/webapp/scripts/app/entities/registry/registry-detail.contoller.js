@@ -21,10 +21,10 @@
         .module('dockhouseApp')
         .controller('RegistryDetailController', RegistryDetailController);
 
-    RegistryDetailController.$inject = ['Registry', '$stateParams', 'Logger'];
+    RegistryDetailController.$inject = ['Registry', '$stateParams', '$state', 'Logger', '$modal'];
 
     /* @ngInject */
-    function RegistryDetailController(Registry, $stateParams, Logger){
+    function RegistryDetailController(Registry, $stateParams, $state, Logger, $modal){
         /* jshint validthis: true */
         var logger = Logger.getInstance('RegistryDetailController');
         var vm = this;
@@ -32,10 +32,11 @@
         vm.registry = {};
         vm.showRegistryDetails = false;
         vm.onlineRegistry = "pending";
-        vm.registryDetail = [];
+        vm.registryDetail = "";
         vm.registryImages = [];
 
         vm.loadRegistry = loadRegistry;
+        vm.openEditionModal = openEditionModal;
 
         activate($stateParams.id);
 
@@ -47,67 +48,76 @@
         }
 
         function loadRegistry(id) {
+            if(id == "") {
+                $state.go('registry');
+            }
             Registry.get(id)
                 .then(function(data){
                     vm.registry = data;
                     testRegistry();
                 })
                 .catch(function(error) {
-                    logger.error('Enabled to get the given registry.');
+                    logger.error('Unable to get the given registry.' + error);
+                    $state.go('error');
                 });
         }
 
         function testRegistry() {
-            Registry.testRegistry(vm.registry)
+            Registry.testRegistry(vm.registry.id)
                 .then(function(data){
-                    if(data) {
+                    if(data.status == "online") {
                         vm.onlineRegistry = "online";
-                        // the return of the ping.
-                        mockRegistryDetail();
-                        mockRegistryImages();
+                        getRegistryDetail();
+                        getRegistryImages();
                     } else {
                         vm.onlineRegistry = "offline";
                     }
                 })
-                .catch(function(error) {
-                    logger.error('Enabled to test the given registry.');
+                .catch(function() {
+                    vm.onlineRegistry = "offline";
                 });
         }
 
-        function mockRegistryDetail() {
-            vm.registryDetail = [
-                {
-                    "key" : "State",
-                    "value" : "online"
-                },
-                {
-                    "key" : "Timestamp",
-                    "value" : "131065412310"
-                },
-                {
-                    "key" : "NbImages",
-                    "value" : "2"
-                },
-                {
-                    "key" : "Value",
-                    "value" : "150"
-                }
-            ];
+        function getRegistryDetail() {
+            Registry.getDetail(vm.registry.id).
+                then(function(data) {
+                    vm.registryDetail = JSON.stringify(data, null, 10);
+                }).
+                catch(function() {
+                    vm.registryDetail = "";
+                });
         }
 
-        function mockRegistryImages() {
-            vm.registryImages = [
-                {
-                    "name" : "Image 1",
-                    "version" : "v1.0.6"
-                },
-                {
-                    "name" : "Image 2",
-                    "version" : "v2.3.7"
+        function getRegistryImages() {
+            Registry.getAllImages(vm.registry.id).
+                then(function(data) {
+                    vm.registryImages = data;
+                }).
+                catch(function() {
+                    vm.registryImages = [];
+                });
+        }
+
+        function openEditionModal() {
+            // Open the modal Edition window
+            var modalInstance = $modal.open({
+                templateUrl: 'RegistryChangeModal',
+                controller: 'RegistryModalChangeController as modal',
+                backdrop: 'static',
+                resolve: {
+                    registryEdited: function() {
+                        return vm.registry;
+                    }
                 }
-            ];
+            });
+            modalInstance.result.then(function (registryModified) {
+                Registry.update(registryModified).then(function(data) {
+                        vm.loadRegistry(data.id);
+                    });
+            }, function () {
+                logger.debug('Modal dismissed at: ' + new Date());
+            });
         }
     }
-
 })();
 

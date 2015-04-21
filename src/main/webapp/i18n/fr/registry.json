@@ -20,7 +20,9 @@
                 "logo": "Logo",
                 "defaultHost": "Hôte par défaut",
                 "defaultPort": "Port par défaut",
-                "accessibility": "Registre public"
+                "accessibility": "Registre public",
+                "id" : "Type ID",
+                "apiVersions" : "versions de l'API"
             },
             "status": {
                 "default" : "Status",
@@ -30,8 +32,7 @@
             "host": "Hôte",
             "port": "Port",
             "protocol": "HTTPS",
-            "protocolLabel": "Protocole",
-            "detailsLabel": "Détails",
+            "apiVersion" : "version de l'API",
             "validation": {
                 "name" : "Le nom du registre doit faire entre {{min}} et {{max}} caractères.",
                 "type" : "Vous devez selectionner un type.",
@@ -39,7 +40,13 @@
                 "port" : "La valeur du port doit être entre {{min}} et {{max}}.",
                 "disconnected" : "Le registry est actuellement innaccessible, Rappuyez pour sauvegarder quand-même."
             },
-            "imagesLabel" : "Images du registre"
+            "images" : {
+                "imagesLabel" : "Images du registre",
+                "noImagesWarning" : "Ce registre ne contient aucune images."
+            },
+            "detailLabel": "Détails du registre",
+            "infoLabel": "Informations",
+            "protocolLabel": "Protocole"
         }
     }
 }
