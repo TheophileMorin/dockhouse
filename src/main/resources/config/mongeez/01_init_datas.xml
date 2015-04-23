@@ -34,7 +34,7 @@
             db.registry_types.insert(
             {
                 "_id" : "registry_type-0",
-                "name" : "Docker Private Registry",
+                "name" : "Docker",
                 "logo" : "assets/images/logos/docker.png",
                 "default_host": "localhost",
                 "default_port": 5000,

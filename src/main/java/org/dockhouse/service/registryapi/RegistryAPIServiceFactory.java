@@ -30,6 +30,9 @@ public class RegistryAPIServiceFactory {
 	@Inject
 	@Qualifier("DockerRegistryAPIServiceV1")
 	private RegistryAPIService dockerRegistryAPIServiceV1;
+	
+	public static final String DOCKER_REGISTRY_TYPE_NAME = "Docker";
+	public static final String DOCKER_V1_REGISTRY_TYPE_VERSION = "v1";
 
 	/**
 	 * Return RegistryAPIService corresponding to given registry type.
@@ -37,10 +40,11 @@ public class RegistryAPIServiceFactory {
 	 * @param registryTypeName Name of the registry type
 	 * @param registryApiVersion Version of the registry
 	 * @return RegistryAPIService of given registry type
+	 * @throws IllegalArgumentException
 	 */
-	public RegistryAPIService get(String registryTypeName, String registryApiVersion) {
+	public RegistryAPIService get(String registryTypeName, String registryApiVersion) throws IllegalArgumentException {
 		switch (registryTypeName) {
-			case "Docker":
+			case DOCKER_REGISTRY_TYPE_NAME:
 				try{
 					return getDockerRegistryByApiVersion(registryApiVersion);
 				}
@@ -57,9 +61,15 @@ public class RegistryAPIServiceFactory {
 	 *
 	 * @param registry Registry to find the RegistryAPIService for
 	 * @return RegistryAPIService of given registry
+	 * @throws IllegalArgumentException
 	 */
-	public RegistryAPIService get(Registry registry) {
-		return get(registry.getRegistryType().getName(), registry.getApiVersion());
+	public RegistryAPIService get(Registry registry) throws IllegalArgumentException {
+		try{
+			return get(registry.getRegistryType().getName(), registry.getApiVersion());
+		}
+		catch(IllegalArgumentException e){
+			throw e;
+		}
 	}
 	
 	/**
@@ -67,10 +77,11 @@ public class RegistryAPIServiceFactory {
 	 *
 	 * @param registryApiVersion Version of the registry
 	 * @return RegistryAPIService of given registry type and api version
+	 * @throws IllegalArgumentException
 	 */
-	public RegistryAPIService getDockerRegistryByApiVersion(String registryApiVersion) {
+	public RegistryAPIService getDockerRegistryByApiVersion(String registryApiVersion) throws IllegalArgumentException {
 		switch (registryApiVersion) {
-		case "v1":
+		case DOCKER_V1_REGISTRY_TYPE_VERSION:
 			return dockerRegistryAPIServiceV1;
 		default:
 			throw new IllegalArgumentException("RegistryAPIService for given id and api does not exist.");

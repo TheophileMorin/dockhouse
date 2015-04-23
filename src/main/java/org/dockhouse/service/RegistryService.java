@@ -37,57 +37,69 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegistryService {
 
-    private final Logger log = LoggerFactory.getLogger(RegistryService.class);
+	private final Logger log = LoggerFactory.getLogger(RegistryService.class);
 
-    @Inject
-    private RegistryRepository registryRepository;
+	@Inject
+	private RegistryRepository registryRepository;
 
-    public List<Registry> getAll() {
-    	return registryRepository.findAll()
-    							 .stream()
-    							 .collect(Collectors.toList());
-    }
+	@Inject
+	private RegistryAPIServiceFactory registryAPIServiceFactory;
 
-    public Optional<Registry> getOne(String id) {
-    	return Optional.ofNullable(registryRepository.findOne(id));
-    }
+	public List<Registry> getAll() {
+		return registryRepository.findAll()
+				.stream()
+				.collect(Collectors.toList());
+	}
 
-    public Registry insert(Registry registry) {
-    	registry.setId(null);
-    	return registryRepository.save(registry);
-    }
+	public Optional<Registry> getOne(String id) {
+		return Optional.ofNullable(registryRepository.findOne(id));
+	}
 
-    public Registry upsert(Registry registry, String id) {
-    	registry.setId(id);
-    	return registryRepository.save(registry);
-    }
+	public Registry insert(Registry registry) {
+		registry.setId(null);
+		return registryRepository.save(registry);
+	}
 
-    public RegistryStatusDTO getStatus(String id){
-        RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
-        registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
+	public Registry upsert(Registry registry, String id) {
+		registry.setId(id);
+		return registryRepository.save(registry);
+	}
 
-        Registry registry = registryRepository.findOne(id);
-        if(registry != null){
-            RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
-            RegistryAPIService registreAPI = factory.get(registry);
-            if(registreAPI.isAvailable(registry)){
-                registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
-            }
-         }
-         return registryStatusDTO;
-    }
+	public RegistryStatusDTO getStatus(String id){
+		RegistryStatusDTO registryStatusDTO = new RegistryStatusDTO();
+		registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_OFFLINE);
 
-    public RegistryDetailsDTO getDetails(String id){
-        RegistryDetailsDTO registryDetailsDTO = new RegistryDetailsDTO();
-        registryDetailsDTO.setDetails(new String());
+		Registry registry = registryRepository.findOne(id);
+		if(registry != null){
+			try{
+				RegistryAPIService registreAPI = registryAPIServiceFactory.get(registry);
+				if(registreAPI.isAvailable(registry)){
+					registryStatusDTO.setStatus(RegistryStatusDTO.STATUT_ONLINE);
+				}
+			}
+			catch(IllegalArgumentException e){
+				log.debug(e.getMessage());
+			}            
+		}
 
-        Registry registry = registryRepository.findOne(id);
-        if(registry != null){
-            RegistryAPIServiceFactory factory = new RegistryAPIServiceFactory();
-            RegistryAPIService registreAPI = factory.get(registry);
-            registryDetailsDTO.setDetails(registreAPI.getDetails(registry));
-        }
-        return registryDetailsDTO;
-    }
+		return registryStatusDTO;
+	}
+
+	public RegistryDetailsDTO getDetails(String id){
+		RegistryDetailsDTO registryDetailsDTO = new RegistryDetailsDTO();
+		registryDetailsDTO.setDetails(new String());
+
+		Registry registry = registryRepository.findOne(id);
+		if(registry != null){
+			try{
+				RegistryAPIService registreAPI = registryAPIServiceFactory.get(registry);
+				registryDetailsDTO.setDetails(registreAPI.getDetails(registry));
+			}
+			catch(IllegalArgumentException e){
+				log.debug(e.getMessage());
+			}
+		}
+		return registryDetailsDTO;
+	}
 
 }
