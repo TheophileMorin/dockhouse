@@ -15,7 +15,10 @@
  */
 package org.dockhouse.service.registryapi;
 
+import java.util.List;
+
 import org.dockhouse.domain.Registry;
+import org.dockhouse.web.rest.dto.RegistryImageDTO;
 
 /**
  * Class to interact with the registry APIs (e.g, Docker)
@@ -35,4 +38,11 @@ public interface RegistryAPIService {
 	 * @return String The message containing the information (JSON)
 	 */
 	public String getDetails(Registry registry);
+	
+	/**
+	 * Returns a list of all the images of the registry
+	 * @param registry The registry to get the information
+	 * @return List The list of all the registries
+	 */
+	public List<RegistryImageDTO> getImages(Registry registry);
 }

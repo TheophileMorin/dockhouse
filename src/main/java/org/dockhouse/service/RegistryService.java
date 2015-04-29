@@ -15,6 +15,7 @@
  */
 package org.dockhouse.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.service.registryapi.RegistryAPIService;
 import org.dockhouse.service.registryapi.RegistryAPIServiceFactory;
 import org.dockhouse.web.rest.dto.RegistryDetailsDTO;
+import org.dockhouse.web.rest.dto.RegistryImageDTO;
 import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,6 +102,22 @@ public class RegistryService {
 			}
 		}
 		return registryDetailsDTO;
+	}
+	
+	public List<RegistryImageDTO> getImages(String id){
+		List<RegistryImageDTO> registryImagesList = new ArrayList<RegistryImageDTO>();
+		
+		Registry registry = registryRepository.findOne(id);
+		if(registry != null){
+			try{
+				RegistryAPIService registreAPI = registryAPIServiceFactory.get(registry);
+				registryImagesList = registreAPI.getImages(registry);
+			}
+			catch(IllegalArgumentException e){
+				log.debug(e.getMessage());
+			}
+		}
+		return registryImagesList;
 	}
 
 }

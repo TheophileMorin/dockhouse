@@ -24,6 +24,7 @@ import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.service.RegistryService;
 import org.dockhouse.web.rest.dto.RegistryDetailsDTO;
+import org.dockhouse.web.rest.dto.RegistryImageDTO;
 import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -116,6 +117,19 @@ public class RegistryResource {
         log.debug("REST request to get Registry details : {}", id);
         RegistryDetailsDTO details = registryService.getDetails(id);
         return new ResponseEntity<RegistryDetailsDTO>(details, HttpStatus.OK);
+    }
+    
+    /**
+     * GET  /registries/:id/images -> get the "id" registry images.
+     */
+    @RequestMapping(value = "/registries/{id}/images",
+		    method = RequestMethod.GET,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    ResponseEntity<List<RegistryImageDTO>> getRegistryImages(@PathVariable String id) {
+        log.debug("REST request to get Registry images : {}", id);
+        List<RegistryImageDTO> images = registryService.getImages(id);
+        return new ResponseEntity<List<RegistryImageDTO>>(images, HttpStatus.OK);
     }
         
     /**
