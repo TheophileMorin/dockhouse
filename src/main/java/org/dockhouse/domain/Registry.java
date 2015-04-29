@@ -21,6 +21,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.dockhouse.domain.validation.ValidateRegistryTypeReference;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
@@ -32,6 +33,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * A registry.
  */
 @Document(collection = "registries")
+@ValidateRegistryTypeReference
 public class Registry extends AbstractAuditingEntity implements Serializable {
 
     @Id

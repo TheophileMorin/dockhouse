@@ -1,6 +1,9 @@
 package org.dockhouse.domain;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
+import javax.validation.Validator;
 
 import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
@@ -133,5 +136,26 @@ public class RegistryTest extends ValidationTest<Registry> {
 	public void testRegistryTypeCannotBeNull() {
 		registry.setRegistryType(null);
 		assertFieldIsInvalid(registry, "registryType");
+	}
+	
+	@Test
+	public void testRegistryTypeCannotBeInvalidReference() {
+		RegistryType registryType = new RegistryType();
+		registryType.setId("invalid");
+		registry.setRegistryType(registryType);
+		assertIsInvalid(registry);
+	}
+	
+	@Test 
+	public void testRegistryTypeIsTheSameAsInTheDatabase() {
+		RegistryType newRegistryType = new RegistryType();
+		newRegistryType.setId(registryType.getId());
+		newRegistryType.setName("different");
+		registry.setRegistryType(newRegistryType);
+		
+		String originalName = registryType.getName();
+		assertIsValid(registry);
+		
+		assertEquals(originalName, registry.getRegistryType().getName());
 	}
 }

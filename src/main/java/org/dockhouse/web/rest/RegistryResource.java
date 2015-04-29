@@ -59,7 +59,7 @@ public class RegistryResource {
 
     @Inject
     private Validator validator;
-    
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(validator);
