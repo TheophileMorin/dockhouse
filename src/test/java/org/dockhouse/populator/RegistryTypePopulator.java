@@ -25,6 +25,7 @@ public class RegistryTypePopulator {
 	    registryType1.setPublic(true);
     	List<String> versions = new ArrayList<String>();
 		versions.add("v1");
+		versions.add("v2");
 		registryType1.setApiVersions(versions);
     	 
 	    RegistryType registryType2 = new RegistryType();

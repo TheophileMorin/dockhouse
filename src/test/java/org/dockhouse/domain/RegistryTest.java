@@ -48,7 +48,7 @@ public class RegistryTest extends ValidationTest<Registry> {
     	registry.setHost("host");
     	registry.setPort(1);
     	registry.setProtocol("protocol");
-    	registry.setApiVersion("V1");
+    	registry.setApiVersion(registryType.getApiVersions().get(0));
     	registry.setRegistryType(registryType);
     }
 
@@ -157,5 +157,14 @@ public class RegistryTest extends ValidationTest<Registry> {
 		assertIsValid(registry);
 		
 		assertEquals(originalName, registry.getRegistryType().getName());
+	}
+	
+	@Test
+	public void testApiVersionIsInRegistryTypeApiVersions() {
+		registry.setApiVersion(registryType.getApiVersions().get(0));
+		assertIsValid(registry);
+		
+		registry.setApiVersion("does not exist");
+		assertIsInvalid(registry);
 	}
 }
