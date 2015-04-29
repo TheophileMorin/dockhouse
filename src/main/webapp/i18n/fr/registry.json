@@ -41,6 +41,9 @@
                 "disconnected" : "Le registry est actuellement innaccessible, Rappuyez pour sauvegarder quand-même."
             },
             "images" : {
+                "delete": {
+                    "question": "Etes-vous certain de vouloir supprimer l'image : {{id}} ?"
+                },
                 "imagesLabel" : "Images du registre",
                 "noImagesWarning" : "Ce registre ne contient aucune images."
             },

@@ -37,7 +37,8 @@
             remove: remove,
             testRegistry : testRegistry,
             getDetail : getDetail,
-            getAllImages : getAllImages
+            getAllImages : getAllImages,
+            deleteImage : deleteImage
         };
 
         ////////////////
@@ -139,7 +140,7 @@
         function testRegistry(id) {
             return service.one(id).customGET("status")
                 .then(function(data) {
-                    return data;
+                    return data.status;
                 })
                 .catch(function(error) {
                     logger.error('registries/:id/status',"Error lors de l'appel du service REST registries status",error);
@@ -152,21 +153,15 @@
          * @param registryId - the registry ID.
          * @returns a JSON object representing the registry details.
          */
-        function getDetail(registryId) { //TODO mock.
-            return $q(function(resolve) {
-                resolve({
-                    "status" : "Still mocked in the Front services.",
-                    "id" : registryId
-                });
-            });
-            /*return service.one(id).customGET("info")
+        function getDetail(registryId) {
+            return service.one(registryId).customGET("details")
                 .then(function(data) {
-                    return data;
+                    return data.details;
                 })
                 .catch(function(error) {
-                    logger.error('registries/:id/info',"Error lors de l'appel du service REST registries info",error);
+                    logger.error('registries/:id/details',"Error lors de l'appel du service REST registries info",error);
                     throw error;
-                });*/
+                });
         }
 
         /**
@@ -192,11 +187,27 @@
                 ]);
             });
             /*return service.one(id).customGET("images")
+                .then(function(data) {
+                    return data;
+                })
+                .catch(function(error) {
+                    logger.error('registries/:id/images',"Error lors de l'appel du service REST registries images",error);
+                    throw error;
+                });*/
+        }
+
+        function deleteImage(registryId, imageId) { //TODO mock
+
+            return $q(function(resolve) {
+                console.log("MOCK - image " + imageId + "deleted (for registry "+ registryId +").");
+                resolve({});
+            });
+            /*return service.one(registryId).customGET("images").one(imageId) //TODO change to delete http verb.
              .then(function(data) {
              return data;
              })
              .catch(function(error) {
-             logger.error('registries/:id/images',"Error lors de l'appel du service REST registries images",error);
+             logger.error('registries/:id/images/:id2',"Error lors de l'appel du service REST registries images",error);
              throw error;
              });*/
         }

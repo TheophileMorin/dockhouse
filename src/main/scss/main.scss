@@ -620,6 +620,14 @@ ul#strength {
 }
 
 
+
+@mixin clickableItem() {
+    cursor: pointer;
+}
+
+
+
+
 .show {
     display: block !important;
 }
@@ -672,17 +680,15 @@ ul#strength {
 }
 
 .regDetInfos {
-    max-height: 130px;
+    max-height: 200px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
+
 .btnStatus {
     float : right;
     margin-right: 4px;
-}
-.clickable {
-    cursor: default;
 }
 
 
@@ -714,3 +720,17 @@ ul#strength {
         pointer-events: none;
     }
 }
+
+.registryEditionBtn {
+    float : right;
+    margin-right: 4px;
+    @include clickableItem();
+}
+
+.imageDeleteBtn {
+    float: right;
+    @include clickableItem();
+}
+
+
+

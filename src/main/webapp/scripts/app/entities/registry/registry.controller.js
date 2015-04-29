@@ -189,17 +189,12 @@
             for (var i= 0; i < max; ++i) {
                 (function(index){
                     Registry.testRegistry(vm.registries[i].id)
-                    .then(function(data){
-                        //console.log(index);
-                        if(data.status == "online") {
-                            vm.registries[index].status = "online";
-                        } else {
+                        .then(function(data){
+                            vm.registries[index].status = data;
+                        })
+                        .catch(function(error) {
                             vm.registries[index].status = "offline";
-                        }
-                    })
-                    .catch(function(error) {
-                            vm.registries[index].status = "offline";
-                    });
+                        });
                 }(i));
             }
         }

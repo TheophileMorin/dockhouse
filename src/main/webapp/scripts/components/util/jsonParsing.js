@@ -24,10 +24,20 @@
             function into(input) {
                 if(input !== null) {
                     console.log("input");
-                    return JSON.parse(input);
+                    console.log(input);
+                    return input; //JSON.parse(input);
                 }
             }
+            function out(output) {
+                if(output !== null) {
+                    console.log("output");
+                    console.log(output);
+                    return output
+                }
+            }
+
             ngModel.$parsers.push(into);
+            ngModel.$parsers.push(out);
         }
     }
 })();
