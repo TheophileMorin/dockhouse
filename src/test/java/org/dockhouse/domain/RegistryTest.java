@@ -1,6 +1,9 @@
 package org.dockhouse.domain;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.inject.Inject;
+import javax.validation.Validator;
 
 import org.dockhouse.Application;
 import org.dockhouse.config.MongoConfiguration;
@@ -45,7 +48,7 @@ public class RegistryTest extends ValidationTest<Registry> {
     	registry.setHost("host");
     	registry.setPort(1);
     	registry.setProtocol("protocol");
-    	registry.setApiVersion("V1");
+    	registry.setApiVersion(registryType.getApiVersions().get(0));
     	registry.setRegistryType(registryType);
     }
 
@@ -133,5 +136,35 @@ public class RegistryTest extends ValidationTest<Registry> {
 	public void testRegistryTypeCannotBeNull() {
 		registry.setRegistryType(null);
 		assertFieldIsInvalid(registry, "registryType");
+	}
+	
+	@Test
+	public void testRegistryTypeCannotBeInvalidReference() {
+		RegistryType registryType = new RegistryType();
+		registryType.setId("invalid");
+		registry.setRegistryType(registryType);
+		assertIsInvalid(registry);
+	}
+	
+	@Test 
+	public void testRegistryTypeIsTheSameAsInTheDatabase() {
+		RegistryType newRegistryType = new RegistryType();
+		newRegistryType.setId(registryType.getId());
+		newRegistryType.setName("different");
+		registry.setRegistryType(newRegistryType);
+		
+		String originalName = registryType.getName();
+		assertIsValid(registry);
+		
+		assertEquals(originalName, registry.getRegistryType().getName());
+	}
+	
+	@Test
+	public void testApiVersionIsInRegistryTypeApiVersions() {
+		registry.setApiVersion(registryType.getApiVersions().get(0));
+		assertIsValid(registry);
+		
+		registry.setApiVersion("does not exist");
+		assertIsInvalid(registry);
 	}
 }

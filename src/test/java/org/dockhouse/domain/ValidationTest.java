@@ -15,18 +15,27 @@ public class ValidationTest<Entity> {
 	@Inject
 	private Validator validator;
 	
+	protected Validator validator() { 
+		return validator;
+	}
+	
 	public void assertIsValid(Entity dto) {
-		Set<ConstraintViolation<Entity>> errors = validator.validate(dto, Default.class);
+		Set<ConstraintViolation<Entity>> errors = validator().validate(dto, Default.class);
 		assertTrue(errors.isEmpty());
 	}
 	
+	public void assertIsInvalid(Entity dto) {
+		Set<ConstraintViolation<Entity>> errors = validator().validate(dto, Default.class);
+		assertFalse(errors.isEmpty());
+	}
+	
 	public void assertFieldIsValid(Entity dto, String field) {
-		Set<ConstraintViolation<Entity>> errors = validator.validateProperty(dto, field, Default.class);
+		Set<ConstraintViolation<Entity>> errors = validator().validateProperty(dto, field, Default.class);
 		assertTrue(errors.isEmpty());
 	}
 	
 	public void assertFieldIsInvalid(Entity dto, String field) {
-		Set<ConstraintViolation<Entity>> errors = validator.validateProperty(dto, field, Default.class);
+		Set<ConstraintViolation<Entity>> errors = validator().validateProperty(dto, field, Default.class);
 		assertFalse(errors.isEmpty());
 	}
 	

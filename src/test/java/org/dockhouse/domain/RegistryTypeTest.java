@@ -44,7 +44,7 @@ public class RegistryTypeTest extends ValidationTest<RegistryType> {
 		assertIsValid(registryType);
 	}
 	
-	@Test
+	@Test	
 	public void testNameCannotBeNull() {
 		registryType.setName(null);
 		assertFieldIsInvalid(registryType, "name");

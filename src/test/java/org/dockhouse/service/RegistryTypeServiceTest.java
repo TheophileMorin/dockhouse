@@ -66,20 +66,4 @@ public class RegistryTypeServiceTest {
     	registryType = registryTypeService.getOne("0");
     	assertFalse(registryType.isPresent());
     }
-    
-    @Test
-    public void insertTest() {
-    	long collectionSize = registryTypeRepository.count();
-    	RegistryType registryType = new RegistryType();
-    	String name = "name";
-    	registryType.setName(name);
-    	registryType.setDefaultHost("host");
-    	registryType.setDefaultPort(4);
-    	List<String> versions = new ArrayList<String>();
-		versions.add("V1");
-		registryType.setApiVersions(versions);
-    	registryType = registryTypeService.insert(registryType);
-    	assertEquals(name, registryType.getName());
-    	assertEquals(collectionSize+1, registryTypeRepository.count());
-    }
 }
