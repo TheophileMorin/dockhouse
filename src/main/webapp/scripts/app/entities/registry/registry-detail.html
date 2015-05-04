@@ -21,6 +21,9 @@
     <script type="text/ng-template" id="RegistryChangeModal">
         <ng-include src="modal.modalHtmlURL"></ng-include>
     </script>
+    <script type="text/ng-template" id="ImageRemoveConfirmationModal">
+        <ng-include src="modalDelete.modalHtmlURL"></ng-include>
+    </script>
 
     <h2>
         <span translate="dockhouseApp.registry.detail.title">Registry</span> : {{detailCtrl.registry.name}} &nbsp;
@@ -36,7 +39,7 @@
                     <div class="col-md-7">
                         <h3 >
                             <span translate="dockhouseApp.registry.detailLabel">Informations</span>
-                            <span class="clickable btnStatus fa fa-cog" ng-click="detailCtrl.openEditionModal()"></span>
+                            <span class="registryEditionBtn fa fa-cog" ng-click="detailCtrl.openEditionModal()"></span>
                         </h3>
                     </div>
                     <div class="col-md-5">
@@ -103,7 +106,7 @@
                 <div>
                     <div class="right-inner-addon">
                         <i class="glyphicon glyphicon-search"></i>
-                        <input type="search" class="form-control" ng-model="filter"  placeholder="TODO.translate@global.search" />
+                        <input type="search" class="form-control" ng-model="filter"  placeholder="{{'global.search' | translate}}" />
                     </div>
                     <div class="table-responsive">
                         <table class="table no-margin">
@@ -115,7 +118,13 @@
                             <tbody>
                             <tr ng-repeat="image in detailCtrl.registryImages | filter:filter | orderBy:predicate:reverse">
                                 <td>
-                                    <h5><i class="fa fa-cube"></i> <a href="">{{image.name}}</a></h5>
+                                    <h5>
+                                        <i class="fa fa-cube"></i> <a href="">{{image.name}}</a>
+                                        <div class="imageDeleteBtn clickable" ng-click="detailCtrl.openRemoveImageModal(image)">
+                                            <span class="glyphicon glyphicon-remove-circle"></span>
+                                        </div>
+                                    </h5>
+
                                 </td>
                             </tr>
                             <tr ng-show="!detailCtrl.registryImages.length">
@@ -133,7 +142,7 @@
                 <tab-heading>
                     <h5 translate="dockhouseApp.registry.infoLabel">Registry Detail</h5>
                 </tab-heading>
-                <div>
+                <div class="regDetInfos">
                     <pre> <code>{{ detailCtrl.registryDetail }}</code> </pre>
                 </div>
             </tab>

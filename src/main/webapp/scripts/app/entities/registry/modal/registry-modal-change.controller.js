@@ -34,6 +34,23 @@
         vm.registryEdited = {};
         vm.registryTypes = [];
 
+        /*
+         TODO
+         You can actually edit a registry with a wrong apiVersion
+         --> If Docker(v2) is changed into Rocket, v2 is still apiVersion and is not reset.
+         So we have to put a listener on the apiVersion or the registryType ?
+         -->  by putting ng-model-options="{ getterSetter: true }" in the HTML select field
+         --> by adding the following code (it's a template)
+         var _name = 'Brian';
+         $scope.user = {
+         name: function(newName) {
+         if (angular.isDefined(newName)) {
+         _name = newName;
+         }
+         return _name;
+         }
+         };
+         */
         vm.vHttpsRegistry = false;
 
         vm.save = save;
@@ -53,7 +70,8 @@
         function save() {
             logger.debug('Choice --> Save');
             setProtocol();
-                $modalInstance.close(vm.registryEdited);
+            setPlaceHolders();
+            $modalInstance.close(vm.registryEdited);
         }
 
         function cancel() {
@@ -65,7 +83,7 @@
             RegistryTypes.getAll()
                 .then(function(data){
                     vm.registryTypes = data;
-                    console.log(data);
+                    doneLoading();
                 })
                 .catch(function(error) {
                     logger.error('Enabled to get the list of registry types.');
@@ -77,6 +95,15 @@
                 vm.registryEdited.protocol = "HTTPS";
             } else {
                 vm.registryEdited.protocol = "HTTP";
+            }
+        }
+
+        function setPlaceHolders() {
+            if(vm.registryEdited.host == "" || vm.registryEdited.host == null) {
+                vm.registryEdited.host = vm.registryEdited.registryType.defaultHost;
+            }
+            if(vm.registryEdited.port == null) {
+                vm.registryEdited.port = vm.registryEdited.registryType.defaultPort;
             }
         }
 
@@ -100,6 +127,31 @@
                 //Otherwise it's a common JS object
                 vm.registryEdited = registryEdited;
             }
+
+        }
+
+        /**
+         * Allow angular to bind correctly objects in the select fields.
+         * Replace the object.
+         */
+        function doneLoading() {
+            //update the edited registry in the modal.
+            if(vm.registryEdited.registryType != null) {
+                vm.registryEdited.registryType = getTypeCorrectReference();
+            }
+        }
+
+        function getTypeCorrectReference() {
+            try {
+                for (var i = 0, max = vm.registryTypes.length ; i < max ; ++i) {
+                    if (vm.registryTypes[i].id == vm.registryEdited.registryType.id) {
+                        return vm.registryTypes[i];
+                    }
+                }
+            } catch(e) {
+                return null;
+            }
+            return null;
         }
     }
 })();

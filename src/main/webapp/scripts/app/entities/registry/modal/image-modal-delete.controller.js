@@ -19,19 +19,19 @@
 
     angular
         .module('dockhouseApp')
-        .controller('RegistryModalRemoveController', RegistryModalRemoveController);
+        .controller('ImageModalRemoveController', ImageModalRemoveController);
 
-    RegistryModalRemoveController.$inject = ['$modalInstance', 'registryName', 'Logger'];
+    ImageModalRemoveController.$inject = ['$modalInstance', 'imageName', 'Logger'];
 
     /* @ngInject */
-    function RegistryModalRemoveController($modalInstance, registryName, Logger){
+    function ImageModalRemoveController($modalInstance, imageName, Logger){
         /* jshint validthis: true */
         var vm = this;
-        var logger = Logger.getInstance('RegistryModalRemoveController');
+        var logger = Logger.getInstance('ImageModalRemoveController');
 
-        vm.modalHtmlURL = "scripts/app/entities/registry/modal/registry-modal-delete.html";
+        vm.modalHtmlURL = "scripts/app/entities/registry/modal/image-modal-delete.html";
 
-        vm.registryName = registryName;
+        vm.imageName = imageName;
         vm.confirmRemove = confirmRemove;
         vm.cancel = cancel;
 
