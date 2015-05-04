@@ -45,4 +45,20 @@ public interface RegistryAPIService {
 	 * @return List The list of all the registries
 	 */
 	public List<RegistryImageDTO> getImages(Registry registry);
+	
+	/**
+	 * Delete an image in the registry
+	 * @param registry The registry where to delete the image
+	 * @param imageName The name of the image to delete
+	 * @return boolean True  if the delete went well
+	 */
+	public boolean deleteImage(Registry registry, String imageName);
+	
+	/**
+	 * Returns the tags for the image of a registry
+	 * @param registry The registry where the image is
+	 * @param imageName The name of the image
+	 * @return String The tags
+	 */
+	public String getImageTags(Registry registry, String imageName);
 }
