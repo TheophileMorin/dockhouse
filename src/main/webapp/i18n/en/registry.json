@@ -48,7 +48,8 @@
                     "question": "Are you sure you want to delete image : {{id}}?"
                 },
                 "imagesLabel" : "Registry images",
-                "noImagesWarning" : "This registry does not contains any images."
+                "noImagesWarning" : "This registry does not contains any images.",
+                "offlineWarning" : "This registry is offline"
             },
             "detailLabel": "Registry Details",
             "infoLabel": "Informations",

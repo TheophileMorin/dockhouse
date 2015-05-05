@@ -130,7 +130,10 @@
                             </tr>
                             <tr ng-show="!detailCtrl.registryImages.length">
                                 <td>
-                                    <h5><i class="fa fa-cube"></i>&nbsp;<i translate="dockhouseApp.registry.images.noImagesWarning">This registry does not contains any images.</i></h5>
+                                    <h5><i class="fa fa-cube"></i>&nbsp;
+                                        <i ng-if="detailCtrl.onlineRegistry=='online'" translate="dockhouseApp.registry.images.noImagesWarning">This registry does not contains any images.</i>
+                                        <i ng-if="!(detailCtrl.onlineRegistry=='online')" translate="dockhouseApp.registry.images.offlineWarning">This registry is offline.</i>
+                                    </h5>
                                 </td>
                             </tr>
                             </tbody>

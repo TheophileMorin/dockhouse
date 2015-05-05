@@ -48,7 +48,8 @@
                     "question": "Etes-vous certain de vouloir supprimer l'image : {{id}} ?"
                 },
                 "imagesLabel" : "Images du registre",
-                "noImagesWarning" : "Ce registre ne contient aucune images."
+                "noImagesWarning" : "Ce registre ne contient aucune images.",
+                "offlineWarning" : "Ce registre n'est pas accessible."
             },
             "detailLabel": "Détails du registre",
             "infoLabel": "Informations",

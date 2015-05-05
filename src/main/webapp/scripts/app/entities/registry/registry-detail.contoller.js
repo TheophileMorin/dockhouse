@@ -102,6 +102,7 @@
             Registry.deleteImage(vm.registry.id, imageID).
                 then(function(data) {
                     console.log("Image correctly deleted : " + data);
+                    vm.loadRegistry(vm.registry.id);
                 }).
                 catch(function() {
                     console.log("Image deletion failed...")

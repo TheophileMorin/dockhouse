@@ -182,12 +182,12 @@
 
 
         function deleteImage(registryId, imageId) {
-            return service.one(registryId).one('images', imageId).remove()
+            return service.one(registryId).one('images').one(imageId).remove()
                 .then(function(data) {
                     return data;
                 })
                 .catch(function(error) {
-                    logger.error('registries/:id/images/:id2',"Error lors de l'appel du service REST registries images",error);
+                    logger.error('registries/'+registryId+'/images/'+imageId+'',"Error lors de l'appel du service REST registries images",error);
                     throw error;
                 });
         }
