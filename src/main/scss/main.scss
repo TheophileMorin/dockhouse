@@ -689,6 +689,7 @@ ul#strength {
 .btnStatus {
     float : right;
     margin-right: 4px;
+    margin-top: 16px;
 }
 
 
@@ -732,5 +733,13 @@ ul#strength {
     @include clickableItem();
 }
 
+.status-badge {
+    width : 48px;
+}
 
-
+.ariane {
+    background: #D6DAE1;
+    margin-bottom: 5px;
+    margin-top: -10px;
+    font-size: small;
+}

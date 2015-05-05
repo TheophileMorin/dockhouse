@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/register',
                 data: {
                     roles: [],
-                    pageTitle: 'register.title'
+                    pageTitle: 'register.title',
+                    displayName: 'register.route'
                 },
                 views: {
                     'content@': {

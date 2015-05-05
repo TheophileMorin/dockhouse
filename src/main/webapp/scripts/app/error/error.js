@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/error',
                 data: {
                     roles: [],
-                    pageTitle: 'errors.title'
+                    pageTitle: 'errors.title',
+                    displayName : "errors.route"
                 },
                 views: {
                     'content@': {

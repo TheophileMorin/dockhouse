@@ -1,6 +1,7 @@
 {
     "register": {
         "title": "Création de compte utilisateur",
+        "route": "Enregistrement",
         "form": {
             "button": "Enregistrement"
         },

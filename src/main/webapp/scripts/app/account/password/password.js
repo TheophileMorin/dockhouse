@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/password',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'global.menu.account.password'
+                    pageTitle: 'global.menu.account.password',
+                    displayName: 'password.route'
                 },
                 views: {
                     'content@': {

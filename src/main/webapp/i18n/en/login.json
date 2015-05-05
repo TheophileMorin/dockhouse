@@ -1,6 +1,7 @@
 {
     "login": {
         "title": "Authentication",
+        "route": "Authentication",
         "form": {
             "username": "Login",
             "username.placeholder": "Your login or email",

@@ -44,9 +44,10 @@
             <tbody>
             <tr ng-repeat="registry in registryCtrl.registries">
                 <td>
-                    <i ng-class="{'fa fa-spinner text-warning fa-spin': registry.status=='pending',
-                            'fa fa-circle-o-notch text-success': registry.status=='online',
-                            'fa fa-circle-o text-danger': registry.status=='offline'}"></i> &nbsp;
+                    <i class="status-badge" ng-class="{'badge badge-warning': registry.status=='pending',
+                            'badge badge-success': registry.status=='online',
+                            'badge badge-danger': registry.status=='offline'}"
+                       translate="dockhouseApp.registry.status.{{registry.status}}">Status</i> &nbsp;
                     <a ui-sref="registryDetail({id:registry.id})">{{registry.name}}</a>
                 </td>
                 <td><img ng-src="{{ registry.registryType.logo }}" alt="{{ registry.registryType.logo }}" class="icons">  &nbsp; {{registry.registryType.name}}</td>

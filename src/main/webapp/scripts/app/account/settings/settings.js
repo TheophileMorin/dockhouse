@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/settings',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'global.menu.account.settings'
+                    pageTitle: 'global.menu.account.settings',
+                    displayName: 'settings.route'
                 },
                 views: {
                     'content@': {

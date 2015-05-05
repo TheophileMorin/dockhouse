@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/login',
                 data: {
                     roles: [],
-                    pageTitle: 'login.title'
+                    pageTitle: 'login.title',
+                    displayName: 'login.route'
                 },
                 views: {
                     'content@': {

@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/author',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'dockhouseApp.author.home.title'
+                    pageTitle: 'dockhouseApp.author.home.title',
+                    displayName: 'dockhouseApp.author.home.route'
                 },
                 views: {
                     'content@': {
@@ -39,11 +40,12 @@ angular.module('dockhouseApp')
                 }
             })
             .state('authorDetail', {
-                parent: 'entity',
+                parent: 'author',
                 url: '/author/:id',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'dockhouseApp.author.detail.title'
+                    pageTitle: 'dockhouseApp.author.detail.title',
+                    displayName: 'dockhouseApp.author.detail.route'
                 },
                 views: {
                     'content@': {

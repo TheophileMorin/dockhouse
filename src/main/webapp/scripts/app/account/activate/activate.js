@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/activate?key',
                 data: {
                     roles: [],
-                    pageTitle: 'activate.title'
+                    pageTitle: 'activate.title',
+                    displayName: 'activate.route'
                 },
                 views: {
                     'content@': {

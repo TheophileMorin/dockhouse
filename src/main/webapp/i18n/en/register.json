@@ -1,6 +1,7 @@
 {
     "register": {
         "title": "Registration",
+        "route": "Registration",
         "form": {
             "button": "Register"
         },

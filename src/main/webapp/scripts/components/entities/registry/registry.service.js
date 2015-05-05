@@ -169,47 +169,27 @@
          * @param registryId - The registry ID.
          * @returns a JSON array with the image list.
          */
-        function getAllImages(registryId) { //TODO mock.
-            return $q(function(resolve) {
-                resolve([
-                    {
-                        "name" : "Dockhouse/Dockhouse",
-                        "version" : "v1.0.6"
-                    },
-                    {
-                        "name" : "Dockhouse/Dockhouse-pic-tool",
-                        "version" : "v2.3.7"
-                    },
-                    {
-                        "name" : "Ubuntu",
-                        "version" : "14.04"
-                    }
-                ]);
-            });
-            /*return service.one(id).customGET("images")
+        function getAllImages(registryId) {
+            return service.one(registryId).customGET("images")
+                .then(function (data) {
+                    return data;
+                })
+                .catch(function (error) {
+                    logger.error('registries/:id/images', "Error lors de l'appel du service REST registries images", error);
+                    throw error;
+                });
+        }
+
+
+        function deleteImage(registryId, imageId) {
+            return service.one(registryId).one('images', imageId).remove()
                 .then(function(data) {
                     return data;
                 })
                 .catch(function(error) {
-                    logger.error('registries/:id/images',"Error lors de l'appel du service REST registries images",error);
+                    logger.error('registries/:id/images/:id2',"Error lors de l'appel du service REST registries images",error);
                     throw error;
-                });*/
-        }
-
-        function deleteImage(registryId, imageId) { //TODO mock
-
-            return $q(function(resolve) {
-                console.log("MOCK - image " + imageId + "deleted (for registry "+ registryId +").");
-                resolve({});
-            });
-            /*return service.one(registryId).customGET("images").one(imageId) //TODO change to delete http verb.
-             .then(function(data) {
-             return data;
-             })
-             .catch(function(error) {
-             logger.error('registries/:id/images/:id2',"Error lors de l'appel du service REST registries images",error);
-             throw error;
-             });*/
+                });
         }
     }
 

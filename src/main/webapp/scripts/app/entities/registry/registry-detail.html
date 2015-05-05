@@ -27,9 +27,10 @@
 
     <h2>
         <span translate="dockhouseApp.registry.detail.title">Registry</span> : {{detailCtrl.registry.name}} &nbsp;
-            <span class="btnStatus" ng-class="{'fa fa-spinner text-warning fa-spin': detailCtrl.onlineRegistry=='pending',
-                            'fa fa-circle-o-notch text-success': detailCtrl.onlineRegistry=='online',
-                            'fa fa-circle-o text-danger': detailCtrl.onlineRegistry=='offline'}"></span>
+        <i class="btnStatus status-badge" ng-class="{'badge badge-warning': detailCtrl.onlineRegistry=='pending',
+                            'badge badge-success': detailCtrl.onlineRegistry=='online',
+                            'badge badge-danger': detailCtrl.onlineRegistry=='offline'}"
+           translate="dockhouseApp.registry.status.{{detailCtrl.onlineRegistry}}">Status</i>
     </h2>
 
     <div class="row">

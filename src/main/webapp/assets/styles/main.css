@@ -12428,36 +12428,37 @@ ul#strength {
 .btnStatus {
   float: right;
   margin-right: 4px;
+  margin-top: 16px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003695}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003696}}
 .left-inner-addon {
   position: relative;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003699}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003700}}
 .left-inner-addon input {
   padding-left: 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003702}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003703}}
 .left-inner-addon i {
   position: absolute;
   padding: 10px 12px;
   pointer-events: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003709}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003710}}
 .right-inner-addon {
   position: relative;
   margin-top: 5px;
   margin-bottom: 5px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003713}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003714}}
 .right-inner-addon input {
   padding-right: 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003716}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003717}}
 .right-inner-addon i {
   position: absolute;
   right: 0px;
@@ -12465,15 +12466,28 @@ ul#strength {
   pointer-events: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003724}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003725}}
 .registryEditionBtn {
   float: right;
   margin-right: 4px;
   cursor: pointer;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003730}}
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003731}}
 .imageDeleteBtn {
   float: right;
   cursor: pointer;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003736}}
+.status-badge {
+  width: 48px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/D\:\/EMN\/A2\/projet_integrateur\/dockhouse\/src\/main\/scss\/main\.scss}line{font-family:\00003740}}
+.ariane {
+  background: #D6DAE1;
+  margin-bottom: 5px;
+  margin-top: -10px;
+  font-size: small;
 }

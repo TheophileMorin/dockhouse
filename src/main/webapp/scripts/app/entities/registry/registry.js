@@ -24,7 +24,8 @@ angular.module('dockhouseApp')
                 url: '/registry',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'dockhouseApp.registry.home.title'
+                    pageTitle: 'dockhouseApp.registry.home.title',
+                    displayName: 'dockhouseApp.registry.home.route'
                 },
                 views: {
                     'content@': {
@@ -40,12 +41,12 @@ angular.module('dockhouseApp')
                 }
             })
             .state('registryDetail', {
-                parent: 'entity',
+                parent: 'registry',
                 url: '/registry/:id',
                 data: {
                     roles: ['ROLE_USER'],
-                    pageTitle: 'dockhouseApp.registry.detail.title'
-
+                    pageTitle: 'dockhouseApp.registry.detail.title',
+                    displayName: 'dockhouseApp.registry.detail.route'
                 },
                 views: {
                     'content@': {

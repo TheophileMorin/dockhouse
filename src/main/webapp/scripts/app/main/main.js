@@ -22,7 +22,8 @@ angular.module('dockhouseApp')
                 parent: 'site',
                 url: '/',
                 data: {
-                    roles: []
+                    roles: [],
+                    displayName : "dockhouseApp.main.route"
                 },
                 views: {
                     'content@': {

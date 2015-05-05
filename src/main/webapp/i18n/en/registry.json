@@ -3,6 +3,7 @@
         "registry" : {
             "home": {
                 "title": "Registry",
+                "route": "Registry",
                 "createLabel": "Create a new Registry",
                 "createOrEditLabel": "Create or edit a Registry"
             },
@@ -10,7 +11,8 @@
                 "question": "Are you sure you want to delete Registry : {{id}}?"
             },
             "detail": {
-                "title": "Registry"
+                "title": "Registry",
+                "route": "Detail"
             },
             "id":"ID",
             "name": "Name",
@@ -26,8 +28,9 @@
             },
             "status": {
                 "default" : "Status",
-                "online" : "Online",
-                "offline" : "Offline"
+                "online" : "Up  ",
+                "offline" : "Down",
+                "pending" : "..."
             },
             "host": "Host",
             "port": "Port",

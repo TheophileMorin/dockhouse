@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/metrics',
                 data: {
                     roles: ['ROLE_ADMIN'],
-                    pageTitle: 'metrics.title'
+                    pageTitle: 'metrics.title',
+                    displayName: 'metrics.route'
                 },
                 views: {
                     'content@': {
