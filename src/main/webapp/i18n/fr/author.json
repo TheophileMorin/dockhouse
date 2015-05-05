@@ -2,6 +2,7 @@
     "dockhouseApp": {
         "author" : {
             "home": {
+                "route": "Auteur",
                 "title": "Authors",
                 "createLabel": "Créer un nouveau Author",
                 "createOrEditLabel": "Créer ou éditer un Author"
@@ -10,6 +11,7 @@
                 "question": "Etes-vous certain de vouloir supprimer le Author {{ id }} ?"
             },
             "detail": {
+                "route": "Détail",
                 "title": "Author"
             },
             "name": "Name",

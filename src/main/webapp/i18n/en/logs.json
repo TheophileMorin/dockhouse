@@ -1,6 +1,7 @@
 {
     "logs": {
         "title": "Logs",
+        "route": "Logs",
         "nbloggers": "There are {{ total }} loggers.",
         "filter": "Filter",
         "table": {

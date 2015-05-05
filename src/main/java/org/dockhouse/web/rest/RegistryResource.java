@@ -23,7 +23,10 @@ import javax.validation.Valid;
 import org.dockhouse.domain.Registry;
 import org.dockhouse.repository.RegistryRepository;
 import org.dockhouse.service.RegistryService;
+import org.dockhouse.web.rest.dto.RegistryDeleteImageDTO;
 import org.dockhouse.web.rest.dto.RegistryDetailsDTO;
+import org.dockhouse.web.rest.dto.RegistryImageDTO;
+import org.dockhouse.web.rest.dto.RegistryImageTagsDTO;
 import org.dockhouse.web.rest.dto.RegistryStatusDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +62,7 @@ public class RegistryResource {
 
     @Inject
     private Validator validator;
-    
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(validator);
@@ -117,6 +120,58 @@ public class RegistryResource {
         RegistryDetailsDTO details = registryService.getDetails(id);
         return new ResponseEntity<RegistryDetailsDTO>(details, HttpStatus.OK);
     }
+    
+    /**
+     * GET  /registries/:id/images -> get the "id" registry images.
+     */
+    @RequestMapping(value = "/registries/{id}/images",
+		    method = RequestMethod.GET,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    ResponseEntity<List<RegistryImageDTO>> getRegistryImages(@PathVariable String id) {
+        log.debug("REST request to get Registry images : {}", id);
+        List<RegistryImageDTO> images = registryService.getImages(id);
+        return new ResponseEntity<List<RegistryImageDTO>>(images, HttpStatus.OK);
+    }
+    
+    /**
+     * DELETE  /registries/:id/images/:namespace/:repository -> delete the image with imageName
+     * from the "id" registry images.
+     */
+    @RequestMapping(value = "/registries/{id}/images/{namespace}/{repository}",
+		    method = RequestMethod.DELETE,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    ResponseEntity<RegistryDeleteImageDTO> deleteImageFromRegistry(@PathVariable String id,
+    		@PathVariable String namespace, @PathVariable String repository) {
+    	String imageName = namespace+"/"+repository;
+        log.debug("REST request to delete the image from the Registry : {}", id + " : " + imageName);
+        RegistryDeleteImageDTO deleteImageResponse = registryService.deleteImage(id, imageName);
+        if(deleteImageResponse.isDeleted()){
+            return new ResponseEntity<RegistryDeleteImageDTO>(deleteImageResponse, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<RegistryDeleteImageDTO>(deleteImageResponse, HttpStatus.METHOD_NOT_ALLOWED);
+        }
+    }
+    
+    
+    /**
+     * GET  /registries/:id/images/:namespace/:repository/tags -> get the tags of the image in the
+     * "id" registry.
+     */
+    @RequestMapping(value = "/registries/{id}/images/{namespace}/{repository}/tags",
+		    method = RequestMethod.GET,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    ResponseEntity<RegistryImageTagsDTO> getRegistryImageTags(@PathVariable String id,
+    		@PathVariable String namespace, @PathVariable String repository) {
+    	String imageName = namespace+"/"+repository;
+        log.debug("REST request to get tags from the image in the Registry : {}", id+" : "+imageName);
+        RegistryImageTagsDTO tags = registryService.getImageTags(id, imageName);
+        return new ResponseEntity<RegistryImageTagsDTO>(tags, HttpStatus.OK);
+    }
+    
         
     /**
      * POST  /registries -> Create a new registry.

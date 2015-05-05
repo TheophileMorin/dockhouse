@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/health',
                 data: {
                     roles: ['ROLE_ADMIN'],
-                    pageTitle: 'health.title'
+                    pageTitle: 'health.title',
+                    displayName: 'health.route'
                 },
                 views: {
                     'content@': {

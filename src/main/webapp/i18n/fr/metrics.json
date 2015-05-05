@@ -1,6 +1,7 @@
 {
     "metrics": {
         "title": "Métriques de l'application",
+        "route": "Métriques",
         "refresh.button": "Rafraichir",
         "updating": "Mise à jour...",
         "jvm": {

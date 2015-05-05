@@ -2,6 +2,7 @@
     "dockhouseApp": {
         "author" : {
             "home": {
+                "route": "Author",
                 "title": "Authors",
                 "createLabel": "Create a new Author",
                 "createOrEditLabel": "Create or edit a Author"
@@ -10,6 +11,7 @@
                 "question": "Are you sure you want to delete Author {{ id }}?"
             },
             "detail": {
+                "route": "Detail",
                 "title": "Author"
             },
             "name": "Name",

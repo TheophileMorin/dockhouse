@@ -4,6 +4,7 @@
         "browsehappy": "Vous utilisez un <strong>ancien</strong> navigateur. Veuillez <a href=\"http://browsehappy.com/?locale=fr\">mettre à jour votre navigateur</a> pour une meilleure expérience.",
         "menu": {
             "home": "Dashboard",
+            "route":"Accueil",
             "entities": {
                 "main": "Entités",
                 "author": "Author",
@@ -31,6 +32,7 @@
                 "logs": "Logs",
                 "audits": "Audits",
                 "apidocs": "API",
+                "apidocsroute": "API",
                 "database": "Base de données"
             },
             "language": "Langue"

@@ -89,7 +89,7 @@ public class RegistryServiceTest {
     	final String id = "id";
     	registry.setName(name);
     	registry.setId(id);
-		registry.setApiVersion("V1");
+		registry.setApiVersion(registryType.getApiVersions().get(0));
     	registry.setRegistryType(registryType);
     	registry = registryService.insert(registry);
     	assertEquals(name, registry.getName());
@@ -104,7 +104,7 @@ public class RegistryServiceTest {
     	String name = "name";
     	String id = "id";
     	registry.setName(name);
-		registry.setApiVersion("V1");
+		registry.setApiVersion(registryType.getApiVersions().get(0));
     	registry.setRegistryType(registryType);
     	registry = registryService.upsert(registry, id);
     	assertEquals(name, registry.getName());

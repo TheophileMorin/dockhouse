@@ -27,6 +27,8 @@
         <![endif]-->
         <div ng-show="{{ENV === 'dev'}}" class="development" ng-cloak=""></div>
         <div ui-view="navbar" ng-cloak=""></div>
+        <!--<div ui-view="breadcrumbs" ng-cloak=""></div>-->
+        <ui-breadcrumbs displayname-property="data.displayName" abstract-proxy-property="data.proxy" template-url="scripts/components/breadcrumbs/breadcrumbs.html"></ui-breadcrumbs>
         <div class="container-fluid">
             <div ui-view="content"></div>
         </div>
@@ -105,6 +107,7 @@
         <script src="scripts/app/entities/author/modal/author-modal-change.controller.js"></script>
         <script src="scripts/app/entities/author/modal/author-modal-delete.controller.js"></script>
         <script src="scripts/app/entities/entity.js"></script>
+        <script src="scripts/app/entities/registry/modal/image-modal-delete.controller.js"></script>
         <script src="scripts/app/entities/registry/modal/registry-modal-change.controller.js"></script>
         <script src="scripts/app/entities/registry/modal/registry-modal-delete.controller.js"></script>
         <script src="scripts/app/entities/registry/registry-detail.contoller.js"></script>
@@ -124,6 +127,8 @@
         <script src="scripts/components/auth/services/activate.service.js"></script>
         <script src="scripts/components/auth/services/password.service.js"></script>
         <script src="scripts/components/auth/services/register.service.js"></script>
+        <script src="scripts/components/breadcrumbs/breadcrumbs.controller.js"></script>
+        <script src="scripts/components/breadcrumbs/breadcrumbs.directive.js"></script>
         <script src="scripts/components/entities/author/author.service.js"></script>
         <script src="scripts/components/entities/registry/registry.service.js"></script>
         <script src="scripts/components/entities/registry_types/registry_types.service.js"></script>

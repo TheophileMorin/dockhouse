@@ -3,6 +3,7 @@
         "registry" : {
             "home": {
                 "title": "Registry",
+                "route": "Registre",
                 "createLabel": "Créer un nouveau Registre",
                 "createOrEditLabel": "Créer ou éditer un Registre"
             },
@@ -10,7 +11,8 @@
                 "question": "Etes-vous certain de vouloir supprimer le Registre : {{id}} ?"
             },
             "detail": {
-                "title": "Registre"
+                "title": "Registre",
+                "route": "Détail"
             },
             "id":"ID",
             "name": "Nom",
@@ -26,8 +28,9 @@
             },
             "status": {
                 "default" : "Status",
-                "online" : "Connecté",
-                "offline" : "Déconnecté"
+                "online" : "Up  ",
+                "offline" : "Down",
+                "pending" : "..."
             },
             "host": "Hôte",
             "port": "Port",
@@ -41,8 +44,12 @@
                 "disconnected" : "Le registry est actuellement innaccessible, Rappuyez pour sauvegarder quand-même."
             },
             "images" : {
+                "delete": {
+                    "question": "Etes-vous certain de vouloir supprimer l'image : {{id}} ?"
+                },
                 "imagesLabel" : "Images du registre",
-                "noImagesWarning" : "Ce registre ne contient aucune images."
+                "noImagesWarning" : "Ce registre ne contient aucune images.",
+                "offlineWarning" : "Ce registre n'est pas accessible."
             },
             "detailLabel": "Détails du registre",
             "infoLabel": "Informations",

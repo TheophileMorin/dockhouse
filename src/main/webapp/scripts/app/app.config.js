@@ -38,10 +38,18 @@
         $urlRouterProvider.otherwise('/');
         $stateProvider.state('site', {
             'abstract': true,
+            data: {
+                displayName: 'global.menu.route',
+                proxy: 'site'
+            },
             views: {
                 'navbar@': {
                     templateUrl: 'scripts/components/navbar/navbar.html',
                     controller: 'NavbarController as nav'
+                },
+                'breadcrumbs@': {
+                    templateUrl: 'scripts/components/breadcrumbs/breadcrumbs.html',
+                    controller: 'BreadcrumbsController as breadCtrl'
                 }
             },
             resolve: {

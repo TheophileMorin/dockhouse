@@ -47,8 +47,4 @@ public class RegistryTypeService {
     public Optional<RegistryType> getOne(String id) {
     	return Optional.ofNullable(registryTypeRepository.findOne(id));
     }
-    
-    public RegistryType insert(RegistryType registryType) {
-    	return registryTypeRepository.save(registryType);
-    }
 }

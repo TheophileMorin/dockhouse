@@ -1,6 +1,7 @@
 {
     "settings": {
         "title": "User settings for [<b>{{username}}</b>]",
+        "route": "Settings",
         "form": {
             "firstname": "First Name",
             "firstname.placeholder": "Your first name",

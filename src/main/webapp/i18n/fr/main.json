@@ -5,5 +5,10 @@
         "logged": {
             "message": "Vous êtes connecté en tant que <strong>\"{{username}}\"<strong>."
         }
+    },
+    "dockhouseApp": {
+        "main": {
+            "route": "Accueil"
+        }
     }
 }

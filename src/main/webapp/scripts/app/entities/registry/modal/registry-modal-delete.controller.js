@@ -27,7 +27,7 @@
     function RegistryModalRemoveController($modalInstance, registryName, Logger){
         /* jshint validthis: true */
         var vm = this;
-        var logger = Logger.getInstance('AuthorModalRemoveController');
+        var logger = Logger.getInstance('RegistryModalRemoveController');
 
         vm.modalHtmlURL = "scripts/app/entities/registry/modal/registry-modal-delete.html";
 

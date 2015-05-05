@@ -37,7 +37,8 @@
             remove: remove,
             testRegistry : testRegistry,
             getDetail : getDetail,
-            getAllImages : getAllImages
+            getAllImages : getAllImages,
+            deleteImage : deleteImage
         };
 
         ////////////////
@@ -139,7 +140,7 @@
         function testRegistry(id) {
             return service.one(id).customGET("status")
                 .then(function(data) {
-                    return data;
+                    return data.status;
                 })
                 .catch(function(error) {
                     logger.error('registries/:id/status',"Error lors de l'appel du service REST registries status",error);
@@ -152,21 +153,15 @@
          * @param registryId - the registry ID.
          * @returns a JSON object representing the registry details.
          */
-        function getDetail(registryId) { //TODO mock.
-            return $q(function(resolve) {
-                resolve({
-                    "status" : "Still mocked in the Front services.",
-                    "id" : registryId
-                });
-            });
-            /*return service.one(id).customGET("info")
+        function getDetail(registryId) {
+            return service.one(registryId).customGET("details")
                 .then(function(data) {
-                    return data;
+                    return data.details;
                 })
                 .catch(function(error) {
-                    logger.error('registries/:id/info',"Error lors de l'appel du service REST registries info",error);
+                    logger.error('registries/:id/details',"Error lors de l'appel du service REST registries info",error);
                     throw error;
-                });*/
+                });
         }
 
         /**
@@ -174,31 +169,27 @@
          * @param registryId - The registry ID.
          * @returns a JSON array with the image list.
          */
-        function getAllImages(registryId) { //TODO mock.
-            return $q(function(resolve) {
-                resolve([
-                    {
-                        "name" : "Dockhouse/Dockhouse",
-                        "version" : "v1.0.6"
-                    },
-                    {
-                        "name" : "Dockhouse/Dockhouse-pic-tool",
-                        "version" : "v2.3.7"
-                    },
-                    {
-                        "name" : "Ubuntu",
-                        "version" : "14.04"
-                    }
-                ]);
-            });
-            /*return service.one(id).customGET("images")
-             .then(function(data) {
-             return data;
-             })
-             .catch(function(error) {
-             logger.error('registries/:id/images',"Error lors de l'appel du service REST registries images",error);
-             throw error;
-             });*/
+        function getAllImages(registryId) {
+            return service.one(registryId).customGET("images")
+                .then(function (data) {
+                    return data;
+                })
+                .catch(function (error) {
+                    logger.error('registries/:id/images', "Error lors de l'appel du service REST registries images", error);
+                    throw error;
+                });
+        }
+
+
+        function deleteImage(registryId, imageId) {
+            return service.one(registryId).one('images').one(imageId).remove()
+                .then(function(data) {
+                    return data;
+                })
+                .catch(function(error) {
+                    logger.error('registries/'+registryId+'/images/'+imageId+'',"Error lors de l'appel du service REST registries images",error);
+                    throw error;
+                });
         }
     }
 

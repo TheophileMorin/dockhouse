@@ -1,6 +1,7 @@
 {
     "health": {
         "title": "Diagnostics",
+        "route": "Diagnostics",
         "refresh.button": "Rafraichir",
         "indicator": {
             "db": "Base de données",

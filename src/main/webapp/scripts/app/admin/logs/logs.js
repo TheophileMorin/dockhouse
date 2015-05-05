@@ -23,7 +23,8 @@ angular.module('dockhouseApp')
                 url: '/logs',
                 data: {
                     roles: ['ROLE_ADMIN'],
-                    pageTitle: 'logs.title'
+                    pageTitle: 'logs.title',
+                    displayName: 'logs.route'
                 },
                 views: {
                     'content@': {

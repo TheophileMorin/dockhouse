@@ -1,6 +1,7 @@
 {
     "audits": {
         "title": "Audits",
+        "route": "Audits",
         "filter": {
             "title": "Filter per date",
             "from": "from",

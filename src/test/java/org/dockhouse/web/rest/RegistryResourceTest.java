@@ -7,9 +7,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.dockhouse.Application;
@@ -67,31 +64,40 @@ public class RegistryResourceTest {
     @Inject
 	private RegistryPopulator registryPopulator;
     
-    private static String registryTypePayload =
-    		"{ \"name\"        : \"Docker\", " +
-			  "\"defaultHost\" : \"host\"        , " +
-			  "\"logo\"        : \"http://example.com/logo.png\" , " +
-			  "\"defaultPort\" : 22222, " +
-			  "\"public\"      : false, " +  
-			  "\"apiVersions\"    : [\"v1\"]" +  
-			  " }";
+    private String registryTypePayload(String registryTypeId) {
+    	return "{ \"name\"        : \"Docker\" , " +
+      			"  \"defaultHost\" : \"host\"  , " +
+      			"  \"id\"          : \"" + registryTypeId      + "\" , " +
+      			"  \"logo\"        : \"http://example.com/logo.png\" , " +
+      			"  \"defaultPort\" : 22222     , " +
+      			"  \"public\"      : false     , " +  
+      			"  \"apiVersions\"    : [\"v1\"] " +  
+      			" }";
+    }
     
-    private static String validPayload =
-    		"{ \"name\"    : \"registry\", " +
-			  "\"host\"    : \"host\"    , " +
-			  "\"protocol\": \"https\"   , " +
-			  "\"port\"    : 22222       , " + 
-   		  	  "\"apiVersion\"  : \"v1\"  , " + 
-			  "\"registryType\": "+ registryTypePayload + "}";
-
-    private static String invalidPayload =
-    		"{ \"name\"    : \"\", " +
-      		  "\"host\"    : \"\", " +
-    	 	  "\"protocol\": \"\", " +
-   		  	  "\"port\"    : -1  , " + 
-   		  	  "\"apiVersion\"  : \"\" , " + 
-   		  	  "\"registryType\": null " + "}";
-
+    private String validPayload(String registryTypeId) {
+    	return "{ \"name\"      : \"registry\", " +
+  			     "\"host\"      : \"host\"    , " +
+  			     "\"protocol\"  : \"https\"   , " +
+  			     "\"port\"      : 22222       , " + 
+     		  	 "\"apiVersion\": \"v1\"      , " + 
+  			     "\"registryType\": "+ registryTypePayload(registryTypeId)
+  			 + "}";
+    }
+    
+    private String invalidPayload(String registryTypeId) {		
+    	return "{ \"name\"      : \"\", " +
+  			     "\"host\"      : \"\", " +
+  			     "\"protocol\"  : \"\", " +
+  			     "\"port\"      : -1  , " + 
+     		  	 "\"apiVersion\": \"\", " + 
+  			     "\"registryType\": "+ registryTypePayload(registryTypeId) 
+  			 + "}";
+    }
+    
+    private String invalidPayload;
+    private String validPayload;
+    
     @Before
     public void setup() {
         RegistryResource registryMockResource = new RegistryResource();
@@ -108,6 +114,9 @@ public class RegistryResourceTest {
         
 	    registryType = registryTypeRepository.findAll().get(0);
         registry = registryRepository.findAll().get(0);
+        validPayload   = validPayload  (registryType.getId());
+        invalidPayload = invalidPayload(registryType.getId());
+
     }
 
     @Test

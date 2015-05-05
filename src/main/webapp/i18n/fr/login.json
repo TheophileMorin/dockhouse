@@ -1,6 +1,7 @@
 {
     "login": {
         "title": "Authentification",
+        "route": "Authentification",
         "form": {
             "username": "Nom d'utilisateur",
             "username.placeholder": "Votre nom d'utilisateur ou email",
